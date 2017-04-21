@@ -1,0 +1,46 @@
+<div style="height:100%" class="ui middle aligned center aligned grid"> 
+  <div class="column">
+    <form [formGroup]="registerForm" class="ui large form">
+      <div class="ui stacked segment ">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" formControlName="name" placeholder="name" ngModel>
+        </div>
+        <div formGroupName="account">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="email" ngModel>
+          </div>
+          <div class="field">
+            <label>Confirm</label>
+            <input type="email" formControlName="confirm" placeholder="confirm" ngModel>
+          </div>
+        </div>
+        <!-- name -->
+        <div
+          class="error"
+          *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched">
+          Name is required
+        </div>
+        <div
+          class="error"
+          *ngIf="registerForm.get('name').hasError('minlength') && registerForm.get('name').touched">
+          Minimum of 2 characters
+        </div>
+
+        <!-- account -->
+        <div
+          class="error"
+          *ngIf="registerForm.get('account').get('email').hasError('required') && registerForm.get('account').get('email').touched">
+          Email is required
+        </div>
+        <div
+          class="error"
+          *ngIf="registerForm.get('account').get('confirm').hasError('required') && registerForm.get('account').get('confirm').touched">
+          Confirming email is required
+        </div>  
+        <button class="ui button" type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div style="height:100%" class="ui middle aligned center aligned grid"> 
+  <div class="column">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" class="ui large form">
+      <div class="ui stacked segment ">
+        <div formGroupName="account">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="email" ngModel>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" formControlName="confirm" placeholder="confirm" ngModel>
+          </div>
+        </div>
+        <button class="ui button" type="submit" [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
