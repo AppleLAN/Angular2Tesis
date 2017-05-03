@@ -1,45 +1,40 @@
 <div style="height:100%" class="ui middle aligned center aligned grid"> 
   <div class="column">
     <form [formGroup]="registerForm" class="ui large form">
+      <h1 class="brand">Semantic AF Contaduria</h1>
+      <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
       <div class="ui stacked segment ">
         <div class="field">
-          <label>First Name</label>
-          <input type="text" formControlName="name" placeholder="name" ngModel>
+          <sm-input type="text" label="Nombre" [control]="registerForm.controls.name" placeholder="Ingresar nombre"></sm-input>
         </div>
-        <div formGroupName="account">
-          <div class="field">
-            <label>Email</label>
-            <input type="email" formControlName="email" placeholder="email" ngModel>
+        <div class="field">
+          <sm-input type="text" label="Apellido" [control]="registerForm.controls.lastName" placeholder="Ingresar apellido"></sm-input>
+        </div>
+        <div class="field">
+          <sm-input type="text" label="Direccion" [control]="registerForm.controls.adress" placeholder="Ingresar direccion"></sm-input>
+        </div>
+        <div class="field">
+          <sm-input type="email" label="E-mail" [control]="registerForm.controls.email" placeholder="Ingresar e-mail"></sm-input>
+        </div>
+        <div class="field">
+          <sm-input type="email" label="Reingresar E-mail" [control]="registerForm.controls.confirm" placeholder="Reingresar e-mail"></sm-input>
+        </div>
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <sm-checkbox type="checkbox" label="App 1"  [control]="registerForm.controls.app1" tabindex="0" class="hidden"></sm-checkbox>
           </div>
-          <div class="field">
-            <label>Confirm</label>
-            <input type="email" formControlName="confirm" placeholder="confirm" ngModel>
+        </div>
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <sm-checkbox type="checkbox" label="App 2"  [control]="registerForm.controls.app2" tabindex="0" class="hidden"></sm-checkbox>
           </div>
         </div>
-        <!-- name -->
-        <div
-          class="error"
-          *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched">
-          Name is required
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <sm-checkbox type="checkbox" label="App 3"  [control]="registerForm.controls.app3" class="hidden"></sm-checkbox>
+          </div>
         </div>
-        <div
-          class="error"
-          *ngIf="registerForm.get('name').hasError('minlength') && registerForm.get('name').touched">
-          Minimum of 2 characters
-        </div>
-
-        <!-- account -->
-        <div
-          class="error"
-          *ngIf="registerForm.get('account').get('email').hasError('required') && registerForm.get('account').get('email').touched">
-          Email is required
-        </div>
-        <div
-          class="error"
-          *ngIf="registerForm.get('account').get('confirm').hasError('required') && registerForm.get('account').get('confirm').touched">
-          Confirming email is required
-        </div>  
-        <button class="ui button" type="submit">Register</button>
+        <button class="ui button" (click)="submit(registerForm)" [disabled]="!registerForm.valid" type="submit">Registrarse</button>
       </div>
     </form>
   </div>

@@ -1,7 +1,10 @@
 export interface User {
   name: string;
-  account: {
-    email: string;
-    confirm: string;
-  }
+  lastName: string;
+  adress: string;
+  email: string;
+  confirm: string;
+  app1: Boolean;
+  app2: Boolean;
+  app3: Boolean;
 }

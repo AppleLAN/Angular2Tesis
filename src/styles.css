@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background: grey !important;
+}
+
+.brand {
+    font-family: 'Pacifico', cursive;
+    color: black;
+    font-size: 35px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}

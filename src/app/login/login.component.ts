@@ -12,14 +12,11 @@ export class LoginComponent implements OnInit{
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
      this.loginForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      account: this.fb.group({
-        email: ['', Validators.required],
-        confirm: ['', Validators.required]
-      })
+      email: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(2)]],      
     });
   } 
-  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  submit({ value, valid }: { value: User, valid: boolean }) {
     console.log(value, valid);
   } 
 }

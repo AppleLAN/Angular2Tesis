@@ -13,13 +13,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
       this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      account: this.fb.group({
-        email: ['', Validators.required],
-        confirm: ['', Validators.required]
-      })
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      adress: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', Validators.required],
+      confirm: ['', Validators.required],
+      app1: [''],
+      app2: [''],
+      app3: ['']
     });
   } 
-  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  submit({ value, valid }: { value: User, valid: boolean }) {
     console.log(value, valid);
   }  
 }
