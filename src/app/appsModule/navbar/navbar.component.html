@@ -1,0 +1,17 @@
+ <div class="ui borderless inverted main menu fixed">
+    <div class="ui container">
+        <a [ngClass]="{'active': isActive('/')}" class="item">Home</a>
+        <div class="right item">
+        <div class="ui inverted menu">
+            <div class="ui simple dropdown item">
+            Acciones
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item">Perfil</div>
+                <div (click)="logOut()" class="item">Salir</div>
+            </div>
+            </div>
+        </div>  
+        </div>
+    </div>
+</div>

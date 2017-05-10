@@ -1,0 +1,46 @@
+.home {
+    .apps {
+        margin: 0 !important;
+    }
+    .cards {
+        .pop-up { 
+            min-width: 120px;
+        }
+        &.segment {
+            min-height: 400px;
+            padding: 1em 0em;
+        }
+    }
+    .masthead {
+        &.segment {
+            min-height: 700px;
+            padding: 1em 0em;
+            background: linear-gradient(
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)
+            ), url("../../../assets/images/header-background.jpg") !important;
+        }
+        h1.ui.header {
+            margin-top: 4em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+    }
+
+    .ui.vertical.stripe {
+        padding: 8em 0em;
+        h3 {
+            font-size: 2em;
+        }
+        p {
+            font-size: 1.33em;
+        }
+    }
+
+    .product.image {
+        height: 150px;
+        width: auto;
+        padding: 15px;
+    }
+}

@@ -1,0 +1,127 @@
+<div id="personal-info">
+  <div style="height:100%" class="ui middle aligned center aligned grid"> 
+    <div class="container column">
+      <div class="form-box">
+        <form class="ui form" [formGroup]="registerForm" name="registerForm">
+            <div class="header-content">
+                <h1 class="brand">Semantic AF Contaduria</h1>
+                <h4>Bienvenido,&nbsp; por favor registrate a continuacion.</h4>
+            </div>
+            <div class="ui left aligned basic segment">
+                <div class="form-group field">
+                    <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username" placeholder="Ingresar nombre de usuario"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+                      Nombre de usuario no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('username').hasError('minlength') && registerForm.get('username').touched">
+                      Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('username').hasError('maxlength') && registerForm.get('username').touched">
+                      Maximo 12 caracteres
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <sm-input type="password" label="Contraseña" [control]="registerForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+                      Contraseña no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+                      Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+                      Maximo 12 caracteres
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <sm-input type="text" label="Nombre" [control]="registerForm.controls.name" placeholder="Ingresar Nombre"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched">
+                      Nombre no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('name').hasError('minlength') && registerForm.get('name').touched">
+                      Minimo 3 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('name').hasError('maxlength') && registerForm.get('name').touched">
+                      Maximo 12 caracteres
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <sm-input type="text" label="Apellido" [control]="registerForm.controls.lastname" placeholder="Ingresar Apellido"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('lastname').hasError('required') && registerForm.get('lastname').touched">
+                      Apellido no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('lastname').hasError('minlength') && registerForm.get('lastname').touched">
+                      Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('lastname').hasError('maxlength') && registerForm.get('lastname').touched">
+                      Maximo 12 caracteres
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <sm-input type="email" label="Email" [control]="registerForm.controls.email" placeholder="Ingresar Email"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+                      Email no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('email').hasError('minlength') && registerForm.get('email').touched">
+                      Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('email').hasError('maxlength') && registerForm.get('email').touched">
+                      Maximo 12 caracteres
+                    </div>
+                </div>  
+                <div class="form-group field">
+                    <sm-input type="text" label="Direccion" [control]="registerForm.controls.adress" placeholder="Ingresar direccion"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('adress').hasError('required') && registerForm.get('adress').touched">
+                      Direccion no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="registerForm.get('adress').hasError('minlength') && registerForm.get('adress').touched">
+                      Minimo 3 caracteres
+                    </div>
+                </div>
+                <div class="form-group field">
+                    <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday" placeholder="Ingresar fecha de nacimiento"></sm-input>
+                    <div class="has-error" *ngIf="registerForm.get('birthday').hasError('required') && registerForm.get('birthday').touched">
+                      Fecha de nacimiento no ingresada
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <h4 class="ui dividing header">Selecciona los productos a utilizar</h4>
+                    <div class="four fields">
+                        <div class="form-group field">
+                            <div class="ui toggle checkbox">
+                                <sm-checkbox label="Ventas" [control]="registerForm.controls.sales"></sm-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <div class="ui toggle checkbox">
+                                <sm-checkbox label="Stock" [control]="registerForm.controls.stock"></sm-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <div class="ui toggle checkbox">
+                                <sm-checkbox label="Clientes" [control]="registerForm.controls.clients"></sm-checkbox>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <sm-checkbox label="Proveedores" [control]="registerForm.controls.providers"></sm-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field text-center">
+                    <div class="two fields">
+                        <div class="field">
+                            <button class="ui button" [disabled]="!registerForm.valid" type="submit" (click)="submit(registerForm)">Register</button>
+                        </div>
+                        <div class="field">
+                            <button class="ui right floated button" (click)="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>          
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

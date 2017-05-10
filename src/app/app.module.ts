@@ -3,29 +3,30 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgSemanticModule } from 'ng-semantic';
+import { NgSemanticModule } from 'ng-semantic/ng-semantic';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+
 import { routing } from './app.routes';
-import { RegisterComponent } from './register/register.component';
+
+import { UserAuthenticationService } from './services/user-authentication.service';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    routing,
     ReactiveFormsModule,
     NgSemanticModule,
-    routing
+    StoreModule.provideStore([])
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard,UserAuthenticationService],
+  bootstrap: [ AppComponent]
 })
 export class AppModule { }

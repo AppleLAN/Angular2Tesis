@@ -1,10 +1,12 @@
 export interface User {
-  name: string;
-  lastName: string;
-  adress: string;
-  email: string;
-  confirm: string;
-  app1: Boolean;
-  app2: Boolean;
-  app3: Boolean;
+  name: String;
+  lastName: String;
+  adress: String;
+  email: String;
+  password: String;
+  confirm: String;
+  sales: Boolean;
+  stock: Boolean;
+  clients: Boolean;
+  providers: Boolean;
 }

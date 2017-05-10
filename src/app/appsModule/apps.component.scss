@@ -1,0 +1,142 @@
+
+.column {
+    max-width: 800px;
+}
+.ui-select-multiple input.ui-select-search:not(.ng-touched) {
+    width: 100% !important;
+}
+#personal-info {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ), url("../../assets/images/background.jpg");
+  background-size: cover;
+  .container {
+    min-width: 700px;
+  }
+  .has-error {
+    color: #9F3A38;
+    padding: 8px 0 15px 0;
+  }
+  .brand {
+    font-family: 'Pacifico', cursive;
+    color: black;
+    font-size: 35px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  }
+  .form-box {
+    padding: 30px;
+    background: white;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+  .page-header {
+    margin-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 15px;
+  }
+  .brand {
+    img {
+      width: 35px;
+    }
+    span {
+      font-size: 24px;
+      font-weight: 300;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  }
+  h4 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  input {
+      background-color: transparent;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      box-shadow: none;
+      color:white;
+
+      &.error {
+          border-color: red;
+      }
+
+      &.disabled {
+          pointer-events: none;
+          cursor: default;
+          color: #ddd;
+      }
+
+      &::-webkit-input-placeholder{
+        font-size: 16px;
+      }
+  }
+  .send-email-input {
+    input {
+      color: black; 
+    }
+  }
+  .forgot-pass {
+    text-align: right;
+    a{
+      color: blue;
+      text-decoration: none;
+
+      &:hover, &:focus {
+        color: blue;
+      }
+    }
+  }
+  button {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+    padding: 6px 70px;
+
+    &:hover {
+      color: #ddd;
+      border-color: #ddd;
+    }
+
+    &[disabled] {
+      border-color: #ddd;
+      color: #ddd;
+    }
+  }
+  .page-content {
+      .form-group {
+          padding-bottom: 0px;
+
+          &:last-child {
+            padding-bottom: 0px;
+          }
+      }
+  }
+  @media(max-width: 991px) {
+    .form-group {
+      text-align: center;
+      .forgot-pass {
+        text-align: center;
+      }
+    }
+  }
+}
+@media(max-width: 991px) {
+    #personal-info {
+      height: 100%;
+      .form-box {
+        height: 100%;
+        margin-top: 0px;
+      }
+    }
+}

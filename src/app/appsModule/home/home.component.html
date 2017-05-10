@@ -1,0 +1,66 @@
+<app-navbar-component></app-navbar-component>
+<div class="home">
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Semantic FA
+      </h1>
+      <h2>Todos tus problemas con simples soluciones.</h2>
+    </div>
+  </div>
+  <div class="ui vertical basic segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">Semantic FA Administration Software</h3>
+          <p>Brinde a sus decisiones el grado de certeza que estas necesitan con nuestro sistema de administracion "Semantic FA Adnministration Software".</p>
+          <h3 class="ui header">Es Facil!</h3>
+          <p>Podras tener control sobre tus clientes, proveedores, ventas y stock de una manera facil y confiable !</p>
+        </div>
+        <div class="six wide right floated column">
+          <img [src]="arrowImg" class="ui large image">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui center aligned very padded inverted segment apps">
+    <h1 class="ui header">Semantic FA Administration Software</h1>
+    <div class="ui link cards text container">
+      <ng-template ngFor let-app [ngForOf]="apps">
+        <div class="ui centered card" *ngIf="app.active" routerLink="/apps/{{app.app}}">
+          <div>
+            <img class="ui centered product image" [src]="getAppImage(app.app)">
+          </div>
+          <div class="content">
+            <a *ngIf="app.app === 'clients'" routerLinkActive="active" class="header">{{app.app}}</a>
+            <a *ngIf="app.app !== 'clients'" [smDirTooltip]="commingSoonText" smDirPosition="left center" routerLinkActive="active" class="header disabled">{{app.app}}</a>
+          </div>
+        </div>
+        
+      </ng-template>   
+    </div>
+  </div>
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Contact Us</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Services</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Order new product</a>
+            <a href="#" class="item">Change current product</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Semantic FA</h4>
+          <p>Semantic FA is an Argentinian software company founded in 2015.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
