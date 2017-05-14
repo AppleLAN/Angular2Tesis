@@ -122,7 +122,7 @@
 
 @lineHeight          : 1.4285em;
 @textColor           : rgba(0, 0, 0, 0.87);
-
+@customTextColor     : #c8d4f9;
 /*-------------------
       Paragraph
 --------------------*/

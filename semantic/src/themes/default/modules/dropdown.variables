@@ -52,7 +52,7 @@
 @itemBorder: none;
 @itemHeight: auto;
 @itemDivider: none;
-@itemColor: #c8d4f9;
+@itemColor: @customTextColor;
 @itemVerticalPadding: @mini;
 @itemHorizontalPadding: @large;
 @itemPadding: @itemVerticalPadding @itemHorizontalPadding;
@@ -72,7 +72,7 @@
 @subMenuZIndex: 21;
 
 /* Menu Header */
-@menuHeaderColor: @darkTextColor;
+@menuHeaderColor: @customTextColor;
 @menuHeaderFontSize: @relative11px;
 @menuHeaderFontWeight: bold;
 @menuHeaderTextTransform: uppercase;
@@ -107,7 +107,7 @@
 /* Description */
 @itemDescriptionFloat: right;
 @itemDescriptionMargin: 0em 0em 0em 1em;
-@itemDescriptionColor: @lightTextColor;
+@itemDescriptionColor: @customTextColor;
 
 /* Message */
 @messagePadding: @selectionItemPadding;
@@ -145,7 +145,7 @@
 @selectVisibility: visible;
 @selectHeight: 38px;
 
-@selectionTextColor: @textColor;
+@selectionTextColor: @customTextColor;
 
 @selectionTextUnderlayIconOpacity: @disabledOpacity;
 @selectionTextUnderlayColor: @inputPlaceholderFocusColor;
@@ -198,7 +198,7 @@
 
 /* Visible */
 @selectionVisibleTextFontWeight: normal;
-@selectionVisibleTextColor: @hoveredTextColor;
+@selectionVisibleTextColor: @customTextColor;
 
 @selectionVisibleBorderColor: @focusedFormMutedBorderColor;
 @selectionVisibleBoxShadow: @raisedShadow;
@@ -279,11 +279,11 @@
 
 /* Hovered */
 @hoveredItemBackground: @transparentBlack;
-@hoveredItemColor: @selectedTextColor;
+@hoveredItemColor: @customTextColor;
 @hoveredZIndex: @menuZIndex + 2;
 
 /* Default Text */
-@defaultTextColor: @inputPlaceholderColor;
+@defaultTextColor: @customTextColor;
 @defaultTextFocusColor: @inputPlaceholderFocusColor;
 
 /* Loading */

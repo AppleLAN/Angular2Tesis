@@ -20,11 +20,11 @@
       "prefix": "app",
       "styles": [
         "styles.css", 
-        "../semantic/dist/semantic.min.css"
+        "../semantic/dist/semantic.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../semantic/semantic.min.js"
+        "../semantic/dist/semantic.min.js"
         ],
       "environmentSource": "environments/environment.ts",
       "environments": {
