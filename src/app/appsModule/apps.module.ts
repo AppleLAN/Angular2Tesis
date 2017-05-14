@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';  
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgSemanticModule } from 'ng-semantic/ng-semantic';
 import { StoreModule } from '@ngrx/store';
 
 import { AppsComponent } from './apps.component';
 import { routing } from './apps.routes';
-import { ClientsComponent } from './clients/clients.component';
 
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -19,13 +17,11 @@ import { AuthGuard } from '../services/auth.guard';
   declarations: [
     AppsComponent,
     HomeComponent,
-    NavbarComponent,
-    ClientsComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
     HttpModule,
-    ReactiveFormsModule,
     NgSemanticModule,
     routing,
     StoreModule.provideStore([])

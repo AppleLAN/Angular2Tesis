@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css", 
-        "../semantic/semantic.min.css"
+        "../semantic/dist/semantic.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

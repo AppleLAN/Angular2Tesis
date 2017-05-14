@@ -1,0 +1,15 @@
+.sidebar {
+    margin-top: 70px !important;
+    background-color: #262626 !important;
+    border-bottom-right: 1px solid #b1c1f7;
+}
+.ui.inverted.icon.menu .item {
+    color: #b1c1f7
+}
+.ui.inverted.menu .active.item {
+    background: #2ec7cb;
+    background: -moz-linear-gradient(left, #2ec7cb 0%, #6c8bef 100%);
+    background: -webkit-linear-gradient(left, #2ec7cb 0%, #6c8bef 100%);
+    background: linear-gradient(to right, #2ec7cb 0%, #6c8bef 100%);
+    color: white;
+}

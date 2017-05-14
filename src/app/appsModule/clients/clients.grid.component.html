@@ -1,0 +1,63 @@
+<div class="grid"> 
+    <table class="ui celled striped inverted table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    E-Mail
+                </th>
+                <th>
+                    Localidad
+                </th>
+                <th>
+                    Telefono
+                </th>
+                <th>
+                    C.U.I.T
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="name" (click)="myModalNormal.show({blurred: true})">Alan Buscaglia</span></td>
+                <td>a@gmail.com</td>
+                <td>Buenos Aires</td>
+                <td>2234487943</td>
+                <td>20-36601731-4</td>
+            </tr>
+            <tr>
+                <td><span class="name" (click)="myModalNormal.show({blurred: true})">Alan Buscaglia</span></td>
+                <td>a@gmail.com</td>
+                <td>Buenos Aires</td>
+                <td>2234487943</td>
+                <td>20-36601731-4</td>
+            </tr>
+            <tr>
+                <td><span class="name" (click)="myModalNormal.show({blurred: true})">Alan Buscaglia</span></td>
+                <td>a@gmail.com</td>
+                <td>Buenos Aires</td>
+                <td>2234487943</td>
+                <td>20-36601731-4</td>
+            </tr>
+            <tr>
+                <td><span class="name" (click)="myModalNormal.show({blurred: true})">Alan Buscaglia</span></td>
+                <td>a@gmail.com</td>
+                <td>Buenos Aires</td>
+                <td>2234487943</td>
+                <td>20-36601731-4</td>
+            </tr>
+        </tbody>
+    </table>
+    <sm-modal title="Hello from Modal" class="fluid" icon="home" #myModalNormal>
+        <modal-content>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </modal-content>
+        <modal-actions>
+            <div class="ui buttons">
+                <div class="ui button primary" (click)="myModalNormal.hide()">Close modal</div>
+            </div>
+        </modal-actions>
+    </sm-modal>
+</div>

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar-component',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 
 export class NavbarComponent implements OnInit{
@@ -16,8 +16,5 @@ export class NavbarComponent implements OnInit{
   } 
   logOut() {
     this.authService.logout();
-  }
-  isActive(url) {
-    return this.router.url === url;
   }
 }

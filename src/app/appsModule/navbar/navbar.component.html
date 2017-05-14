@@ -1,9 +1,12 @@
  <div class="ui borderless inverted main menu fixed">
-    <div class="ui container">
-        <a [ngClass]="{'active': isActive('/')}" class="item">Home</a>
+        <div class="item brand">Semantic AF Contaduria</div>
+        <a routerLink="/apps/home" routerLinkActive="active" class="item home">Home</a>
+        <a routerLink="/apps/clients" routerLinkActive="active" class="item">
+            <i class="user icon"></i> Clientes
+        </a>
         <div class="right item">
         <div class="ui inverted menu">
-            <div class="ui simple dropdown item">
+            <div class="ui simple inverted dropdown item">
             Acciones
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -13,5 +16,4 @@
             </div>
         </div>  
         </div>
-    </div>
 </div>

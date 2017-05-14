@@ -23,7 +23,7 @@
   .brand {
     font-family: 'Pacifico', cursive;
     color: black;
-    font-size: 35px;
+    font-size: 2.5rem;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   }
   .form-box {
@@ -43,7 +43,7 @@
       width: 35px;
     }
     span {
-      font-size: 24px;
+      font-size: 1.7rem;
       font-weight: 300;
       margin-left: 10px;
       vertical-align: middle;
@@ -74,7 +74,7 @@
       }
 
       &::-webkit-input-placeholder{
-        font-size: 16px;
+        font-size: 1.14rem;
       }
   }
   .send-email-input {

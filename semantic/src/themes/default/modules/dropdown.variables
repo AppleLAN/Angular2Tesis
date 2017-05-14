@@ -52,7 +52,7 @@
 @itemBorder: none;
 @itemHeight: auto;
 @itemDivider: none;
-@itemColor: @textColor;
+@itemColor: #c8d4f9;
 @itemVerticalPadding: @mini;
 @itemHorizontalPadding: @large;
 @itemPadding: @itemVerticalPadding @itemHorizontalPadding;

@@ -1,6 +1,6 @@
 
 .column {
-    max-width: 800px;
+    max-width: 50rem;
 }
 .ui-select-multiple input.ui-select-search:not(.ng-touched) {
     width: 100% !important;
@@ -14,48 +14,48 @@
     ), url("../../assets/images/background.jpg");
   background-size: cover;
   .container {
-    min-width: 700px;
+    min-width: 43.75rem;
   }
   .has-error {
     color: #9F3A38;
-    padding: 8px 0 15px 0;
+    padding: 0.5rem 0 0.9375rem 0;
   }
   .brand {
     font-family: 'Pacifico', cursive;
     color: black;
-    font-size: 35px;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    font-size: 2.1875rem;
+    text-shadow: -0.0625rem 0 white, 0 0.0625rem white, 0.0625rem 0 white, 0 -0.0625rem white;
   }
   .form-box {
-    padding: 30px;
+    padding: 1.875rem;
     background: white;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    -moz-border-radius: 0.25rem;
+    -webkit-border-radius: 0.25rem;
+    border-radius: 0.25rem;
   }
   .page-header {
-    margin-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 15px;
+    margin-top: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0.9375rem;
   }
   .brand {
     img {
-      width: 35px;
+      width: 2.188rem;
     }
     span {
-      font-size: 24px;
+      font-size: 20.25rem;
       font-weight: 300;
-      margin-left: 10px;
+      margin-left: 0.625rem;
       vertical-align: middle;
     }
   }
   h4 {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0.9375rem;
+    margin-bottom: 0.9375rem;
   }
   input {
       background-color: transparent;
-      border: 1px solid #ccc;
+      border: 0.0625rem solid #ccc;
       border-top: none;
       border-left: none;
       border-right: none;
@@ -74,7 +74,7 @@
       }
 
       &::-webkit-input-placeholder{
-        font-size: 16px;
+        font-size: 1rem;
       }
   }
   .send-email-input {
@@ -97,11 +97,11 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid black;
+    border-bottom: 0.0625rem solid black;
     border-radius: 0;
     box-shadow: none;
     background-color: transparent;
-    padding: 6px 70px;
+    padding: 0.375rem 4.375rem;
 
     &:hover {
       color: #ddd;
@@ -115,14 +115,14 @@
   }
   .page-content {
       .form-group {
-          padding-bottom: 0px;
+          padding-bottom: 0rem;
 
           &:last-child {
-            padding-bottom: 0px;
+            padding-bottom: 0rem;
           }
       }
   }
-  @media(max-width: 991px) {
+  @media(max-width: 990.0625rem) {
     .form-group {
       text-align: center;
       .forgot-pass {
@@ -131,12 +131,11 @@
     }
   }
 }
-@media(max-width: 991px) {
+@media(max-width: 990.0625rem) {
     #personal-info {
-      height: 100%;
       .form-box {
         height: 100%;
-        margin-top: 0px;
+        margin-top: 0rem;
       }
     }
 }
