@@ -1,9 +1,13 @@
 .grid {
-    padding: 15px;
-    padding-top: 85px;
-    margin-left: 150px;
+    padding: 0.9375rem;
+    padding-top: 6.2rem;
+    margin-left: 11rem;
     .name{
         cursor: pointer;   
         color:#84a0ff;
     }
+}
+.has-error {
+    color: #9F3A38;
+    padding: 0.5rem 0 0.9375rem 0;
 }
