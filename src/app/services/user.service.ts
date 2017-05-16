@@ -22,11 +22,6 @@ export class UserService {
    }
 
   getUserApps(): Observable<Object[]> {
-    // ...using get request
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('authentication', this.token);
-
     return this.http.get('http://localhost:8000/api/getUserApps', this.options)
       .map((response: Response) => {
         return response.json().apps;

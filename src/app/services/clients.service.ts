@@ -18,24 +18,19 @@ export class ClientsService {
   constructor(private http: Http, private store: Store<Client>) {
     // set token if saved in local storage
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;/*
+    this.token = currentUser && currentUser.token;
     this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
-    this.options = new RequestOptions({ headers: this.headers });*/
+    this.options = new RequestOptions({ headers: this.headers });
     this.clientStorage = store.select('client');
    }
     getClientStorage(): Observable<Client> {
         return this.clientStorage;
     }
     getClients(): Observable<Client> {
-    // ...using get request
-    /*    let headers = new Headers();
-    */    /*headers.append('Content-Type', 'application/json');
-    headers.append('authentication', this.token);*/
-    
-    return this.http.get('http://www.json-generator.com/api/json/get/cotyjHCUky?indent=2', this.options)
+    return this.http.get('http://localhost:8000/api/getClients', this.options)
         .map((response: Response) => {
-        this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
-        return response.json();
+            this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
+            return response.json();
         })
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
