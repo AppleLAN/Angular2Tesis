@@ -1,4 +1,5 @@
 <div class="grid"> 
+    <button class="ui button" (click)="myModalNormal.show({blurred: true}); openNewClientModal()">Agregar Nuevo Cliente</button>
     <table class="ui celled striped inverted table">
         <thead>
             <tr>
@@ -74,14 +75,14 @@
                     </div>
 
                     <div class="form-group field">
-                        <sm-input type="text" label="Direccion" [control]="clientForm.controls.adress" adressholder="Ingresar Direccion"></sm-input>
-                        <div class="has-error" *ngIf="clientForm.get('adress').hasError('required') && clientForm.get('adress').touched">
+                        <sm-input type="text" label="Direccion" [control]="clientForm.controls.address" addressholder="Ingresar Direccion"></sm-input>
+                        <div class="has-error" *ngIf="clientForm.get('address').hasError('required') && clientForm.get('address').touched">
                         Direccion no ingresada
                         </div>
-                        <div class="has-error" *ngIf="clientForm.get('adress').hasError('minlength') && clientForm.get('adress').touched">
+                        <div class="has-error" *ngIf="clientForm.get('address').hasError('minlength') && clientForm.get('address').touched">
                         Minimo 6 caracteres
                         </div>
-                        <div class="has-error" *ngIf="clientForm.get('adress').hasError('maxlength') && clientForm.get('adress').touched">
+                        <div class="has-error" *ngIf="clientForm.get('address').hasError('maxlength') && clientForm.get('address').touched">
                         Maximo 30 caracteres
                         </div>
                     </div>
@@ -126,7 +127,9 @@
                     <div class="field text-center">
                         <div class="two fields">
                             <div class="field">
-                                <button class="ui button" (click)="submit(clientForm)" [disabled]="clientForm.invalid">Actualizar Datos</button>
+                                <button class="ui button" (click)="addClient(clientForm)" [disabled]="clientForm.invalid" *ngIf="isNew(clientForm)">Agregar Cliente</button>
+                                <button class="ui button" (click)="updateClient(clientForm)" [disabled]="clientForm.invalid" *ngIf="!isNew(clientForm)">Actualizar Datos</button>
+                                <button class="ui button" (click)="deleteClient(clientForm)" *ngIf="!isNew(clientForm)">Borrar Cliente</button>
                             </div>
                             <div class="field">
                                 <button class="ui right floated button" (click)="myModalNormal.hide()">Close modal</button>

@@ -4,7 +4,8 @@ import { User } from '../interfaces/user.interface';
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 import { Client } from '../interfaces/client';
-import { NEWCLIENTS } from './../appsModule/clients/reducers/grid.reducer';
+import { NEWCLIENTS, ADDCLIENT, DELETECLIENT, CHANGECLIENT } from './../appsModule/clients/reducers/grid.reducer';
+
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -27,12 +28,39 @@ export class ClientsService {
         return this.clientStorage;
     }
     getClients(): Observable<Client> {
-    return this.http.get('http://localhost:8000/api/getClients', this.options)
-        .map((response: Response) => {
-            this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
-            return response.json();
-        })
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.get('http://localhost:8000/api/getClients', this.options)
+            .map((response: Response) => {
+                this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    updateClient(newClient : Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/updateClient',newClient, this.options)
+            .map((response: Response) => {
+                this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    addClient(newClient : Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/saveClient',newClient, this.options)
+            .map((response: Response) => {
+                this.store.dispatch({ type: ADDCLIENT, payload: newClient});
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    deleteClient(newClient : Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/deleteClient',newClient, this.options)
+            .map((response: Response) => {
+                this.store.dispatch({ type: DELETECLIENT, payload: newClient});
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
 
