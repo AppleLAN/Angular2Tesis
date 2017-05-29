@@ -24,6 +24,7 @@
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/chart.js/dist/Chart.bundle.min.js",
         "../semantic/dist/semantic.min.js"
         ],
       "environmentSource": "environments/environment.ts",

@@ -24,7 +24,7 @@ import { AuthGuard } from './services/auth.guard';
     routing,
     ReactiveFormsModule,
     NgSemanticModule,
-    StoreModule.provideStore([])
+    StoreModule.provideStore([]),
   ],
   providers: [AuthGuard,UserAuthenticationService],
   bootstrap: [ AppComponent]

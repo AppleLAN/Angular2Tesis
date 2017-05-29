@@ -1,0 +1,43 @@
+<div class="charts">
+    <div class="ui link cards">
+
+        <div class="card" [routerLink]="['/apps/clients/charts', 'bar']">
+            <div class="content">
+                <div class="header">Ejemplo de grafico tipo barra</div>
+                <div class="description">
+                    <charts [chartType]= "'bar'" [noTable]="true"></charts>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" [routerLink]="['/apps/clients/charts', 'line']">
+            <div class="content">
+                <div class="header">Ejemplo de grafico tipo linea</div>
+                <div class="description">
+                    <charts [chartType]= "'line'" [noTable]="true"></charts>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" [routerLink]="['/apps/clients/charts', 'radar']">
+            <div class="content">
+                <div class="header">Ejemplo de grafico tipo radar</div>
+                <div class="description">
+                    <charts [chartType]= "'radar'" [noTable]="true"></charts>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" [routerLink]="['/apps/clients/charts', 'polarArea']">
+            <div class="content">
+                <div class="header">Ejemplo de grafico tipo area polar</div>
+                <div class="description">
+                    <charts [chartType]= "'polarArea'" [noTable]="true"></charts>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="grid"> 
+        <div>
+            <canvas baseChart width="400" height="400"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="chartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+    </div>
+    <div *ngIf="!noTable" class="grid" style="margin-bottom: 10px">
+        <table class="ui celled striped inverted table">
+            <thead>
+                <tr>
+                    <th *ngFor="let label of lineChartLabels">{{label}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of lineChartData">
+                    <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="randomize()">CLICK</button>
+    </div>
+</div>

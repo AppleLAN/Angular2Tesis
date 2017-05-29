@@ -7,36 +7,7 @@ export const CHANGECLIENT = 'CHANGECLIENT';
 export const ADDCLIENT = 'ADDCLIENT';
 export const DELETECLIENT = 'DELETECLIENT';
 
-export const initialModalObject: Client = {
-    id: null,
-    user_id: null,
-    created_at:'',
-    updated_at:'',
-    deleted_at:'',
-    name: '',
-    fantasyName: '',
-    email: '',
-    place: '',
-    address: '',
-    telephone: null,
-    cuit: '',
-    web: '',
-    iib: '',
-    pib: '',
-    epib: '',
-    responsableInscripto: null,
-    excento: null,
-    responsableMonotributo: null,
-    ivaInscripto: null,
-    precioLista: null,
-    condicionDeVenta: '',
-    limiteDeCredito: null,
-    numeroDeInscripcionesIB: null,
-    cuentasGenerales: '',
-    percepcionDeGanancia: null,  
-}
-
-export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
+export const chartReducer: Reducer<any> = (state: any[], action: Action) => {
     let index :number = null;
     switch(action.type){
         case 'NEWCLIENTS':
