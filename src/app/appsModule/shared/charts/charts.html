@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="lineChartData">
     <div class="grid"> 
         <div>
             <canvas baseChart width="400" height="400"
@@ -13,16 +13,18 @@
             </canvas>
         </div>
     </div>
-    <div *ngIf="!noTable" class="grid" style="margin-bottom: 10px">
+    <div *ngIf="!demo" class="grid" style="margin-bottom: 10px">
         <table class="ui celled striped inverted table">
             <thead>
                 <tr>
+                    <th>Interes</th>
                     <th *ngFor="let label of lineChartLabels">{{label}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let d of lineChartData">
-                    <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+                    <td>{{d.label}}</td>
+                    <td *ngFor="let label of lineChartLabels; let j=index">{{d.data[j]}}</td>
                 </tr>
             </tbody>
         </table>

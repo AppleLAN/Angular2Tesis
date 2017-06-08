@@ -9,14 +9,17 @@ export const DELETECLIENT = 'DELETECLIENT';
 
 export const initialModalObject: Client = {
     id: null,
-    user_id: null,
-    created_at:'',
-    updated_at:'',
-    deleted_at:'',
+    userId: null,
+    isData: null,
+    createdAt:  '',
+    updatedAt:  '',
+    deletedAt:  '',
     name: '',
     fantasyName: '',
     email: '',
     place: '',
+    codigoPostal: '',
+    codigoProvincia: '',
     address: '',
     telephone: null,
     cuit: '',
@@ -24,39 +27,32 @@ export const initialModalObject: Client = {
     iib: '',
     pib: '',
     epib: '',
-    responsableInscripto: null,
-    excento: null,
-    responsableMonotributo: null,
-    ivaInscripto: null,
+    responsableInscripto: false,
+    excento: false,
+    responsableMonotributo: false,
+    ivaInscripto: false,
     precioLista: null,
     condicionDeVenta: '',
     limiteDeCredito: null,
     numeroDeInscripcionesIB: null,
     cuentasGenerales: '',
-    percepcionDeGanancia: null,  
+    percepcionDeGanancia: null,
 }
 
 export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
-    let index :number = null;
     switch(action.type){
         case 'NEWCLIENTS':
-            state = action.payload;
-            return state;
+            return action.payload;
         case 'ADDCLIENT':
             return [...state, action.payload];
         case 'CHANGECLIENT':
-            index = state.findIndex(
-                function (element) {
-                    return element.id === action.payload.id;
-                }
-            );
-            state[index] = action.payload;
-            return state;
+            return state.map(item => {
+                return item.id === action.payload.id ? Object.assign({}, item, action.payload.id) : item;
+            });
         case 'DELETECLIENT':
-            state.filter(item => {
+            return state.filter(item => {
                 return item.id !== action.payload.id;
             })
-            return state;
         default:
             return state;
     }

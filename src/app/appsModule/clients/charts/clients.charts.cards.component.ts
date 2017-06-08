@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user.interface';
+import { User } from '../../../interfaces/user';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { ClientsService } from '../../../services/clients.service';
 import { Observable } from 'rxjs/Rx';
@@ -20,7 +20,7 @@ export class ClientsChartsCardsComponent implements OnInit{
     clientStorage: Observable<Client>
     clients: Client;
     error: String;
-    noTable: Boolean = true;
+    demo: Boolean = true;
     
     constructor(
         private fb: FormBuilder, 

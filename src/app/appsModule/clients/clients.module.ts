@@ -9,6 +9,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { ClientsMainComponent } from './clients.main.component';
 import { ClientsGridComponent } from './grid/clients.grid.component';
+import { ClientModal } from './clientModal/client.modal';
 import { ClientsChartsCardsComponent } from './charts/clients.charts.cards.component';
 import { ClientsChartsComponent } from './charts/clients.charts.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
@@ -16,17 +17,19 @@ import { ChartComponent } from '../shared/charts/charts';
 
 import { routing } from './clients.routes';
 
-import { gridReducer } from './reducers/grid.reducer';
-import { chartReducer } from './reducers/chart.reducer';
+import { reducer } from './clients.reducers';
+
 
 import { UserService } from '../../services/user.service';
 import { ClientsService } from './../../services/clients.service';
+import { ChartService } from './../../services/chart.service';
 import { AuthGuard } from '../../services/auth.guard';
 
 @NgModule({
   declarations: [
     ClientsMainComponent,
     ClientsGridComponent,
+    ClientModal,
     ClientsChartsCardsComponent,
     ClientsChartsComponent,
     SidebarComponent,
@@ -38,13 +41,13 @@ import { AuthGuard } from '../../services/auth.guard';
     NgSemanticModule,
     routing,
     ReactiveFormsModule,
-    StoreModule.provideStore({client : gridReducer, chart : chartReducer}),
+    StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),
     ChartsModule
   ],
-  providers: [AuthGuard,UserService,ClientsService],
-  bootstrap:    [ ClientsMainComponent]
+  providers: [ AuthGuard, UserService, ClientsService, ChartService ],
+  bootstrap: [ ClientsMainComponent]
 })
 export class ClientsModule { }

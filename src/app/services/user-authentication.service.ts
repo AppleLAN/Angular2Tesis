@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { User } from '../interfaces/user.interface';
+import { User } from '../interfaces/user';
 import { Observable } from 'rxjs/Rx';
 import { Router, CanActivate } from '@angular/router';
 

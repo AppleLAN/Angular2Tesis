@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSemanticModule } from 'ng-semantic/ng-semantic';
-import { StoreModule } from '@ngrx/store';
-
 import { AppComponent } from './app.component';
 
 import { routing } from './app.routes';
@@ -24,7 +22,6 @@ import { AuthGuard } from './services/auth.guard';
     routing,
     ReactiveFormsModule,
     NgSemanticModule,
-    StoreModule.provideStore([]),
   ],
   providers: [AuthGuard,UserAuthenticationService],
   bootstrap: [ AppComponent]

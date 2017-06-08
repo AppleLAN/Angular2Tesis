@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserAuthenticationService } from '../../services/user-authentication.service';
 import { Router } from '@angular/router';
 import { Store, Action } from '@ngrx/store';
-import { NEWCLIENTS, ADDCLIENT, DELETECLIENT, CHANGECLIENT } from '../clients/reducers/chart.reducer';
+import { NEWCHARTDATA} from '../clients/reducers/chart.reducer';
 
 @Component({
   selector: 'app-sidebar-component',
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit{
   ngOnInit() {
   } 
   addToStore() {
-      this.store.dispatch({ type: NEWCLIENTS, payload: {'hello': 'Hola'}});
+      this.store.dispatch({ type: NEWCHARTDATA, payload: {'hello': 'Hola'}});
   }
   isActive(url) {
     return this.router.url === url;

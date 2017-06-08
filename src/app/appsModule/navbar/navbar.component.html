@@ -5,15 +5,16 @@
             <i class="user icon"></i> Clientes
         </a>
         <div class="right item">
-        <div class="ui inverted menu">
-            <div class="ui simple inverted dropdown item">
-            Acciones
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <div class="item">Perfil</div>
-                <div (click)="logOut()" class="item">Salir</div>
-            </div>
-            </div>
-        </div>  
+            <div class="ui inverted menu">
+                <div class="ui simple inverted dropdown item">
+                Acciones
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div (click)="showProfileModal()" class="item">Perfil</div>
+                    <div (click)="logOut()" class="item">Salir</div>
+                </div>
+                </div>
+            </div>  
         </div>
 </div>
+<app-profile-modal></app-profile-modal>
