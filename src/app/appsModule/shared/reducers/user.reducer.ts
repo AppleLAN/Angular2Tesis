@@ -6,6 +6,7 @@ import { initialModalObject } from '../../clients/reducers/grid.reducer';
 
 export const NEWUSER = 'NEWUSER';
 export const NEWCOMPANY = 'NEWCOMPANY';
+export const NEWUSERPROFILE = 'NEWUSERPROFILE';
 
 export const initialUserObject: User = {
     name: '',
@@ -20,9 +21,9 @@ export const initialUserObject: User = {
     providers: false
 }
 
-const emptyState = {
-    profile: null,
-    company:null
+const emptyState: CompleteUser = {
+    profile: initialUserObject,
+    company: initialModalObject
 }
 
 const initialCompanyObject = initialModalObject;
@@ -30,6 +31,11 @@ const initialCompanyObject = initialModalObject;
 export const userReducer: Reducer<any> = (state: CompleteUser, action: Action) => {
     switch(action.type){
         case NEWUSER:
+            emptyState.profile = action.payload.profile;
+            if(action.payload.company)
+                emptyState.company = action.payload.company;
+            return emptyState;
+        case NEWUSERPROFILE:
             emptyState.profile = action.payload;
             return emptyState;
         case NEWCOMPANY:

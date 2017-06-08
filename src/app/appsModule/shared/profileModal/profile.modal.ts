@@ -6,7 +6,7 @@ import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 
 import { UserService } from '../../../services/user.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 declare var jQuery:any;
 
@@ -21,8 +21,8 @@ export class ProfileModal implements OnInit {
     userForm: FormGroup;
     registerForm: FormGroup;
     error: String;
-    userStorage: Observable<CompleteUser>;
-
+    userStorage: Subscription;
+    userData:CompleteUser;
   constructor(
     private router: Router,
     private fb: FormBuilder, 
@@ -37,7 +37,6 @@ export class ProfileModal implements OnInit {
       createdAt:[''],
       updatedAt:[''],
       deletedAt:[''],
-      new:[true],
       name: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required,Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
@@ -64,7 +63,7 @@ export class ProfileModal implements OnInit {
     });
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],
-      password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],
+      password: ['', [Validators.minLength(6),Validators.maxLength(12)]],
       name: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
       lastname: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
@@ -75,7 +74,15 @@ export class ProfileModal implements OnInit {
       clients: [''],
       providers: [''],
     });
-    this.userStorage = this.userService.getUserStorage();
+    this.userStorage = this.userService.getUserStorage().subscribe(state => {
+      this.userData = state;
+      if(state){
+        this.userData.profile.password = null;
+        this.registerForm.setValue(this.userData.profile);
+        this.userForm.setValue(this.userData.company);
+      }
+    });
+    this.userService.getProfileInfo().subscribe();
   } 
   
   refresh(){ 
@@ -83,32 +90,10 @@ export class ProfileModal implements OnInit {
   }
 
   updateClientInfo({ value }: { value: User }) {
-    this.userService.updateClientInfo(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.userService.updateClientInfo(value).subscribe();
   }
 
   updateClientCompany({ value }: { value: Client }) {
-    this.userService.updateClientCompany(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.userService.updateClientCompany(value).subscribe();
   }
 }

@@ -6,7 +6,7 @@ import { CompleteUser } from '../interfaces/complete.user';
 
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
-import { NEWUSER,NEWCOMPANY, userReducer } from './../appsModule/shared/reducers/user.reducer';
+import { NEWUSER, NEWCOMPANY, userReducer, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -40,11 +40,20 @@ export class UserService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getProfileInfo(): Observable<any> {
+    return this.http.get(
+      'http://localhost:8000/api/getProfileInfo', this.options)
+        .map((response: Response) => {
+            this.store.dispatch({ type: NEWUSER, payload: response.json()});
+        })
+        .catch((error: any) =>Observable.throw(error.json().error || 'Server error')
+        );
+  }
+
   updateClientInfo(user : User): Observable<Object[]> {
     return this.http.post('http://localhost:8000/api/updateUserProfile', user, this.options)
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWUSER, payload: user});
-        return response.json();
+        this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -53,7 +62,6 @@ export class UserService {
     return this.http.post('http://localhost:8000/api/updateUserCompany',company, this.options)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
-        return response.json();
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
