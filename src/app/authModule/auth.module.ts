@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -30,7 +30,7 @@ import { AuthGuard } from '../services/auth.guard';
     NgSemanticModule,
     StoreModule.provideStore([])
   ],
-  providers: [AuthGuard,UserAuthenticationService],
+  providers: [AuthGuard, UserAuthenticationService],
   bootstrap: [ AuthComponent]
 })
 export class AuthModule { }

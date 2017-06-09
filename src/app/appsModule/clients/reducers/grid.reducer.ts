@@ -47,7 +47,7 @@ export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
             return [...state, action.payload];
         case 'CHANGECLIENT':
             return state.map(item => {
-                return item.id === action.payload.id ? Object.assign({}, item, action.payload.id) : item;
+                return item.id === action.payload.id ? item = action.payload : item;
             });
         case 'DELETECLIENT':
             return state.filter(item => {

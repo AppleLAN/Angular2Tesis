@@ -27,5 +27,5 @@ export interface Client {
   limiteDeCredito: number,
   numeroDeInscripcionesIB: number,
   cuentasGenerales: String,
-  percepcionDeGanancia: number,           
+  percepcionDeGanancia: number,
 }

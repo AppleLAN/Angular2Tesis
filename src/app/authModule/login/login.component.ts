@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit{
       email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
       password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],      
     });
-  } 
-  
+  }
+
   submit({ value }: { value: User }) {
     this.authService.signIn(value)
     .subscribe(
