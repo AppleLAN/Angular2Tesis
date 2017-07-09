@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit{
      this.clientsImg = '../../assets/images/client.png';
      this.providersImg = '../../assets/images/provider.png';
      this.commingSoonText = 'Pronto !';
+
      this.authService.getUserApps()
      .subscribe(
       response => {
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit{
         console.log(error);
       }
     );
-  } 
+  }
 
   getAppImage (app: String) {
     let result:String;

@@ -40,7 +40,7 @@ export const initialModalObject: Client = {
 }
 
 export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'NEWCLIENTS':
             return action.payload;
         case 'ADDCLIENT':

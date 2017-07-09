@@ -10,7 +10,7 @@ import { UserAuthenticationService } from '../../services/user-authentication.se
   styleUrls: ['../auth.component.scss']
 })
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error: String;
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit{
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],      
+      password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],
     });
   }
 

@@ -23,7 +23,7 @@ import { AuthGuard } from './services/auth.guard';
     ReactiveFormsModule,
     NgSemanticModule,
   ],
-  providers: [AuthGuard,UserAuthenticationService],
+  providers: [AuthGuard, UserAuthenticationService],
   bootstrap: [ AppComponent]
 })
 export class AppModule { }

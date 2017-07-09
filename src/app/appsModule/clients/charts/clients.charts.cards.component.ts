@@ -21,7 +21,7 @@ export class ClientsChartsCardsComponent implements OnInit{
     clients: Client;
     error: String;
     demo: Boolean = true;
-    
+
     constructor(
         private fb: FormBuilder, 
         private authService: UserAuthenticationService, 
@@ -29,7 +29,7 @@ export class ClientsChartsCardsComponent implements OnInit{
         private store: Store<Client>) {
         }
     ngOnInit() {
-    
-    } 
+
+    }
 
 }

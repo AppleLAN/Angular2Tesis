@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 import { Client } from '../../../interfaces/client';
 import { initialModalObject } from '../reducers/grid.reducer';
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-client-modal',
@@ -58,7 +58,7 @@ export class ClientModal implements OnInit{
       limiteDeCredito: ['', [Validators.required]],
       numeroDeInscripcionesIB: ['', [Validators.required]],
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
-      percepcionDeGanancia: ['', [Validators.required]],           
+      percepcionDeGanancia: ['', [Validators.required]],
     });
     this.clientStorage = this.clientsService.getClientStorage();
     this.clientsService.getClients().subscribe();

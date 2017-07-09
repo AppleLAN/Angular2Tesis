@@ -13,14 +13,13 @@ const reducers = {
     user: userReducer,
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze,combineReducers)(reducers);
+const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
 const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
   if (environment.production) {
     return productionReducer(state, action);
-  }
-  else {
+  } else {
     return developmentReducer(state, action);
   }
 }
