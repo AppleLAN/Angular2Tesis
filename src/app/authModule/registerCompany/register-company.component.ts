@@ -1,39 +1,31 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { Client, UpdateClient } from '../../../interfaces/client';
-import { CompleteUser } from '../../../interfaces/complete.user';
-
-import { UserService } from '../../../services/user.service';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Client, UpdateClient } from '../../interfaces/client';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { CompleteUser } from './../../interfaces/complete.user';
+import { Subscription } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
-declare var jQuery:any;
 
 @Component({
-  selector: 'app-profile-modal',
-  templateUrl: './profile.modal.html',
+  selector: 'app-register-company-component',
+  templateUrl: './register-company.component.html',
+  styleUrls: ['../auth.component.scss']
 })
 
-export class ProfileModal implements OnInit {
-
-    clients: Client;
-    userForm: FormGroup;
-    registerForm: FormGroup;
-    error: String;
-    userStorage: Subscription;
-    userData:CompleteUser;
-
-  constructor(
-    private router: Router,
-    private fb: FormBuilder, 
-    private userService: UserService, 
-    private store: Store<CompleteUser>) {}
+export class RegisterCompanyComponent implements OnInit {
+  userForm: FormGroup;
+  error: String;
+  clients: Client;
+  userStorage: Subscription;
+  userData: CompleteUser;
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private store: Store<CompleteUser>) {}
 
   ngOnInit() {
-     this.userForm = this.fb.group({
+    this.userForm = this.fb.group({
       id:[''],
-      company_id:[''],
+      client_id:[''],
+      isData:[''],
       created_at:[''],
       updated_at:[''],
       deleted_at:[''],
@@ -61,42 +53,27 @@ export class ProfileModal implements OnInit {
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
       percepcionDeGanancia: ['', [Validators.required]],           
     });
-    this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],
-      password: ['', [Validators.minLength(6),Validators.maxLength(12)]],
-      name: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
-      lastname: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
-      email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      address: ['', [Validators.required, Validators.minLength(3)]],
-      birthday: ['', [Validators.required]],
-      company_id: [''],
-      sales: [''],
-      stock: [''],
-      clients: [''],
-      providers: [''],
-    });
-
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.userData = state;
       if(state){
         this.userData.profile.password = null;
-        this.registerForm.setValue(this.userData.profile);
         this.userForm.setValue(this.userData.company);
       }
     });
     this.userService.getProfileInfo().subscribe();
-  } 
-  
-  refresh(){ 
-    jQuery('.ui.modal.profile-modal').modal('refresh');
-  }
-
-  updateClientInfo({ value }: { value: User }) {
-    this.userService.updateClientInfo(value).subscribe();
   }
 
   updateClientCompany({ value }: { value: UpdateClient }) {
-    value.type = "UPDATE";
-    this.userService.updateClientCompany(value).subscribe();
+    value.type = "CREATE";
+    this.userService.updateClientCompany(value).subscribe(
+      response => {
+        if (response) {
+            this.router.navigate(['/apps']);
+        } else {
+            this.error = 'Error';
+        }
+      },
+    );
+    
   }
 }

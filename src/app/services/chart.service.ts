@@ -54,7 +54,7 @@ export class ChartService {
         .map((response: Response) => {
           return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.json().error || 'Server error')
+        .catch((error: any) =>Observable.throw(error.error || 'Server error')
         );
   }
 
@@ -69,7 +69,7 @@ export class ChartService {
         .map((response: Response) => {
           return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.json().error || 'Server error')
+        .catch((error: any) =>Observable.throw(error.error || 'Server error')
         );
   }
   

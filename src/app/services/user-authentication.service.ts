@@ -35,7 +35,7 @@ export class UserAuthenticationService {
             return false;
           }
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
   
   register(userInfo: User): Observable<Comment[]> {
@@ -55,7 +55,7 @@ export class UserAuthenticationService {
             return false;
           }
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
   logout(): void {

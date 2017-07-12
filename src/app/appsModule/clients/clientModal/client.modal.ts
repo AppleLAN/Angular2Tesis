@@ -30,12 +30,12 @@ export class ClientModal implements OnInit{
   ngOnInit() {
     this.clientForm = this.fb.group({
       id:[''],
-      userId:[''],
+      client_id:[''],
       isData:[''],
       created_at:[''],
       updated_at:[''],
       deleted_at:[''],
-      new:[true],
+      new: [true],
       name: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required,Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
@@ -43,7 +43,7 @@ export class ClientModal implements OnInit{
       codigoPostal: ['', [Validators.minLength(4),Validators.maxLength(30)]],
       codigoProvincia: ['', [Validators.minLength(4),Validators.maxLength(30)]],
       address: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      telephone: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9)]],
+      telephone: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(11)]],
       cuit: ['', [Validators.required, Validators.minLength(11),Validators.maxLength(11)]],
       web: ['', [Validators.minLength(6),Validators.maxLength(30)]],
       iib: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
@@ -74,7 +74,7 @@ export class ClientModal implements OnInit{
   openNewClientModal() {
     let clientFormEmptyObject: any;
     clientFormEmptyObject = this.clientFormEmptyObject;
-    clientFormEmptyObject.new = false;
+    clientFormEmptyObject.new = true;
     this.clientForm.setValue(this.clientFormEmptyObject);
     jQuery('.ui.modal.client-modal').modal('show');
   }

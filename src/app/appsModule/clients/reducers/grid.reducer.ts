@@ -9,7 +9,7 @@ export const DELETECLIENT = 'DELETECLIENT';
 
 export const initialModalObject: Client = {
     id: null,
-    userId: null,
+    client_id: null,
     isData: null,
     created_at:  '',
     updated_at:  '',

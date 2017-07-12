@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
-import { Client } from '../interfaces/client';
+import { Client, UpdateClient } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
 
 import { Observable } from 'rxjs/Rx';
@@ -37,7 +37,7 @@ export class UserService {
       .map((response: Response) => {
         return response.json().apps;
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
   getProfileInfo(): Observable<any> {
@@ -45,8 +45,9 @@ export class UserService {
       'http://localhost:8000/api/getProfileInfo', this.options)
         .map((response: Response) => {
             this.store.dispatch({ type: NEWUSER, payload: response.json()});
+            return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.json().error || 'Server error')
+        .catch((error: any) =>Observable.throw(error.error || 'Server error')
         );
   }
 
@@ -55,15 +56,16 @@ export class UserService {
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
-  updateClientCompany(company: Client): Observable<Object[]> {
+  updateClientCompany(company: UpdateClient): Observable<Object[]> {
     return this.http.post('http://localhost:8000/api/updateUserCompany',company, this.options)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
+        return response.json();
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
   
 

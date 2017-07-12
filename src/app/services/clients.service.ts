@@ -31,9 +31,10 @@ export class ClientsService {
     getClients(): Observable<Client> {
         return this.http.get('http://localhost:8000/api/getClients', this.options)
             .map((response: Response) => {
+                const thisResponse = response.json();
                 this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
             })
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     updateClient(newClient : Client): Observable<Client> {
@@ -41,7 +42,7 @@ export class ClientsService {
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
             })
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     addClient(newClient : Client): Observable<Client> {
@@ -50,7 +51,7 @@ export class ClientsService {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
                 return response.json();
             })
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
     deleteClient(newClient : Client): Observable<Client> {
@@ -59,7 +60,7 @@ export class ClientsService {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
                 return response.json();
             })
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
 

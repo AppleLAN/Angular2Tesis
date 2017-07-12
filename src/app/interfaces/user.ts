@@ -9,4 +9,5 @@ export interface User {
   stock: Boolean;
   clients: Boolean;
   providers: Boolean;
+  company_id: String;
 }

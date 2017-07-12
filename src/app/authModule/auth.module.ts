@@ -11,15 +11,19 @@ import { routing } from './auth.routing';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisterCompanyComponent } from './registerCompany/register-company.component';
 
 import { UserAuthenticationService } from '../services/user-authentication.service';
+import { UserService } from './../services/user.service';
 import { AuthGuard } from '../services/auth.guard';
+import { HasCompanyGuard } from '../services/company.guard';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent,
+    RegisterCompanyComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,7 @@ import { AuthGuard } from '../services/auth.guard';
     NgSemanticModule,
     StoreModule.provideStore([])
   ],
-  providers: [AuthGuard, UserAuthenticationService],
+  providers: [AuthGuard, HasCompanyGuard, UserService, UserAuthenticationService],
   bootstrap: [ AuthComponent]
 })
 export class AuthModule { }

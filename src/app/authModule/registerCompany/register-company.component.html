@@ -1,0 +1,376 @@
+<div id="personal-info">
+  <div class="ui middle aligned center aligned grid"> 
+    <div class="container column">
+      <div class="form-box">
+        <form class="ui form" [formGroup]="userForm" name="Form">
+          <div class="header-content">
+              <h1 class="brand">Semantic AF Contaduria</h1>
+              <h4>Bienvenido,&nbsp; por favor registra tu compañia a continuacion.</h4>
+          </div>
+          <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
+          <div class="ui left aligned basic segment">
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Nombre" 
+                          [control]="userForm.controls.name" 
+                          placeholder="Ingresar Nombre">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('name').hasError('required') && userForm.get('name').touched">
+                      Nombre no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('name').hasError('minlength') && userForm.get('name').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('name').hasError('maxlength') && userForm.get('name').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Nombre De Fantasia" 
+                          [control]="userForm.controls.fantasyName" 
+                          placeholder="Ingresar nombre de fantasia">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('fantasyName').hasError('required') && userForm.get('fantasyName').touched">
+                      Nombre de fantasia no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('fantasyName').hasError('maxlength') && userForm.get('fantasyName').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="email" 
+                          label="E-mail" 
+                          [control]="userForm.controls.email" 
+                          placeholder="Ingresar E-mail">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('email').hasError('required') && userForm.get('email').touched">
+                      E-mail no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('email').hasError('minlength') && userForm.get('email').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('email').hasError('maxlength') && userForm.get('email').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Localidad" 
+                          [control]="userForm.controls.place" 
+                          placeholder="Ingresar Localidad">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('place').hasError('required') && userForm.get('place').touched">
+                      Lugar no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('place').hasError('minlength') && userForm.get('place').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('place').hasError('maxlength') && userForm.get('place').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Codigo Postal" 
+                          [control]="userForm.controls.codigoPostal" 
+                          placeholder="Ingresar codigo postal">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('required') && userForm.get('codigoPostal').touched">
+                      Codigo postal no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('minlength') && userForm.get('codigoPostal').touched">
+                      Minimo 4 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('maxlength') && userForm.get('codigoPostal').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Codigo Provincia" 
+                          [control]="userForm.controls.codigoProvincia" 
+                          placeholder="Ingresar codigo postal">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').touched">
+                      Codigo provincia no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('minlength') && userForm.get('codigoProvincia').touched">
+                      Minimo 4 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('maxlength') && userForm.get('codigoProvincia').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Direccion" 
+                          [control]="userForm.controls.address" 
+                          addressholder="Ingresar Direccion">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('address').hasError('required') && userForm.get('address').touched">
+                      Direccion no ingresada
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('address').hasError('minlength') && userForm.get('address').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('address').hasError('maxlength') && userForm.get('address').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Telefono" 
+                          [control]="userForm.controls.telephone"
+                          placeholder="Ingresar Telefono">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').touched">
+                      Telefono no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('telephone').hasError('minlength') && userForm.get('telephone').touched">
+                      9 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('telephone').hasError('maxlength') && userForm.get('telephone').touched">
+                      9 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="C.U.I.T" 
+                          [control]="userForm.controls.cuit" 
+                          placeholder="Ingresar C.U.I.T">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('cuit').hasError('required') && userForm.get('cuit').touched">
+                      C.U.I.T no ingresado
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('cuit').hasError('minlength') && userForm.get('cuit').touched">
+                      11 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('cuit').hasError('maxlength') && userForm.get('cuit').touched">
+                      11 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Pagina Web" 
+                          [control]="userForm.controls.web" 
+                          placeholder="Ingresar Pagina Web">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('web').hasError('minlength') && userForm.get('web').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('web').hasError('maxlength') && userForm.get('web').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="​Inscripcion en ingresos brutos" 
+                          [control]="userForm.controls.iib" 
+                          placeholder="Ingresar ​inscripcion en ingresos brutos">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').touched">
+                      ​Inscripcion en ingresos brutos no ingresada
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('iib').hasError('minlength') && userForm.get('iib').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('iib').hasError('maxlength') && userForm.get('iib').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Percepcion en ingresos brutos" 
+                          [control]="userForm.controls.pib" 
+                          placeholder="Ingresar percepcion en ingresos brutos">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('pib').hasError('required') && userForm.get('pib').touched">
+                      Percepcion en ingresos brutos no ingresada
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('pib').hasError('minlength') && userForm.get('pib').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('pib').hasError('maxlength') && userForm.get('pib').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Excencion de percepcion en ingresos brutos" 
+                          [control]="userForm.controls.epib" 
+                          placeholder="Ingresar excencion de percepcion en ingresos brutos">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('epib').hasError('required') && userForm.get('epib').touched">
+                      Excencion de percepcion en ingresos brutos no ingresada
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('epib').hasError('minlength') && userForm.get('epib').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('epib').hasError('maxlength') && userForm.get('epib').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <div class="ui toggle checkbox">
+                      <sm-checkbox 
+                          label="Responsable Inscripto" 
+                          [control]="userForm.controls.responsableInscripto" 
+                          placeholder="Ingresar responsable inscripto">
+                      </sm-checkbox>
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <div class="ui toggle checkbox">
+                      <sm-checkbox 
+                              label="Excento" 
+                              [control]="userForm.controls.excento" 
+                              placeholder="Ingresar si es excento">
+                      </sm-checkbox>
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <div class="ui toggle checkbox">
+                      <sm-checkbox 
+                          label="Responsable de Monotributo" 
+                          [control]="userForm.controls.responsableMonotributo" 
+                          placeholder="Ingresar si es responsable de monotributo">
+                      </sm-checkbox>
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <div class="ui toggle checkbox">
+                      <sm-checkbox 
+                          label="Iva Inscripto" 
+                          [control]="userForm.controls.ivaInscripto" 
+                          placeholder="Ingresar si es iva inscripto">
+                      </sm-checkbox>
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Precio Lista" 
+                          [control]="userForm.controls.precioLista" 
+                          placeholder="Ingresar precio lista">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('precioLista').hasError('required') && userForm.get('precioLista').touched">
+                      Precio lista no ingresado
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Condicion De Venta" 
+                          [control]="userForm.controls.condicionDeVenta" 
+                          placeholder="Ingresar condicion de venta">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('required') && userForm.get('condicionDeVenta').touched">
+                      Condicion de venta no ingresada
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('minlength') && userForm.get('condicionDeVenta').touched">
+                      Minimo 6 caracteres
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('maxlength') && userForm.get('condicionDeVenta').touched">
+                      Maximo 30 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Limite De Credito" 
+                          [control]="userForm.controls.limiteDeCredito" 
+                          placeholder="Ingresar condicion de venta">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('required') && userForm.get('limiteDeCredito').touched">
+                      Limite de credito no ingresada
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Numero De Inscripciones Ingresos Brutos" 
+                          [control]="userForm.controls.numeroDeInscripcionesIB" 
+                          placeholder="Ingresar numero de inscripciones ingresos brutos">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('required') && userForm.get('numeroDeInscripcionesIB').touched">
+                      Numero de inscripciones ingresos brutos no ingresado
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Cuentas Generales" 
+                          [control]="userForm.controls.cuentasGenerales" 
+                          placeholder="Ingresar cuentas generales">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('required') && userForm.get('cuentasGenerales').touched">
+                      Cuentas Generales no ingresadas
+                  </div>
+                  <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('minlength') && userForm.get('cuentasGenerales').touched">
+                      Minimo 6 caracteres
+                  </div>
+              </div>
+
+              <div class="form-group field">
+                  <sm-input 
+                          type="text" 
+                          label="Percepcion De Ganancia" 
+                          [control]="userForm.controls.percepcionDeGanancia" 
+                          placeholder="Ingresar percepcion de ganancia">
+                  </sm-input>
+                  <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('required') && userForm.get('percepcionDeGanancia').touched">
+                      Percepcion De Ganancia no ingresada
+                  </div>
+              </div>
+
+          </div>
+          <modal-actions>
+              <div class="field text-center">
+                  <div class="one fields">
+                      <div class="field">
+                          <button class="ui button" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar Datos</button>
+                      </div>
+                  </div>
+              </div>
+          </modal-actions>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
