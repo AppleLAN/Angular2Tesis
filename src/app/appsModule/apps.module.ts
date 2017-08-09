@@ -36,7 +36,7 @@ import { reducer } from './apps.reducers';
       maxAge: 5
     }),
   ],
-  providers: [AuthGuard,UserService],
+  providers: [AuthGuard, UserService],
   bootstrap: [ AppsComponent]
 })
 export class AppsModule { }

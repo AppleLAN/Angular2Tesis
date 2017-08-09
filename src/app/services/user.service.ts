@@ -31,7 +31,7 @@ export class UserService {
   getUserStorage(): Observable<CompleteUser> {
       return this.userStorage;
   }
-  
+
   getUserApps(): Observable<Object[]> {
     return this.http.get('http://localhost:8000/api/getUserApps', this.options)
       .map((response: Response) => {
@@ -47,7 +47,7 @@ export class UserService {
             this.store.dispatch({ type: NEWUSER, payload: response.json()});
             return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
         );
   }
 

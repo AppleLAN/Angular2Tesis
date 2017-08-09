@@ -22,18 +22,17 @@ export class ProfileModal implements OnInit {
     registerForm: FormGroup;
     error: String;
     userStorage: Subscription;
-    userData:CompleteUser;
+    userData: CompleteUser;
 
   constructor(
     private router: Router,
-    private fb: FormBuilder, 
-    private userService: UserService, 
+    private fb: FormBuilder,
+    private userService: UserService,
     private store: Store<CompleteUser>) {}
 
   ngOnInit() {
      this.userForm = this.fb.group({
       id:[''],
-      company_id:[''],
       created_at:[''],
       updated_at:[''],
       deleted_at:[''],
