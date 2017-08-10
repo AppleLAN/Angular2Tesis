@@ -20,6 +20,7 @@ export class ProfileModal implements OnInit {
     clients: Client;
     userForm: FormGroup;
     registerForm: FormGroup;
+    newSubUserForm: FormGroup;
     error: String;
     userStorage: Subscription;
     userData: CompleteUser;
@@ -33,6 +34,7 @@ export class ProfileModal implements OnInit {
   ngOnInit() {
      this.userForm = this.fb.group({
       id:[''],
+      company_id:[''],
       created_at:[''],
       updated_at:[''],
       deleted_at:[''],
@@ -73,8 +75,23 @@ export class ProfileModal implements OnInit {
       stock: [''],
       clients: [''],
       providers: [''],
+      isAdmin: ['']
     });
-
+    this.newSubUserForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(12)]],
+      password: ['', [Validators.minLength(6),Validators.maxLength(12)]],
+      name: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
+      lastname: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(12)]],
+      email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.minLength(3)]],
+      birthday: ['', [Validators.required]],
+      company_id: [''],
+      sales: [''],
+      stock: [''],
+      clients: [''],
+      providers: [''],
+      isAdmin: ['']
+    })
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.userData = state;
       if(state){
@@ -97,5 +114,8 @@ export class ProfileModal implements OnInit {
   updateClientCompany({ value }: { value: UpdateClient }) {
     value.type = "UPDATE";
     this.userService.updateClientCompany(value).subscribe();
+  }
+  createSubClient({ value }: { value:User }) {
+    this.userService.createSubClient(value).subscribe();
   }
 }

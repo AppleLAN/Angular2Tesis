@@ -10,4 +10,5 @@ export interface User {
   clients: Boolean;
   providers: Boolean;
   company_id: String;
+  isAdmin: Boolean;
 }

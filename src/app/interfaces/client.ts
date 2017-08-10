@@ -1,5 +1,6 @@
 export interface Client {
   id: number,
+  company_id: number,
   client_id: number,
   isData: number,
   created_at:  String,
@@ -32,6 +33,7 @@ export interface Client {
 
 export interface UpdateClient {
   id: number,
+  company_id: number,
   client_id: number,
   isData: number,
   created_at:  String,

@@ -59,6 +59,14 @@ export class UserService {
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
+  createSubClient(user : User): Observable<Object[]> {
+  return this.http.post('http://localhost:8000/api/createInternalUser', user, this.options)
+    .map((response: Response) => {
+      
+    })
+    .catch((error: any) => Observable.throw(error.error || 'Server error'));
+  }
+
   updateClientCompany(company: UpdateClient): Observable<Object[]> {
     return this.http.post('http://localhost:8000/api/updateUserCompany',company, this.options)
       .map((response: Response) => {

@@ -79,8 +79,8 @@
                             Fecha de nacimiento no ingresada
                             </div>
                         </div>
-                        <div class="ui segment">
-                            <h4 class="ui dividing header">Selecciona los productos a utilizar</h4>
+                        <div *ngIf="userData?.profile.isAdmin" class="ui segment">
+                            <h4  class="ui dividing header">Selecciona los productos a utilizar</h4>
                             <div class="four fields">
                                 <div class="form-group field">
                                     <div class="ui toggle checkbox">
@@ -117,7 +117,7 @@
                     </div>
                 </form>
             </sm-tab>
-            <sm-tab title="Datos de Empresa">
+            <sm-tab *ngIf="userData?.profile.isAdmin" title="Datos de Empresa">
                 <form class="ui form" [formGroup]="userForm" name="Form">
                     <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
                     <div class="ui left aligned basic segment">
@@ -483,6 +483,122 @@
                             </div>
                         </div>
                     </modal-actions>
+                </form>
+            </sm-tab>
+            <sm-tab *ngIf="userData?.profile.isAdmin" title="Nuevo Sub-Usuario">
+                <form class="ui form" [formGroup]="newSubUserForm" name="newSubUserForm">
+                    <div class="ui left aligned basic segment">
+                        <div class="form-group field">
+                            <sm-input type="text" label="Nombre de Usuario" [control]="newSubUserForm.controls.username" placeholder="Ingresar nombre de usuario"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('username').hasError('required') && newSubUserForm.get('username').touched">
+                            Nombre de usuario no ingresado
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('username').hasError('minlength') && newSubUserForm.get('username').touched">
+                            Minimo 6 caracteres
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('username').hasError('maxlength') && newSubUserForm.get('username').touched">
+                            Maximo 12 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <sm-input type="password" label="Contraseña" [control]="newSubUserForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('password').hasError('required') && newSubUserForm.get('password').touched">
+                            Contraseña no ingresada
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('password').hasError('minlength') && newSubUserForm.get('password').touched">
+                            Minimo 6 caracteres
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('password').hasError('maxlength') && newSubUserForm.get('password').touched">
+                            Maximo 12 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <sm-input type="text" label="Nombre" [control]="newSubUserForm.controls.name" placeholder="Ingresar Nombre"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('name').hasError('required') && newSubUserForm.get('name').touched">
+                            Nombre no ingresado
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('name').hasError('minlength') && newSubUserForm.get('name').touched">
+                            Minimo 3 caracteres
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('name').hasError('maxlength') && newSubUserForm.get('name').touched">
+                            Maximo 12 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <sm-input type="text" label="Apellido" [control]="newSubUserForm.controls.lastname" placeholder="Ingresar Apellido"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('lastname').hasError('required') && newSubUserForm.get('lastname').touched">
+                            Apellido no ingresado
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('lastname').hasError('minlength') && newSubUserForm.get('lastname').touched">
+                            Minimo 6 caracteres
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('lastname').hasError('maxlength') && newSubUserForm.get('lastname').touched">
+                            Maximo 12 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <sm-input type="email" label="Email" [control]="newSubUserForm.controls.email" placeholder="Ingresar Email"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('email').hasError('required') && newSubUserForm.get('email').touched">
+                            Email no ingresado
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('email').hasError('minlength') && newSubUserForm.get('email').touched">
+                            Minimo 6 caracteres
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('email').hasError('maxlength') && newSubUserForm.get('email').touched">
+                            Maximo 12 caracteres
+                            </div>
+                        </div>  
+                        <div class="form-group field">
+                            <sm-input type="text" label="Direccion" [control]="newSubUserForm.controls.address" placeholder="Ingresar direccion"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('address').hasError('required') && newSubUserForm.get('address').touched">
+                            Direccion no ingresada
+                            </div>
+                            <div class="has-error" *ngIf="newSubUserForm.get('address').hasError('minlength') && newSubUserForm.get('address').touched">
+                            Minimo 3 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group field">
+                            <sm-input type="date" label="Fecha de nacimiento" [control]="newSubUserForm.controls.birthday" placeholder="Ingresar fecha de nacimiento"></sm-input>
+                            <div class="has-error" *ngIf="newSubUserForm.get('birthday').hasError('required') && newSubUserForm.get('birthday').touched">
+                            Fecha de nacimiento no ingresada
+                            </div>
+                        </div>
+                        <div *ngIf="userData?.profile.isAdmin" class="ui segment">
+                            <h4  class="ui dividing header">Selecciona los productos a utilizar</h4>
+                            <div class="four fields">
+                                <div class="form-group field">
+                                    <div class="ui toggle checkbox">
+                                        <sm-checkbox label="Ventas" [control]="newSubUserForm.controls.sales"></sm-checkbox>
+                                    </div>
+                                </div>
+                                <div class="form-group field">
+                                    <div class="ui toggle checkbox">
+                                        <sm-checkbox label="Stock" [control]="newSubUserForm.controls.stock"></sm-checkbox>
+                                    </div>
+                                </div>
+                                <div class="form-group field">
+                                    <div class="ui toggle checkbox">
+                                        <sm-checkbox label="Clientes" [control]="newSubUserForm.controls.clients"></sm-checkbox>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui toggle checkbox">
+                                        <sm-checkbox label="Proveedores" [control]="newSubUserForm.controls.providers"></sm-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field text-center">
+                            <div class="two fields">
+                                <div class="field">
+                                    <button class="ui button" [disabled]="!newSubUserForm.valid" type="submit" (click)="createSubClient(newSubUserForm)">Crear</button>
+                                </div>
+                                <div class="field">
+                                    <button class="ui right floated button" (click)="profileModal.hide()">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>          
+                    </div>
                 </form>
             </sm-tab>
         </sm-tabs>
