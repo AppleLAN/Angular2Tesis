@@ -29,7 +29,7 @@ export class ProvidersService {
     }
 
     getProviders(): Observable<Provider> {
-        return this.http.get('http://localhost:8000/api/getClients', this.options)
+        return this.http.get('http://localhost:8000/api/getProviders', this.options)
             .map((response: Response) => {
                 const thisResponse = response.json();
                 this.store.dispatch({ type: NEWPROVIDERS, payload: response.json()});
@@ -38,7 +38,7 @@ export class ProvidersService {
     }
 
     updateProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/updateClient',newProvider, this.options)
+        return this.http.post('http://localhost:8000/api/updateProvider',newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider});
             })
@@ -46,7 +46,7 @@ export class ProvidersService {
     }
 
     addProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/saveClient',newProvider, this.options)
+        return this.http.post('http://localhost:8000/api/saveProvider',newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
                 return response.json();
@@ -55,7 +55,7 @@ export class ProvidersService {
     }
 
     deleteProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/deleteClient',newProvider, this.options)
+        return this.http.post('http://localhost:8000/api/deleteProvider',newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
                 return response.json();
