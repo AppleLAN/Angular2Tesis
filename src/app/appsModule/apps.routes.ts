@@ -11,7 +11,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,  canActivate: [AuthGuard]},
-      { path: 'clients', loadChildren: './../appsModule/clients/clients.module#ClientsModule', canActivate: [AuthGuard]}
+      { path: 'clients', loadChildren: './../appsModule/clients/clients.module#ClientsModule', canActivate: [AuthGuard]},
+      { path: 'providers', loadChildren: './../appsModule/providers/providers.module#ProvidersModule', canActivate: [AuthGuard]}
     ]
   }
 ];

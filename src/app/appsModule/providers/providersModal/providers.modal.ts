@@ -2,33 +2,33 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
-import { ClientsService } from '../../../services/clients.service';
+import { ProvidersService } from '../../../services/providers.service';
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
-import { Client } from '../../../interfaces/client';
+import { Provider } from '../../../interfaces/provider';
 import { initialModalObject } from '../reducers/grid.reducer';
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-client-modal',
-  templateUrl: './client.modal.html',
+  selector: 'app-provider-modal',
+  templateUrl: './providers.modal.html',
 })
 
-export class ClientModal implements OnInit{
-  clientStorage: Observable<Client>
-  clients: Client;
-  clientForm: FormGroup;
+export class ProviderModal implements OnInit{
+  providerStorage: Observable<Provider>
+  providers: Provider;
+  providerForm: FormGroup;
   error: String;
-  clientFormEmptyObject = initialModalObject;
+  providerFormEmptyObject = initialModalObject;
 
   constructor(
     private fb: FormBuilder, 
     private authService: UserAuthenticationService, 
-    private clientsService: ClientsService, 
-    private store: Store<Client>) {
+    private providersService: ProvidersService, 
+    private store: Store<Provider>) {
   }
   ngOnInit() {
-    this.clientForm = this.fb.group({
+    this.providerForm = this.fb.group({
       id:[''],
       company_id: [''],
       created_at:[''],
@@ -59,34 +59,34 @@ export class ClientModal implements OnInit{
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
       percepcionDeGanancia: ['', [Validators.required]],
     });
-    this.clientStorage = this.clientsService.getClientStorage();
-    this.clientsService.getClients().subscribe();
+    this.providerStorage = this.providersService.getProviderStorage();
+    this.providersService.getProviders().subscribe();
   } 
   
-  changeInformation(client: Client) {
-    const formClient: any = client;
-    formClient.new = false;
-    this.clientForm.setValue(formClient);
-    jQuery('.ui.modal.client-modal').modal('show');
+  changeInformation(provider: Provider) {
+    const formProvider: any = provider;
+    formProvider.new = false;
+    this.providerForm.setValue(formProvider);
+    jQuery('.ui.modal.provider-modal').modal('show');
   }
 
-  openNewClientModal() {
-    let clientFormEmptyObject: any;
-    clientFormEmptyObject = this.clientFormEmptyObject;
-    clientFormEmptyObject.new = true;
-    this.clientForm.setValue(this.clientFormEmptyObject);
-    jQuery('.ui.modal.client-modal').modal('show');
+  openNewProviderModal() {
+    let providerFormEmptyObject: any;
+   providerFormEmptyObject = this.providerFormEmptyObject;
+   providerFormEmptyObject.new = true;
+    this.providerForm.setValue(this.providerFormEmptyObject);
+    jQuery('.ui.modal.provider-modal').modal('show');
   }
 
-  isNew(clientForm: any) {
-    if(clientForm.controls.new.value)
+  isNew(providerForm: any) {
+    if(providerForm.controls.new.value)
       return true;
     else
       return false;
   }
 
-  addClient({ value }: { value: Client }) {
-    this.clientsService.addClient(value).subscribe(
+  addProvider({ value }: { value: Provider }) {
+    this.providersService.addProvider(value).subscribe(
       response => {
         if (response) {
             // login successful
@@ -100,8 +100,8 @@ export class ClientModal implements OnInit{
     );
   }
 
-  updateClient({ value }: { value: Client }) {
-    this.clientsService.updateClient(value).subscribe(
+  updateProvider({ value }: { value: Provider }) {
+    this.providersService.updateProvider(value).subscribe(
       response => {
         if (response) {
             // login successful
@@ -115,8 +115,8 @@ export class ClientModal implements OnInit{
     );
   }
 
-   deleteClient({ value }: { value: Client }) {
-    this.clientsService.deleteClient(value).subscribe(
+   deleteProvider({ value }: { value: Provider }) {
+    this.providersService.deleteProvider(value).subscribe(
       response => {
         if (response) {
             // login successful

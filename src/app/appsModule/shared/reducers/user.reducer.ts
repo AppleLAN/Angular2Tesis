@@ -10,6 +10,7 @@ export const NEWUSERPROFILE = 'NEWUSERPROFILE';
 
 export const initialUserObject: User = {
     company_id: '',
+    isAdmin: false,
     name: '',
     lastName: '',
     address: '',

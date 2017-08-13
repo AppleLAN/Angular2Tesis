@@ -1,13 +1,13 @@
 import { Action } from './../../../interfaces/action';
 import { Reducer } from './../../../interfaces/reducer';
-import { Client } from './../../../interfaces/client';
+import { Provider } from './../../../interfaces/provider';
 
-export const NEWCLIENTS = 'NEWCLIENTS';
-export const CHANGECLIENT = 'CHANGECLIENT';
-export const ADDCLIENT = 'ADDCLIENT';
-export const DELETECLIENT = 'DELETECLIENT';
+export const NEWPROVIDERS = 'NEWPROVIDERS';
+export const CHANGEPROVIDER = 'CHANGEPROVIDER';
+export const ADDPROVIDER = 'ADDPROVIDER';
+export const DELETEPROVIDER = 'DELETEPROVIDER';
 
-export const initialModalObject: Client = {
+export const initialModalObject: Provider = {
     id: null,
     company_id: null,
     created_at:  '',
@@ -38,17 +38,17 @@ export const initialModalObject: Client = {
     percepcionDeGanancia: null,
 }
 
-export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
+export const gridReducer: Reducer<any> = (state: Provider[], action: Action) => {
     switch (action.type) {
-        case 'NEWCLIENTS':
+        case 'NEWPROVIDERS':
             return action.payload;
-        case 'ADDCLIENT':
+        case 'ADDPROVIDER':
             return [...state, action.payload];
-        case 'CHANGECLIENT':
+        case 'CHANGEPROVIDER':
             return state.map(item => {
                 return item.id === action.payload.id ? item = action.payload : item;
             });
-        case 'DELETECLIENT':
+        case 'DELETEPROVIDER':
             return state.filter(item => {
                 return item.id !== action.payload.id;
             })

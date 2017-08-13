@@ -1,0 +1,372 @@
+<sm-modal title="Provider" class="fluid provider-modal" #providerModal>
+    <modal-content>
+        <form class="ui form" [formGroup]="providerForm" name="Form">
+            <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
+            <div class="ui left aligned basic segment">
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Nombre" 
+                            [control]="providerForm.controls.name" 
+                            placeholder="Ingresar Nombre">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('name').hasError('required') && providerForm.get('name').touched">
+                        Nombre no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('name').hasError('minlength') && providerForm.get('name').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('name').hasError('maxlength') && providerForm.get('name').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Nombre De Fantasia" 
+                            [control]="providerForm.controls.fantasyName" 
+                            placeholder="Ingresar nombre de fantasia">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('fantasyName').hasError('required') && providerForm.get('fantasyName').touched">
+                        Nombre de fantasia no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('fantasyName').hasError('maxlength') && providerForm.get('fantasyName').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="email" 
+                            label="E-mail" 
+                            [control]="providerForm.controls.email" 
+                            placeholder="Ingresar E-mail">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('email').hasError('required') && providerForm.get('email').touched">
+                        E-mail no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('email').hasError('minlength') && providerForm.get('email').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('email').hasError('maxlength') && providerForm.get('email').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Localidad" 
+                            [control]="providerForm.controls.place" 
+                            placeholder="Ingresar Localidad">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('place').hasError('required') && providerForm.get('place').touched">
+                        Lugar no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('place').hasError('minlength') && providerForm.get('place').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('place').hasError('maxlength') && providerForm.get('place').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Codigo Postal" 
+                            [control]="providerForm.controls.codigoPostal" 
+                            placeholder="Ingresar codigo postal">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('codigoPostal').hasError('required') && providerForm.get('codigoPostal').touched">
+                        Codigo postal no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('codigoPostal').hasError('minlength') && providerForm.get('codigoPostal').touched">
+                        Minimo 4 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('codigoPostal').hasError('maxlength') && providerForm.get('codigoPostal').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Codigo Provincia" 
+                            [control]="providerForm.controls.codigoProvincia" 
+                            placeholder="Ingresar codigo postal">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('required') && providerForm.get('codigoProvincia').touched">
+                        Codigo provincia no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('minlength') && providerForm.get('codigoProvincia').touched">
+                        Minimo 4 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('maxlength') && providerForm.get('codigoProvincia').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Direccion" 
+                            [control]="providerForm.controls.address" 
+                            addressholder="Ingresar Direccion">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('address').hasError('required') && providerForm.get('address').touched">
+                        Direccion no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('address').hasError('minlength') && providerForm.get('address').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('address').hasError('maxlength') && providerForm.get('address').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Telefono" 
+                            [control]="providerForm.controls.telephone"
+                            placeholder="Ingresar Telefono">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('telephone').hasError('required') && providerForm.get('telephone').touched">
+                        Telefono no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('telephone').hasError('minlength') && providerForm.get('telephone').touched">
+                        9 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('telephone').hasError('maxlength') && providerForm.get('telephone').touched">
+                        9 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="C.U.I.T" 
+                            [control]="providerForm.controls.cuit" 
+                            placeholder="Ingresar C.U.I.T">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('cuit').hasError('required') && providerForm.get('cuit').touched">
+                        C.U.I.T no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('cuit').hasError('minlength') && providerForm.get('cuit').touched">
+                        11 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('cuit').hasError('maxlength') && providerForm.get('cuit').touched">
+                        11 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Pagina Web" 
+                            [control]="providerForm.controls.web" 
+                            placeholder="Ingresar Pagina Web">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('web').hasError('minlength') && providerForm.get('web').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('web').hasError('maxlength') && providerForm.get('web').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="​Inscripcion en ingresos brutos" 
+                            [control]="providerForm.controls.iib" 
+                            placeholder="Ingresar ​inscripcion en ingresos brutos">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('iib').hasError('required') && providerForm.get('iib').touched">
+                        ​Inscripcion en ingresos brutos no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('iib').hasError('minlength') && providerForm.get('iib').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('iib').hasError('maxlength') && providerForm.get('iib').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Percepcion en ingresos brutos" 
+                            [control]="providerForm.controls.pib" 
+                            placeholder="Ingresar percepcion en ingresos brutos">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('pib').hasError('required') && providerForm.get('pib').touched">
+                        Percepcion en ingresos brutos no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('pib').hasError('minlength') && providerForm.get('pib').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('pib').hasError('maxlength') && providerForm.get('pib').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Excencion de percepcion en ingresos brutos" 
+                            [control]="providerForm.controls.epib" 
+                            placeholder="Ingresar excencion de percepcion en ingresos brutos">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('epib').hasError('required') && providerForm.get('epib').touched">
+                        Excencion de percepcion en ingresos brutos no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('epib').hasError('minlength') && providerForm.get('epib').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('epib').hasError('maxlength') && providerForm.get('epib').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <div class="ui toggle checkbox">
+                        <sm-checkbox 
+                            label="Responsable Inscripto" 
+                            [control]="providerForm.controls.responsableInscripto" 
+                            placeholder="Ingresar responsable inscripto">
+                        </sm-checkbox>
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <div class="ui toggle checkbox">
+                        <sm-checkbox 
+                                label="Excento" 
+                                [control]="providerForm.controls.excento" 
+                                placeholder="Ingresar si es excento">
+                        </sm-checkbox>
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <div class="ui toggle checkbox">
+                        <sm-checkbox 
+                            label="Responsable de Monotributo" 
+                            [control]="providerForm.controls.responsableMonotributo" 
+                            placeholder="Ingresar si es responsable de monotributo">
+                        </sm-checkbox>
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <div class="ui toggle checkbox">
+                        <sm-checkbox 
+                            label="Iva Inscripto" 
+                            [control]="providerForm.controls.ivaInscripto" 
+                            placeholder="Ingresar si es iva inscripto">
+                        </sm-checkbox>
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Precio Lista" 
+                            [control]="providerForm.controls.precioLista" 
+                            placeholder="Ingresar precio lista">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('precioLista').hasError('required') && providerForm.get('precioLista').touched">
+                        Precio lista no ingresado
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Condicion De Venta" 
+                            [control]="providerForm.controls.condicionDeVenta" 
+                            placeholder="Ingresar condicion de venta">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('condicionDeVenta').hasError('required') && providerForm.get('condicionDeVenta').touched">
+                        Condicion de venta no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('condicionDeVenta').hasError('minlength') && providerForm.get('condicionDeVenta').touched">
+                        Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('condicionDeVenta').hasError('maxlength') && providerForm.get('condicionDeVenta').touched">
+                        Maximo 30 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Limite De Credito" 
+                            [control]="providerForm.controls.limiteDeCredito" 
+                            placeholder="Ingresar condicion de venta">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('limiteDeCredito').hasError('required') && providerForm.get('limiteDeCredito').touched">
+                        Limite de credito no ingresada
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Numero De Inscripciones Ingresos Brutos" 
+                            [control]="providerForm.controls.numeroDeInscripcionesIB" 
+                            placeholder="Ingresar numero de inscripciones ingresos brutos">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('numeroDeInscripcionesIB').hasError('required') && providerForm.get('numeroDeInscripcionesIB').touched">
+                        Numero de inscripciones ingresos brutos no ingresado
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Cuentas Generales" 
+                            [control]="providerForm.controls.cuentasGenerales" 
+                            placeholder="Ingresar cuentas generales">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('cuentasGenerales').hasError('required') && providerForm.get('cuentasGenerales').touched">
+                        Cuentas Generales no ingresadas
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('cuentasGenerales').hasError('minlength') && providerForm.get('cuentasGenerales').touched">
+                        Minimo 6 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Percepcion De Ganancia" 
+                            [control]="providerForm.controls.percepcionDeGanancia" 
+                            placeholder="Ingresar percepcion de ganancia">
+                    </sm-input>
+                    <div class="has-error" *ngIf="providerForm.get('percepcionDeGanancia').hasError('required') && providerForm.get('percepcionDeGanancia').touched">
+                        Percepcion De Ganancia no ingresada
+                    </div>
+                </div>
+
+            </div>
+            <modal-actions>
+                <div class="field text-center">
+                    <div class="two fields">
+                        <div class="field">
+                            <button class="ui button" (click)="addProvider(providerForm)" [disabled]="providerForm.invalid" *ngIf="isNew(providerForm)">Agregar Proveedor</button>
+                            <button class="ui button" (click)="updateProvider(providerForm)" [disabled]="providerForm.invalid" *ngIf="!isNew(providerForm)">Actualizar Datos</button>
+                            <button class="ui button" (click)="deleteProvider(providerForm)" *ngIf="!isNew(providerForm)">Borrar Proveedor</button>
+                        </div>
+                        <div class="field">
+                            <button class="ui right floated button" (click)="providerModal.hide()">Close modal</button>
+                        </div>
+                    </div>
+                </div>
+            </modal-actions>
+        </form>
+    </modal-content>
+</sm-modal>

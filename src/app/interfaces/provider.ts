@@ -1,4 +1,4 @@
-export interface Client {
+export interface Provider {
   id: number,
   company_id: number,
   created_at:  String,
@@ -29,7 +29,7 @@ export interface Client {
   percepcionDeGanancia: number,
 }
 
-export interface UpdateClient {
+export interface UpdateProvider {
   id: number,
   company_id: number,
   created_at:  String,

@@ -24,8 +24,6 @@ export class RegisterCompanyComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       id:[''],
-      client_id:[''],
-      isData:[''],
       created_at:[''],
       updated_at:[''],
       deleted_at:[''],
