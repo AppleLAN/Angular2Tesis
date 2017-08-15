@@ -16,20 +16,19 @@ import { initialModalObject } from '../reducers/grid.reducer';
   styleUrls: ['../providers.component.scss']
 })
 
-export class ProvidersChartsCardsComponent implements OnInit{
+export class ProvidersChartsCardsComponent implements OnInit {
     providersStorage: Observable<Provider>
     providers: Provider;
     error: String;
     demo: Boolean = true;
 
     constructor(
-        private fb: FormBuilder, 
-        private authService: UserAuthenticationService, 
-        private clientsService: ProvidersService, 
+        private fb: FormBuilder,
+        private authService: UserAuthenticationService,
+        private clientsService: ProvidersService,
         private store: Store<Provider>) {
         }
     ngOnInit() {
 
     }
-
 }

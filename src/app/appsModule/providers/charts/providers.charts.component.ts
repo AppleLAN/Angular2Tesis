@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
@@ -15,7 +15,7 @@ import { initialModalObject } from '../reducers/grid.reducer';
   styleUrls: ['../providers.component.scss']
 })
 
-export class ProvidersChartsComponent implements OnInit{
+export class ProvidersChartsComponent implements OnInit, OnDestroy {
     error: String;
     demo: Boolean = true;
     charType: String;
@@ -23,21 +23,21 @@ export class ProvidersChartsComponent implements OnInit{
     chartStorage: Subscription;
     charts: any;
     constructor(
-        private fb: FormBuilder, 
-        private authService: UserAuthenticationService, 
-        private chartService: ChartService, 
+        private fb: FormBuilder,
+        private authService: UserAuthenticationService,
+        private chartService: ChartService,
         private store: Store<any>,
         private route: ActivatedRoute) {
-            this.charType = route.snapshot.params['type'];;
+            this.charType = route.snapshot.params['type'];
         }
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.charType = params['type'];
-            this.chartService.getChartData();
+            this.chartService.getProvidersChartData();
         });
-    } 
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
-
 }

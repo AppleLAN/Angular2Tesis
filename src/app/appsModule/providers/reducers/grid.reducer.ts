@@ -46,7 +46,7 @@ export const gridReducer: Reducer<any> = (state: Provider[], action: Action) => 
             return [...state, action.payload];
         case 'CHANGEPROVIDER':
             return state.map(item => {
-                return item.id === action.payload.id ? item = action.payload : item;
+                return item.id === action.payload.id ? action.payload : item;
             });
         case 'DELETEPROVIDER':
             return state.filter(item => {
@@ -55,4 +55,4 @@ export const gridReducer: Reducer<any> = (state: Provider[], action: Action) => 
         default:
             return state;
     }
-};
+}

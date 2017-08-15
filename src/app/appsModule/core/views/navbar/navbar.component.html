@@ -1,12 +1,26 @@
  <div class="ui borderless inverted main menu fixed">
         <div class="item brand">Semantic AF Contaduria</div>
         <a routerLink="/apps/home" routerLinkActive="active" class="item home">Home</a>
-        <a routerLink="/apps/clients" routerLinkActive="active" class="item">
-            <i class="user icon"></i> Clientes
-        </a>
-        <a routerLink="/apps/providers" routerLinkActive="active" class="item">
-            <i class="user icon"></i> Providers
-        </a>
+        <template ngFor let-app [ngForOf]="userApps">
+            <a routerLink="/apps/{{app.app}}" routerLinkActive="active" class="item" [ngSwitch]="app.app">
+                <template [ngSwitchCase]="'clients'">
+                    <i class="user icon"></i> Clientes
+                </template>
+                <template [ngSwitchCase]="'providers'">
+                    <i class="user icon"></i> Providers
+                </template>
+                <template [ngSwitchCase]="'sales'">
+                    <span [smDirTooltip]="commingSoonText" smDirPosition="left center">
+                        <i class="user icon"></i> Ventas    
+                    </span>
+                </template>
+                <template [ngSwitchCase]="'stock'">
+                    <span [smDirTooltip]="commingSoonText" smDirPosition="left center">       
+                        <i class="user icon"></i> Stock
+                    </span>
+                </template>
+            </a>
+        </template>
         <div class="right item">
             <div class="ui inverted menu">
                 <div class="ui simple inverted dropdown item">

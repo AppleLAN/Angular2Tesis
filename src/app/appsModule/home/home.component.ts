@@ -7,15 +7,15 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit{
-  arrowImg: String;
-  salesImg: String;
-  stockImg: String;
-  clientsImg: String;
-  providersImg: String;
-  commingSoonText: String;
+export class HomeComponent implements OnInit {
+  arrowImg: string;
+  salesImg: string;
+  stockImg: string;
+  clientsImg: string;
+  providersImg: string;
+  commingSoonText: string;
   apps: Object[];
-  
+
   constructor(private authService: UserService) {}
   ngOnInit() {
      this.arrowImg = '../../assets/images/arrow-up.png';
@@ -30,25 +30,25 @@ export class HomeComponent implements OnInit{
       response => {
         this.apps = response;
       },
-      error =>{
+      error => {
         console.log(error);
       }
     );
   }
 
-  getAppImage (app: String) {
-    let result:String;
+  getAppImage (app: string) {
+    let result: string;
     switch (app) {
-      case "sales":
+      case 'sales':
         result = this.salesImg;
         break;
-    case "stock":
+    case 'stock':
         result = this.stockImg;
         break;
-    case "clients":
+    case 'clients':
         result = this.clientsImg;
         break;
-    case "providers":
+    case 'providers':
         result = this.providersImg;
         break;
     }

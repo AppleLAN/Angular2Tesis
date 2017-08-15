@@ -18,11 +18,11 @@ export class ClientsService {
   clientStorage: Observable<Client>;
   constructor(private http: Http, private store: Store<Client>) {
         // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
         this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
         this.options = new RequestOptions({ headers: this.headers });
-        this.clientStorage = store.select('grid');
+        this.clientStorage = store.select('clients');
     }
     getClientStorage(): Observable<Client> {
         return this.clientStorage;
@@ -37,16 +37,16 @@ export class ClientsService {
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    updateClient(newClient : Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/updateClient',newClient, this.options)
+    updateClient(newClient: Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/updateClient', newClient, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
             })
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    addClient(newClient : Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/saveClient',newClient, this.options)
+    addClient(newClient: Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/saveClient', newClient, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
                 return response.json();
@@ -54,8 +54,8 @@ export class ClientsService {
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    deleteClient(newClient : Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/deleteClient',newClient, this.options)
+    deleteClient(newClient: Client): Observable<Client> {
+        return this.http.post('http://localhost:8000/api/deleteClient', newClient, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
                 return response.json();

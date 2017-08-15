@@ -17,12 +17,12 @@ export class ChartComponent implements OnInit {
 
   @Input() chartType: String = 'line';
   @Input() demo: Boolean = false;
-  
-  constructor(private chartService: ChartService){}
+
+  constructor(private chartService: ChartService) {}
   ngOnInit() {
-    if(!this.demo){
-      this.chartStorage = this.chartService.getChartStorage().subscribe(data => { 
-          if(data) {
+    if (!this.demo) {
+      this.chartStorage = this.chartService.getChartStorage().subscribe(data => {
+          if (data) {
             this.lineChartData = data.result;
             this.lineChartLabels = data.months;
           }
@@ -68,13 +68,13 @@ export class ChartComponent implements OnInit {
     ];
     this.lineChartLegend = true;
   }
- 
+
   // events
-  chartClicked(e:any):void {
+  chartClicked(e: any): void {
     console.log(e);
   }
- 
-  chartHovered(e:any):void {
+
+  chartHovered(e: any): void {
     console.log(e);
   }
 }

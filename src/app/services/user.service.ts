@@ -21,7 +21,7 @@ export class UserService {
 ;
   constructor(private http: Http,  private store: Store<User>) {
     // set token if saved in local storage
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
     this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
     this.options = new RequestOptions({ headers: this.headers });
@@ -32,7 +32,7 @@ export class UserService {
       return this.userStorage;
   }
 
-  getUserApps(): Observable<Object[]> {
+  getUserApps(): Observable<any> {
     return this.http.get('http://localhost:8000/api/getUserApps', this.options)
       .map((response: Response) => {
         return response.json().apps;
@@ -51,7 +51,7 @@ export class UserService {
         );
   }
 
-  updateClientInfo(user : User): Observable<Object[]> {
+  updateClientInfo(user: User): Observable<Object[]> {
     return this.http.post('http://localhost:8000/api/updateUserProfile', user, this.options)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
@@ -59,22 +59,22 @@ export class UserService {
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
-  createSubClient(user : User): Observable<Object[]> {
+  createSubClient(user: User): Observable<Object[]> {
   return this.http.post('http://localhost:8000/api/createInternalUser', user, this.options)
     .map((response: Response) => {
-      
+
     })
     .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
   updateClientCompany(company: UpdateClient): Observable<Object[]> {
-    return this.http.post('http://localhost:8000/api/updateUserCompany',company, this.options)
+    return this.http.post('http://localhost:8000/api/updateUserCompany', company, this.options)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
         return response.json();
       })
       .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
-  
+
 
 }

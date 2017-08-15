@@ -5,7 +5,8 @@ import { Client } from '../interfaces/client';
 
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
-import { NEWCHARTDATA } from './../appsModule/clients/reducers/chart.reducer';
+import { NEWCLIENTCHARTDATA } from './../appsModule/clients/reducers/chart.reducer';
+import { NEWPROVIDERCHARTDATA } from './../appsModule/providers/reducers/chart.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -20,7 +21,7 @@ export class ChartService {
 ;
   constructor(private http: Http,  private store: Store<any>) {
     // set token if saved in local storage
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
     this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
     this.options = new RequestOptions({ headers: this.headers });
@@ -31,46 +32,86 @@ export class ChartService {
       return this.chartStorage;
   }
 
-  getChartData(): any {
-    
+  getClientsChartData(): any {
     let response: any;
-    let combineObs = this.getAdded().combineLatest(this.getDeleted(), 
-    (added, deleted) => { 
+    const combineObs = this.getAddedClients().combineLatest(this.getDeletedClients(),
+    (added, deleted) => {
       response = added;
       response.result.push(deleted.result[0]);
-      this.store.dispatch({ type: NEWCHARTDATA, payload: response})
+      this.store.dispatch({ type: NEWCLIENTCHARTDATA, payload: response})
     });
     combineObs.subscribe();
   }
 
-  getAdded(): Observable<any> {
-    let params:any = {
+  getProvidersChartData(): any {
+    let response: any;
+    const combineObs = this.getAddedProviders().combineLatest(this.getDeletedProviders(),
+    (added, deleted) => {
+      response = added;
+      response.result.push(deleted.result[0]);
+      this.store.dispatch({ type: NEWPROVIDERCHARTDATA, payload: response})
+    });
+    combineObs.subscribe();
+  }
+
+  getAddedClients(): Observable<any> {
+    const params: any = {
       table: 'Clients',
       operation: 'cat',
-      label: 'Nuevos'  
+      label: 'Nuevos'
     };
     return this.http.post(
       'http://localhost:8000/api/statisticsUser', params, this.options)
         .map((response: Response) => {
           return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
         );
   }
 
-  getDeleted(): Observable<any> {
-    let params:any = {
-      table: 'Clients',
-      operation: 'dat',
-      label: 'Eliminados'  
+  getAddedProviders(): Observable<any> {
+    const params: any = {
+      table: 'Providers',
+      operation: 'cat',
+      label: 'Nuevos'
     };
     return this.http.post(
       'http://localhost:8000/api/statisticsUser', params, this.options)
         .map((response: Response) => {
           return response.json();
         })
-        .catch((error: any) =>Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
         );
   }
-  
+
+  getDeletedClients(): Observable<any> {
+    const params: any = {
+      table: 'Clients',
+      operation: 'dat',
+      label: 'Eliminados'
+    };
+    return this.http.post(
+      'http://localhost:8000/api/statisticsUser', params, this.options)
+        .map((response: Response) => {
+          return response.json();
+        })
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        );
+  }
+
+  getDeletedProviders(): Observable<any> {
+    const params: any = {
+      table: 'Providers',
+      operation: 'dat',
+      label: 'Eliminados'
+    };
+    return this.http.post(
+      'http://localhost:8000/api/statisticsUser', params, this.options)
+        .map((response: Response) => {
+          return response.json();
+        })
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        );
+  }
+
 }

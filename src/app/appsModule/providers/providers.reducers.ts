@@ -8,21 +8,20 @@ import { chartReducer } from './reducers/chart.reducer';
 
 export interface State {
     chart: any,
-    grid: Provider
+    providers: Provider
 }
 const reducers = {
     chart: chartReducer,
-    grid: gridReducer
+    providers: gridReducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze,combineReducers)(reducers);
+const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
 const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
   if (environment.production) {
     return productionReducer(state, action);
-  }
-  else {
+  }else {
     return developmentReducer(state, action);
   }
 }

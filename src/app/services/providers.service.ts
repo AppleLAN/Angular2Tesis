@@ -18,11 +18,11 @@ export class ProvidersService {
   providerStorage: Observable<Provider>;
   constructor(private http: Http, private store: Store<Provider>) {
         // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
         this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
         this.options = new RequestOptions({ headers: this.headers });
-        this.providerStorage = store.select('grid');
+        this.providerStorage = store.select('providers');
     }
     getProviderStorage(): Observable<Provider> {
         return this.providerStorage;
@@ -37,16 +37,16 @@ export class ProvidersService {
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    updateProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/updateProvider',newProvider, this.options)
+    updateProvider(newProvider: Provider): Observable<Provider> {
+        return this.http.post('http://localhost:8000/api/updateProvider', newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider});
             })
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    addProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/saveProvider',newProvider, this.options)
+    addProvider(newProvider: Provider): Observable<Provider> {
+        return this.http.post('http://localhost:8000/api/saveProvider', newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
                 return response.json();
@@ -54,8 +54,8 @@ export class ProvidersService {
             .catch((error: any) => Observable.throw(error.error || 'Server error'));
     }
 
-    deleteProvider(newProvider : Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/deleteProvider',newProvider, this.options)
+    deleteProvider(newProvider: Provider): Observable<Provider> {
+        return this.http.post('http://localhost:8000/api/deleteProvider', newProvider, this.options)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
                 return response.json();
