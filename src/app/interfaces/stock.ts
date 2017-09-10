@@ -1,4 +1,4 @@
-export interface Stock {
+export interface Product {
   id: number;
   company_id: number;
   name: string;
@@ -11,4 +11,18 @@ export interface Stock {
   updated_at: string;
   deleted_at: string;
   type?: string;
+  quantity?: number;
+}
+
+export interface Stock {
+  id: number;
+  product_id: number;
+  company_id: number;
+  order_id: number;
+  sale_id: number;
+  quantity: number;
+  type: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
 }

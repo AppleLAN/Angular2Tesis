@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { StockService } from '../../../services/stock.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 
-import { Stock } from '../../../interfaces/stock';
+import { Stock, Product } from '../../../interfaces/stock';
 
-import { initialModalObject } from '../reducers/grid.reducer';
+import { initialModalObject, State } from '../reducers/grid.reducer';
 
 @Component({
   selector: 'app-stock-grid',
@@ -17,17 +17,18 @@ import { initialModalObject } from '../reducers/grid.reducer';
 })
 
 export class StockGridComponent implements OnInit {
-  stockStorage: Observable<Stock>
-  stock: Stock;
+  stockStorage: Subscription;
   error: String;
-
+  storage: State;
   constructor(
     private authService: UserAuthenticationService,
     private stockService: StockService,
-    private store: Store<Stock>) {
+    private store: Store<State>) {
   }
   ngOnInit() {
-    this.stockStorage = this.stockService.getStockStorage();
-    this.stockService.getStock().subscribe();
+    this.stockStorage = this.stockService.getStockStorage().subscribe(storage => {
+      this.storage = storage;
+    });
+    this.stockService.getStateInformation().subscribe();
   }
 }

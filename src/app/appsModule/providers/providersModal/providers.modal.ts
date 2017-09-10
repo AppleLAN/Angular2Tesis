@@ -29,31 +29,31 @@ export class ProviderModal implements OnInit{
   }
   ngOnInit() {
     this.providerForm = this.fb.group({
-      id:[''],
+      id: [''],
       company_id: [''],
-      created_at:[''],
-      updated_at:[''],
-      deleted_at:[''],
+      created_at: [''],
+      updated_at: [''],
+      deleted_at: [''],
       new: [true],
-      name: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(30)]],
-      fantasyName: ['', [Validators.required,Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      place: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      codigoPostal: ['', [Validators.minLength(4),Validators.maxLength(30)]],
-      codigoProvincia: ['', [Validators.minLength(4),Validators.maxLength(30)]],
-      address: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      telephone: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(11)]],
-      cuit: ['', [Validators.required, Validators.minLength(11),Validators.maxLength(11)]],
-      web: ['', [Validators.minLength(6),Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      pib: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
-      epib: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+      fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
+      email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      place: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      codigoPostal: ['', [Validators.minLength(4), Validators.maxLength(30)]],
+      codigoProvincia: ['', [Validators.minLength(4), Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      telephone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
+      cuit: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
       precioLista: ['', [Validators.required]],
-      condicionDeVenta: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(30)]],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       limiteDeCredito: ['', [Validators.required]],
       numeroDeInscripcionesIB: ['', [Validators.required]],
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
@@ -61,8 +61,8 @@ export class ProviderModal implements OnInit{
     });
     this.providerStorage = this.providersService.getProviderStorage();
     this.providersService.getProviders().subscribe();
-  } 
-  
+  }
+
   changeInformation(provider: Provider) {
     const formProvider: any = provider;
     formProvider.new = false;
@@ -79,54 +79,22 @@ export class ProviderModal implements OnInit{
   }
 
   isNew(providerForm: any) {
-    if(providerForm.controls.new.value)
+    if (providerForm.controls.new.value) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   addProvider({ value }: { value: Provider }) {
-    this.providersService.addProvider(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.providersService.addProvider(value).subscribe();
   }
 
   updateProvider({ value }: { value: Provider }) {
-    this.providersService.updateProvider(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.providersService.updateProvider(value).subscribe();
   }
 
    deleteProvider({ value }: { value: Provider }) {
-    this.providersService.deleteProvider(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.providersService.deleteProvider(value).subscribe();
   }
 }

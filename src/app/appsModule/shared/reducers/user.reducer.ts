@@ -31,7 +31,7 @@ const emptyState: CompleteUser = {
 const initialCompanyObject = initialModalObject;
 
 export const userReducer: Reducer<any> = (state: CompleteUser, action: Action) => {
-    switch(action.type) {
+    switch (action.type) {
         case NEWUSER:
             emptyState.profile = action.payload.profile;
             if (action.payload.company) {

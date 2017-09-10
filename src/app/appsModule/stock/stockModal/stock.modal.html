@@ -1,6 +1,6 @@
 <sm-modal title="Stock" class="fluid stock-modal" #stockModal>
     <modal-content>
-        <form class="ui form" [formGroup]="stockForm" name="Form">
+        <form class="ui form" [formGroup]="productForm" name="Form">
             <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
             <div class="ui left aligned basic segment">
 
@@ -8,16 +8,16 @@
                     <sm-input 
                             type="text" 
                             label="Nombre" 
-                            [control]="stockForm.controls.name" 
+                            [control]="productForm.controls.name" 
                             placeholder="Ingresar Nombre">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('name').hasError('required') && stockForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').touched">
                         Nombre no ingresado
                     </div>
-                    <div class="has-error" *ngIf="stockForm.get('name').hasError('minlength') && stockForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('minlength') && productForm.get('name').touched">
                         Minimo 6 caracteres
                     </div>
-                    <div class="has-error" *ngIf="stockForm.get('name').hasError('maxlength') && stockForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('maxlength') && productForm.get('name').touched">
                         Maximo 30 caracteres
                     </div>
                 </div>
@@ -26,16 +26,16 @@
                     <sm-input 
                             type="text" 
                             label="Descripcion" 
-                            [control]="stockForm.controls.description" 
+                            [control]="productForm.controls.description" 
                             placeholder="Ingresar Descripcion">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('description').hasError('required') && stockForm.get('description').touched">
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('required') && productForm.get('description').touched">
                         Descripcion no ingresada
                     </div>
-                    <div class="has-error" *ngIf="stockForm.get('description').hasError('minlength') && stockForm.get('description').touched">
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('minlength') && productForm.get('description').touched">
                         Minimo 4 caracteres
                     </div>
-                    <div class="has-error" *ngIf="stockForm.get('description').hasError('maxlength') && stockForm.get('description').touched">
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('maxlength') && productForm.get('description').touched">
                         Maximo 120 caracteres
                     </div>
                 </div>
@@ -44,10 +44,10 @@
                     <sm-input 
                             type="text" 
                             label="Precio a costo" 
-                            [control]="stockForm.controls.cost_price" 
+                            [control]="productForm.controls.cost_price" 
                             placeholder="Ingresar Costo Minimo">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('cost_price').hasError('required') && stockForm.get('cost_price').touched">
+                    <div class="has-error" *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').touched">
                         Costo minimo no ingresado
                     </div>
                 </div>
@@ -56,10 +56,10 @@
                     <sm-input 
                             type="text" 
                             label="Precio a la venta" 
-                            [control]="stockForm.controls.sale_price" 
+                            [control]="productForm.controls.sale_price" 
                             placeholder="Ingresar Precio a la venta">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('sale_price').hasError('required') && stockForm.get('sale_price').touched">
+                    <div class="has-error" *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').touched">
                         Precio a la venta no ingresado
                     </div>
                 </div>
@@ -68,10 +68,10 @@
                     <sm-input 
                             type="text" 
                             label="Id de Categoria" 
-                            [control]="stockForm.controls.category_id" 
+                            [control]="productForm.controls.category_id" 
                             placeholder="Ingresar id de categoria">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('category_id').hasError('required') && stockForm.get('category_id').touched">
+                    <div class="has-error" *ngIf="productForm.get('category_id').hasError('required') && productForm.get('category_id').touched">
                         Id de categoria no ingresado
                     </div>
                 </div>
@@ -80,11 +80,23 @@
                     <sm-input 
                             type="text" 
                             label="Ingresar codigo de identificacion" 
-                            [control]="stockForm.controls.code" 
+                            [control]="productForm.controls.code" 
                             placeholder="Ingresar codigo de identificacion">
                     </sm-input>
-                    <div class="has-error" *ngIf="stockForm.get('code').hasError('required') && stockForm.get('code').touched">
+                    <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').touched">
                         Codigo de identificacion no ingresado
+                    </div>
+                </div>
+
+                <div class="form-group field">
+                    <sm-input 
+                            type="text" 
+                            label="Ingresar cantidad" 
+                            [control]="productForm.controls.quantity" 
+                            placeholder="Ingresar cantidad">
+                    </sm-input>
+                    <div class="has-error" *ngIf="productForm.get('quantity').hasError('required') && productForm.get('quantity').touched">
+                        Cantidad no ingresada
                     </div>
                 </div>
 
@@ -93,9 +105,9 @@
                 <div class="field text-center">
                     <div class="two fields">
                         <div class="field">
-                            <button class="ui button" (click)="addStock(stockForm)" [disabled]="stockForm.invalid" *ngIf="isNew(stockForm)">Agregar Producto</button>
-                            <button class="ui button" (click)="updateStock(stockForm)" [disabled]="stockForm.invalid" *ngIf="!isNew(stockForm)">Actualizar Datos</button>
-                            <button class="ui button" (click)="deleteStock(stockForm)" *ngIf="!isNew(stockForm)">Borrar Producto</button>
+                            <button class="ui button" (click)="addProducts(productForm)" [disabled]="productForm.invalid" *ngIf="isNew(productForm)">Agregar Producto</button>
+                            <button class="ui button" (click)="updateProducts(productForm)" [disabled]="productForm.invalid" *ngIf="!isNew(productForm)">Actualizar Datos</button>
+                            <button class="ui button" (click)="deleteProducts(productForm)" *ngIf="!isNew(productForm)">Borrar Producto</button>
                         </div>
                         <div class="field">
                             <button class="ui right floated button" (click)="stockModal.hide()">Close modal</button>

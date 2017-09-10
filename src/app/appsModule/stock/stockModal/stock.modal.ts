@@ -5,8 +5,8 @@ import { UserAuthenticationService } from '../../../services/user-authentication
 import { StockService } from '../../../services/stock.service';
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
-import { Stock } from '../../../interfaces/stock';
-import { initialModalObject } from '../reducers/grid.reducer';
+import { Stock, Product } from '../../../interfaces/stock';
+import { initialModalObject, State } from '../reducers/grid.reducer';
 declare var jQuery: any;
 
 @Component({
@@ -15,20 +15,19 @@ declare var jQuery: any;
 })
 
 export class StockModal implements OnInit {
-  stockStorage: Observable<Stock>
-  stock: Stock;
-  stockForm: FormGroup;
+  stockStorage: Observable<State>;
+  productForm: FormGroup;
   error: String;
-  stockFormEmptyObject = initialModalObject;
+  productFormEmptyObject = initialModalObject.products[0];
 
   constructor(
     private fb: FormBuilder,
     private authService: UserAuthenticationService,
     private stockService: StockService,
-    private store: Store<Stock>) {
+    private store: Store<State>) {
   }
   ngOnInit() {
-    this.stockForm = this.fb.group({
+    this.productForm = this.fb.group({
       id: [''],
       company_id: [''],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
@@ -40,33 +39,54 @@ export class StockModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
-      new: [true]
+      new: [true],
+      quantity: ['', [Validators.required]]
     });
+
     this.stockStorage = this.stockService.getStockStorage();
-    this.stockService.getStock().subscribe();
+    this.stockService.getStateInformation().subscribe();
   }
 
   changeInformation(stock: Stock) {
-    const formStock: any = stock;
-    formStock.new = false;
-    this.stockForm.setValue(formStock);
+    const productForm: any = stock;
+    productForm.new = false;
+    this.productForm.setValue(productForm);
     jQuery('.ui.modal.stock-modal').modal('show');
   }
 
   openNewStockModal() {
-    let stockFormEmptyObject: any;
-    stockFormEmptyObject = this.stockFormEmptyObject;
-    stockFormEmptyObject.new = true;
-    this.stockForm.setValue(this.stockFormEmptyObject);
+    let productFormEmptyObject: any;
+    productFormEmptyObject = this.productFormEmptyObject;
+    productFormEmptyObject.new = true;
+    this.productForm.setValue(productFormEmptyObject);
     jQuery('.ui.modal.stock-modal').modal('show');
   }
 
-  isNew(stockForm: any) {
-    if (stockForm.controls.new.value) {
+  refresh() {
+    jQuery('.ui.modal.profile-modal').modal('refresh');
+  }
+
+  isNew(productForm: any) {
+    if (productForm.controls.new.value) {
         return true;
     }else {
       return false;
     }
+  }
+
+  addProducts({ value }: { value: Product }) {
+    this.stockService.addProducts(value).subscribe();
+    // this.addStock(value);
+  }
+
+  updateProducts({ value }: { value: Product }) {
+    this.stockService.updateProducts(value).subscribe();
+    // this.updateStock(value);
+  }
+
+  deleteProducts({ value }: { value: Product }) {
+    this.stockService.deleteProducts(value).subscribe();
+    // this.deleteStock(value);
   }
 
   addStock({ value }: { value: Stock }) {
@@ -77,7 +97,7 @@ export class StockModal implements OnInit {
     this.stockService.updateStock(value).subscribe();
   }
 
-   deleteStock({ value }: { value: Stock }) {
+  deleteStock({ value }: { value: Stock }) {
     this.stockService.deleteStock(value).subscribe();
   }
 }

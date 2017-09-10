@@ -9,16 +9,18 @@
                 <th>Precio a la venta</th>
                 <th>Categoria</th>
                 <th>Codigo</th>
+                <th>Cantidad</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let stock of stockStorage | async; let i = index;">
-                <td><span class="name" (click)="stockModal.changeInformation(stock)">{{stock.name}}</span></td>
-                <td>{{stock.description}}</td>
-                <td>{{stock.cost_price}}</td>
-                <td>{{stock.sale_price}}</td>
-                <td>{{stock.category_id}}</td>
-                <td>{{stock.code}}</td>
+            <tr *ngFor="let product of storage?.products; let i = index;">
+                <td><span class="name" (click)="stockModal.changeInformation(product)">{{product.name}}</span></td>
+                <td>{{product.description}}</td>
+                <td>{{product.cost_price}}</td>
+                <td>{{product.sale_price}}</td>
+                <td>{{product.category_id}}</td>
+                <td>{{product.code}}</td>
+                <td>{{product.quantity}}</td>
             </tr>
         </tbody>
     </table>
