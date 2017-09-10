@@ -79,54 +79,22 @@ export class ClientModal implements OnInit{
   }
 
   isNew(clientForm: any) {
-    if(clientForm.controls.new.value)
+    if (clientForm.controls.new.value) {
       return true;
-    else
+    }else {
       return false;
+    }
   }
 
   addClient({ value }: { value: Client }) {
-    this.clientsService.addClient(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.clientsService.addClient(value).subscribe();
   }
 
   updateClient({ value }: { value: Client }) {
-    this.clientsService.updateClient(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.clientsService.updateClient(value).subscribe();
   }
 
    deleteClient({ value }: { value: Client }) {
-    this.clientsService.deleteClient(value).subscribe(
-      response => {
-        if (response) {
-            // login successful
-        } else {
-            // login failed
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+    this.clientsService.deleteClient(value).subscribe();
   }
 }

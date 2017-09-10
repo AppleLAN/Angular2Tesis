@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Client, UpdateClient } from '../../interfaces/client';
+import { Client } from '../../interfaces/client';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CompleteUser } from './../../interfaces/complete.user';
@@ -49,7 +49,7 @@ export class RegisterCompanyComponent implements OnInit {
       limiteDeCredito: ['', [Validators.required]],
       numeroDeInscripcionesIB: ['', [Validators.required]],
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
-      percepcionDeGanancia: ['', [Validators.required]],           
+      percepcionDeGanancia: ['', [Validators.required]]
     });
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.userData = state;
@@ -61,8 +61,8 @@ export class RegisterCompanyComponent implements OnInit {
     this.userService.getProfileInfo().subscribe();
   }
 
-  updateClientCompany({ value }: { value: UpdateClient }) {
-    value.type = "CREATE";
+  updateClientCompany({ value }: { value: Client }) {
+    value.type = 'CREATE';
     this.userService.updateClientCompany(value).subscribe(
       response => {
         if (response) {

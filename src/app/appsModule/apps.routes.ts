@@ -12,7 +12,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: 'home', component: HomeComponent,  canActivate: [AuthGuard]},
       { path: 'clients', loadChildren: './../appsModule/clients/clients.module#ClientsModule', canActivate: [AuthGuard]},
-      { path: 'providers', loadChildren: './../appsModule/providers/providers.module#ProvidersModule', canActivate: [AuthGuard]}
+      { path: 'providers', loadChildren: './../appsModule/providers/providers.module#ProvidersModule', canActivate: [AuthGuard]},
+      { path: 'stock', loadChildren: './../appsModule/stock/stock.module#StockModule', canActivate: [AuthGuard]}
     ]
   }
 ];

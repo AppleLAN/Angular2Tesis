@@ -54,6 +54,17 @@ export class ChartService {
     combineObs.subscribe();
   }
 
+  getStockChartData(): any {
+    let response: any;
+    const combineObs = this.getAddedStock().combineLatest(this.getDeletedStock(),
+    (added, deleted) => {
+      response = added;
+      response.result.push(deleted.result[0]);
+      this.store.dispatch({ type: NEWPROVIDERCHARTDATA, payload: response})
+    });
+    combineObs.subscribe();
+  }
+
   getAddedClients(): Observable<any> {
     const params: any = {
       table: 'Clients',
@@ -84,6 +95,21 @@ export class ChartService {
         );
   }
 
+  getAddedStock(): Observable<any> {
+    const params: any = {
+      table: 'Providers',
+      operation: 'cat',
+      label: 'Nuevos'
+    };
+    return this.http.post(
+      'http://localhost:8000/api/statisticsUser', params, this.options)
+        .map((response: Response) => {
+          return response.json();
+        })
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        );
+  }
+
   getDeletedClients(): Observable<any> {
     const params: any = {
       table: 'Clients',
@@ -100,6 +126,21 @@ export class ChartService {
   }
 
   getDeletedProviders(): Observable<any> {
+    const params: any = {
+      table: 'Providers',
+      operation: 'dat',
+      label: 'Eliminados'
+    };
+    return this.http.post(
+      'http://localhost:8000/api/statisticsUser', params, this.options)
+        .map((response: Response) => {
+          return response.json();
+        })
+        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        );
+  }
+
+  getDeletedStock(): Observable<any> {
     const params: any = {
       table: 'Providers',
       operation: 'dat',

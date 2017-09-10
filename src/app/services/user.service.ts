@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
-import { Client, UpdateClient } from '../interfaces/client';
+import { Client } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
 
 import { Observable } from 'rxjs/Rx';
@@ -67,7 +67,7 @@ export class UserService {
     .catch((error: any) => Observable.throw(error.error || 'Server error'));
   }
 
-  updateClientCompany(company: UpdateClient): Observable<Object[]> {
+  updateClientCompany(company: Client): Observable<Object[]> {
     return this.http.post('http://localhost:8000/api/updateUserCompany', company, this.options)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});

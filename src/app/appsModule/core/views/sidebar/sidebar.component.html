@@ -16,6 +16,14 @@
             <i class="line chart icon"></i> Estadisticas
         </a>
     </p>
+    <p *ngSwitchCase="'stock'">
+        <a routerLink="/apps/stock/grid" routerLinkActive="active" class="item">
+            <i class="table icon"></i> Tabla de Proveedores
+        </a>
+        <a routerLink="/apps/stock/charts" routerLinkActive="active" class="item">
+            <i class="line chart icon"></i> Estadisticas
+        </a>
+    </p>
     <p *ngSwitchDefault>
     
     </p>

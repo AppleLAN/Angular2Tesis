@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthenticationService } from '../../../../services/user-authentication.service';
 import { ActivatedRoute } from '@angular/router';
-import { NEWCHARTDATA} from '../../../clients/reducers/chart.reducer';
 
 @Component({
   selector: 'app-sidebar-component',

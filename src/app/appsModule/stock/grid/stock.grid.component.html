@@ -1,0 +1,26 @@
+<div class="grid"> 
+    <button class="ui button" (click)="stockModal.openNewStockModal()">Agregar Nuevo Producto</button>
+    <table class="ui celled striped inverted table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio a costo</th>
+                <th>Precio a la venta</th>
+                <th>Categoria</th>
+                <th>Codigo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let stock of stockStorage | async; let i = index;">
+                <td><span class="name" (click)="stockModal.changeInformation(stock)">{{stock.name}}</span></td>
+                <td>{{stock.description}}</td>
+                <td>{{stock.cost_price}}</td>
+                <td>{{stock.sale_price}}</td>
+                <td>{{stock.category_id}}</td>
+                <td>{{stock.code}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<app-stock-modal #stockModal></app-stock-modal>

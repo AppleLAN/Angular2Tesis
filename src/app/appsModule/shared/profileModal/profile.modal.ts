@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
-import { Client, UpdateClient } from '../../../interfaces/client';
+import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { UserService } from '../../../services/user.service';
 import { Observable, Subscription } from 'rxjs/Rx';
@@ -110,7 +110,7 @@ export class ProfileModal implements OnInit {
     this.userService.updateClientInfo(value).subscribe();
   }
 
-  updateClientCompany({ value }: { value: UpdateClient }) {
+  updateClientCompany({ value }: { value: Client }) {
     value.type = 'UPDATE';
     this.userService.updateClientCompany(value).subscribe();
   }
