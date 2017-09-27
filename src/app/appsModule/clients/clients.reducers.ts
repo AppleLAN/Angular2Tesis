@@ -10,18 +10,7 @@ export interface State {
     chart: any,
     clients: Client
 }
-const reducers = {
+export const reducers = {
     chart: chartReducer,
     clients: gridReducer
 };
-
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
-
-export function reducer(state: any, action: any) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  } else {
-    return developmentReducer(state, action);
-  }
-}
