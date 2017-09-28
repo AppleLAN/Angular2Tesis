@@ -16,18 +16,18 @@ import { initialModalObject } from '../reducers/grid.reducer';
   styleUrls: ['../providers.component.scss']
 })
 
-export class ProvidersGridComponent implements OnInit{
+export class ProvidersGridComponent implements OnInit {
   providerStorage: Observable<Provider>
   providers: Provider;
   error: String;
-  
+
   constructor(
-    private authService: UserAuthenticationService, 
-    private providersService: ProvidersService, 
+    private authService: UserAuthenticationService,
+    private providersService: ProvidersService,
     private store: Store<Provider>) {
   }
   ngOnInit() {
     this.providerStorage = this.providersService.getProviderStorage();
-    this.providersService.getProviders().subscribe(); 
-  } 
+    this.providersService.getProviders().subscribe();
+  }
 }

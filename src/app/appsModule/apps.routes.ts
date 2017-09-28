@@ -1,6 +1,6 @@
 import { AppsComponent } from './apps.component';
 
-import { ModuleWithProviders }  from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from '../services/auth.guard';
@@ -13,7 +13,8 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent,  canActivate: [AuthGuard]},
       { path: 'clients', loadChildren: './../appsModule/clients/clients.module#ClientsModule', canActivate: [AuthGuard]},
       { path: 'providers', loadChildren: './../appsModule/providers/providers.module#ProvidersModule', canActivate: [AuthGuard]},
-      { path: 'stock', loadChildren: './../appsModule/stock/stock.module#StockModule', canActivate: [AuthGuard]}
+      { path: 'stock', loadChildren: './../appsModule/stock/stock.module#StockModule', canActivate: [AuthGuard]},
+      { path: 'sales', loadChildren: './../appsModule/sales/sales.module#SalesModule', canActivate: [AuthGuard]}
     ]
   }
 ];

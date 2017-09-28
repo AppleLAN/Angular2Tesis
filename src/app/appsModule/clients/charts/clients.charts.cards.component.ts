@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
@@ -16,20 +16,16 @@ import { initialModalObject } from '../reducers/grid.reducer';
   styleUrls: ['../clients.component.scss']
 })
 
-export class ClientsChartsCardsComponent implements OnInit{
+export class ClientsChartsCardsComponent {
     clientStorage: Observable<Client>
     clients: Client;
     error: String;
     demo: Boolean = true;
 
     constructor(
-        private fb: FormBuilder, 
-        private authService: UserAuthenticationService, 
-        private clientsService: ClientsService, 
+        private fb: FormBuilder,
+        private authService: UserAuthenticationService,
+        private clientsService: ClientsService,
         private store: Store<Client>) {
-        }
-    ngOnInit() {
-
     }
-
 }

@@ -22,9 +22,9 @@ export class ProviderModal implements OnInit{
   providerFormEmptyObject = initialModalObject;
 
   constructor(
-    private fb: FormBuilder, 
-    private authService: UserAuthenticationService, 
-    private providersService: ProvidersService, 
+    private fb: FormBuilder,
+    private authService: UserAuthenticationService,
+    private providersService: ProvidersService,
     private store: Store<Provider>) {
   }
   ngOnInit() {
