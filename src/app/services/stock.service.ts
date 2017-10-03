@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 import { Stock, Product } from '../interfaces/stock';
 import { NEWSTOCK, ADDSTOCK, DELETESTOCK, CHANGESTOCK,
-    NEWPRODUCT, ADDPRODUCT, DELETEPRODUCT, CHANGEPRODUCT, State } from './../appsModule/stock/reducers/grid.reducer';
+    NEWPRODUCT, ADDPRODUCT, DELETEPRODUCT, CHANGEPRODUCT, StockState } from './../appsModule/stock/reducers/grid.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -16,7 +16,7 @@ export class StockService {
   token: string;
   headers: Headers;
   options: RequestOptions;
-  stockStorage: Observable<State>;
+  stockStorage: Observable<StockState>;
   constructor(private http: Http, private store: Store<Stock>) {
         // set token if saved in local storage
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -25,7 +25,7 @@ export class StockService {
         this.options = new RequestOptions({ headers: this.headers });
         this.stockStorage = store.select('stock');
     }
-    getStockStorage(): Observable<State> {
+    getStockStorage(): Observable<StockState> {
         return this.stockStorage;
     }
 

@@ -1,1 +1,118 @@
-This is the buy screen
+<div class="ui column doubling grid main-container">
+    <div class="row container">
+        <div class="column">
+            <form class="ui inverted form" [formGroup]="saleForm" name="Form">
+                <div class="ui four column doubling grid">            
+                    <div class="row">
+                        <div class="column formItem">
+                            <sm-select 
+                                class="fluid search inverted"                                                        
+                                label="Proveedor" 
+                                [control]="saleForm.controls.provider" 
+                                placeholder="Ingresar Proveedor">
+                                <option *ngFor="let provider of providers">{{provider.name}}</option>
+                            </sm-select>
+                        </div>
+                        <div class="column formItem">
+                            <sm-select 
+                                class="fluid inverted"
+                                label="Letra de Factura" 
+                                [control]="saleForm.controls.invoiceType" 
+                                placeholder="Ingresar el tipo de factura">
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>X</option>
+                            </sm-select>
+                        </div>
+                        <div class="column formItem">
+                            <sm-select 
+                                class="fluid inverted"                            
+                                label="Tipo de Compra" 
+                                [control]="saleForm.controls.typeOfBuy" 
+                                placeholder="Ingresar tipo de compra">
+                                <option>Cuenta corriente</option>
+                                <option>Efectivo</option>
+                            </sm-select>
+                        </div>
+                        <div class="column formItem">
+                            <sm-select 
+                                class="fluid inverted search"                            
+                                label="Producto" 
+                                [control]="saleForm.controls.product" 
+                                placeholder="Ingresar Producto">
+                                <option *ngFor="let product of stock?.products">{{product.name}}</option>                                
+                            </sm-select>
+                        </div>
+                        <div class="column formItem">
+                            <sm-input 
+                                icon="shopping bag"
+                                type="number" 
+                                label="Cantidad" 
+                                [control]="saleForm.controls.quantity" 
+                                placeholder="Ingresar Cantidad">
+                            </sm-input>
+                        </div>
+                        <div class="two wide two height left floated column formItem addProduct">
+                            <sm-button class="normal tiny" [disabled]="saleForm.invalid" (click)="addProduct()">Agregar producto</sm-button>                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <p>
+                "La eleccion de Proveedor, Letra de Factura y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de compra"
+            </p>
+        </div>
+    </div>
+    <div class="row container">
+        <div class="column">
+            <h1>Busqueda de productos</h1>
+            <table-pagination [productList]="stock?.products"></table-pagination>
+        </div>
+    </div>
+    <div class="row container">
+        <div class="column">
+            <h1>Orden de compras</h1>                
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Nombre de producto</th>
+                        <th>Proveedor</th>
+                        <th>Letra de factura</th>
+                        <th>Tipo de venta</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="selectedProducts.length > 0; else noProductsSelectedTemplate">
+                        <tr *ngFor="let selected of selectedProducts">
+                            <td>{{selected.product.name}}</td>
+                            <td>{{saleForm.controls.provider.value}}</td>                            
+                            <td>{{saleForm.controls.invoiceType.value}}</td>                            
+                            <td>{{saleForm.controls.typeOfBuy.value}}</td>                            
+                            <td>{{selected.quantity}}</td>                           
+                        </tr>
+                    </ng-container>
+                    <ng-template #noProductsSelectedTemplate>
+                        <tr>
+                            <td colspan="5"><h3>No hay productos seleccionados</h3></td>                       
+                        </tr>
+                    </ng-template>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <span class="total">Total:</span>
+            <span class="total">${{total | number: '1.2-5'}}</span>                                                       
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <sm-button class="normal tiny" [disabled]="selectedProducts.length === 0" (click)="buy()">Comprar productos</sm-button>
+        </div>
+    </div>
+</div>

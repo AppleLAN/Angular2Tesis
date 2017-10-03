@@ -17,14 +17,14 @@ import { initialModalObject } from '../reducers/grid.reducer';
 })
 
 export class ClientsGridComponent implements OnInit {
-  clientStorage: Observable<Client>
+  clientStorage: Observable<Client[]>
   clients: Client;
   error: String;
 
   constructor(
     private authService: UserAuthenticationService,
     private clientsService: ClientsService,
-    private store: Store<Client>) {
+    private store: Store<Client[]>) {
   }
   ngOnInit() {
     this.clientStorage = this.clientsService.getClientStorage();

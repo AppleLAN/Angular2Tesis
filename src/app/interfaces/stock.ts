@@ -1,3 +1,4 @@
+import { Provider } from './provider';
 export interface Product {
   id: number;
   company_id: number;
@@ -25,4 +26,17 @@ export interface Stock {
   created_at: string;
   updated_at: string;
   deleted_at: string;
+}
+
+export interface AddedStock {
+  product: Product;
+  quantity: number;
+}
+
+export interface NewBuy {
+  newStock: AddedStock[],
+  total: number,
+  invoiceType: string;
+  typeOfBuy: string;
+  provider: number;  
 }

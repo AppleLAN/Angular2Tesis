@@ -16,6 +16,7 @@ export interface State {
 const reducers = {
     user: userReducer,
     ...providersReducer,
+    ...clientReducer,
     ...stockReducer
 };
 

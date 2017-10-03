@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../../services/auth.guard';
-import { SalesMainComponent } from './sales.main.component';
+import { SalesMainComponent } from './sales-main.component';
 
 // Route Configuration
 export const routes: Routes = [

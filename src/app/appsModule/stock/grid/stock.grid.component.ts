@@ -8,7 +8,7 @@ import { Store, Action } from '@ngrx/store';
 
 import { Stock, Product } from '../../../interfaces/stock';
 
-import { initialModalObject, State } from '../reducers/grid.reducer';
+import { initialModalObject, StockState } from '../reducers/grid.reducer';
 
 @Component({
   selector: 'app-stock-grid',
@@ -19,11 +19,12 @@ import { initialModalObject, State } from '../reducers/grid.reducer';
 export class StockGridComponent implements OnInit {
   stockStorage: Subscription;
   error: String;
-  storage: State;
+  storage: StockState;
+
   constructor(
     private authService: UserAuthenticationService,
     private stockService: StockService,
-    private store: Store<State>) {
+    private store: Store<StockState>) {
   }
   ngOnInit() {
     this.stockStorage = this.stockService.getStockStorage().subscribe(storage => {

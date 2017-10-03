@@ -11,12 +11,12 @@ export const CHANGEPRODUCT = 'CHANGEPRODUCT';
 export const ADDPRODUCT = 'ADDPRODUCT';
 export const DELETEPRODUCT = 'DELETEPRODUCT';
 
-export interface State {
+export interface StockState {
     products: Product[];
     stock: Stock[];
 }
 
-export const initialModalObject: State = {
+export const initialModalObject: StockState = {
     products: [
         {
             id: null,
@@ -49,8 +49,8 @@ export const initialModalObject: State = {
     ]
 }
 
-export const gridReducer: Reducer<any> = (state: State, action: Action) => {
-    const newState: State = initialModalObject;
+export const gridReducer: Reducer<any> = (state: StockState, action: Action) => {
+    const newState: StockState = initialModalObject;
     switch (action.type) {
         case 'NEWSTOCK':
             state.products.map( p => p.quantity = action.payload);

@@ -6,7 +6,7 @@ import { StockService } from '../../../services/stock.service';
 import { Observable } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 import { Stock, Product } from '../../../interfaces/stock';
-import { initialModalObject, State } from '../reducers/grid.reducer';
+import { initialModalObject, StockState } from '../reducers/grid.reducer';
 declare var jQuery: any;
 
 @Component({
@@ -15,7 +15,7 @@ declare var jQuery: any;
 })
 
 export class StockModal implements OnInit {
-  stockStorage: Observable<State>;
+  stockStorage: Observable<StockState>;
   productForm: FormGroup;
   error: String;
   productFormEmptyObject = initialModalObject.products[0];
@@ -24,7 +24,7 @@ export class StockModal implements OnInit {
     private fb: FormBuilder,
     private authService: UserAuthenticationService,
     private stockService: StockService,
-    private store: Store<State>) {
+    private store: Store<StockState>) {
   }
   ngOnInit() {
     this.productForm = this.fb.group({

@@ -15,7 +15,7 @@ export class ClientsService {
   token: string;
   headers: Headers;
   options: RequestOptions;
-  clientStorage: Observable<Client>;
+  clientStorage: Observable<Client[]>;
   constructor(private http: Http, private store: Store<Client>) {
         // set token if saved in local storage
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -24,7 +24,7 @@ export class ClientsService {
         this.options = new RequestOptions({ headers: this.headers });
         this.clientStorage = store.select('clients');
     }
-    getClientStorage(): Observable<Client> {
+    getClientStorage(): Observable<Client[]> {
         return this.clientStorage;
     }
 

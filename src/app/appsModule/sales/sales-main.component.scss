@@ -1,0 +1,33 @@
+.grid {
+    padding: 0.9375rem;
+    padding-top: 6.2rem;
+    margin-left: 11rem;
+
+    .name {
+        cursor: pointer;   
+        color:#84a0ff;
+    }
+
+}
+
+.charts {
+    padding: 0.9375rem;
+    padding-top: 6.2rem;
+    margin-left: 11rem;
+
+    .chart-example {
+        max-height: 600px;
+        max-width: 450px;
+    }
+
+}
+
+.has-error {
+    color: #9F3A38;
+    padding: 0.5rem 0 0.9375rem 0;
+}
+
+.sales-main-container { 
+    color: white;
+    margin: 0px 20px;
+}

@@ -14,8 +14,8 @@ declare var jQuery: any;
   templateUrl: './providers.modal.html',
 })
 
-export class ProviderModal implements OnInit{
-  providerStorage: Observable<Provider>
+export class ProviderModal implements OnInit {
+  providerStorage: Observable<Provider[]>
   providers: Provider;
   providerForm: FormGroup;
   error: String;
@@ -25,7 +25,7 @@ export class ProviderModal implements OnInit{
     private fb: FormBuilder,
     private authService: UserAuthenticationService,
     private providersService: ProvidersService,
-    private store: Store<Provider>) {
+    private store: Store<Provider[]>) {
   }
   ngOnInit() {
     this.providerForm = this.fb.group({

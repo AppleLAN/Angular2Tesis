@@ -15,7 +15,7 @@ export class ProvidersService {
   token: string;
   headers: Headers;
   options: RequestOptions;
-  providerStorage: Observable<Provider>;
+  providerStorage: Observable<Provider[]>;
   constructor(private http: Http, private store: Store<Provider>) {
         // set token if saved in local storage
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -24,11 +24,11 @@ export class ProvidersService {
         this.options = new RequestOptions({ headers: this.headers });
         this.providerStorage = store.select('providers');
     }
-    getProviderStorage(): Observable<Provider> {
+    getProviderStorage(): Observable<Provider[]> {
         return this.providerStorage;
     }
 
-    getProviders(): Observable<Provider> {
+    getProviders(): Observable<Provider[]> {
         return this.http.get('http://localhost:8000/api/getProviders', this.options)
             .map((response: Response) => {
                 const thisResponse = response.json();
