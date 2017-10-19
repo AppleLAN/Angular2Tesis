@@ -15,7 +15,7 @@ export class SidebarComponent {
     this.parentUrl = router.snapshot.parent.url[0].path;
   }
 
-  isActive(url) {
+  isActive(url: any) {
     return this.router.url === url;
   }
 }

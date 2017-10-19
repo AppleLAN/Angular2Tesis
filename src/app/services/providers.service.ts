@@ -1,3 +1,4 @@
+import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
@@ -16,12 +17,7 @@ export class ProvidersService {
   headers: Headers;
   options: RequestOptions;
   providerStorage: Observable<Provider[]>;
-  constructor(private http: Http, private store: Store<Provider>) {
-        // set token if saved in local storage
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
-        this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
-        this.options = new RequestOptions({ headers: this.headers });
+  constructor(private http: Http, private store: Store<Provider>, private api: ApiClient) {
         this.providerStorage = store.select('providers');
     }
     getProviderStorage(): Observable<Provider[]> {
@@ -29,38 +25,38 @@ export class ProvidersService {
     }
 
     getProviders(): Observable<Provider[]> {
-        return this.http.get('http://localhost:8000/api/getProviders', this.options)
+        return this.api.get('http://localhost:8000/api/getProviders')
             .map((response: Response) => {
-                const thisResponse = response.json();
-                this.store.dispatch({ type: NEWPROVIDERS, payload: response.json()});
+                const thisResponse = response;
+                this.store.dispatch({ type: NEWPROVIDERS, payload: response});
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     updateProvider(newProvider: Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/updateProvider', newProvider, this.options)
+        return this.api.post('http://localhost:8000/api/updateProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider});
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     addProvider(newProvider: Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/saveProvider', newProvider, this.options)
+        return this.api.post('http://localhost:8000/api/saveProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
-                return response.json();
+                return response;
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     deleteProvider(newProvider: Provider): Observable<Provider> {
-        return this.http.post('http://localhost:8000/api/deleteProvider', newProvider, this.options)
+        return this.api.post('http://localhost:8000/api/deleteProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
-                return response.json();
+                return response;
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
 

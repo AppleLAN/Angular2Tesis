@@ -1,3 +1,4 @@
+import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
@@ -12,17 +13,14 @@ import 'rxjs/add/operator/catch';
 export class UserAuthenticationService {
   public token: string;
 
-  constructor(private http: Http, private router: Router) {
-    // set token if saved in local storage
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+  constructor(private http: Http, private router: Router, private api: ApiClient) {
    }
 
   signIn(userInfo: User): Observable<Comment[]> {
     // ...using get request
-    return this.http.post("http://localhost:8000/api/authenticate",userInfo)
-      .map((response: Response) => {
-          let token = response.json() && response.json().token;
+    return this.api.post("http://localhost:8000/api/authenticate",userInfo, )
+      .map((response: any) => {
+          let token = response && response.token;
           if (token) {
             // set token property
             this.token = token;
@@ -35,14 +33,14 @@ export class UserAuthenticationService {
             return false;
           }
       })
-      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
   
   register(userInfo: User): Observable<Comment[]> {
     // ...using get request
-    return this.http.post("http://localhost:8000/api/signup",userInfo)
-      .map((response: Response) => {
-       let token = response.json() && response.json().token;
+    return this.api.post("http://localhost:8000/api/signup",userInfo)
+      .map((response: any) => {
+       let token = response && response.token;
           if (token) {
             // set token property
             this.token = token;
@@ -55,7 +53,7 @@ export class UserAuthenticationService {
             return false;
           }
       })
-      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   logout(): void {

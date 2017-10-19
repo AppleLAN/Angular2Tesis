@@ -39,7 +39,15 @@
                         Maximo 120 caracteres
                     </div>
                 </div>
-
+                <div class="form-group field">
+                    <sm-select 
+                        class="fluid search inverted"                                                        
+                        label="Proveedor" 
+                        [control]="productForm.controls.provider_id" 
+                        placeholder="Ingresar Proveedor">
+                        <option *ngFor="let provider of providers" value="{{provider.id}}">{{provider.name}}</option>
+                    </sm-select>
+                </div>
                 <div class="form-group field">
                     <sm-input 
                             type="text" 
@@ -87,19 +95,6 @@
                         Codigo de identificacion no ingresado
                     </div>
                 </div>
-
-                <div class="form-group field">
-                    <sm-input 
-                            type="text" 
-                            label="Ingresar cantidad" 
-                            [control]="productForm.controls.quantity" 
-                            placeholder="Ingresar cantidad">
-                    </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('quantity').hasError('required') && productForm.get('quantity').touched">
-                        Cantidad no ingresada
-                    </div>
-                </div>
-
             </div>
             <modal-actions>
                 <div class="field text-center">

@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     this.userService.getUserApps()
     .subscribe(
      response => {
-      this.userApps = response.filter( apps => !!apps.active);
+      this.userApps = response.filter( (apps: any) => !!apps.active);
     },
      error => {
        console.log(error);

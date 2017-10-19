@@ -1,3 +1,4 @@
+import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
@@ -19,12 +20,7 @@ export class ChartService {
   options: RequestOptions
   chartStorage: Observable<any>;
 ;
-  constructor(private http: Http,  private store: Store<any>) {
-    // set token if saved in local storage
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
-    this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
-    this.options = new RequestOptions({ headers: this.headers });
+  constructor(private http: Http,  private store: Store<any>, private api: ApiClient) {  
     this.chartStorage = store.select('chart');
    }
 
@@ -71,12 +67,12 @@ export class ChartService {
       operation: 'cat',
       label: 'Nuevos'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
@@ -86,12 +82,12 @@ export class ChartService {
       operation: 'cat',
       label: 'Nuevos'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
@@ -101,12 +97,12 @@ export class ChartService {
       operation: 'cat',
       label: 'Nuevos'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
@@ -116,12 +112,12 @@ export class ChartService {
       operation: 'dat',
       label: 'Eliminados'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
@@ -131,12 +127,12 @@ export class ChartService {
       operation: 'dat',
       label: 'Eliminados'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
@@ -146,12 +142,12 @@ export class ChartService {
       operation: 'dat',
       label: 'Eliminados'
     };
-    return this.http.post(
-      'http://localhost:8000/api/statisticsUser', params, this.options)
+    return this.api.post(
+      'http://localhost:8000/api/statisticsUser', params)
         .map((response: Response) => {
-          return response.json();
+          return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 

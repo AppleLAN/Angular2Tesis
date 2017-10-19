@@ -1,16 +1,16 @@
 import { Component, Input, NgModule, OnChanges, OnInit } from '@angular/core';
-import { Stock } from '../../../interfaces/stock';
+import { Product, Stock } from '../../../interfaces/stock';
 import { FormControl } from '@angular/forms';
-import { include } from 'lodash';
+import { includes } from 'lodash';
 
 @Component({
- selector: 'table-pagination',
- template: ` 
+  selector: 'table-pagination',
+  template: `
    <div>
-     <sm-input 
+     <sm-input
        icon="shopping bag"
-       type="text" 
-       [formControl]="searchProduct" 
+       type="text"
+       [formControl]="searchProduct"
        placeholder="Ingrese nombre..."
        ngDefaultControl>
     </sm-input>
@@ -29,55 +29,63 @@ import { include } from 'lodash';
         <tbody>
             <tr *ngFor="let item of filteredItems">
                 <td>{{item.name}}</td>
-                <td>{{item.description}}</td>                            
-                <td>{{item.cost_price}}</td>                            
-                <td>{{item.category_id}}</td>                          
-                <td>{{item.code}}</td>                           
-                <td>{{item.quantity}}</td>                           
+                <td>{{item.description}}</td>
+                <td>{{item.cost_price}}</td>
+                <td>{{item.category_id}}</td>
+                <td>{{item.code}}</td>
+                <td>{{item.quantity}}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr *ngIf="numberOfPages.length > 0">
                 <th colspan="7">
                     <div class="ui right floated pagination menu">
-                        <sm-button [disabled]="currentIndex === 0" [ngClass]="{'disabled': currentIndex === 0}" class="normal" (click)="previousPage()" icon="left chevron icon"></sm-button>
+                        <button [disabled]="currentIndex === 0" [ngClass]="{'disabled': currentIndex === 0}" class="pagination-button" (click)="previousPage()"><i class="left chevron icon"></i></button>
                         <a class="item" *ngFor="let pageNumber of numberOfPages">{{pageNumber + 1}}</a>
-                        <sm-button [disabled]="currentIndex === pageSize" [ngClass]="{'disabled': currentIndex === pageSize}" class="normal" (click)="nextPage()" icon="right chevron icon"></sm-button>                        
+                        <button [disabled]="currentIndex === pageSize" [ngClass]="{'disabled': currentIndex === pageSize}" class="pagination-button" (click)="nextPage()"><i class="right chevron icon"></i></button>
                     </div>
                 </th>
             </tr>
         </tfoot>
     </table>
   `,
- styles: ['.pagination { margin: 0px !important; }']
+  styles: [`
+  .pagination { 
+    margin: 0px !important; 
+    .pagination-button {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  }`]
 })
 export class Pagination implements OnChanges, OnInit {
-  @Input() productList;
-  filteredItems : Stock[];
-  pageSize : number = 5;
-  currentIndex : number = 0;
-  inputName : string = '';
+  @Input() productList: Product[];
+  filteredItems: Product[];
+  pageSize = 5;
+  currentIndex = 0;
+  inputName = '';
   numberOfPages: number[] = [];
   searchProduct = new FormControl();
 
-  constructor( ) {
+  constructor() {
   };
 
   ngOnInit() {
-    this.searchProduct.valueChanges.debounceTime(400).subscribe( value => {
-      this.filteredItems = this.productList.filter( product => include(`${product.name}`, value)); 
+    this.searchProduct.valueChanges.debounceTime(400).subscribe(value => {
+      this.filteredItems = this.productList.filter(product => includes(`${product.name}`, value));
     });
   }
 
   ngOnChanges() {
     if (this.productList) {
-      this.getNewItems();    
-      this.numberOfPages = Array(Math.round( this.productList.length / this.pageSize)).fill(0).map((x,i)=>i);
+      this.getNewItems();
+      this.numberOfPages = Array(Math.round(this.productList.length / this.pageSize)).fill(0).map((x, i) => i);
     }
   }
 
   getNewItems() {
-    this.filteredItems = this.productList.slice(this.currentIndex, this.pageSize);    
+    this.filteredItems = this.productList.slice(this.currentIndex, this.pageSize + this.currentIndex);
   }
 
   nextPage() {
@@ -90,7 +98,7 @@ export class Pagination implements OnChanges, OnInit {
   previousPage() {
     if (this.currentIndex > 0) {
       this.currentIndex = this.currentIndex - this.pageSize;
-      this.getNewItems();    
+      this.getNewItems();
     }
   }
- }
+}

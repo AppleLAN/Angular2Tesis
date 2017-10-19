@@ -1,9 +1,11 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
+import { Provider } from '../../../interfaces/provider';
 import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { StockService } from '../../../services/stock.service';
-import { Observable } from 'rxjs/Rx';
+import { ProvidersService } from '../../../services/providers.service';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { Store, Action } from '@ngrx/store';
 import { Stock, Product } from '../../../interfaces/stock';
 import { initialModalObject, StockState } from '../reducers/grid.reducer';
@@ -19,17 +21,21 @@ export class StockModal implements OnInit {
   productForm: FormGroup;
   error: String;
   productFormEmptyObject = initialModalObject.products[0];
+  providers: Provider[];
+  subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: UserAuthenticationService,
     private stockService: StockService,
+    private ps: ProvidersService,
     private store: Store<StockState>) {
   }
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [''],
       company_id: [''],
+      provider_id: ['',[Validators.required]],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       code: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
@@ -39,12 +45,15 @@ export class StockModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
-      new: [true],
-      quantity: ['', [Validators.required]]
+      new: [true]
     });
-
+  
     this.stockStorage = this.stockService.getStockStorage();
     this.stockService.getStateInformation().subscribe();
+    this.ps.getProviders().subscribe();
+    this.subscriptions.push(this.ps.getProviderStorage().subscribe((providers)  => {
+      this.providers = providers;
+    }));
   }
 
   changeInformation(stock: Stock) {

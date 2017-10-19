@@ -2,6 +2,7 @@ import { Provider } from './provider';
 export interface Product {
   id: number;
   company_id: number;
+  provider_id: number;
   name: string;
   code: string;
   description: string;
@@ -36,7 +37,6 @@ export interface AddedStock {
 export interface NewBuy {
   newStock: AddedStock[],
   total: number,
-  invoiceType: string;
   typeOfBuy: string;
-  provider: number;  
+  provider_id: number;  
 }

@@ -8,6 +8,7 @@ import { StockChartsComponent } from './charts/stock.charts.component';
 import { CoreModule } from '../../appsModule/core/core.module';
 import { routing } from './stock.routes';
 import { UserService } from '../../services/user.service';
+import { ProvidersService } from '../../services/providers.service';
 import { StockService } from './../../services/stock.service';
 import { ChartService } from './../../services/chart.service';
 import { AuthGuard } from '../../services/auth.guard';
@@ -25,7 +26,7 @@ import { AuthGuard } from '../../services/auth.guard';
     CommonModule,
     routing
   ],
-  providers: [ AuthGuard, UserService, StockService, ChartService ],
+  providers: [ AuthGuard, UserService, StockService, ChartService, ProvidersService ],
   bootstrap: [ StockMainComponent]
 })
 export class StockModule { }

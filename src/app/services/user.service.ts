@@ -1,3 +1,4 @@
+import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
@@ -19,12 +20,7 @@ export class UserService {
   options: RequestOptions
   userStorage: Observable<CompleteUser>;
 ;
-  constructor(private http: Http,  private store: Store<User>) {
-    // set token if saved in local storage
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
-    this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
-    this.options = new RequestOptions({ headers: this.headers });
+  constructor(private http: Http,  private store: Store<User>, private api: ApiClient) {
     this.userStorage = store.select('user');
    }
 
@@ -33,47 +29,47 @@ export class UserService {
   }
 
   getUserApps(): Observable<any> {
-    return this.http.get('http://localhost:8000/api/getUserApps', this.options)
-      .map((response: Response) => {
-        return response.json().apps;
+    return this.api.get('http://localhost:8000/api/getUserApps')
+      .map((response: any) => {
+        return response.apps;
       })
-      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   getProfileInfo(): Observable<any> {
-    return this.http.get(
-      'http://localhost:8000/api/getProfileInfo', this.options)
+    return this.api.get(
+      'http://localhost:8000/api/getProfileInfo')
         .map((response: Response) => {
-            this.store.dispatch({ type: NEWUSER, payload: response.json()});
-            return response.json();
+            this.store.dispatch({ type: NEWUSER, payload: response});
+            return response;
         })
-        .catch((error: any) => Observable.throw(error.error || 'Server error')
+        .catch((error: any) => Observable.throw(error || 'Server error')
         );
   }
 
   updateClientInfo(user: User): Observable<Object[]> {
-    return this.http.post('http://localhost:8000/api/updateUserProfile', user, this.options)
+    return this.api.post('http://localhost:8000/api/updateUserProfile', user)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
       })
-      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   createSubClient(user: User): Observable<Object[]> {
-  return this.http.post('http://localhost:8000/api/createInternalUser', user, this.options)
+  return this.api.post('http://localhost:8000/api/createInternalUser', user)
     .map((response: Response) => {
 
     })
-    .catch((error: any) => Observable.throw(error.error || 'Server error'));
+    .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   updateClientCompany(company: Client): Observable<Object[]> {
-    return this.http.post('http://localhost:8000/api/updateUserCompany', company, this.options)
+    return this.api.post('http://localhost:8000/api/updateUserCompany', company)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
-        return response.json();
+        return response;
       })
-      .catch((error: any) => Observable.throw(error.error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
 

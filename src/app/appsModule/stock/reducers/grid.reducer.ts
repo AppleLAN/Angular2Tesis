@@ -21,10 +21,10 @@ export const initialModalObject: StockState = {
         {
             id: null,
             company_id: null,
+            provider_id: null,
             name: null,
             code: null,
             description: null,
-            quantity: null,
             cost_price: null,
             sale_price: null,
             category_id: null,
@@ -69,7 +69,7 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
             return state;
         case 'DELETESTOCK':
             state.products.map( p => {
-                    if (action.payload.find( s => s.product_id === p.id)) {
+                    if (action.payload.find( (s: Stock) => s.product_id === p.id)) {
                         p.quantity = 0;
                     };
                     return p;
@@ -85,13 +85,11 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
             state.products = [...state.products, action.payload];
             return state;
         case 'CHANGEPRODUCT':
-            return state.products.map(item => {
-                return item.id === action.payload.id ? action.payload : item;
-            });
+            state.products = state.products.map(item =>  item.id === action.payload.id ? action.payload : item);
+            return state;
         case 'DELETEPRODUCT':
-            return state.products.filter(item => {
-                return item.id !== action.payload.id;
-            })
+            state.products = state.products.filter(item =>  item.id !== action.payload.id);
+            return state;
         default:
             return state;
     }

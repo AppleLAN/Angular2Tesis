@@ -1,3 +1,4 @@
+import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
@@ -16,12 +17,7 @@ export class ClientsService {
   headers: Headers;
   options: RequestOptions;
   clientStorage: Observable<Client[]>;
-  constructor(private http: Http, private store: Store<Client>) {
-        // set token if saved in local storage
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
-        this.headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
-        this.options = new RequestOptions({ headers: this.headers });
+  constructor(private http: Http, private store: Store<Client>, private api: ApiClient) {
         this.clientStorage = store.select('clients');
     }
     getClientStorage(): Observable<Client[]> {
@@ -29,38 +25,38 @@ export class ClientsService {
     }
 
     getClients(): Observable<Client> {
-        return this.http.get('http://localhost:8000/api/getClients', this.options)
+        return this.api.get('http://localhost:8000/api/getClients')
             .map((response: Response) => {
-                const thisResponse = response.json();
-                this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
+                const thisResponse = response;
+                this.store.dispatch({ type: NEWCLIENTS, payload: response});
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     updateClient(newClient: Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/updateClient', newClient, this.options)
+        return this.api.post('http://localhost:8000/api/updateClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     addClient(newClient: Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/saveClient', newClient, this.options)
+        return this.api.post('http://localhost:8000/api/saveClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
-                return response.json();
+                return response;
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     deleteClient(newClient: Client): Observable<Client> {
-        return this.http.post('http://localhost:8000/api/deleteClient', newClient, this.options)
+        return this.api.post('http://localhost:8000/api/deleteClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
-                return response.json();
+                return response;
             })
-            .catch((error: any) => Observable.throw(error.error || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
 
