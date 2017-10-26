@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MapToIterable } from '../shared/pipes/map-to-iterable.pipe';
 import { SalesMainComponent } from './sales-main.component';
 import { CoreModule } from '../../appsModule/core/core.module';
 import { routing } from './sales.routes';
@@ -18,7 +19,8 @@ import { SaleService } from './services/sale.service';
     SalesMainComponent,
     SaleComponent,
     BuyComponent,
-    Pagination
+    Pagination,
+    MapToIterable
   ],
   imports: [
     CoreModule,
@@ -26,7 +28,7 @@ import { SaleService } from './services/sale.service';
     routing,
     FormsModule
   ],
-  providers: [ AuthGuard, StockService, ProvidersService, SaleService],
+  providers: [ AuthGuard, StockService, ProvidersService, SaleService, MapToIterable],
   bootstrap: [ SalesMainComponent]
 })
 export class SalesModule { }

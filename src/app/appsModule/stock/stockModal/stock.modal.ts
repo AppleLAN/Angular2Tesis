@@ -47,7 +47,7 @@ export class StockModal implements OnInit {
       deleted_at: [''],
       new: [true]
     });
-  
+
     this.stockStorage = this.stockService.getStockStorage();
     this.stockService.getStateInformation().subscribe();
     this.ps.getProviders().subscribe();

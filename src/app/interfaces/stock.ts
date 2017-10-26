@@ -32,11 +32,16 @@ export interface Stock {
 export interface AddedStock {
   product: Product;
   quantity: number;
+  provider: String;
+}
+
+export interface SelectedStock {
+  [id: string]: { stock: AddedStock[], subTotal: number, typeOfBuy: string };
 }
 
 export interface NewBuy {
-  newStock: AddedStock[],
-  total: number,
+  newStock: AddedStock[];
+  total: number;
   typeOfBuy: string;
-  provider_id: number;  
+  provider_id: number;
 }

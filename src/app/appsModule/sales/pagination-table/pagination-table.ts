@@ -42,7 +42,7 @@ import { includes } from 'lodash';
                     <div class="ui right floated pagination menu">
                         <button [disabled]="currentIndex === 0" [ngClass]="{'disabled': currentIndex === 0}" class="pagination-button" (click)="previousPage()"><i class="left chevron icon"></i></button>
                         <a class="item" *ngFor="let pageNumber of numberOfPages">{{pageNumber + 1}}</a>
-                        <button [disabled]="currentIndex === pageSize" [ngClass]="{'disabled': currentIndex === pageSize}" class="pagination-button" (click)="nextPage()"><i class="right chevron icon"></i></button>
+                        <button [disabled]="currentIndex === pageSize || filteredItems.length < pageSize" [ngClass]="{'disabled': currentIndex === pageSize && filteredItems.length > 0}" class="pagination-button" (click)="nextPage()"><i class="right chevron icon"></i></button>
                     </div>
                 </th>
             </tr>
@@ -50,8 +50,8 @@ import { includes } from 'lodash';
     </table>
   `,
   styles: [`
-  .pagination { 
-    margin: 0px !important; 
+  .pagination {
+    margin: 0px !important;
     .pagination-button {
       width: 100%;
       height: 100%;
@@ -68,8 +68,7 @@ export class Pagination implements OnChanges, OnInit {
   numberOfPages: number[] = [];
   searchProduct = new FormControl();
 
-  constructor() {
-  };
+  constructor() {}
 
   ngOnInit() {
     this.searchProduct.valueChanges.debounceTime(400).subscribe(value => {

@@ -3614,11 +3614,11 @@ $.fn.dropdown.settings = {
     addResult     : 'Add <b>{term}</b>',
     count         : '{count} selected',
     maxSelections : 'Max {maxCount} selections',
-    noResults     : 'No results found.',
+    noResults     : '',
     serverError   : 'There was an error contacting the server'
   },
 
-  error : {
+  error : { 
     action          : 'You called a dropdown action that was not defined',
     alreadySetup    : 'Once a select has been initialized behaviors must be called on the created ui dropdown',
     labels          : 'Allowing user additions currently requires the use of labels.',

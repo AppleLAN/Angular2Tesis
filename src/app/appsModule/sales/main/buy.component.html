@@ -58,9 +58,43 @@
             <table-pagination [productList]="stock?.products"></table-pagination>
         </div>
     </div>
-    <div class="row container buy-container">
-        <div class="column">
-            <h1>Orden de compras</h1>                
+    <ng-container *ngIf="!isEmpty(selectedProducts); else noProductsSelectedTemplate">            
+        <div class="row container buy-container" *ngFor="let product of selectedProducts | mapToIterable">
+            <div class="column">
+                <h1>Orden de compras para proveedor "{{product.value.stock[0].provider}}"</h1>                
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>Nombre de producto</th>
+                            <th>Descripcion</th>
+                            <th>Proveedor</th>
+                            <th>Cantidad</th>
+                            <th>Eliminar producto de orden de compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selected of product.value.stock">
+                            <td>{{selected.product.name}}</td>
+                            <td>{{selected.product.description}}</td>
+                            <td>{{selected.provider}}</td>                            
+                            <td>{{selected.quantity}}</td>  
+                            <td><button class="ui button" (click)="deleteProduct(product.key, selected.product.id)">Borrar</button></td>                         
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <span class="sub-total">Sub total:</span>
+                    <span class="sub-total">${{product.value.subTotal | number: '1.2-5'}}</span>
+                </div>
+                <div>
+                    <span class="sub-total">Forma de pago:</span>
+                    <span class="sub-total">{{product.value.typeOfBuy}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noProductsSelectedTemplate>
+        <div class="row">    
             <table class="ui celled table">
                 <thead>
                     <tr>
@@ -71,24 +105,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngIf="selectedProducts.length > 0; else noProductsSelectedTemplate">
-                        <tr *ngFor="let selected of selectedProducts">
-                            <td>{{selected.product.name}}</td>
-                            <td>{{selectedProvider.name}}</td>                            
-                            <td>{{saleForm.controls.typeOfBuy.value}}</td>                            
-                            <td>{{selected.quantity}}</td>                           
-                        </tr>
-                    </ng-container>
-                    <ng-template #noProductsSelectedTemplate>
-                        <tr>
-                            <td colspan="5"><h3>No hay productos seleccionados</h3></td>                       
-                        </tr>
-                    </ng-template>
-                    
+                    <tr>
+                        <td colspan="5"><h3>No hay productos seleccionados</h3></td>                                                       
+                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>
+    </ng-template>
     <div class="row">
         <div class="column">
             <span class="total">Total:</span>
@@ -98,7 +121,7 @@
 
     <div class="row">
         <div class="column">
-            <sm-button class="normal tiny" [disabled]="selectedProducts.length === 0" (click)="buy()">Comprar productos</sm-button>
+            <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="buy()">Comprar productos</sm-button>
         </div>
     </div>
 </div>
