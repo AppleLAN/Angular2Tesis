@@ -1,9 +1,10 @@
-import { storeFreeze } from 'ngrx-store-freeze';
-import { Provider } from '../../interfaces/provider';
-import { environment } from '../../../environments/environment.prod';
-import { compose } from '@ngrx/core/compose';
-import { ActionReducer, combineReducers } from '@ngrx/store';
-
+import { OrderReducer, OrdersState } from './reducers/order.reducer';
+import { SaleReducer, SaleState } from './reducers/sale.reducer';
+export interface State {
+    orders: OrdersState,
+    sales: SaleState
+}
 export const reducers = {
-
+    orders: OrderReducer,
+    sales: SaleReducer
 };

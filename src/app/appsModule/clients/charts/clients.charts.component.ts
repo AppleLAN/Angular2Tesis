@@ -1,13 +1,7 @@
-import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartService } from '../../../services/chart.service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
-import { ActivatedRoute, Params } from '@angular/router';
-
-import { initialModalObject } from '../reducers/grid.reducer';
+import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients-charts',
@@ -23,10 +17,7 @@ export class ClientsChartsComponent implements OnInit, OnDestroy{
     chartStorage: Subscription;
     charts: any;
     constructor(
-        private fb: FormBuilder,
-        private authService: UserAuthenticationService,
         private chartService: ChartService,
-        private store: Store<any>,
         private route: ActivatedRoute) {
             this.charType = route.snapshot.params['type'];
         }

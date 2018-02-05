@@ -1,11 +1,9 @@
 import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { User } from '../interfaces/user';
-import { Client } from '../interfaces/client';
+import { Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { NEWCLIENTCHARTDATA } from './../appsModule/clients/reducers/chart.reducer';
 import { NEWPROVIDERCHARTDATA } from './../appsModule/providers/reducers/chart.reducer';
 
@@ -20,7 +18,7 @@ export class ChartService {
   options: RequestOptions
   chartStorage: Observable<any>;
 ;
-  constructor(private http: Http,  private store: Store<any>, private api: ApiClient) {  
+  constructor(private store: Store<any>, private api: ApiClient) {  
     this.chartStorage = store.select('chart');
    }
 

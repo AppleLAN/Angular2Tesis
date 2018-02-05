@@ -112,4 +112,7 @@
             </modal-actions>
         </form>
     </modal-content>
+    <modal-actions>
+        <simple-notifications *ngIf="options" [options]="options"></simple-notifications>
+    </modal-actions>
 </sm-modal>

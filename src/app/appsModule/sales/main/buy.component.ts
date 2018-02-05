@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { SemanticSelectComponent } from 'ng-semantic/ng-semantic';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StockService } from '../../../services/stock.service';
 import { ProvidersService } from '../../../services/providers.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { AddedStock, NewBuy, Product, Stock, SelectedStock } from '../../../interfaces/stock';
+import { NewBuy, Product, SelectedStock } from '../../../interfaces/stock';
 import { Provider } from '../../../interfaces/provider';
 import { StockState } from '../../stock/reducers/grid.reducer';
 import { forEach, uniqBy, orderBy, isEmpty  } from 'lodash';
@@ -31,11 +31,22 @@ export class BuyComponent implements OnInit, OnDestroy {
   selectedProductsObserver: Subscription;
   selectedProvider: Provider;
   productsToChoose: Product[];
+  numberOfChanges = 0;
   isEmpty = isEmpty;
+  options: any;
+
   constructor( private fb: FormBuilder,
                private ss: StockService,
                private ps: ProvidersService,
-               private sas: SaleService ) { }
+               private sas: SaleService,
+               private ns: NotificationsService ) {
+    this.options = {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }
+  }
 
   ngOnInit() {
     this.saleForm = this.fb.group({
@@ -62,85 +73,42 @@ export class BuyComponent implements OnInit, OnDestroy {
       }
     }));
     this.subscriptions.push(this.ss.getStateInformation().subscribe());
-  this.subscriptions.push(this.ps.getProviders().subscribe());
+    this.subscriptions.push(this.ps.getProviders().subscribe());
   }
 
   addProduct() {
-    const product = this.stock.products.find(p => {
-      const isTheSameProduct = p.name === this.saleForm.controls['product'].value;
-      const isTheSameProvider = p.provider_id === parseInt(this.saleForm.controls['provider_id'].value);
-      return isTheSameProduct && isTheSameProvider;
-    });
-    const selectedProvider = this.providers.find(p => p.id === product.provider_id);
-    const selectedProviderId = product.provider_id;
-    const addedProduct: AddedStock = {
-      product: product,
-      quantity: 0,
-      provider: selectedProvider.name
-    };
-    if (this.selectedProducts[selectedProviderId]) {
-      this.selectedProducts[selectedProviderId].stock = [...this.selectedProducts[selectedProviderId].stock, addedProduct];
-    } else {
-      this.selectedProducts[selectedProviderId] = { stock : null, subTotal: 0, typeOfBuy: this.saleForm.controls['typeOfBuy'].value };
-      this.selectedProducts[selectedProviderId].stock = [addedProduct];
-    }
-    const selectedProduct = this.selectedProducts[selectedProviderId].stock.find( p => p.product.id === product.id);
-    selectedProduct.quantity = Number(selectedProduct.quantity) + Number(this.saleForm.controls['quantity'].value);
-    this.selectedProducts[selectedProviderId].stock = this.selectedProducts[selectedProviderId].stock
-      .map(p => {
-        if (p.product === selectedProduct.product) {
-          p.quantity = selectedProduct.quantity;
-        }
-        return p;
-      });
-    this.selectedProducts[selectedProviderId].stock = uniqBy(this.selectedProducts[selectedProviderId].stock,
-                                                             (p: AddedStock) => p.product.id);
-    this.selectedProducts[selectedProviderId].subTotal = 0;
-    this.getSubTotal(selectedProviderId);
-    this.getTotal();
+    const addProductResult = this.ss.addProduct(this.stock, this.saleForm, this.providers, this.selectedProducts, this.total, this.numberOfChanges);
+    this.selectedProducts = addProductResult.selectedProducts;
+    this.total = addProductResult.total;
+    this.numberOfChanges = addProductResult.numberOfChanges;
+    this.ns.success('Perfecto!', 'Su producto a sido agregado debajo');    
   }
 
   ngOnDestroy() {
     forEach(this.subscriptions, (s: Subscription) => s.unsubscribe());
   }
-
+  
   deleteProduct(providerId: number, productId: number) {
-    this.selectedProducts[providerId].stock = this.selectedProducts[providerId].stock.filter(p => p.product.id !== productId);
-    if (this.selectedProducts[providerId].stock.length > 0) {
-      this.getSubTotal(providerId);
-    } else {
-      delete this.selectedProducts[providerId];
-    }
-    this.getTotal();
+    const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges)
+    this.selectedProducts = deletedResult.selectedProducts;
+    this.total = deletedResult.total;
+    this.numberOfChanges = deletedResult.numberOfChanges;
+    this.ns.success('Perfecto!', 'Su producto a sido agregado eliminado');        
   }
-
-  getSubTotal(selectedProviderId: number) {
-    this.selectedProducts[selectedProviderId].subTotal = 0;
-    forEach(this.selectedProducts[selectedProviderId].stock, (p: AddedStock) => {
-      const quantityPrice = p.product.sale_price * p.quantity;
-      this.selectedProducts[selectedProviderId].subTotal += quantityPrice;
-    });
-  }
-
-  getTotal() {
-    this.total = 0;
-    forEach(this.selectedProducts, (products, provider) => {
-      this.total += products.subTotal;
-    });
-  }
-
+  
   buy() {
     forEach(this.selectedProducts, (value, key) => {
       const buyOrder: NewBuy = {
         newStock: value.stock,
-        total: this.total,
-        typeOfBuy: this.saleForm.controls['typeOfBuy'].value,
-        provider_id: this.saleForm.controls['provider_id'].value
+        total: value.subTotal,
+        typeOfBuy: value.typeOfBuy,
+        provider_id: parseInt(key)
       };
       this.sas.buy(buyOrder)
         .subscribe(
+          () => this.ns.success('Perfecto!', 'Sus ordenes han sido realizadas'),                    
           error => {
-            console.log(error);
+            this.ns.error('Error!', 'Sus ordenes no han podido ser realizadas')         
           }
       );
     });

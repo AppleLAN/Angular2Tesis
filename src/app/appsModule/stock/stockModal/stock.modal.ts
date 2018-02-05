@@ -1,14 +1,13 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
 import { Provider } from '../../../interfaces/provider';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { StockService } from '../../../services/stock.service';
 import { ProvidersService } from '../../../services/providers.service';
 import { Observable, Subscription } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
 import { Stock, Product } from '../../../interfaces/stock';
 import { initialModalObject, StockState } from '../reducers/grid.reducer';
+import { NotificationsService } from 'angular2-notifications';
+
 declare var jQuery: any;
 
 @Component({
@@ -23,13 +22,19 @@ export class StockModal implements OnInit {
   productFormEmptyObject = initialModalObject.products[0];
   providers: Provider[];
   subscriptions: Subscription[] = [];
+  options: any;
 
   constructor(
     private fb: FormBuilder,
-    private authService: UserAuthenticationService,
     private stockService: StockService,
     private ps: ProvidersService,
-    private store: Store<StockState>) {
+    private ns: NotificationsService) {
+      this.options = {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      }
   }
   ngOnInit() {
     this.productForm = this.fb.group({
@@ -45,6 +50,7 @@ export class StockModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
+      quantity: [''],
       new: [true]
     });
 
@@ -84,29 +90,47 @@ export class StockModal implements OnInit {
   }
 
   addProducts({ value }: { value: Product }) {
-    this.stockService.addProducts(value).subscribe();
+    this.stockService.addProducts(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su producto a sido agregado'),
+      error => this.ns.error('Error!',error)
+    );
     // this.addStock(value);
   }
 
   updateProducts({ value }: { value: Product }) {
-    this.stockService.updateProducts(value).subscribe();
+    this.stockService.updateProducts(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su producto a sido actualizado'),
+      error => this.ns.error('Error!',error)
+    );
     // this.updateStock(value);
   }
 
   deleteProducts({ value }: { value: Product }) {
-    this.stockService.deleteProducts(value).subscribe();
+    this.stockService.deleteProducts(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su producto a sido eliminado'),
+      error => this.ns.error('Error!',error)
+    );
     // this.deleteStock(value);
   }
 
   addStock({ value }: { value: Stock }) {
-    this.stockService.addStock(value).subscribe();
+    this.stockService.addStock(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su producto a sido agregado al stock'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
   updateStock({ value }: { value: Stock }) {
-    this.stockService.updateStock(value).subscribe();
+    this.stockService.updateStock(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su stock a sido actualizado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
   deleteStock({ value }: { value: Stock }) {
-    this.stockService.deleteStock(value).subscribe();
+    this.stockService.deleteStock(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su stock a sido eliminado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 }

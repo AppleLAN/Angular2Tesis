@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
         providers: [''],
       });
   } 
-  submit({ value, valid }: { value: User, valid: boolean }) {
+submit({ value }: { value: User }) {
     this.authService.register(value)
     .subscribe(
       response => {

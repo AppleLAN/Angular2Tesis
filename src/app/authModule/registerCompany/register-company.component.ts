@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CompleteUser } from './../../interfaces/complete.user';
 import { Subscription } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
 
 @Component({
   selector: 'app-register-company-component',
@@ -19,7 +18,7 @@ export class RegisterCompanyComponent implements OnInit {
   clients: Client;
   userStorage: Subscription;
   userData: CompleteUser;
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private store: Store<CompleteUser>) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.userForm = this.fb.group({

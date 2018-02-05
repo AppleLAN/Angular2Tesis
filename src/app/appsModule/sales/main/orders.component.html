@@ -1,0 +1,45 @@
+<div *ngIf="$orders | async  as orders;else noOrdersTemplate" class="ui column doubling grid main-container">
+  <div class="row">
+      <div class="column">
+          <div class="container order-container buy-container" *ngFor="let order of orders">
+            <p>Proveedor: {{order.order.provider}}</p>
+            <p>Total: {{order.order.orderTotal}}</p>
+            <p>Status: {{order.order.status}}</p>
+            <p>Tipo de compra: {{order.order.typeOfBuy}}</p>
+            <p>Productos de la orden</p>
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Nombre de producto</th>
+                        <th>Descripcion</th>
+                        <th>Costo</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let details of order.details">
+                        <td>{{details.product_name}}</td>
+                        <td>{{order.products[details.product_id].description}}</td>
+                        <td>{{order.products[details.product_id].cost_price}}</td>
+                        <td>{{details.quantity}}</td>                            
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="column">
+                    <sm-button class="normal tiny" (click)="completeOrder(order.order)">Completar order de compra</sm-button>
+                    <sm-button class="normal tiny" (click)="deleteOrder(order.order)">Cancelar orden de compra</sm-button>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+<ng-template #noOrdersTemplate>
+    <div class="no-orders">
+        <span>No hay ordenes disponibles </span>       
+    </div>
+</ng-template>
+<simple-notifications *ngIf="options" [options]="options"></simple-notifications>          
+
+<factura></factura>

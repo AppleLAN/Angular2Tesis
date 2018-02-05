@@ -1,9 +1,8 @@
 import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs/Rx';
-import { Router, CanActivate } from '@angular/router';
+import { Router } from '@angular/router';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -13,11 +12,12 @@ import 'rxjs/add/operator/catch';
 export class UserAuthenticationService {
   public token: string;
 
-  constructor(private http: Http, private router: Router, private api: ApiClient) {
+  constructor(private router: Router, private api: ApiClient) {
    }
 
   signIn(userInfo: User): Observable<Comment[]> {
     // ...using get request
+    localStorage.removeItem('currentUser');
     return this.api.post("http://localhost:8000/api/authenticate",userInfo, )
       .map((response: any) => {
           let token = response && response.token;

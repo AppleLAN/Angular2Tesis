@@ -1,0 +1,102 @@
+
+<div id="to-print">
+  <div class="ui grid container factura-container">
+      <div class="four wide column">
+          Semantic Sa
+      </div>
+      <div class="four wide column">
+          Comprobante electronico
+      </div>
+      <div class="four wide column">
+          Factura tipo A
+      </div>
+      <div class="four wide column">
+          FACTURA
+          <p>Fecha: 09/05/2018</p>
+          <p>0001-00001502</p>
+          <p>Vendedor: Proveedor1</p>
+      </div>
+  </div>
+  
+  <div class="ui grid container factura-container">
+      <div class="four wide column">
+          <h1>Semantic Sa</h1>
+          <p>Leandro N. Alem 5077- Mar del Plata</p>
+          <p>IVA: Responsable inscripto</p>
+          <p>CUIT: 20-366017313-4</p>
+      </div>
+      <div class="four wide column"></div>
+      <div class="four wide column"></div>
+      <div class="four wide column">
+          <p>Ing Brutos: 913-506850-1</p>
+          <p>Inicio Act: 11/05/2005</p>
+          <p>Tel: 0261-4521258 / 5248910 / 8911</p>
+          <p>E-mail: alanbuscaglia@email.com</p>
+      </div>
+  </div>
+  
+  <div class="ui grid container factura-container">
+      <div class="four wide column">
+          <p>Cliente: Nombre del cliente (Cod: numero de codigo)</p>
+          <p>Domicilio: lugar de domicilio cliente</p>
+          <p>IVA: iva del cliente</p>
+          <p>CUIT: 20-36601731-4</p>
+      </div>
+      <div class="four wide column"></div>
+      <div class="four wide column"></div>
+      <div class="four wide column">
+          <p>Cod de venta: codigo de la venta</p>
+          <p>Vto. factura: fecha de vencimiento</p>
+          <p>Pedido: 001-00004159 / Remito</p>
+      </div>
+  </div>
+  
+  
+  <div class="ui grid container factura-container">
+      <table class="ui celled striped inverted table">
+          <thead>
+          <tr>
+              <th>Codigo</th>
+              <th>Descripcion</th>
+              <th>Cantidad</th>
+              <th>% Desc</th>
+              <th>Desc</th>
+              <th>Precio unitario</th>
+              <th>Precio total</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+              <td>12312345Csad45</td>
+              <td>Test de producto</td>
+              <td>1</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>15.00</td>
+              <td>15.00</td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+  
+  <div class="ui grid container factura-container">
+      <div class="sixteen wide column">
+          <p>Neto: 15.00</p>
+          <p>Descuento: 0.00</p>
+          <p>Exento: 0.00</p>
+          <p>IVA: 21.0 / 3.15</p>
+          <p>IVA: 10.5 / 0.00</p>
+          <p>Percepciones: 0.00</p>
+          <h1>TOTAL: 18.15</h1>
+      </div>
+  </div>
+  
+  <div class="ui grid container factura-container">
+      <div class="sixteen wide column">
+          <p>Nro CAE: 64193185311064</p>
+          <p>Vto CAE: 09/05/2018</p>
+      </div>
+  </div>
+</div>
+
+<button (click)="print()">Imprimir</button>

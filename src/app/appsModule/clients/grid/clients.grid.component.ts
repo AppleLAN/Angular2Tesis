@@ -1,15 +1,7 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
+import { Component, OnInit } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
-
 import { Client } from '../../../interfaces/client';
-
-import { initialModalObject } from '../reducers/grid.reducer';
-
 @Component({
   selector: 'app-clients-grid',
   templateUrl: './clients.grid.component.html',
@@ -22,9 +14,7 @@ export class ClientsGridComponent implements OnInit {
   error: String;
 
   constructor(
-    private authService: UserAuthenticationService,
-    private clientsService: ClientsService,
-    private store: Store<Client[]>) {
+    private clientsService: ClientsService) {
   }
   ngOnInit() {
     this.clientStorage = this.clientsService.getClientStorage();

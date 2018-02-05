@@ -5,7 +5,6 @@
 // import { provideRouter, RouterConfig } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './../services/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterCompanyComponent } from './registerCompany/register-company.component';

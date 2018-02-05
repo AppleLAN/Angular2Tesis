@@ -1,3 +1,4 @@
+import { CoreModule } from '../appsModule/core/core.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +31,7 @@ import { HasCompanyGuard } from '../services/company.guard';
     routing,
     ReactiveFormsModule,
     NgSemanticModule,
+    CoreModule,
     StoreModule.provideStore([])
   ],
   providers: [AuthGuard, HasCompanyGuard, UserService, UserAuthenticationService],

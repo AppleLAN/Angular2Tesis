@@ -1,11 +1,8 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
-import { Client } from '../../../../interfaces/client';
-import { User } from '../../../../interfaces/user';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserAuthenticationService } from '../../../../services/user-authentication.service';
 import { UserService } from '../../../../services/user.service';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 declare var jQuery: any;
 @Component({

@@ -1,5 +1,5 @@
-import { Component, Input, NgModule, OnChanges, OnInit } from '@angular/core';
-import { Product, Stock } from '../../../interfaces/stock';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Product } from '../../../interfaces/stock';
 import { FormControl } from '@angular/forms';
 import { includes } from 'lodash';
 
@@ -79,7 +79,7 @@ export class Pagination implements OnChanges, OnInit {
   ngOnChanges() {
     if (this.productList) {
       this.getNewItems();
-      this.numberOfPages = Array(Math.round(this.productList.length / this.pageSize)).fill(0).map((x, i) => i);
+      this.numberOfPages = Array(Math.round(this.productList.length / this.pageSize)).fill(0).map(i => i);
     }
   }
 

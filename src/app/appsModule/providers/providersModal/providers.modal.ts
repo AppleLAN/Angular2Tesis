@@ -1,10 +1,8 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { ProvidersService } from '../../../services/providers.service';
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
 import { Provider } from '../../../interfaces/provider';
 import { initialModalObject } from '../reducers/grid.reducer';
 declare var jQuery: any;
@@ -20,12 +18,18 @@ export class ProviderModal implements OnInit {
   providerForm: FormGroup;
   error: String;
   providerFormEmptyObject = initialModalObject;
+  options: any;
 
   constructor(
     private fb: FormBuilder,
-    private authService: UserAuthenticationService,
     private providersService: ProvidersService,
-    private store: Store<Provider[]>) {
+    private ns: NotificationsService) {
+      this.options = {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      }
   }
   ngOnInit() {
     this.providerForm = this.fb.group({
@@ -87,14 +91,23 @@ export class ProviderModal implements OnInit {
   }
 
   addProvider({ value }: { value: Provider }) {
-    this.providersService.addProvider(value).subscribe();
+    this.providersService.addProvider(value).subscribe(
+      () => this.ns.success('Perfecto!', 'Su proveedor a sido agregado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
   updateProvider({ value }: { value: Provider }) {
-    this.providersService.updateProvider(value).subscribe();
+    this.providersService.updateProvider(value).subscribe(
+      () => this.ns.success('Perfecto!', 'Su proveedor a sido actualizado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
    deleteProvider({ value }: { value: Provider }) {
-    this.providersService.deleteProvider(value).subscribe();
+    this.providersService.deleteProvider(value).subscribe(
+      () => this.ns.success('Perfecto!', 'Su proveedor a sido eliminado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 }

@@ -1,10 +1,8 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
 import { ClientsService } from '../../../services/clients.service';
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
 import { Client } from '../../../interfaces/client';
 import { initialModalObject } from '../reducers/grid.reducer';
 declare var jQuery: any;
@@ -20,12 +18,18 @@ export class ClientModal implements OnInit {
   clientForm: FormGroup;
   error: String;
   clientFormEmptyObject = initialModalObject;
+  options:any;
 
   constructor(
     private fb: FormBuilder,
-    private authService: UserAuthenticationService,
     private clientsService: ClientsService,
-    private store: Store<Client[]>) {
+    private ns: NotificationsService) {
+      this.options = {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      }
   }
   ngOnInit() {
     this.clientForm = this.fb.group({
@@ -87,14 +91,23 @@ export class ClientModal implements OnInit {
   }
 
   addClient({ value }: { value: Client }) {
-    this.clientsService.addClient(value).subscribe();
+    this.clientsService.addClient(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su cliente a sido agregado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
   updateClient({ value }: { value: Client }) {
-    this.clientsService.updateClient(value).subscribe();
+    this.clientsService.updateClient(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su cliente a sido actualizado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
    deleteClient({ value }: { value: Client }) {
-    this.clientsService.deleteClient(value).subscribe();
+    this.clientsService.deleteClient(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su cliente a sido eliminado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 }

@@ -1,12 +1,12 @@
-import { Router } from '@angular/router';
-import { Component, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { UserService } from '../../../services/user.service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
+import { Subscription } from 'rxjs/Rx';
+
 declare var jQuery: any;
 
 @Component({
@@ -23,12 +23,19 @@ export class ProfileModal implements OnInit {
     error: String;
     userStorage: Subscription;
     userData: CompleteUser;
+    options: any;
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private userService: UserService,
-    private store: Store<CompleteUser>) {}
+    private ns: NotificationsService) {
+      this.options = {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      }
+    }
 
   ngOnInit() {
      this.userForm = this.fb.group({
@@ -107,14 +114,23 @@ export class ProfileModal implements OnInit {
   }
 
   updateClientInfo({ value }: { value: User }) {
-    this.userService.updateClientInfo(value).subscribe();
+    this.userService.updateClientInfo(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su cliente a sido actualizado'),
+      error => this.ns.error('Error!',error)
+    );
   }
 
   updateClientCompany({ value }: { value: Client }) {
     value.type = 'UPDATE';
-    this.userService.updateClientCompany(value).subscribe();
+    this.userService.updateClientCompany(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su compañia a sido actualizada'),
+      error => this.ns.error('Error!',error)
+    );
   }
   createSubClient({ value }: { value: User }) {
-    this.userService.createSubClient(value).subscribe();
+    this.userService.createSubClient(value).subscribe(
+      suc => this.ns.success('Perfecto!', 'Su sub-cliente a sido creado'),
+      error => this.ns.error('Error!',error)      
+    );
   }
 }

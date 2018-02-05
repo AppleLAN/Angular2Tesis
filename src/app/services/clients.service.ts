@@ -1,9 +1,8 @@
 import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { User } from '../interfaces/user';
+import { Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Client } from '../interfaces/client';
 import { NEWCLIENTS, ADDCLIENT, DELETECLIENT, CHANGECLIENT } from './../appsModule/clients/reducers/grid.reducer';
 
@@ -17,7 +16,7 @@ export class ClientsService {
   headers: Headers;
   options: RequestOptions;
   clientStorage: Observable<Client[]>;
-  constructor(private http: Http, private store: Store<Client>, private api: ApiClient) {
+  constructor(private store: Store<Client>, private api: ApiClient) {
         this.clientStorage = store.select('clients');
     }
     getClientStorage(): Observable<Client[]> {
@@ -27,7 +26,6 @@ export class ClientsService {
     getClients(): Observable<Client> {
         return this.api.get('http://localhost:8000/api/getClients')
             .map((response: Response) => {
-                const thisResponse = response;
                 this.store.dispatch({ type: NEWCLIENTS, payload: response});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));

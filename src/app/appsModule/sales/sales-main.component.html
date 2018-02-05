@@ -1,7 +1,11 @@
  <!-- Router Outlet -->
 <div class="grid sales-main-container">
-    <sm-button class="normal tiny" (click)="operation = 'buy'">Compras de productos</sm-button>                            
-    <sm-button class="normal tiny" (click)="operation = 'sale'">Ventas de productos</sm-button>                            
+    <sm-button class="normal tiny" (click)="operation = 'buy'">Generar ordenes de compra de productos</sm-button>                            
+    <sm-button class="normal tiny" (click)="operation = 'sale'">Generar ventas de productos</sm-button>                            
+    <sm-button class="normal tiny" (click)="operation = 'orders'">Ordenes de compra</sm-button>                            
+    <sm-button class="normal tiny" (click)="operation = 'sales'">Ventas</sm-button>                            
     <app-buy *ngIf="operation === 'buy'"></app-buy>
-    <app-sale *ngIf="operation === 'sale'"></app-sale>            
+    <app-sale *ngIf="operation === 'sale'"></app-sale>   
+    <orders *ngIf="operation === 'orders'"></orders>       
+    <created-sales *ngIf="operation === 'sales'"></created-sales>       
 </div>

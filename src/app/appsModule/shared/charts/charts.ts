@@ -1,5 +1,5 @@
 import { ChartService } from './../../../services/chart.service';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Rx';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({

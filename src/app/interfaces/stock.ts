@@ -1,4 +1,3 @@
-import { Provider } from './provider';
 export interface Product {
   id: number;
   company_id: number;
@@ -28,20 +27,39 @@ export interface Stock {
   updated_at: string;
   deleted_at: string;
 }
-
 export interface AddedStock {
   product: Product;
   quantity: number;
+}
+export interface AddedBuyStock extends AddedStock {
   provider: String;
 }
 
-export interface SelectedStock {
-  [id: string]: { stock: AddedStock[], subTotal: number, typeOfBuy: string };
+export interface AddedSaleStock extends AddedStock {
+  client: String;
 }
 
-export interface NewBuy {
+export interface SelectedStock {
+  [id: string]: { stock: AddedStock[],
+                  subTotal: number,
+                  typeOfBuy?: string,
+                  saleDate?: Date,
+                  paymentMethods?: string
+                };
+}
+
+export interface NewOperation {
   newStock: AddedStock[];
   total: number;
+}
+
+export interface NewBuy extends NewOperation{
   typeOfBuy: string;
   provider_id: number;
+}
+
+export interface NewSale extends NewOperation {
+  paymentMethods: string;
+  client_id: number;
+  saleDate: Date;
 }

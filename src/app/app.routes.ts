@@ -5,7 +5,6 @@
 // import { provideRouter, RouterConfig } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './services/auth.guard';
 
 // Route Configuration
 export const routes: Routes = [

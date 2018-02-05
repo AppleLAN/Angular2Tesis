@@ -1,9 +1,8 @@
 import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { User } from '../interfaces/user';
+import { Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Provider } from '../interfaces/provider';
 import { NEWPROVIDERS, ADDPROVIDER, DELETEPROVIDER, CHANGEPROVIDER } from './../appsModule/providers/reducers/grid.reducer';
 
@@ -17,7 +16,7 @@ export class ProvidersService {
   headers: Headers;
   options: RequestOptions;
   providerStorage: Observable<Provider[]>;
-  constructor(private http: Http, private store: Store<Provider>, private api: ApiClient) {
+  constructor(private store: Store<Provider>, private api: ApiClient) {
         this.providerStorage = store.select('providers');
     }
     getProviderStorage(): Observable<Provider[]> {
@@ -27,7 +26,6 @@ export class ProvidersService {
     getProviders(): Observable<Provider[]> {
         return this.api.get('http://localhost:8000/api/getProviders')
             .map((response: Response) => {
-                const thisResponse = response;
                 this.store.dispatch({ type: NEWPROVIDERS, payload: response});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));

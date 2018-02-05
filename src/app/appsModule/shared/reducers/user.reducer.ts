@@ -28,8 +28,6 @@ const emptyState: CompleteUser = {
     company: initialModalObject
 }
 
-const initialCompanyObject = initialModalObject;
-
 export const userReducer: Reducer<any> = (state: CompleteUser, action: Action) => {
     switch (action.type) {
         case NEWUSER:

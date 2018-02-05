@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
         NgSemanticModule,
         ReactiveFormsModule,
         RouterModule,
-        ChartsModule
+        ChartsModule,
+        SimpleNotificationsModule.forRoot()
     ],
     exports: [
         SidebarComponent,
@@ -35,10 +37,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
         ReactiveFormsModule,
         RouterModule,
         ChartComponent,
-        ChartsModule
+        ChartsModule,
+        SimpleNotificationsModule
     ],
     providers: [
-        ApiClient
+        ApiClient,
+        NotificationsService
     ]
 })
 export class CoreModule { }

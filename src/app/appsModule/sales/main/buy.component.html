@@ -1,4 +1,5 @@
 <div class="ui column doubling grid main-container">
+    <h1>Ordenes de compra</h1>
     <div class="row container buy-container">
         <div class="column">
             <form class="ui inverted form" [formGroup]="saleForm" name="Form">
@@ -59,9 +60,9 @@
         </div>
     </div>
     <ng-container *ngIf="!isEmpty(selectedProducts); else noProductsSelectedTemplate">            
-        <div class="row container buy-container" *ngFor="let product of selectedProducts | mapToIterable">
+        <div class="row container buy-container" *ngFor="let product of selectedProducts | mapToIterable: numberOfChanges">
             <div class="column">
-                <h1>Orden de compras para proveedor "{{product.value.stock[0].provider}}"</h1>                
+                <h1>Orden de compras para proveedor "{{product.val.stock[0].provider}}"</h1>                
                 <table class="ui celled table">
                     <thead>
                         <tr>
@@ -73,7 +74,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let selected of product.value.stock">
+                        <tr *ngFor="let selected of product.val.stock">
                             <td>{{selected.product.name}}</td>
                             <td>{{selected.product.description}}</td>
                             <td>{{selected.provider}}</td>                            
@@ -84,11 +85,11 @@
                 </table>
                 <div>
                     <span class="sub-total">Sub total:</span>
-                    <span class="sub-total">${{product.value.subTotal | number: '1.2-5'}}</span>
+                    <span class="sub-total">${{product.val.subTotal | number: '1.2-5'}}</span>
                 </div>
                 <div>
                     <span class="sub-total">Forma de pago:</span>
-                    <span class="sub-total">{{product.value.typeOfBuy}}</span>
+                    <span class="sub-total">{{product.val.typeOfBuy}}</span>
                 </div>
             </div>
         </div>
@@ -121,7 +122,8 @@
 
     <div class="row">
         <div class="column">
-            <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="buy()">Comprar productos</sm-button>
+            <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="buy()">Generar orden de compra</sm-button>
         </div>
     </div>
 </div>
+<simple-notifications *ngIf="options" [options]="options"></simple-notifications>          

@@ -1,14 +1,20 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-    name: 'mapToIterable'
+  name: 'mapToIterable'
 })
-export class MapToIterable implements PipeTransform {
-    transform(map: { [key: string]: any }, ...parameters: any[]) {
-        if (!map) {
-          return undefined;
-        }
-        return Object.keys(map)
-            .map((key) => ({ 'key': key, 'value': map[key] }));
+export class MapToIterable implements PipeTransform  {
+  transform(dict:any, args:any = [], trigger:number): any {
+    var a:any[] = [];
+    for (var key in dict) {
+      if (dict.hasOwnProperty(key)) {
+        a.push({key: key, val: dict[key]});
+      }
     }
+    return a;
+  }
 }
+
+export var MAPTOITERABLE_PROVIDERS = [
+    MapToIterable
+];

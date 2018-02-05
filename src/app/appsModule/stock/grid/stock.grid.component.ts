@@ -1,14 +1,7 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../interfaces/user';
-import { UserAuthenticationService } from '../../../services/user-authentication.service';
+import { StockState } from '../reducers/grid.reducer';
+import { Component, OnInit } from '@angular/core';
 import { StockService } from '../../../services/stock.service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
-
-import { Stock, Product } from '../../../interfaces/stock';
-
-import { initialModalObject, StockState } from '../reducers/grid.reducer';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-stock-grid',
@@ -20,11 +13,9 @@ export class StockGridComponent implements OnInit {
   stockStorage: Subscription;
   error: String;
   storage: StockState;
-
+  
   constructor(
-    private authService: UserAuthenticationService,
-    private stockService: StockService,
-    private store: Store<StockState>) {
+    private stockService: StockService) {
   }
   ngOnInit() {
     this.stockStorage = this.stockService.getStockStorage().subscribe(storage => {

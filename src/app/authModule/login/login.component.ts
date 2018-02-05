@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../interfaces/user';
 import { Router } from '@angular/router';
 import { UserAuthenticationService } from '../../services/user-authentication.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login-component',
@@ -13,8 +14,19 @@ import { UserAuthenticationService } from '../../services/user-authentication.se
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error: String;
+  options: any;
 
-  constructor(private fb: FormBuilder, private authService: UserAuthenticationService, private router: Router) {}
+  constructor(private fb: FormBuilder,
+              private authService: UserAuthenticationService,
+              private router: Router,
+              private ns: NotificationsService) {
+    this.options = {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -36,7 +48,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error =>{
-        console.log(error);
+        this.ns.error('Error!','porfavor, compruebe los datos ingresados')
       }
     )
   }

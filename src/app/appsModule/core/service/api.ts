@@ -24,7 +24,7 @@ export class ApiClient {
       .flatMap(this.handleResponse);
   }
 
-  delete<T>(url: string, options?: RequestOptionsArgs): Observable<any> {
+  delete(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this.http.delete(url, this.getRequestOptionArgs(options))
       .catch(res => Observable.of(res))
       .flatMap(this.handleResponse);

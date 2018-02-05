@@ -1,13 +1,13 @@
 import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../interfaces/user';
 import { Client } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
 
 import { Observable } from 'rxjs/Rx';
-import { Store, Action } from '@ngrx/store';
-import { NEWUSER, NEWCOMPANY, userReducer, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
+import { Store } from '@ngrx/store';
+import { NEWUSER, NEWCOMPANY, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -20,7 +20,7 @@ export class UserService {
   options: RequestOptions
   userStorage: Observable<CompleteUser>;
 ;
-  constructor(private http: Http,  private store: Store<User>, private api: ApiClient) {
+  constructor(private store: Store<User>, private api: ApiClient) {
     this.userStorage = store.select('user');
    }
 
@@ -50,7 +50,7 @@ export class UserService {
   updateClientInfo(user: User): Observable<Object[]> {
     return this.api.post('http://localhost:8000/api/updateUserProfile', user)
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
+        this.store.dispatch({ type: NEWUSERPROFILE, payload: response});
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -58,7 +58,7 @@ export class UserService {
   createSubClient(user: User): Observable<Object[]> {
   return this.api.post('http://localhost:8000/api/createInternalUser', user)
     .map((response: Response) => {
-
+      return response;
     })
     .catch((error: any) => Observable.throw(error || 'Server error'));
   }

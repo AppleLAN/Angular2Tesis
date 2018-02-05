@@ -1,11 +1,3 @@
 /*******************************
         Global Overrides
 *******************************/
-body {
-        background: #1d1d1d;
-}
-.ui.inverted.menu .item, 
-.ui.inverted.menu .item>a:not(.ui), 
-.ui.menu .ui.dropdown .menu>.item{
-        color:black !important;
-}
