@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { StockMainComponent } from './stock.main.component';
 import { StockGridComponent } from './grid/stock.grid.component';
-import { StockModal } from './StockModal/stock.modal';
+import { StockModal } from './stockModal/stock.modal';
 import { StockChartsCardsComponent } from './charts/stock.charts.cards.component';
 import { StockChartsComponent } from './charts/stock.charts.component';
 import { CoreModule } from '../../appsModule/core/core.module';

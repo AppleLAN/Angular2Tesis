@@ -6,7 +6,7 @@ import { ProviderModal } from './providersModal/providers.modal';
 import { ProvidersChartsCardsComponent } from './charts/providers.charts.cards.component';
 import { ProvidersChartsComponent } from './charts/providers.charts.component';
 import { CoreModule } from '../../appsModule/core/core.module';
-import { routing } from './Providers.routes';
+import { routing } from './providers.routes';
 import { UserService } from '../../services/user.service';
 import { ProvidersService } from './../../services/providers.service';
 import { ChartService } from './../../services/chart.service';
