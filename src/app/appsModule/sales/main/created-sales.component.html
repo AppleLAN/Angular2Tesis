@@ -1,33 +1,34 @@
 <div *ngIf="$sales | async  as sales;else noSalesTemplate" class="ui column doubling grid main-container">
-  <div class="row">
-      <div class="column">
-          <div class="container order-container buy-container" *ngFor="let sale of sales">
-            <p>Cliente: {{sale.sale.client_name}}</p>
-            <p>Total: {{sale.sale.total}}</p>
-            <p>Status: {{sale.sale.status}}</p>
-            <p>Tipo de venta: {{sale.sale.payments}}</p>
-            <p>Productos de la venta</p>
-            <table class="ui celled table">
-                <thead>
-                    <tr>
-                        <th>Nombre de producto</th>
-                        <th>Descripcion</th>
-                        <th>Costo</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let details of sale.sale_details">
-                        <td>{{details.product_name}}</td>
-                        <td>{{sale.products[details.product_id].description}}</td>
-                        <td>{{sale.products[details.product_id].cost_price}}</td>
-                        <td>{{details.quantity}}</td>                            
-                    </tr>
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="column">
+            <div class="container order-container buy-container" *ngFor="let sale of sales">
+                <p>Cliente: {{sale.sale.client_name}}</p>
+                <p>Total: {{sale.sale.total}}</p>
+                <p>Status: {{sale.sale.status}}</p>
+                <p>Tipo de venta: {{sale.sale.payments}}</p>
+                <p>Productos de la venta</p>
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>Nombre de producto</th>
+                            <th>Descripcion</th>
+                            <th>Costo</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let details of sale.sale_details">
+                            <td>{{details.product_name}}</td>
+                            <td>{{sale.products[details.product_id].description}}</td>
+                            <td>{{sale.products[details.product_id].sale_price}}</td>
+                            <td>{{details.quantity}}</td>                            
+                        </tr>
+                    </tbody>
+                </table>
+                <factura [products_details]="sale.sale_details" [products]="sale.products" [sale]="sale.sale" ></factura>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
   </div>
   <ng-template #noSalesTemplate>
     <div class="no-orders">

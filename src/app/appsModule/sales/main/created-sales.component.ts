@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './created-sales.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class CreatedSalesComponent implements OnInit{
+export class CreatedSalesComponent implements OnInit {
   $sales: Observable<SaleState>;
   constructor(private ss: SaleService) { }
 

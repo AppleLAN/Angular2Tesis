@@ -1,102 +1,104 @@
 
-<div id="to-print">
-  <div class="ui grid container factura-container">
-      <div class="four wide column">
-          Semantic Sa
-      </div>
-      <div class="four wide column">
-          Comprobante electronico
-      </div>
-      <div class="four wide column">
-          Factura tipo A
-      </div>
-      <div class="four wide column">
-          FACTURA
-          <p>Fecha: 09/05/2018</p>
-          <p>0001-00001502</p>
-          <p>Vendedor: Proveedor1</p>
-      </div>
-  </div>
-  
-  <div class="ui grid container factura-container">
-      <div class="four wide column">
-          <h1>Semantic Sa</h1>
-          <p>Leandro N. Alem 5077- Mar del Plata</p>
-          <p>IVA: Responsable inscripto</p>
-          <p>CUIT: 20-366017313-4</p>
-      </div>
-      <div class="four wide column"></div>
-      <div class="four wide column"></div>
-      <div class="four wide column">
-          <p>Ing Brutos: 913-506850-1</p>
-          <p>Inicio Act: 11/05/2005</p>
-          <p>Tel: 0261-4521258 / 5248910 / 8911</p>
-          <p>E-mail: alanbuscaglia@email.com</p>
-      </div>
-  </div>
-  
-  <div class="ui grid container factura-container">
-      <div class="four wide column">
-          <p>Cliente: Nombre del cliente (Cod: numero de codigo)</p>
-          <p>Domicilio: lugar de domicilio cliente</p>
-          <p>IVA: iva del cliente</p>
-          <p>CUIT: 20-36601731-4</p>
-      </div>
-      <div class="four wide column"></div>
-      <div class="four wide column"></div>
-      <div class="four wide column">
-          <p>Cod de venta: codigo de la venta</p>
-          <p>Vto. factura: fecha de vencimiento</p>
-          <p>Pedido: 001-00004159 / Remito</p>
-      </div>
-  </div>
-  
-  
-  <div class="ui grid container factura-container">
-      <table class="ui celled striped inverted table">
-          <thead>
-          <tr>
-              <th>Codigo</th>
-              <th>Descripcion</th>
-              <th>Cantidad</th>
-              <th>% Desc</th>
-              <th>Desc</th>
-              <th>Precio unitario</th>
-              <th>Precio total</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-              <td>12312345Csad45</td>
-              <td>Test de producto</td>
-              <td>1</td>
-              <td>0.00</td>
-              <td>0.00</td>
-              <td>15.00</td>
-              <td>15.00</td>
-          </tr>
-          </tbody>
-      </table>
-  </div>
-  
-  <div class="ui grid container factura-container">
-      <div class="sixteen wide column">
-          <p>Neto: 15.00</p>
-          <p>Descuento: 0.00</p>
-          <p>Exento: 0.00</p>
-          <p>IVA: 21.0 / 3.15</p>
-          <p>IVA: 10.5 / 0.00</p>
-          <p>Percepciones: 0.00</p>
-          <h1>TOTAL: 18.15</h1>
-      </div>
-  </div>
-  
-  <div class="ui grid container factura-container">
-      <div class="sixteen wide column">
-          <p>Nro CAE: 64193185311064</p>
-          <p>Vto CAE: 09/05/2018</p>
-      </div>
-  </div>
+<div id="to-print" [hidden]="true">
+    <div *ngIf="userStorage | async; let user" class="ui grid container factura-container">
+        <div class="eigth">
+            <h1>{{user.company.fantasyName}}</h1>
+            <p><strong>Razon social:</strong>{{user.company.name}}</p>
+            <p><strong>Domicilio comercial:</strong>{{user.company.place}}</p>
+            <p><strong>Condicion frente al IVA:</strong>
+                <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
+                <ng-template #noInscripto>
+                    <span *ngIf="!client?.ivaInscripto">Consumidor final</span>
+                </ng-template>
+            </p>
+        </div>
+        <div class="eigth">
+            <h1>Factura B</h1>
+            <p><strong>Fecha:</strong>{{sale.updated_at}}</p>
+            <p><strong>CUIT:</strong>{{user.company.cuit}}</p>
+            <p><strong>Ingresos brutos:</strong>{{user.company.iib}}</p>
+            <p><strong>Fecha de inicio de actividades:</strong>{{user.company.created_at}}</p>
+        </div>
+    </div>
+
+    <div class="ui grid container factura-container">
+        <div class="three">
+            <span><strong>Periodo facturado desde:</strong>27*03/2016</span>
+        </div>
+        <div class="three">
+            <span><strong>Hasta:</strong>27/03/2016</span>
+        </div>
+        <div class="three">
+            <span><strong>Fecha de vto. para el pago:</strong>27/03/2016</span>
+        </div>
+    </div>
+
+    <div class="ui grid container factura-container">
+        <div class="eigth">
+            <p><strong>DNI/ CUIT:</strong>{{client?.cuit}}</p>
+            <p><strong>Condicion frente al IVA:</strong>
+                <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
+                <ng-template #noInscripto>
+                    <span *ngIf="!client?.ivaInscripto">Consumidor final</span>
+                </ng-template>
+            </p>
+            <p><strong>Condicion de venta:</strong>Otro</p>
+        </div>      
+        <div class="eigth">
+            <p><strong>Apellido y nombre/ Razon social:</strong>{{client?.name}}</p>
+            <p><strong>Domicilio comercial:</strong>{{client?.place}}</p>
+        </div>
+    </div>
+    
+    <div class="ui grid container factura-container">
+        <table class="ui celled striped inverted table">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Desc</th>
+                    <th>Precio unitario</th>
+                    <th>Precio total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let details of products_details">
+                    <td>{{products[details.product_id].code}}</td>
+                    <td>{{details.product_name}}</td>
+                    <td>{{products[details.product_id].description}}</td>
+                    <td>{{details.quantity}}</td>                           
+                    <td>{{sale.discount}}</td>
+                    <td>{{products[details.product_id].sale_price}}</td>
+                    <td>{{sale.total}}</td>                                             
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="ui grid container factura-container">
+        <div class="eigth">
+            <p>Gracias por cofiar en Semantic SA</p>
+            <p>Somos expertos en ventas y administraciones digitales</p>
+            <p>Estamos para ayudarle</p>
+        </div>
+        <div class="eigth">
+            <p><strong>Subtotal:</strong>18.15</p>
+            <p><strong>Importe otros tributos:</strong>0</p>
+            <h1>TOTAL: 18.15</h1>
+        </div>
+    </div>
+    
+    <div class="ui grid container factura-container">
+        <div class="eigth">
+            <p><strong>Nro CAE:</strong>64193185311064</p>
+            <p><strong>Vto CAE:</strong>09/05/2018</p>
+        </div>
+        <div class="eigth">
+            <img src="../../assets/images/arba.png" alt="arba">
+        </div>
+    </div>
 </div>
 
-<button (click)="print()">Imprimir</button>
+<sm-button class="normal tiny" (click)="print()">Imprimir Factura</sm-button>

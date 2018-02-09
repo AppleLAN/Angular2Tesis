@@ -37,13 +37,13 @@ export class SaleComponent implements OnInit, OnDestroy {
                private ss: StockService,
                private cs: ClientsService,
                private sas: SaleService,
-               private ns: NotificationsService) { 
+               private ns: NotificationsService) {
     this.options = {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true
-    }
+    };
                }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       client_id: ['', [Validators.required]],
       quantity: ['', [Validators.required]],
       paymentMethods: ['', [Validators.required]],
-      saleDate: ['',[Validators.required]]
+      saleDate: ['', [Validators.required]]
     });
     this.subscriptions.push(Observable.combineLatest(this.ss.getStockStorage(), this.cs.getClientStorage()).subscribe(
         ([stock, clients])  => {
@@ -78,7 +78,7 @@ export class SaleComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     forEach(this.subscriptions, (s: Subscription) => s.unsubscribe());
   }
-  
+
   deleteProduct(providerId: number, productId: number) {
     const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges)
     this.selectedProducts = deletedResult.selectedProducts;
@@ -86,7 +86,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.numberOfChanges = deletedResult.numberOfChanges;
     this.ns.success('Perfecto!', 'Su producto a sido eliminado');
   }
-  
+
   sale() {
     forEach(this.selectedProducts, (value, key) => {
       const sale: NewSale = {
@@ -98,9 +98,9 @@ export class SaleComponent implements OnInit, OnDestroy {
       };
       this.sas.sale(sale)
         .subscribe(
-          () => this.ns.success('Perfecto!', 'Sus ventas han sido realizadas'),          
+          () => this.ns.success('Perfecto!', 'Sus ventas han sido realizadas'),
           error => {
-            this.ns.error('Error!', 'Sus ventas no han podido ser realizadas')         
+            this.ns.error('Error!', 'Sus ventas no han podido ser realizadas');
           }
       );
     });

@@ -13,12 +13,12 @@ declare var jQuery: any;
 })
 
 export class ClientModal implements OnInit {
-  clientStorage: Observable<Client[]>
+  clientStorage: Observable<Client[]>;
   clients: Client;
   clientForm: FormGroup;
   error: String;
   clientFormEmptyObject = initialModalObject;
-  options:any;
+  options: any;
 
   constructor(
     private fb: FormBuilder,
@@ -93,21 +93,21 @@ export class ClientModal implements OnInit {
   addClient({ value }: { value: Client }) {
     this.clientsService.addClient(value).subscribe(
       suc => this.ns.success('Perfecto!', 'Su cliente a sido agregado'),
-      error => this.ns.error('Error!',error)
+      error => this.ns.error('Error!', error)
     );
   }
 
   updateClient({ value }: { value: Client }) {
     this.clientsService.updateClient(value).subscribe(
       suc => this.ns.success('Perfecto!', 'Su cliente a sido actualizado'),
-      error => this.ns.error('Error!',error)
+      error => this.ns.error('Error!', error)
     );
   }
 
    deleteClient({ value }: { value: Client }) {
     this.clientsService.deleteClient(value).subscribe(
       suc => this.ns.success('Perfecto!', 'Su cliente a sido eliminado'),
-      error => this.ns.error('Error!',error)
+      error => this.ns.error('Error!', error)
     );
   }
 }
