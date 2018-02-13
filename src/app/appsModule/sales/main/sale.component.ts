@@ -62,7 +62,7 @@ export class SaleComponent implements OnInit, OnDestroy {
         this.productsToChoose = uniqBy(stock.products, 'name');
       }
     }));
-    this.subscriptions.push(this.ss.getStateInformation().subscribe());
+    this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.cs.getClientStorage().subscribe());
     this.subscriptions.push(this.cs.getClients().subscribe());
   }

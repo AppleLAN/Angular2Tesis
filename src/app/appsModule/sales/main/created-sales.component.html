@@ -1,7 +1,7 @@
 <div *ngIf="$sales | async  as sales;else noSalesTemplate" class="ui column doubling grid main-container">
     <div class="row">
         <div class="column">
-            <div class="container order-container buy-container" *ngFor="let sale of sales">
+            <div class="container order-container buy-container" *ngFor="let sale of sales; let index = index">
                 <p>Cliente: {{sale.sale.client_name}}</p>
                 <p>Total: {{sale.sale.total}}</p>
                 <p>Status: {{sale.sale.status}}</p>
@@ -25,7 +25,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <factura [products_details]="sale.sale_details" [products]="sale.products" [sale]="sale.sale" ></factura>
+                <factura [products_details]="sale.sale_details" [products]="sale.products" [sale]="sale.sale" [id]="'to_print' + index" ></factura>
             </div>
         </div>
     </div>

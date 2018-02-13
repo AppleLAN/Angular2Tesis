@@ -33,7 +33,7 @@ import { includes } from 'lodash';
                 <td>{{item.cost_price}}</td>
                 <td>{{item.category_id}}</td>
                 <td>{{item.code}}</td>
-                <td>{{item.quantity}}</td>
+                <td>{{item.stock}}</td>
             </tr>
         </tbody>
         <tfoot>

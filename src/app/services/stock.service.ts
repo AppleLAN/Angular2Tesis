@@ -23,6 +23,15 @@ export class StockService {
   constructor(private store: Store<Stock>, private api: ApiClient) {
         this.stockStorage = store.select('stock');
     }
+
+    getAfipCae(saleId: number): Observable<any> {
+        return this.api.post('http://localhost:8000/api/getAfipCae', {saleId})
+            .map((response: Response) => {
+                return response;
+            })
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+    }
+
     getStockStorage(): Observable<StockState> {
         return this.stockStorage;
     }

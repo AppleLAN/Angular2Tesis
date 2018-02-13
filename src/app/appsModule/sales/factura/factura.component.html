@@ -1,10 +1,10 @@
 
-<div id="to-print" [hidden]="true">
+<div [id]="id" [hidden]="true">
     <div *ngIf="userStorage | async; let user" class="ui grid container factura-container">
         <div class="eigth">
-            <h1>{{user.company.fantasyName}}</h1>
-            <p><strong>Razon social:</strong>{{user.company.name}}</p>
-            <p><strong>Domicilio comercial:</strong>{{user.company.place}}</p>
+            <h1> {{user.company.fantasyName}}</h1>
+            <p><strong>Razon social:</strong> {{user.company.name}}</p>
+            <p><strong>Domicilio comercial:</strong> {{user.company.place}}</p>
             <p><strong>Condicion frente al IVA:</strong>
                 <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
                 <ng-template #noInscripto>
@@ -14,39 +14,27 @@
         </div>
         <div class="eigth">
             <h1>Factura B</h1>
-            <p><strong>Fecha:</strong>{{sale.updated_at}}</p>
-            <p><strong>CUIT:</strong>{{user.company.cuit}}</p>
-            <p><strong>Ingresos brutos:</strong>{{user.company.iib}}</p>
-            <p><strong>Fecha de inicio de actividades:</strong>{{user.company.created_at}}</p>
-        </div>
-    </div>
-
-    <div class="ui grid container factura-container">
-        <div class="three">
-            <span><strong>Periodo facturado desde:</strong>27*03/2016</span>
-        </div>
-        <div class="three">
-            <span><strong>Hasta:</strong>27/03/2016</span>
-        </div>
-        <div class="three">
-            <span><strong>Fecha de vto. para el pago:</strong>27/03/2016</span>
+            <p><strong>Fecha:</strong> {{sale.updated_at }}</p>
+            <p><strong>CUIT:</strong> {{user.company.cuit}}</p>
+            <p><strong>Ingresos brutos:</strong> {{user.company.iib}}</p>
+            <p><strong>Fecha de inicio de actividades:</strong> {{user.company.created_at}}</p>
         </div>
     </div>
 
     <div class="ui grid container factura-container">
         <div class="eigth">
-            <p><strong>DNI/ CUIT:</strong>{{client?.cuit}}</p>
+            <p><strong>DNI/ CUIT:</strong> {{client?.cuit}}</p>
             <p><strong>Condicion frente al IVA:</strong>
                 <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
                 <ng-template #noInscripto>
                     <span *ngIf="!client?.ivaInscripto">Consumidor final</span>
                 </ng-template>
             </p>
-            <p><strong>Condicion de venta:</strong>Otro</p>
+            <p><strong>Condicion de venta:</strong> {{sale.payments}}</p>
         </div>      
         <div class="eigth">
-            <p><strong>Apellido y nombre/ Razon social:</strong>{{client?.name}}</p>
-            <p><strong>Domicilio comercial:</strong>{{client?.place}}</p>
+            <p><strong>Apellido y nombre/ Razon social:</strong> {{client?.name}}</p>
+            <p><strong>Domicilio comercial:</strong> {{client?.place}}</p>
         </div>
     </div>
     
@@ -65,13 +53,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let details of products_details">
-                    <td>{{products[details.product_id].code}}</td>
-                    <td>{{details.product_name}}</td>
-                    <td>{{products[details.product_id].description}}</td>
-                    <td>{{details.quantity}}</td>                           
-                    <td>{{sale.discount}}</td>
-                    <td>{{products[details.product_id].sale_price}}</td>
-                    <td>{{sale.total}}</td>                                             
+                    <td> {{products[details.product_id].code}}</td>
+                    <td> {{details.product_name}}</td>
+                    <td> {{products[details.product_id].description}}</td>
+                    <td> {{details.quantity}}</td>                           
+                    <td> {{sale.discount}}</td>
+                    <td> {{products[details.product_id].sale_price}}</td>
+                    <td> {{details.quantity * products[details.product_id].sale_price}}</td>                                             
                 </tr>
             </tbody>
         </table>
@@ -84,16 +72,16 @@
             <p>Estamos para ayudarle</p>
         </div>
         <div class="eigth">
-            <p><strong>Subtotal:</strong>18.15</p>
+            <p><strong>Subtotal:</strong> {{sale.total}}</p>
             <p><strong>Importe otros tributos:</strong>0</p>
-            <h1>TOTAL: 18.15</h1>
+            <h1>TOTAL: {{sale.total}}</h1>
         </div>
     </div>
     
     <div class="ui grid container factura-container">
         <div class="eigth">
-            <p><strong>Nro CAE:</strong>64193185311064</p>
-            <p><strong>Vto CAE:</strong>09/05/2018</p>
+            <p><strong>Nro CAE:</strong> {{cae}}</p>
+            <p><strong>Vto CAE:</strong> {{vto.year}}/{{vto.month}}/{{vto.day}}</p>
         </div>
         <div class="eigth">
             <img src="../../assets/images/arba.png" alt="arba">

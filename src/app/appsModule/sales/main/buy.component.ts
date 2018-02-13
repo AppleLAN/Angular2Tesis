@@ -72,7 +72,7 @@ export class BuyComponent implements OnInit, OnDestroy {
         this.productsToChoose = uniqBy(stock.products, 'name');
       }
     }));
-    this.subscriptions.push(this.ss.getStateInformation().subscribe());
+    this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.ps.getProviders().subscribe());
   }
 
@@ -81,7 +81,7 @@ export class BuyComponent implements OnInit, OnDestroy {
     this.selectedProducts = addProductResult.selectedProducts;
     this.total = addProductResult.total;
     this.numberOfChanges = addProductResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido agregado debajo');    
+    this.ns.success('Perfecto!', 'Su producto a sido agregado debajo');
   }
 
   ngOnDestroy() {
@@ -93,7 +93,7 @@ export class BuyComponent implements OnInit, OnDestroy {
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido agregado eliminado');        
+    this.ns.success('Perfecto!', 'Su producto a sido agregado eliminado');
   }
   
   buy() {

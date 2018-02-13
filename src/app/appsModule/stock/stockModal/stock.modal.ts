@@ -34,7 +34,7 @@ export class StockModal implements OnInit {
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true
-      }
+      };
   }
   ngOnInit() {
     this.productForm = this.fb.group({
@@ -50,12 +50,12 @@ export class StockModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
-      quantity: [''],
+      stock: [''],
       new: [true]
     });
 
     this.stockStorage = this.stockService.getStockStorage();
-    this.stockService.getStateInformation().subscribe();
+    this.stockService.getProducts().subscribe();
     this.ps.getProviders().subscribe();
     this.subscriptions.push(this.ps.getProviderStorage().subscribe((providers)  => {
       this.providers = providers;

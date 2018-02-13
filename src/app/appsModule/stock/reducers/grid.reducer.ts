@@ -31,7 +31,6 @@ export const initialModalObject: StockState = {
             created_at: null,
             updated_at: null,
             deleted_at: null,
-            quantity: null
         }
   ],
     stock: [

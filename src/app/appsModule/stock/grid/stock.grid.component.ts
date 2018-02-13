@@ -21,6 +21,6 @@ export class StockGridComponent implements OnInit {
     this.stockStorage = this.stockService.getStockStorage().subscribe(storage => {
       this.storage = storage;
     });
-    this.stockService.getStateInformation().subscribe();
+    this.stockService.getProducts().subscribe();
   }
 }
