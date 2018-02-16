@@ -66,7 +66,7 @@ export class ChartService {
       label: 'Nuevos'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })
@@ -81,7 +81,7 @@ export class ChartService {
       label: 'Nuevos'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })
@@ -96,7 +96,7 @@ export class ChartService {
       label: 'Nuevos'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })
@@ -111,7 +111,7 @@ export class ChartService {
       label: 'Eliminados'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })
@@ -126,7 +126,7 @@ export class ChartService {
       label: 'Eliminados'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })
@@ -141,7 +141,7 @@ export class ChartService {
       label: 'Eliminados'
     };
     return this.api.post(
-      'http://localhost:8000/api/statisticsUser', params)
+      'https://contaduriabackend.herokuapp.com/api/statisticsUser', params)
         .map((response: Response) => {
           return response;
         })

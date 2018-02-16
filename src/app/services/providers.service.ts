@@ -24,7 +24,7 @@ export class ProvidersService {
     }
 
     getProviders(): Observable<Provider[]> {
-        return this.api.get('http://localhost:8000/api/getProviders')
+        return this.api.get('https://contaduriabackend.herokuapp.com/api/getProviders')
             .map((response: Response) => {
                 this.store.dispatch({ type: NEWPROVIDERS, payload: response});
             })
@@ -32,7 +32,7 @@ export class ProvidersService {
     }
 
     updateProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('http://localhost:8000/api/updateProvider', newProvider)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/updateProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider});
             })
@@ -40,7 +40,7 @@ export class ProvidersService {
     }
 
     addProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('http://localhost:8000/api/saveProvider', newProvider)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
                 return response;
@@ -49,7 +49,7 @@ export class ProvidersService {
     }
 
     deleteProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('http://localhost:8000/api/deleteProvider', newProvider)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
                 return response;

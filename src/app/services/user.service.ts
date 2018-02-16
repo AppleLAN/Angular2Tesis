@@ -29,7 +29,7 @@ export class UserService {
   }
 
   getUserApps(): Observable<any> {
-    return this.api.get('http://localhost:8000/api/getUserApps')
+    return this.api.get('https://contaduriabackend.herokuapp.com/api/getUserApps')
       .map((response: any) => {
         return response.apps;
       })
@@ -38,7 +38,7 @@ export class UserService {
 
   getProfileInfo(): Observable<any> {
     return this.api.get(
-      'http://localhost:8000/api/getProfileInfo')
+      'https://contaduriabackend.herokuapp.com/api/getProfileInfo')
         .map((response: Response) => {
             this.store.dispatch({ type: NEWUSER, payload: response});
             return response;
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   updateClientInfo(user: User): Observable<Object[]> {
-    return this.api.post('http://localhost:8000/api/updateUserProfile', user)
+    return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserProfile', user)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSERPROFILE, payload: response});
       })
@@ -56,7 +56,7 @@ export class UserService {
   }
 
   createSubClient(user: User): Observable<Object[]> {
-  return this.api.post('http://localhost:8000/api/createInternalUser', user)
+  return this.api.post('https://contaduriabackend.herokuapp.com/api/createInternalUser', user)
     .map((response: Response) => {
       return response;
     })
@@ -64,7 +64,7 @@ export class UserService {
   }
 
   updateClientCompany(company: Client): Observable<Object[]> {
-    return this.api.post('http://localhost:8000/api/updateUserCompany', company)
+    return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserCompany', company)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
         return response;

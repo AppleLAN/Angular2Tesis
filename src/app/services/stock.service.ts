@@ -25,7 +25,7 @@ export class StockService {
     }
 
     getAfipCae(saleId: number): Observable<any> {
-        return this.api.post('http://localhost:8000/api/getAfipCae', {saleId})
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/getAfipCae', {saleId})
             .map((response: Response) => {
                 return response;
             })
@@ -48,7 +48,7 @@ export class StockService {
     }
 
     getProducts(): Observable<Product[]> {
-        return this.api.get('http://localhost:8000/api/getProducts')
+        return this.api.get('https://contaduriabackend.herokuapp.com/api/getProducts')
             .map((response: Response) => {
                 this.store.dispatch({ type: NEWPRODUCT, payload: response});
                 return response;
@@ -57,7 +57,7 @@ export class StockService {
     }
 
     updateProducts(newProduct: Product): Observable<Product> {
-        return this.api.post('http://localhost:8000/api/updateProducts', newProduct)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/updateProducts', newProduct)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGEPRODUCT, payload: newProduct});
             })
@@ -65,7 +65,7 @@ export class StockService {
     }
 
     addProducts(newProduct: Product): Observable<Product> {
-        return this.api.post('http://localhost:8000/api/saveProducts', newProduct)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveProducts', newProduct)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPRODUCT, payload: newProduct});
                 return response;
@@ -74,7 +74,7 @@ export class StockService {
     }
 
     deleteProducts(newProduct: Product): Observable<Product> {
-        return this.api.post('http://localhost:8000/api/deleteProducts', newProduct)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteProducts', newProduct)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPRODUCT, payload: newProduct});
                 return response;
@@ -83,7 +83,7 @@ export class StockService {
     }
 
     getStock(product: Product): Observable<Stock> {
-        return this.api.post('http://localhost:8000/api/getProductStock', product)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/getProductStock', product)
             .map((response: Response) => {
                 this.store.dispatch({ type: NEWSTOCK, payload: response});
             })
@@ -91,7 +91,7 @@ export class StockService {
     }
 
     updateStock(newStock: Stock): Observable<Stock> {
-        return this.api.post('http://localhost:8000/api/updateMovements', newStock)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/updateMovements', newStock)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGESTOCK, payload: newStock});
             })
@@ -99,7 +99,7 @@ export class StockService {
     }
 
     addStock(newStock: Stock): Observable<Stock> {
-        return this.api.post('http://localhost:8000/api/saveMovements', newStock)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveMovements', newStock)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDSTOCK, payload: newStock});
                 return response;
@@ -108,7 +108,7 @@ export class StockService {
     }
 
     deleteStock(newStock: Stock): Observable<Stock> {
-        return this.api.post('http://localhost:8000/api/deleteMovements', newStock)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteMovements', newStock)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETESTOCK, payload: newStock});
                 return response;

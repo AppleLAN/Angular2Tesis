@@ -18,7 +18,7 @@ export class UserAuthenticationService {
   signIn(userInfo: User): Observable<Comment[]> {
     // ...using get request
     localStorage.removeItem('currentUser');
-    return this.api.post("http://localhost:8000/api/authenticate",userInfo, )
+    return this.api.post("https://contaduriabackend.herokuapp.com/api/authenticate",userInfo, )
       .map((response: any) => {
           let token = response && response.token;
           if (token) {
@@ -38,7 +38,7 @@ export class UserAuthenticationService {
   
   register(userInfo: User): Observable<Comment[]> {
     // ...using get request
-    return this.api.post("http://localhost:8000/api/signup",userInfo)
+    return this.api.post("https://contaduriabackend.herokuapp.com/api/signup",userInfo)
       .map((response: any) => {
        let token = response && response.token;
           if (token) {
