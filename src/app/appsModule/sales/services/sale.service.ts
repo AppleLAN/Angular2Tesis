@@ -25,7 +25,7 @@ export class SaleService {
     
 
     buy(addedProducts: NewBuy): Observable<any> {
-        return this.api.post('http://localhost:8000/api/saveBuyOrder', addedProducts)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveBuyOrder', addedProducts)
             .map((response: Response) => {
                 return response;
             })
@@ -33,7 +33,7 @@ export class SaleService {
     }
 
     sale(addedProducts: NewSale): Observable<any> {
-        return this.api.post('http://localhost:8000/api/createNewSale', addedProducts)
+        return this.api.post('https://contaduriabackend.herokuapp.com/api/createNewSale', addedProducts)
             .map((response: Response) => {
                 return response;
             })
@@ -49,7 +49,7 @@ export class SaleService {
     }
     
     getAllOrders(): Observable<any> {
-        return this.api.get('http://localhost:8000/api/getBuyOrders')
+        return this.api.get('https://contaduriabackend.herokuapp.com/api/getBuyOrders')
         .map((response: Response) => {
             this.store.dispatch({ type: NEWORDERS, payload: response});
             return response;
@@ -58,7 +58,7 @@ export class SaleService {
     }
 
     getAllSales(): Observable<any> {
-        return this.api.get('http://localhost:8000/api/saleInformation')
+        return this.api.get('https://contaduriabackend.herokuapp.com/api/saleInformation')
         .map((response: Response) => {
             this.store.dispatch({ type: NEWSALES, payload: response});
             return response;
@@ -67,7 +67,7 @@ export class SaleService {
     }
 
     deleteOrder(order: Order): Observable<any> {
-        return this.api.post(`http://localhost:8000/api/deleteOrder/${order.id}`)
+        return this.api.post(`https://contaduriabackend.herokuapp.com/api/deleteOrder/${order.id}`)
         .map((response: Response) => {
             this.store.dispatch({ type: DELETEORDER, payload: order});            
             return response;
@@ -76,7 +76,7 @@ export class SaleService {
     }
 
     completeOrder(order: Order): Observable<any> {
-        return this.api.post(`http://localhost:8000/api/completeOrder/${order.id}`)
+        return this.api.post(`https://contaduriabackend.herokuapp.com/api/completeOrder/${order.id}`)
         .map((response: Response) => {
             order.status = 'R';
             this.store.dispatch({ type: CHANGEORDER, payload: order});                        
