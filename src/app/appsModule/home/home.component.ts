@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   stockImg: string;
   clientsImg: string;
   providersImg: string;
-  commingSoonText: string;
   apps: Object[];
 
   constructor(private authService: UserService) {}
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
      this.stockImg = '../../assets/images/stock.png';
      this.clientsImg = '../../assets/images/client.png';
      this.providersImg = '../../assets/images/provider.png';
-     this.commingSoonText = 'Pronto !';
 
      this.authService.getUserApps()
      .subscribe(

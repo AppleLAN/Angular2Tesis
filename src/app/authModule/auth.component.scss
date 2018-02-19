@@ -132,13 +132,31 @@
         text-align: center;
       }
     }
+    .container {
+      min-width: auto;
+    }
   }
 }
 @media(max-width: 990.0625rem) {
     #personal-info {
+      height: auto;
+      width: auto;
+      &.login {
+        height: 100%;
+      }
       .form-box {
         height: 100%;
         margin-top: 0rem;
+        .login-button {
+          text-align: center;
+          button {
+            float: none;
+          }
+        }
       }
+      
+    }
+    .ui.grid > .column:only-child, .ui.grid > .row > .column:only-child {
+      padding-bottom: 0px;
     }
 }

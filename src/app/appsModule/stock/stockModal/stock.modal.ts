@@ -40,7 +40,7 @@ export class StockModal implements OnInit {
     this.productForm = this.fb.group({
       id: [''],
       company_id: [''],
-      provider_id: ['',[Validators.required]],
+      provider_id: ['', [Validators.required]],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       code: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],

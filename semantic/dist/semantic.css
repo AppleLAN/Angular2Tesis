@@ -661,7 +661,7 @@ input::selection {
 *******************************/
 
 body {
-  background: #1d1d1d;
+  background: #1d1d1d !important;
 }
 
 .ui.inverted.menu .item,

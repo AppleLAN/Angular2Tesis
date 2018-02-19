@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('myModalNormal') myModalNormal: any;
   userApps: Observable<void>;
-  commingSoonText = 'Pronto !';
 
   constructor(
     private authService: UserAuthenticationService,

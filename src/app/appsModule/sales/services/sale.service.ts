@@ -17,12 +17,11 @@ import 'rxjs/add/operator/catch';
 export class SaleService {
   orderStorage: Observable<OrdersState>;
   saleStorage: Observable<SaleState>;
-    
+
   constructor(private api: ApiClient, private store: Store<OrdersState>) {
     this.orderStorage = store.select('orders');
     this.saleStorage = store.select('sales');
 }
-    
 
     buy(addedProducts: NewBuy): Observable<any> {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveBuyOrder', addedProducts)
@@ -47,7 +46,7 @@ export class SaleService {
     getOrderStorage(): Observable<OrdersState> {
         return this.orderStorage;
     }
-    
+
     getAllOrders(): Observable<any> {
         return this.api.get('https://contaduriabackend.herokuapp.com/api/getBuyOrders')
         .map((response: Response) => {
@@ -69,7 +68,7 @@ export class SaleService {
     deleteOrder(order: Order): Observable<any> {
         return this.api.post(`https://contaduriabackend.herokuapp.com/api/deleteOrder/${order.id}`)
         .map((response: Response) => {
-            this.store.dispatch({ type: DELETEORDER, payload: order});            
+            this.store.dispatch({ type: DELETEORDER, payload: order});
             return response;
         })
         .catch((error: any) => Observable.throw(error || 'Server error'));
@@ -79,7 +78,7 @@ export class SaleService {
         return this.api.post(`https://contaduriabackend.herokuapp.com/api/completeOrder/${order.id}`)
         .map((response: Response) => {
             order.status = 'R';
-            this.store.dispatch({ type: CHANGEORDER, payload: order});                        
+            this.store.dispatch({ type: CHANGEORDER, payload: order});
             return response;
         })
         .catch((error: any) => Observable.throw(error || 'Server error'));

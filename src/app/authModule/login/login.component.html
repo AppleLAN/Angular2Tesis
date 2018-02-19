@@ -1,4 +1,4 @@
-<div id="personal-info">
+<div id="personal-info" class="login">
   <div style="height:100%" class="ui middle aligned center aligned grid"> 
     <div class="container column">
       <div class="form-box">
@@ -37,10 +37,10 @@
             
             <div class="field text-center">
               <div class="two fields">
-                <div class="field">
+                <div class="field login-button">
                   <button class="ui button" (click)="submit(loginForm)" [disabled]="loginForm.invalid" type="submit">Ingresar</button>
                 </div>
-                <div class="field">
+                <div class="field login-button">
                   <button class="ui right floated button" (click)="goToRegister()" type="submit">Register</button>
                 </div>
               </div>

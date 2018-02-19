@@ -32,7 +32,7 @@
           </div>
           <div class="content">
             <a *ngIf="app.app === 'clients'" routerLinkActive="active" class="header">{{app.app}}</a>
-            <a *ngIf="app.app !== 'clients'" [smDirTooltip]="commingSoonText" smDirPosition="left center" routerLinkActive="active" class="header disabled">{{app.app}}</a>
+            <a *ngIf="app.app !== 'clients'" routerLinkActive="active" class="header disabled">{{app.app}}</a>
           </div>
         </div>
         
