@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Product } from '../../../interfaces/stock';
 import { FormControl } from '@angular/forms';
 import { includes } from 'lodash';
@@ -38,11 +38,11 @@ import { includes } from 'lodash';
         </tbody>
         <tfoot>
             <tr *ngIf="numberOfPages.length > 0">
-                <th colspan="7">
-                    <div class="ui right floated pagination menu">
+                <th colspan="7" style="text-align: right;">
+                    <div class="ui pagination menu">
                         <button [disabled]="currentIndex === 0" [ngClass]="{'disabled': currentIndex === 0}" class="pagination-button" (click)="previousPage()"><i class="left chevron icon"></i></button>
-                        <a class="item" *ngFor="let pageNumber of numberOfPages">{{pageNumber + 1}}</a>
-                        <button [disabled]="currentIndex === pageSize || filteredItems.length < pageSize" [ngClass]="{'disabled': currentIndex === pageSize && filteredItems.length > 0}" class="pagination-button" (click)="nextPage()"><i class="right chevron icon"></i></button>
+                        <a class="item" [ngClass]="{'active': currentIndex / 5 === index}" *ngFor="let pageNumber of numberOfPages; let index = index;">{{pageNumber + 1}}</a>
+                        <button [disabled]="currentIndex + 1 === pageSize || filteredItems.length < pageSize" [ngClass]="{'disabled': currentIndex === pageSize && filteredItems.length > 0}" class="pagination-button" (click)="nextPage()"><i class="right chevron icon"></i></button>
                     </div>
                 </th>
             </tr>
@@ -73,13 +73,14 @@ export class Pagination implements OnChanges, OnInit {
   ngOnInit() {
     this.searchProduct.valueChanges.debounceTime(400).subscribe(value => {
       this.filteredItems = this.productList.filter(product => includes(`${product.name}`, value));
+      this.numberOfPages = Array.from(Array(Math.ceil(this.filteredItems.length / this.pageSize)).keys());
     });
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     if (this.productList) {
       this.getNewItems();
-      this.numberOfPages = Array(Math.round(this.productList.length / this.pageSize)).fill(0).map(i => i);
+      this.numberOfPages = Array.from(Array(Math.ceil(changes.productList.currentValue.length / this.pageSize)).keys());
     }
   }
 

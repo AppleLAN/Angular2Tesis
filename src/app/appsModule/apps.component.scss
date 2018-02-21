@@ -131,12 +131,13 @@
     }
   }
 }
+
 @media(max-width: 991px) {
-    #personal-info {
-      height: auto;
-      .form-box {
-        height: 100%;
-        margin-top: 0px;
-      }
+  #personal-info {
+    height: auto;
+    .form-box {
+      height: 100%;
+      margin-top: 0px;
     }
+  }
 }

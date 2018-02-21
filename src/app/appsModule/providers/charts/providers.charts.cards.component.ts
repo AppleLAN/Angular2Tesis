@@ -9,7 +9,7 @@ import { Provider } from '../../../interfaces/provider';
 })
 
 export class ProvidersChartsCardsComponent {
-    providersStorage: Observable<Provider>
+    providersStorage: Observable<Provider>;
     providers: Provider;
     error: String;
     demo: Boolean = true;

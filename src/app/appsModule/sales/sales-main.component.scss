@@ -1,7 +1,6 @@
 .grid {
     padding: 0.9375rem;
     padding-top: 6.2rem;
-    margin-left: 11rem;
 
     .name {
         cursor: pointer;   
@@ -13,7 +12,6 @@
 .charts {
     padding: 0.9375rem;
     padding-top: 6.2rem;
-    margin-left: 11rem;
 
     .chart-example {
         max-height: 600px;
@@ -30,4 +28,10 @@
 .sales-main-container { 
     color: white;
     margin: 0px 20px;
+}
+
+@media(max-width: 991px) {
+    button { 
+        font-size: 0.8rem !important;
+    }
 }

@@ -1,5 +1,5 @@
 import { ApiClient } from './service/api';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SidebarComponent } from './views/sidebar//sidebar.component';
 import { NavbarComponent } from './views/navbar/navbar.component';

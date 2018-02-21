@@ -1,7 +1,7 @@
 .grid {
     padding: 0.9375rem;
     padding-top: 6.2rem;
-    margin-left: 11rem;
+    margin-left: 11rem; 
 
     .name {
         cursor: pointer;   
@@ -12,7 +12,7 @@
 .charts {
     padding: 0.9375rem;
     padding-top: 6.2rem;
-    margin-left: 11rem;
+    margin-left: 11rem; 
 
     .chart-example {
         max-height: 600px;
@@ -24,4 +24,13 @@
 .has-error {
     color: #9F3A38;
     padding: 0.5rem 0 0.9375rem 0;
+}
+
+@media(max-width: 767px) {
+    .grid {
+        margin-left: 0px; 
+    }
+    .charts {
+        margin-left: 0px; 
+    }
 }
