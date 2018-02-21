@@ -1,10 +1,10 @@
  <!-- Router Outlet -->
 <div class="grid sales-main-container">
     <div class="four ui buttons">
-        <button class="ui button normal tiny fluid" (click)="operation = 'buy'">Generar ordenes de compra de productos</button>
-        <button class="ui button normal tiny fluid" (click)="operation = 'sale'">Generar ventas de productos</button>
-        <button class="ui button normal tiny fluid" (click)="operation = 'orders'">Ordenes de compra</button>
-        <button class="ui button normal tiny fluid" (click)="operation = 'sales'">Ventas</button>
+        <button [ngClass]="{'active': operation === 'buy'}" class="ui button normal tiny fluid" (click)="operation = 'buy'">Generar ordenes de compra de productos</button>
+        <button [ngClass]="{'active': operation === 'sale'}" class="ui button normal tiny fluid" (click)="operation = 'sale'">Generar ventas de productos</button>
+        <button [ngClass]="{'active': operation === 'orders'}" class="ui button normal tiny fluid" (click)="operation = 'orders'">Ordenes de compra</button>
+        <button [ngClass]="{'active': operation === 'sales'}" class="ui button normal tiny fluid" (click)="operation = 'sales'">Ventas</button>
     </div>
     <app-buy *ngIf="operation === 'buy'"></app-buy>
     <app-sale *ngIf="operation === 'sale'"></app-sale>   
