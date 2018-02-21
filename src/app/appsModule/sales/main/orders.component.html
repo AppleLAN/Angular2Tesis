@@ -27,8 +27,10 @@
             </table>
             <div class="row">
                 <div class="column">
-                    <sm-button class="normal tiny" (click)="completeOrder(order.order)">Completar order de compra</sm-button>
-                    <sm-button class="normal tiny" (click)="deleteOrder(order.order)">Cancelar orden de compra</sm-button>
+                    <div class="ui eight buttons">
+                        <button class="ui positive  button" (click)="completeOrder(order.order)">Completar order de compra</button>
+                        <button class="ui negative button" (click)="deleteOrder(order.order)">Cancelar orden de compra</button>
+                    </div>
                 </div>
             </div>
         </div>
