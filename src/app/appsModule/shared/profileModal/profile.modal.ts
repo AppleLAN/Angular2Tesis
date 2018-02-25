@@ -115,22 +115,22 @@ export class ProfileModal implements OnInit {
 
   updateClientInfo({ value }: { value: User }) {
     this.userService.updateClientInfo(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su cliente a sido actualizado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su cliente ha sido actualizado'),
+      error => this.ns.error('Error!', error)
     );
   }
 
   updateClientCompany({ value }: { value: Client }) {
     value.type = 'UPDATE';
     this.userService.updateClientCompany(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su compañia a sido actualizada'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su compañia ha sido actualizada'),
+      error => this.ns.error('Error!', error)
     );
   }
   createSubClient({ value }: { value: User }) {
     this.userService.createSubClient(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su sub-cliente a sido creado'),
-      error => this.ns.error('Error!',error)      
+      suc => this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado'),
+      error => this.ns.error('Error!', error)
     );
   }
 }

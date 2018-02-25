@@ -91,46 +91,46 @@ export class StockModal implements OnInit {
 
   addProducts({ value }: { value: Product }) {
     this.stockService.addProducts(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su producto a sido agregado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su producto ha sido agregado'),
+      error => this.ns.error('Error!', error)
     );
     // this.addStock(value);
   }
 
   updateProducts({ value }: { value: Product }) {
     this.stockService.updateProducts(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su producto a sido actualizado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su producto ha sido actualizado'),
+      error => this.ns.error('Error!', error)
     );
     // this.updateStock(value);
   }
 
   deleteProducts({ value }: { value: Product }) {
     this.stockService.deleteProducts(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su producto a sido eliminado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su producto ha sido eliminado'),
+      error => this.ns.error('Error!', error)
     );
     // this.deleteStock(value);
   }
 
   addStock({ value }: { value: Stock }) {
     this.stockService.addStock(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su producto a sido agregado al stock'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su producto ha sido agregado al stock'),
+      error => this.ns.error('Error!', error)
     );
   }
 
   updateStock({ value }: { value: Stock }) {
     this.stockService.updateStock(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su stock a sido actualizado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su stock ha sido actualizado'),
+      error => this.ns.error('Error!', error)
     );
   }
 
   deleteStock({ value }: { value: Stock }) {
     this.stockService.deleteStock(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su stock a sido eliminado'),
-      error => this.ns.error('Error!',error)
+      suc => this.ns.success('Perfecto!', 'Su stock ha sido eliminado'),
+      error => this.ns.error('Error!', error)
     );
   }
 }

@@ -81,21 +81,21 @@ export class BuyComponent implements OnInit, OnDestroy {
     this.selectedProducts = addProductResult.selectedProducts;
     this.total = addProductResult.total;
     this.numberOfChanges = addProductResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido agregado debajo');
+    this.ns.success('Perfecto!', 'Su producto ha sido agregado debajo');
   }
 
   ngOnDestroy() {
     forEach(this.subscriptions, (s: Subscription) => s.unsubscribe());
   }
-  
+
   deleteProduct(providerId: number, productId: number) {
     const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges)
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido agregado eliminado');
+    this.ns.success('Perfecto!', 'Su producto ha sido agregado eliminado');
   }
-  
+
   buy() {
     forEach(this.selectedProducts, (value, key) => {
       const buyOrder: NewBuy = {
@@ -106,9 +106,9 @@ export class BuyComponent implements OnInit, OnDestroy {
       };
       this.sas.buy(buyOrder)
         .subscribe(
-          () => this.ns.success('Perfecto!', 'Sus ordenes han sido realizadas'),                    
+          () => this.ns.success('Perfecto!', 'Sus ordenes han sido realizadas'),
           error => {
-            this.ns.error('Error!', 'Sus ordenes no han podido ser realizadas')         
+            this.ns.error('Error!', 'Sus ordenes no han podido ser realizadas');
           }
       );
     });

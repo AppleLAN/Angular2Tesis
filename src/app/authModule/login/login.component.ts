@@ -48,12 +48,12 @@ export class LoginComponent implements OnInit {
         }
       },
       error =>{
-        this.ns.error('Error!','porfavor, compruebe los datos ingresados')
+        this.ns.error('Error!', 'porfavor, compruebe los datos ingresados')
       }
-    )
+    );
   }
 
   goToRegister() {
      this.router.navigate(['/register']);
-  } 
+  }
 }

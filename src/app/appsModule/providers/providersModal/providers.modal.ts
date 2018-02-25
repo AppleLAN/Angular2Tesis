@@ -92,22 +92,22 @@ export class ProviderModal implements OnInit {
 
   addProvider({ value }: { value: Provider }) {
     this.providersService.addProvider(value).subscribe(
-      () => this.ns.success('Perfecto!', 'Su proveedor a sido agregado'),
-      error => this.ns.error('Error!',error)
+      () => this.ns.success('Perfecto!', 'Su proveedor ha sido agregado'),
+      error => this.ns.error('Error!', error)
     );
   }
 
   updateProvider({ value }: { value: Provider }) {
     this.providersService.updateProvider(value).subscribe(
-      () => this.ns.success('Perfecto!', 'Su proveedor a sido actualizado'),
-      error => this.ns.error('Error!',error)
+      () => this.ns.success('Perfecto!', 'Su proveedor ha sido actualizado'),
+      error => this.ns.error('Error!', error)
     );
   }
 
    deleteProvider({ value }: { value: Provider }) {
     this.providersService.deleteProvider(value).subscribe(
-      () => this.ns.success('Perfecto!', 'Su proveedor a sido eliminado'),
-      error => this.ns.error('Error!',error)
+      () => this.ns.success('Perfecto!', 'Su proveedor ha sido eliminado'),
+      error => this.ns.error('Error!', error)
     );
   }
 }

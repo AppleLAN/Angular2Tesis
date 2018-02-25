@@ -30,15 +30,15 @@ export class OrdersComponent implements OnInit{
 
   completeOrder(order: Order) {
     this.ss.completeOrder(order).subscribe(
-      () => this.ns.success('Perfecto!', 'Su orden a sido completada'),
-      error => this.ns.success('Error!', 'un error ah ocurrido por favor intentelo mas tarde')
+      () => this.ns.success('Perfecto!', 'Su orden ha sido completada'),
+      error => this.ns.error('Error!', 'Un error ha ocurrido por favor intentelo mas tarde')
     );
   }
 
   deleteOrder(order: Order) {
     this.ss.deleteOrder(order).subscribe(
-      () => this.ns.success('Perfecto!', 'Su orden a sido eliminadada'),
-      error => this.ns.success('Error!', 'un error ah ocurrido por favor intentelo mas tarde')
+      () => this.ns.success('Perfecto!', 'Su orden ha sido eliminadada'),
+      error => this.ns.error('Error!', 'Un error ha ocurrido por favor intentelo mas tarde')
     );
   }
 }

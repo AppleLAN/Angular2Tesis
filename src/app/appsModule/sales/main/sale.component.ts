@@ -72,7 +72,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.selectedProducts = addProductResult.selectedProducts;
     this.total = addProductResult.total;
     this.numberOfChanges = addProductResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido agregado debajo');
+    this.ns.success('Perfecto!', 'Su producto ha sido agregado debajo');
   }
 
   ngOnDestroy() {
@@ -84,7 +84,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto a sido eliminado');
+    this.ns.success('Perfecto!', 'Su producto ha sido eliminado');
   }
 
   sale() {

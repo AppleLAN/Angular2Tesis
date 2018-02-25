@@ -92,21 +92,21 @@ export class ClientModal implements OnInit {
 
   addClient({ value }: { value: Client }) {
     this.clientsService.addClient(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su cliente a sido agregado'),
+      suc => this.ns.success('Perfecto!', 'Su cliente ha sido agregado'),
       error => this.ns.error('Error!', error)
     );
   }
 
   updateClient({ value }: { value: Client }) {
     this.clientsService.updateClient(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su cliente a sido actualizado'),
+      suc => this.ns.success('Perfecto!', 'Su cliente ha sido actualizado'),
       error => this.ns.error('Error!', error)
     );
   }
 
    deleteClient({ value }: { value: Client }) {
     this.clientsService.deleteClient(value).subscribe(
-      suc => this.ns.success('Perfecto!', 'Su cliente a sido eliminado'),
+      suc => this.ns.success('Perfecto!', 'Su cliente ha sido eliminado'),
       error => this.ns.error('Error!', error)
     );
   }
