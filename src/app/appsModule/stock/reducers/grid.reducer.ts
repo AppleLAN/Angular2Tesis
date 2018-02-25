@@ -24,6 +24,7 @@ export const initialModalObject: StockState = {
             provider_id: null,
             name: null,
             code: null,
+            stock: null,
             description: null,
             cost_price: null,
             sale_price: null,

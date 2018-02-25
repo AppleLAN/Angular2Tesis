@@ -4,6 +4,7 @@ export interface Product {
   provider_id: number;
   name: string;
   code: string;
+  stock: number;
   description: string;
   cost_price: number;
   sale_price: number;

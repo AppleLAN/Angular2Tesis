@@ -61,7 +61,7 @@ export class ChartService {
 
   getAddedClients(): Observable<any> {
     const params: any = {
-      table: 'Clients',
+      table: 'clients',
       operation: 'cat',
       label: 'Nuevos'
     };
@@ -76,7 +76,7 @@ export class ChartService {
 
   getAddedProviders(): Observable<any> {
     const params: any = {
-      table: 'Providers',
+      table: 'providers',
       operation: 'cat',
       label: 'Nuevos'
     };
@@ -91,7 +91,7 @@ export class ChartService {
 
   getAddedStock(): Observable<any> {
     const params: any = {
-      table: 'Providers',
+      table: 'products',
       operation: 'cat',
       label: 'Nuevos'
     };
@@ -106,7 +106,7 @@ export class ChartService {
 
   getDeletedClients(): Observable<any> {
     const params: any = {
-      table: 'Clients',
+      table: 'clients',
       operation: 'dat',
       label: 'Eliminados'
     };
@@ -121,7 +121,7 @@ export class ChartService {
 
   getDeletedProviders(): Observable<any> {
     const params: any = {
-      table: 'Providers',
+      table: 'providers',
       operation: 'dat',
       label: 'Eliminados'
     };
@@ -136,7 +136,7 @@ export class ChartService {
 
   getDeletedStock(): Observable<any> {
     const params: any = {
-      table: 'Providers',
+      table: 'products',
       operation: 'dat',
       label: 'Eliminados'
     };
