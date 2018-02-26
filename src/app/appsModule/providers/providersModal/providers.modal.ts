@@ -10,6 +10,8 @@ declare var jQuery: any;
 @Component({
   selector: 'app-provider-modal',
   templateUrl: './providers.modal.html',
+  styleUrls: ['.././providers.component.scss'],
+
 })
 
 export class ProviderModal implements OnInit {
@@ -29,7 +31,7 @@ export class ProviderModal implements OnInit {
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true
-      }
+      };
   }
   ngOnInit() {
     this.providerForm = this.fb.group({
@@ -75,10 +77,10 @@ export class ProviderModal implements OnInit {
   }
 
   openNewProviderModal() {
-    let providerFormEmptyObject: any;
-   providerFormEmptyObject = this.providerFormEmptyObject;
-   providerFormEmptyObject.new = true;
-    this.providerForm.setValue(this.providerFormEmptyObject);
+    let providerFormObject: any;
+    providerFormObject = this.providerFormEmptyObject;
+    providerFormObject.new = true;
+    this.providerForm.setValue(providerFormObject);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
 

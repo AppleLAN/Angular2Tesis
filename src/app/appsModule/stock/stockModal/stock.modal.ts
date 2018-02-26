@@ -13,6 +13,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-stock-modal',
   templateUrl: './stock.modal.html',
+  styleUrls: ['.././stock.component.scss'],
 })
 
 export class StockModal implements OnInit {
@@ -70,10 +71,10 @@ export class StockModal implements OnInit {
   }
 
   openNewStockModal() {
-    let productFormEmptyObject: any;
-    productFormEmptyObject = this.productFormEmptyObject;
-    productFormEmptyObject.new = true;
-    this.productForm.setValue(productFormEmptyObject);
+    let productFormObject: any;
+    productFormObject = this.productFormEmptyObject;
+    productFormObject.new = true;
+    this.productForm.setValue(productFormObject);
     jQuery('.ui.modal.stock-modal').modal('show');
   }
 

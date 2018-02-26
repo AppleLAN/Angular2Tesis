@@ -10,6 +10,8 @@ declare var jQuery: any;
 @Component({
   selector: 'app-client-modal',
   templateUrl: './client.modal.html',
+  styleUrls: ['.././clients.component.scss'],
+
 })
 
 export class ClientModal implements OnInit {
@@ -75,10 +77,10 @@ export class ClientModal implements OnInit {
   }
 
   openNewClientModal() {
-    let clientFormEmptyObject: any;
-    clientFormEmptyObject = this.clientFormEmptyObject;
-    clientFormEmptyObject.new = true;
-    this.clientForm.setValue(this.clientFormEmptyObject);
+    let clientFormObject: any;
+    clientFormObject = this.clientFormEmptyObject;
+    clientFormObject.new = true;
+    this.clientForm.setValue(clientFormObject);
     jQuery('.ui.modal.client-modal').modal('show');
   }
 
