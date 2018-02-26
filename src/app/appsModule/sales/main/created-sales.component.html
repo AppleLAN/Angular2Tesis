@@ -1,6 +1,7 @@
 <div *ngIf="$sales | async  as sales;else noSalesTemplate" class="ui column doubling grid main-container">
     <div class="row">
         <div class="column">
+            <div class="ui orange message">Por favor verificar que el bloqueo de pop ups este desactivado para poder imprimir una factura !</div>
             <div class="container order-container buy-container" *ngFor="let sale of sales; let index = index">
                 <p>Cliente: {{sale.sale.client_name}}</p>
                 <p>Total: {{sale.sale.total}}</p>
@@ -29,9 +30,7 @@
             </div>
         </div>
     </div>
-  </div>
-  <ng-template #noSalesTemplate>
-    <div class="no-orders">
-        <span>No hay ventas realizadas </span>       
-    </div>
-  </ng-template>
+</div>
+<ng-template #noSalesTemplate>
+    <div class="ui red message main-container">No se han encotrado ventas realizadas !</div>
+</ng-template>

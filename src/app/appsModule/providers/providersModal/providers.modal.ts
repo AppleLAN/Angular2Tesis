@@ -15,7 +15,7 @@ declare var jQuery: any;
 })
 
 export class ProviderModal implements OnInit {
-  providerStorage: Observable<Provider[]>
+  providerStorage: Observable<Provider[]>;
   providers: Provider;
   providerForm: FormGroup;
   error: String;

@@ -38,8 +38,6 @@
   </div>
 </div>
 <ng-template #noOrdersTemplate>
-    <div class="no-orders">
-        <span>No hay ordenes disponibles </span>       
-    </div>
+    <div class="ui red message main-container">No se han encotrado ordenes de compra realizadas !</div>
 </ng-template>
 <simple-notifications *ngIf="options" [options]="options"></simple-notifications>          
