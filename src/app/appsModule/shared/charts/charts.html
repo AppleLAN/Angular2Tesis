@@ -1,4 +1,4 @@
-<div class="row" *ngIf="lineChartData">
+<div class="row" *ngIf="lineChartData ;else noDataTemplate">
     <div class="grid"> 
         <div>
             <canvas baseChart width="400" height="400"
@@ -30,3 +30,15 @@
         </table>
     </div>
 </div>
+
+<ng-template #noDataTemplate>
+    <div class="ui icon message">
+        <i class="notched circle loading icon"></i>
+        <div class="content">
+            <div class="header">
+                Solo un segundo !
+            </div>
+            <p>Estamos buscando tus datos para ti.</p>
+        </div>
+    </div>
+</ng-template>
