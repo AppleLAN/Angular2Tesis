@@ -15,10 +15,10 @@ import 'rxjs/add/operator/catch';
 export class ChartService {
   token: string;
   headers: Headers;
-  options: RequestOptions
+  options: RequestOptions;
   chartStorage: Observable<any>;
-;
-  constructor(private store: Store<any>, private api: ApiClient) {  
+
+  constructor(private store: Store<any>, private api: ApiClient) {
     this.chartStorage = store.select('chart');
    }
 
