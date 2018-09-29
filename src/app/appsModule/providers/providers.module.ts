@@ -18,14 +18,10 @@ import { AuthGuard } from '../../services/auth.guard';
     ProvidersGridComponent,
     ProviderModal,
     ProvidersChartsCardsComponent,
-    ProvidersChartsComponent,
+    ProvidersChartsComponent
   ],
-  imports: [
-    CoreModule,
-    CommonModule,
-    routing
-  ],
-  providers: [ AuthGuard, UserService, ProvidersService, ChartService ],
-  bootstrap: [ ProvidersMainComponent]
+  imports: [CoreModule, CommonModule, routing],
+  providers: [AuthGuard, UserService, ProvidersService, ChartService],
+  bootstrap: [ProvidersMainComponent]
 })
-export class ProvidersModule { }
+export class ProvidersModule {}

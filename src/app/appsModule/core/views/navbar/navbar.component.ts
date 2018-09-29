@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, HostListener, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 import { UserAuthenticationService } from '../../../../services/user-authentication.service';
 import { UserService } from '../../../../services/user.service';
-import { Router, Event, NavigationStart } from '@angular/router';
 
-import { Observable } from 'rxjs/Rx';
 
 declare var jQuery: any;
 @Component({
@@ -15,6 +15,7 @@ declare var jQuery: any;
 export class NavbarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('myModalNormal') myModalNormal: any;
+
   userApps: Observable<void>;
   parentUrl: string;
   windowWidth: number = window.innerWidth;
@@ -53,10 +54,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.windowWidth = window.innerWidth;
-  }
-
-  showProfileModal() {
-    jQuery('.ui.modal.profile-modal').modal('show');
   }
 
   logOut() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProvidersService } from '../../../services/providers.service';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
+import { SpinnerService } from '../../../services/spinner.service';
 
 
 @Component({
@@ -16,10 +17,13 @@ export class ProvidersGridComponent implements OnInit {
   error: String;
 
   constructor(
-    private providersService: ProvidersService) {
+    private providersService: ProvidersService, private spinnerService: SpinnerService) {
   }
   ngOnInit() {
+    this.spinnerService.displayLoader(true);
     this.providerStorage = this.providersService.getProviderStorage();
-    this.providersService.getProviders().subscribe();
+    this.providersService.getProviders().subscribe(r => {
+      this.spinnerService.displayLoader(false);
+    });
   }
 }

@@ -11,12 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { UserService } from './../services/user.service';
 import { AuthGuard } from '../services/auth.guard';
 import { reducer } from './apps.reducers';
+import { SharedService } from '../services/shared.service';
 
 @NgModule({
-  declarations: [
-    AppsComponent,
-    HomeComponent,
-  ],
+  declarations: [AppsComponent, HomeComponent],
   imports: [
     CommonModule,
     routing,
@@ -24,9 +22,9 @@ import { reducer } from './apps.reducers';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
-    }),
+    })
   ],
-  providers: [AuthGuard, UserService],
-  bootstrap: [ AppsComponent]
+  providers: [AuthGuard, UserService, SharedService],
+  bootstrap: [AppsComponent]
 })
-export class AppsModule { }
+export class AppsModule {}

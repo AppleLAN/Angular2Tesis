@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './charts.html'
 })
 export class ChartComponent implements OnInit {
+  @Input() itemToGet: string;
+  @Input() chartType: String = 'line';
+  @Input() demo: Boolean = false;
   
   lineChartData: Array<any>;
   lineChartLabels: Array<any>;
@@ -15,16 +18,13 @@ export class ChartComponent implements OnInit {
   lineChartLegend: Boolean;
   chartStorage: Subscription;
 
-  @Input() chartType: String = 'line';
-  @Input() demo: Boolean = false;
-
   constructor(private chartService: ChartService) {}
   ngOnInit() {
     if (!this.demo) {
       this.chartStorage = this.chartService.getChartStorage().subscribe(data => {
-          if (data) {
-            this.lineChartData = data.result;
-            this.lineChartLabels = data.months;
+          if (data && data[this.itemToGet]) {
+            this.lineChartData = data[this.itemToGet].result;
+            this.lineChartLabels = data[this.itemToGet].months;
           }
       });
     } else {

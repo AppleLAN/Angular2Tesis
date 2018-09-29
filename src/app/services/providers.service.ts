@@ -1,6 +1,5 @@
-import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Provider } from '../interfaces/provider';
@@ -16,7 +15,7 @@ export class ProvidersService {
   headers: Headers;
   options: RequestOptions;
   providerStorage: Observable<Provider[]>;
-  constructor(private store: Store<Provider>, private api: ApiClient) {
+  constructor(private store: Store<Provider>, private api: Http) {
         this.providerStorage = store.select('providers');
     }
     getProviderStorage(): Observable<Provider[]> {
@@ -26,7 +25,7 @@ export class ProvidersService {
     getProviders(): Observable<Provider[]> {
         return this.api.get('https://contaduriabackend.herokuapp.com/api/getProviders')
             .map((response: Response) => {
-                this.store.dispatch({ type: NEWPROVIDERS, payload: response});
+                this.store.dispatch({ type: NEWPROVIDERS, payload: response.json()});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -43,7 +42,7 @@ export class ProvidersService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -52,7 +51,7 @@ export class ProvidersService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteProvider', newProvider)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

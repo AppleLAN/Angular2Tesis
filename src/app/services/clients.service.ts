@@ -1,6 +1,5 @@
-import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Client } from '../interfaces/client';
@@ -16,7 +15,7 @@ export class ClientsService {
   headers: Headers;
   options: RequestOptions;
   clientStorage: Observable<Client[]>;
-  constructor(private store: Store<Client>, private api: ApiClient) {
+  constructor(private store: Store<Client>, private api: Http) {
         this.clientStorage = store.select('clients');
     }
     getClientStorage(): Observable<Client[]> {
@@ -26,7 +25,7 @@ export class ClientsService {
     getClients(): Observable<Client> {
         return this.api.get('https://contaduriabackend.herokuapp.com/api/getClients')
             .map((response: Response) => {
-                this.store.dispatch({ type: NEWCLIENTS, payload: response});
+                this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -43,7 +42,7 @@ export class ClientsService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -52,7 +51,7 @@ export class ClientsService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

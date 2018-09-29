@@ -1,68 +1,68 @@
- <div class="ui stackable container menu borderless inverted">
-        <div class="item brand">Semantic AF Contaduria</div>
-        <a routerLink="/apps/home" routerLinkActive="active" class="item home">Inicio</a>
-        <ng-template ngFor let-app [ngForOf]="userApps">
-            <a routerLink="/apps/{{app.app}}" routerLinkActive="active" class="item" [ngSwitch]="app.app">
-                <ng-template [ngSwitchCase]="'clients'">
-                    <i class="user icon"></i> Clientes
-                </ng-template>
-                <ng-template [ngSwitchCase]="'providers'">
-                    <i class="handshake icon"></i> Proveedores
-                </ng-template>
-                <ng-template [ngSwitchCase]="'sales'">
-                    <i class="dollar icon"></i> Operaciones    
-                </ng-template>
-                <ng-template [ngSwitchCase]="'stock'">
-                    <i class="database icon"></i> Stock
-                </ng-template>
-            </a>
-        </ng-template>
-        <div *ngIf="windowWidth < 767">
-            <a (click)="showProfileModal()" class="item">Perfil</a>
-            <a (click)="logOut()" class="item">Salir</a>
-        </div>
-        <div *ngIf="windowWidth >= 767" class="right item">
-                <div class="ui inverted menu">
-                    <div class="ui simple inverted dropdown item">
-                    Acciones
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <div (click)="showProfileModal()" class="item">Perfil</div>
-                        <div (click)="logOut()" class="item">Salir</div>
-                    </div>
-                    </div>
-                </div>  
+<div class="ui stackable container menu borderless inverted">
+    <div class="item brand">Semantic AF Contaduria</div>
+    <a routerLink="/apps/home" routerLinkActive="active" class="item home">Inicio</a>
+    <ng-template ngFor let-app [ngForOf]="userApps">
+        <a routerLink="/apps/{{app.app}}" routerLinkActive="active" class="item" [ngSwitch]="app.app">
+            <ng-template [ngSwitchCase]="'clients'">
+                <i class="user icon"></i> Clientes
+            </ng-template>
+            <ng-template [ngSwitchCase]="'providers'">
+                <i class="handshake icon"></i> Proveedores
+            </ng-template>
+            <ng-template [ngSwitchCase]="'sales'">
+                <i class="dollar icon"></i> Operaciones
+            </ng-template>
+            <ng-template [ngSwitchCase]="'stock'">
+                <i class="database icon"></i> Stock
+            </ng-template>
+        </a>
+    </ng-template>
+    <div *ngIf="windowWidth < 767">
+        <a (click)="profileModal.showModal()" class="item">Perfil</a>
+        <a (click)="logOut()" class="item">Salir</a>
+    </div>
+    <div *ngIf="windowWidth >= 767" class="right item">
+        <div class="ui inverted menu">
+            <div class="ui simple inverted dropdown item">
+                Acciones
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div (click)="profileModal.showModal()" class="item">Perfil</div>
+                    <div (click)="logOut()" class="item">Salir</div>
+                </div>
             </div>
-        <div *ngIf="windowWidth < 767" class="sidebar-section">
-            <span [ngSwitch]="parentUrl">
-                <p *ngSwitchCase="'clients'">
-                    <a routerLink="/apps/clients/grid" routerLinkActive="active" class="item">
-                        <i class="table icon"></i> Tabla de Clientes
-                    </a>
-                    <a routerLink="/apps/clients/charts" routerLinkActive="active" class="item">
-                        <i class="line chart icon"></i> Estadisticas
-                    </a>
-                </p>
-                <p *ngSwitchCase="'providers'">
-                    <a routerLink="/apps/providers/grid" routerLinkActive="active" class="item">
-                        <i class="table icon"></i> Tabla de Proveedores
-                    </a>
-                    <a routerLink="/apps/providers/charts" routerLinkActive="active" class="item">
-                        <i class="line chart icon"></i> Estadisticas
-                    </a>
-                </p>
-                <p *ngSwitchCase="'stock'">
-                    <a routerLink="/apps/stock/grid" routerLinkActive="active" class="item">
-                        <i class="table icon"></i> Tabla de Stock
-                    </a>
-                    <a routerLink="/apps/stock/charts" routerLinkActive="active" class="item">
-                        <i class="line chart icon"></i> Estadisticas
-                    </a>
-                </p>
-                <p *ngSwitchDefault>
-                
-                </p>
-            </span>
         </div>
+    </div>
+    <div *ngIf="windowWidth < 767" class="sidebar-section">
+        <span [ngSwitch]="parentUrl">
+            <p *ngSwitchCase="'clients'">
+                <a routerLink="/apps/clients/grid" routerLinkActive="active" class="item">
+                    <i class="table icon"></i> Tabla de Clientes
+                </a>
+                <a routerLink="/apps/clients/charts" routerLinkActive="active" class="item">
+                    <i class="line chart icon"></i> Estadisticas
+                </a>
+            </p>
+            <p *ngSwitchCase="'providers'">
+                <a routerLink="/apps/providers/grid" routerLinkActive="active" class="item">
+                    <i class="table icon"></i> Tabla de Proveedores
+                </a>
+                <a routerLink="/apps/providers/charts" routerLinkActive="active" class="item">
+                    <i class="line chart icon"></i> Estadisticas
+                </a>
+            </p>
+            <p *ngSwitchCase="'stock'">
+                <a routerLink="/apps/stock/grid" routerLinkActive="active" class="item">
+                    <i class="table icon"></i> Tabla de Stock
+                </a>
+                <a routerLink="/apps/stock/charts" routerLinkActive="active" class="item">
+                    <i class="line chart icon"></i> Estadisticas
+                </a>
+            </p>
+            <p *ngSwitchDefault>
+
+            </p>
+        </span>
+    </div>
 </div>
-<app-profile-modal></app-profile-modal>
+<app-profile-modal #profileModal></app-profile-modal>

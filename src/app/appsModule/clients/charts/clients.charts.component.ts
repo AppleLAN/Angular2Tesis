@@ -1,35 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChartService } from '../../../services/chart.service';
-import { Subscription } from 'rxjs/Rx';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ChartService } from '../../../services/chart.service';
 
 @Component({
   selector: 'app-clients-charts',
   templateUrl: './clients.charts.component.html',
   styleUrls: ['../clients.component.scss']
 })
+export class ClientsChartsComponent implements OnInit, OnDestroy {
+  error: String;
+  demo: Boolean = true;
+  charType: String;
+  sub: any;
+  charts: any;
+  getItem = 'clients';
 
-export class ClientsChartsComponent implements OnInit, OnDestroy{
-    error: String;
-    demo: Boolean = true;
-    charType: String;
-    sub: any;
-    chartStorage: Subscription;
-    charts: any;
-    constructor(
-        private chartService: ChartService,
-        private route: ActivatedRoute) {
-            this.charType = route.snapshot.params['type'];
-        }
-    ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.charType = params['type'];
-            this.chartService.getClientsChartData();
-        });
-    }
+  constructor(
+    private chartService: ChartService,
+    private route: ActivatedRoute
+  ) {
+    this.charType = route.snapshot.params['type'];
+  }
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.charType = params['type'];
+      this.chartService.getClientsChartData();
+    });
+  }
 
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
-
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

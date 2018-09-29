@@ -52,6 +52,7 @@ export const initialModalObject: StockState = {
 
 export const gridReducer: Reducer<any> = (state: StockState, action: Action) => {
     const newState: StockState = initialModalObject;
+
     switch (action.type) {
         case 'NEWSTOCK':
             state.products.map( p => p.quantity = action.payload);

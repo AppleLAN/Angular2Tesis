@@ -8,8 +8,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { NewSale, Product, SelectedStock } from '../../../interfaces/stock';
 import { Client } from '../../../interfaces/client';
 import { StockState } from '../../stock/reducers/grid.reducer';
-import { forEach, uniqBy, isEmpty  } from 'lodash';
+import { forEach, uniqBy, isEmpty } from 'lodash';
 import { SaleService } from '../services/sale.service';
+import { SpinnerService } from '../../../services/spinner.service';
 
 @Component({
   selector: 'app-sale',
@@ -33,18 +34,21 @@ export class SaleComponent implements OnInit, OnDestroy {
   isEmpty = isEmpty;
   options: any;
 
-  constructor( private fb: FormBuilder,
-               private ss: StockService,
-               private cs: ClientsService,
-               private sas: SaleService,
-               private ns: NotificationsService) {
+  constructor(
+    private fb: FormBuilder,
+    private ss: StockService,
+    private cs: ClientsService,
+    private sas: SaleService,
+    private ns: NotificationsService,
+    private spinnerService: SpinnerService
+  ) {
     this.options = {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true
     };
-               }
+  }
 
   ngOnInit() {
     this.saleForm = this.fb.group({
@@ -54,21 +58,34 @@ export class SaleComponent implements OnInit, OnDestroy {
       paymentMethods: ['', [Validators.required]],
       saleDate: ['', [Validators.required]]
     });
-    this.subscriptions.push(Observable.combineLatest(this.ss.getStockStorage(), this.cs.getClientStorage()).subscribe(
-        ([stock, clients])  => {
-      this.stock = stock;
-      this.clients = clients;
-      if (stock) {
-        this.productsToChoose = uniqBy(stock.products, 'name');
-      }
-    }));
+    this.spinnerService.displayLoader(true);
+    this.subscriptions.push(
+      Observable.combineLatest(
+        this.ss.getStockStorage(),
+        this.cs.getClientStorage()
+      ).subscribe(([stock, clients]) => {
+        this.spinnerService.displayLoader(false);
+        this.stock = stock;
+        this.clients = clients;
+        if (stock) {
+          this.productsToChoose = uniqBy(stock.products, 'name');
+        }
+      })
+    );
     this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.cs.getClientStorage().subscribe());
     this.subscriptions.push(this.cs.getClients().subscribe());
   }
 
   addProduct() {
-    const addProductResult = this.ss.addSaleProduct(this.stock, this.saleForm, this.clients, this.selectedProducts, this.total, this.numberOfChanges);
+    const addProductResult = this.ss.addSaleProduct(
+      this.stock,
+      this.saleForm,
+      this.clients,
+      this.selectedProducts,
+      this.total,
+      this.numberOfChanges
+    );
     this.selectedProducts = addProductResult.selectedProducts;
     this.total = addProductResult.total;
     this.numberOfChanges = addProductResult.numberOfChanges;
@@ -80,7 +97,13 @@ export class SaleComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(providerId: number, productId: number) {
-    const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges)
+    const deletedResult = this.ss.deleteProduct(
+      providerId,
+      productId,
+      this.selectedProducts,
+      this.total,
+      this.numberOfChanges
+    );
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
@@ -96,14 +119,12 @@ export class SaleComponent implements OnInit, OnDestroy {
         client_id: parseInt(key),
         saleDate: value.saleDate
       };
-      this.sas.sale(sale)
-        .subscribe(
-          () => this.ns.success('Perfecto!', 'Sus ventas han sido realizadas'),
-          error => {
-            this.ns.error('Error!', 'Sus ventas no han podido ser realizadas');
-          }
+      this.sas.sale(sale).subscribe(
+        () => this.ns.success('Perfecto!', 'Sus ventas han sido realizadas'),
+        error => {
+          this.ns.error('Error!', 'Sus ventas no han podido ser realizadas');
+        }
       );
     });
   }
-
 }

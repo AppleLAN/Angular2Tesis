@@ -1,4 +1,3 @@
-import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs/Rx';
@@ -7,20 +6,21 @@ import { Router } from '@angular/router';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class UserAuthenticationService {
   public token: string;
 
-  constructor(private router: Router, private api: ApiClient) {
+  constructor(private router: Router, private api: Http) {
    }
 
-  signIn(userInfo: User): Observable<Comment[]> {
+  signIn(userInfo: User): Observable<boolean> {
     // ...using get request
     localStorage.removeItem('currentUser');
     return this.api.post("https://contaduriabackend.herokuapp.com/api/authenticate",userInfo, )
       .map((response: any) => {
-          let token = response && response.token;
+          let token = response.json() && response.json().token;
           if (token) {
             // set token property
             this.token = token;
@@ -36,11 +36,11 @@ export class UserAuthenticationService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
   
-  register(userInfo: User): Observable<Comment[]> {
+  register(userInfo: User): Observable<boolean> {
     // ...using get request
     return this.api.post("https://contaduriabackend.herokuapp.com/api/signup",userInfo)
       .map((response: any) => {
-       let token = response && response.token;
+       let token = response.json() && response.json().token;
           if (token) {
             // set token property
             this.token = token;

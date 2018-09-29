@@ -1,9 +1,8 @@
 import { Client } from '../interfaces/client';
 import { Provider } from '../interfaces/provider';
 import { FormGroup } from '@angular/forms';
-import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { AddedStock, AddedSaleStock, AddedBuyStock, Product, SelectedStock, Stock } from '../interfaces/stock';
@@ -20,14 +19,14 @@ export class StockService {
   headers: Headers;
   options: RequestOptions;
   stockStorage: Observable<StockState>;
-  constructor(private store: Store<Stock>, private api: ApiClient) {
+  constructor(private store: Store<Stock>, private api: Http) {
         this.stockStorage = store.select('stock');
     }
 
     getAfipCae(saleId: number): Observable<any> {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/getAfipCae', {saleId})
             .map((response: Response) => {
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -50,8 +49,8 @@ export class StockService {
     getProducts(): Observable<Product[]> {
         return this.api.get('https://contaduriabackend.herokuapp.com/api/getProducts')
             .map((response: Response) => {
-                this.store.dispatch({ type: NEWPRODUCT, payload: response});
-                return response;
+                this.store.dispatch({ type: NEWPRODUCT, payload: response.json()});
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -68,7 +67,7 @@ export class StockService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveProducts', newProduct)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDPRODUCT, payload: newProduct});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -77,7 +76,7 @@ export class StockService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteProducts', newProduct)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETEPRODUCT, payload: newProduct});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -85,7 +84,7 @@ export class StockService {
     getStock(product: Product): Observable<Stock> {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/getProductStock', product)
             .map((response: Response) => {
-                this.store.dispatch({ type: NEWSTOCK, payload: response});
+                this.store.dispatch({ type: NEWSTOCK, payload: response.json()});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -102,7 +101,7 @@ export class StockService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveMovements', newStock)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDSTOCK, payload: newStock});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -111,7 +110,7 @@ export class StockService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteMovements', newStock)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETESTOCK, payload: newStock});
-                return response;
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

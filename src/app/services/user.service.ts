@@ -1,6 +1,5 @@
-import { ApiClient } from '../appsModule/core/service/api';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { User } from '../interfaces/user';
 import { Client } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
@@ -20,7 +19,7 @@ export class UserService {
   options: RequestOptions
   userStorage: Observable<CompleteUser>;
 ;
-  constructor(private store: Store<User>, private api: ApiClient) {
+  constructor(private store: Store<User>, private api: Http) {
     this.userStorage = store.select('user');
    }
 
@@ -31,7 +30,7 @@ export class UserService {
   getUserApps(): Observable<any> {
     return this.api.get('https://contaduriabackend.herokuapp.com/api/getUserApps')
       .map((response: any) => {
-        return response.apps;
+        return response.json().apps;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -40,8 +39,8 @@ export class UserService {
     return this.api.get(
       'https://contaduriabackend.herokuapp.com/api/getProfileInfo')
         .map((response: Response) => {
-            this.store.dispatch({ type: NEWUSER, payload: response});
-            return response;
+            this.store.dispatch({ type: NEWUSER, payload: response.json()});
+            return response.json();
         })
         .catch((error: any) => Observable.throw(error || 'Server error')
         );
@@ -50,7 +49,7 @@ export class UserService {
   updateClientInfo(user: User): Observable<Object[]> {
     return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserProfile', user)
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWUSERPROFILE, payload: response});
+        this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -58,7 +57,7 @@ export class UserService {
   createSubClient(user: User): Observable<Object[]> {
   return this.api.post('https://contaduriabackend.herokuapp.com/api/createInternalUser', user)
     .map((response: Response) => {
-      return response;
+      return response.json();
     })
     .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -67,7 +66,7 @@ export class UserService {
     return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserCompany', company)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
-        return response;
+        return response.json();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }

@@ -63,7 +63,7 @@ export class FacturaComponent implements OnInit {
   print(): void {
     let printContents, popupWin;
     this.stockService.getAfipCae(this.sale.id).subscribe(response => {
-      this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
+      this.cae = response.success.FeDetResp.FECAEDetCAE;
       const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
       this.vto.year = vtoString.slice(0, 4);
       this.vto.month = vtoString.slice(4, 6);

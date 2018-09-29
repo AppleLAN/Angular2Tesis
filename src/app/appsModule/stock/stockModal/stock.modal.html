@@ -1,97 +1,68 @@
 <sm-modal title="Stock" class="fluid stock-modal" #stockModal>
     <modal-content>
         <form class="ui form" [formGroup]="productForm" name="Form">
-            <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
             <div class="ui left aligned basic segment">
 
                 <div class="form-group field">
-                    <sm-input 
-                            type="text" 
-                            label="Nombre" 
-                            [control]="productForm.controls.name" 
-                            placeholder="Ingresar Nombre">
+                    <sm-input type="text" label="Nombre" [control]="productForm.controls.name" placeholder="Ingresar Nombre">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').dirty">
                         Nombre no ingresado
                     </div>
-                    <div class="has-error" *ngIf="productForm.get('name').hasError('minlength') && productForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('minlength') && productForm.get('name').dirty">
                         Minimo 6 caracteres
                     </div>
-                    <div class="has-error" *ngIf="productForm.get('name').hasError('maxlength') && productForm.get('name').touched">
+                    <div class="has-error" *ngIf="productForm.get('name').hasError('maxlength') && productForm.get('name').dirty">
                         Maximo 30 caracteres
                     </div>
                 </div>
 
                 <div class="form-group field">
-                    <sm-input 
-                            type="text" 
-                            label="Descripcion" 
-                            [control]="productForm.controls.description" 
-                            placeholder="Ingresar Descripcion">
+                    <sm-input type="text" label="Descripcion" [control]="productForm.controls.description" placeholder="Ingresar Descripcion">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('description').hasError('required') && productForm.get('description').touched">
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('required') && productForm.get('description').dirty">
                         Descripcion no ingresada
                     </div>
-                    <div class="has-error" *ngIf="productForm.get('description').hasError('minlength') && productForm.get('description').touched">
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('minlength') && productForm.get('description').dirty">
                         Minimo 4 caracteres
                     </div>
-                    <div class="has-error" *ngIf="productForm.get('description').hasError('maxlength') && productForm.get('description').touched">
-                        Maximo 120 caracteres
+                    <div class="has-error" *ngIf="productForm.get('description').hasError('maxlength') && productForm.get('description').dirty">
+                    Maximo 120 caracteres
                     </div>
                 </div>
                 <div class="form-group field">
-                    <sm-select 
-                        class="fluid search inverted"                                                        
-                        label="Proveedor" 
-                        [control]="productForm.controls.provider_id" 
-                        placeholder="Ingresar Proveedor">
+                    <sm-select class="fluid search inverted" label="Proveedor" [control]="productForm.controls.provider_id" placeholder="Ingresar Proveedor">
                         <option *ngFor="let provider of providers" value="{{provider.id}}">{{provider.name}}</option>
                     </sm-select>
                 </div>
                 <div class="form-group field">
-                    <sm-input 
-                            type="number" 
-                            label="Precio a costo" 
-                            [control]="productForm.controls.cost_price" 
-                            placeholder="Ingresar Costo Minimo">
+                    <sm-input type="number" label="Precio a costo" [control]="productForm.controls.cost_price" placeholder="Ingresar Costo Minimo">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').touched">
+                    <div class="has-error" *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').dirty">
                         Costo minimo no ingresado
                     </div>
                 </div>
 
                 <div class="form-group field">
-                    <sm-input 
-                            type="number" 
-                            label="Precio a la venta" 
-                            [control]="productForm.controls.sale_price" 
-                            placeholder="Ingresar Precio a la venta">
+                    <sm-input type="number" label="Precio a la venta" [control]="productForm.controls.sale_price" placeholder="Ingresar Precio a la venta">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').touched">
+                    <div class="has-error" *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').dirty">
                         Precio a la venta no ingresado
                     </div>
                 </div>
 
                 <div class="form-group field">
-                    <sm-input 
-                            type="text" 
-                            label="Id de Categoria" 
-                            [control]="productForm.controls.category_id" 
-                            placeholder="Ingresar id de categoria">
+                    <sm-input type="text" label="Id de Categoria" [control]="productForm.controls.category_id" placeholder="Ingresar id de categoria">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('category_id').hasError('required') && productForm.get('category_id').touched">
+                    <div class="has-error" *ngIf="productForm.get('category_id').hasError('required') && productForm.get('category_id').dirty">
                         Id de categoria no ingresado
                     </div>
                 </div>
 
                 <div class="form-group field">
-                    <sm-input 
-                            type="text" 
-                            label="Ingresar codigo de identificacion" 
-                            [control]="productForm.controls.code" 
-                            placeholder="Ingresar codigo de identificacion">
+                    <sm-input type="text" label="Ingresar codigo de identificacion" [control]="productForm.controls.code" placeholder="Ingresar codigo de identificacion">
                     </sm-input>
-                    <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').touched">
+                    <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').dirty">
                         Codigo de identificacion no ingresado
                     </div>
                 </div>
@@ -100,19 +71,25 @@
                 <div class="field text-center">
                     <div class="two fields">
                         <div class="field">
-                            <button class="ui button" (click)="addProducts(productForm)" [disabled]="productForm.invalid" *ngIf="isNew(productForm)">Agregar Producto</button>
-                            <button class="ui button" (click)="updateProducts(productForm)" [disabled]="productForm.invalid" *ngIf="!isNew(productForm)">Actualizar Datos</button>
-                            <button class="ui button" (click)="deleteProducts(productForm)" *ngIf="!isNew(productForm)">Borrar Producto</button>
+                            <button class="ui button" (click)="addProducts(productForm)" [disabled]="productForm.invalid" *ngIf="isNew(productForm)">Agregar
+                                Producto
+                            </button>
+                            <button class="ui button" (click)="updateProducts(productForm)" [disabled]="productForm.invalid" *ngIf="!isNew(productForm)">Actualizar
+                                Datos
+                            </button>
+                            <button class="ui button" (click)="deleteProducts(productForm)" *ngIf="!isNew(productForm)">Borrar
+                                Producto
+                            </button>
                         </div>
                         <div class="field">
-                            <button class="ui right floated button" (click)="stockModal.hide()">Close modal</button>
+                            <button class="ui right floated button" (click)="stockModal.hide()">Cancelar</button> 
                         </div>
                     </div>
                 </div>
             </modal-actions>
         </form>
     </modal-content>
-    <modal-actions>
-        <simple-notifications *ngIf="options" [options]="options"></simple-notifications>
-    </modal-actions>
 </sm-modal>
+<modal-actions>
+    <simple-notifications *ngIf="options" [options]="options"></simple-notifications>
+</modal-actions>

@@ -2,6 +2,7 @@ import { SaleState } from '../reducers/sale.reducer';
 import { Observable } from 'rxjs/Rx';
 import { SaleService } from '../services/sale.service';
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from '../../../services/spinner.service';
 
 @Component({
   selector: 'created-sales',
@@ -10,10 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatedSalesComponent implements OnInit {
   $sales: Observable<SaleState>;
-  constructor(private ss: SaleService) { }
+  constructor(private ss: SaleService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
-    this.ss.getAllSales().subscribe();
+    this.spinnerService.displayLoader(true);
+    this.ss.getAllSales().subscribe(r => {
+      this.spinnerService.displayLoader(false);
+    });
     this.$sales = this.ss.getSaleStorage();
   }
 }

@@ -1,54 +1,45 @@
 <div id="personal-info" class="login">
-  <div style="height:100%" class="ui middle aligned center aligned grid"> 
-    <div class="container column">
-      <div class="form-box">
-        <form class="ui form" [formGroup]="loginForm" name="Form">
-          <sm-loader [complete]="!formSubmited" class="inverted" text="Loading..."></sm-loader>
-          <div class="header-content">
-            <h1 class="brand">Semantic AF Contaduria</h1>
-            <h4 class="inverted">Bienvenido,&nbsp; por favor ingresa tus datos para continuar.</h4>
-          </div>
-          <div class="ui left aligned basic segment">
-            <div class="form-group field">
-              <sm-input type="email" label="Email" [control]="loginForm.controls.email" placeholder="Ingresar Email"></sm-input>
-              <div class="has-error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
-                Email no ingresado
-              </div>
-              <div class="has-error" *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').touched">
-                Minimo 6 caracteres
-              </div>
-              <div class="has-error" *ngIf="loginForm.get('email').hasError('maxlength') && loginForm.get('email').touched">
-                Maximo 12 caracteres
-              </div>
+  <div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <div class="form-box">
+      <form class="ui form" [formGroup]="loginForm" name="Form">
+        <div class="header-content">
+          <h1 class="brand">Semantic AF Contaduria</h1>
+          <h4 class="inverted">Bienvenido,&nbsp; por favor ingresa tus datos para continuar.</h4>
+        </div>
+        <div class="ui left aligned basic segment">
+          <div class="form-group field">
+            <sm-input type="email" label="Email" [control]="loginForm.controls.email" placeholder="Ingresar Email"></sm-input>
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+              Email no ingresado
             </div>
-            
-            <div class="form-group field">
-              <sm-input type="password" label="Contraseña" [control]="loginForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
-              <div class="has-error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
-                Contraseña no ingresada
-              </div>
-              <div class="has-error" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">
-                Minimo 6 caracteres
-              </div>
-              <div class="has-error" *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched">
-                Maximo 12 caracteres
-              </div>
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').touched">
+              Minimo 6 caracteres
             </div>
-            
-            <div class="field text-center">
-              <div class="two fields">
-                <div class="field login-button">
-                  <button class="ui button" (click)="submit(loginForm)" [disabled]="loginForm.invalid" type="submit">Ingresar</button>
-                </div>
-                <div class="field login-button">
-                  <button class="ui right floated button" (click)="goToRegister()" type="submit">Register</button>
-                </div>
-              </div>
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('maxlength') && loginForm.get('email').touched">
+              Maximo 12 caracteres
             </div>
           </div>
-        </form>
-      </div>
+
+          <div class="form-group field">
+            <sm-input type="password" label="Contraseña" [control]="loginForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+              Contraseña no ingresada
+            </div>
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">
+              Minimo 6 caracteres
+            </div>
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched">
+              Maximo 12 caracteres
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+            <button class="ui button" (click)="submit(loginForm)" [disabled]="loginForm.invalid" type="submit">Ingresar</button>
+            <button class="ui button" (click)="goToRegister()" type="submit">Register</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-<simple-notifications *ngIf="options" [options]="options"></simple-notifications>          
+<simple-notifications *ngIf="options" [options]="options"></simple-notifications>
