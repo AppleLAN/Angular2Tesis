@@ -15,3 +15,9 @@ html {
   color: #9f3a38;
   padding: 8px 0 15px 0;
 }
+
+@media (max-width: 767px) {
+  .ui.attached.tabular.menu {
+    overflow-x: scroll;
+  }
+}
