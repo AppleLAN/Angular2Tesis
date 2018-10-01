@@ -5,10 +5,13 @@
 // import { provideRouter, RouterConfig } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './not-found.component';
 
 // Route Configuration
 export const routes: Routes = [
   { path: '', loadChildren: './authModule/auth.module#AuthModule' },
+  { path: '**', redirectTo: '/notfound' },
+  { path: 'notfound', component: NotFoundComponent },  
 ];
 
 // Deprecated provide
