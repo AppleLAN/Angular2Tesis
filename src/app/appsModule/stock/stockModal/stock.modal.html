@@ -75,7 +75,7 @@
 
             <modal-actions>
                 <div fxLayout="column" fxLayoutGap="15px">
-                    <div fxLayout="row" fxLayoutGap="15px">
+                    <div fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
                         <button class="ui button tiny" (click)="addProducts(productForm)" [disabled]="productForm.invalid"
                             *ngIf="isNew(productForm)">Agregar
                             Producto
