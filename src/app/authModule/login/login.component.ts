@@ -13,7 +13,6 @@ import { SpinnerService } from '../../services/spinner.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  error: String;
   options: any;
 
   constructor(
@@ -49,17 +48,12 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(value).subscribe(
       response => {
         this.spinnerService.displayLoader(false);
-        if (response) {
-          // login successful
-          this.router.navigate(['/apps']);
-        } else {
-          // login failed
-          this.error = 'Username or password is incorrect';
-        }
+        // login successful
+        this.router.navigate(['/apps']);
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error('Error!', 'porfavor, compruebe los datos ingresados');
+        this.ns.error('Error!', 'Porfavor, compruebe los datos ingresados');
       }
     );
   }

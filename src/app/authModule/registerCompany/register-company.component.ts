@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Client } from '../../interfaces/client';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
+import { Subscription } from 'rxjs/Rx';
+import { Client } from '../../interfaces/client';
+import { SpinnerService } from '../../services/spinner.service';
 import { UserService } from '../../services/user.service';
 import { CompleteUser } from './../../interfaces/complete.user';
-import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-register-company-component',
   templateUrl: './register-company.component.html',
-  styleUrls: ['../auth.component.scss']
+  styleUrls: ['../auth.component.scss', './register-company.component.scss']
 })
 export class RegisterCompanyComponent implements OnInit {
   userForm: FormGroup;
@@ -22,7 +24,9 @@ export class RegisterCompanyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private spinnerService: SpinnerService,
+    private ns: NotificationsService
   ) {
     this.options = {
       timeOut: 3000,
@@ -123,13 +127,19 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   updateClientCompany({ value }: { value: Client }) {
-    value.type = 'CREATE';
-    this.userService.updateClientCompany(value).subscribe(response => {
-      if (response) {
-        this.router.navigate(['/apps']);
-      } else {
-        this.error = 'Error';
-      }
-    });
+    if (this.userForm.valid) {
+      this.spinnerService.displayLoader(true);
+      value.type = 'CREATE';
+      this.userService.updateClientCompany(value).subscribe(
+        response => {
+          this.spinnerService.displayLoader(false);
+          this.router.navigate(['/apps']);
+        },
+        error => {
+          this.spinnerService.displayLoader(false);
+          this.ns.error('Error!', 'Porfavor, compruebe los datos ingresados');
+        }
+      );
+    }
   }
 }

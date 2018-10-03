@@ -31,9 +31,11 @@
             <img class="ui centered product image" [src]="getAppImage(app.app)">
           </div>
           <div class="content">
-            <a *ngIf="app.app === 'clients'" routerLinkActive="active" class="header">{{app.app}}</a>
-            <a *ngIf="app.app !== 'clients'" routerLinkActive="active" class="header disabled">{{app.app}}</a>
-          </div>
+              <a *ngIf="app.app === 'clients'" routerLinkActive="active" class="header">Clientes</a>
+              <a *ngIf="app.app === 'sales'" routerLinkActive="active" class="header">Ventas</a>
+              <a *ngIf="app.app === 'stock'" routerLinkActive="active" class="header">Stock</a>
+              <a *ngIf="app.app === 'providers'" routerLinkActive="active" class="header">Proveedores</a>
+            </div>
         </div>
         
       </ng-template>   

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
-  Validators,
-  FormControl
+  Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { User } from '../../interfaces/user';
+import { SpinnerService } from '../../services/spinner.service';
 import { UserAuthenticationService } from '../../services/user-authentication.service';
 
 @Component({
@@ -16,14 +18,14 @@ import { UserAuthenticationService } from '../../services/user-authentication.se
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  error: String;
-  loading: Boolean;
   options: any;
 
   constructor(
     private fb: FormBuilder,
     private authService: UserAuthenticationService,
-    private router: Router
+    private router: Router,
+    private spinnerService: SpinnerService,
+    private ns: NotificationsService
   ) {
     this.options = {
       timeOut: 3000,
@@ -65,32 +67,38 @@ export class RegisterComponent implements OnInit {
   }
 
   dateValidator(control: FormControl) {
-    let actualDate = new Date();
+    const actualDate = new Date();
     actualDate.setHours(0);
     actualDate.setMinutes(0);
     actualDate.setSeconds(0);
     actualDate.setMilliseconds(0);
-    let formDate = new Date(control.value);
+    const formDate = new Date(control.value);
     formDate.setHours(formDate.getHours() + 3);
     if (formDate < actualDate) {
       return null;
-    } else if(formDate instanceof Date && !isNaN(formDate.getTime())) {
+    } else if (formDate instanceof Date && !isNaN(formDate.getTime())) {
       return { dateValidator: 'bad date' };
     }
   }
 
   submit({ value }: { value: User }) {
     if (this.registerForm.valid) {
-      this.authService.register(value).subscribe(response => {
-        if (response) {
+      this.spinnerService.displayLoader(true);
+      this.authService.register(value).subscribe(
+        response => {
+          this.spinnerService.displayLoader(false);
           // login successful
           this.router.navigate(['/apps']);
-        } else {
-          // login failed
-          this.error = 'Usuario o contrasenia incorrecto';
-          this.loading = false;
+        },
+        error => {
+          this.spinnerService.displayLoader(false);
+          if (error.error.includes('Duplicate')) {
+            this.ns.error('Error!', 'Email existente, por favor ingrese un email diferente');
+          } else {
+            this.ns.error('Error!', 'Porfavor, compruebe los datos ingresados');
+          }
         }
-      });
+      );
     }
   }
 

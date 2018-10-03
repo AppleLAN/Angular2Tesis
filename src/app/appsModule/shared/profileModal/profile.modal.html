@@ -5,7 +5,8 @@
                 <form class="ui form" [formGroup]="registerForm" name="registerForm">
                     <div class="ui left aligned basic segment">
                         <div class="form-group field">
-                            <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username" placeholder="Ingresar nombre de usuario"></sm-input>
+                            <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username"
+                                placeholder="Ingresar nombre de usuario"></sm-input>
                             <div class="has-error" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').dirty">
                                 Nombre de usuario no ingresado
                             </div>
@@ -17,7 +18,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="password" label="Contraseña" [control]="registerForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+                            <sm-input type="password" label="Contraseña" [control]="registerForm.controls.password"
+                                placeholder="Ingresar Contraseña"></sm-input>
                             <div class="has-error" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').dirty">
                                 Contraseña no ingresada
                             </div>
@@ -41,7 +43,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="text" label="Apellido" [control]="registerForm.controls.lastname" placeholder="Ingresar Apellido"></sm-input>
+                            <sm-input type="text" label="Apellido" [control]="registerForm.controls.lastname"
+                                placeholder="Ingresar Apellido"></sm-input>
                             <div class="has-error" *ngIf="registerForm.get('lastname').hasError('required') && registerForm.get('lastname').dirty">
                                 Apellido no ingresado
                             </div>
@@ -65,7 +68,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="text" label="Direccion" [control]="registerForm.controls.address" placeholder="Ingresar direccion"></sm-input>
+                            <sm-input type="text" label="Direccion" [control]="registerForm.controls.address"
+                                placeholder="Ingresar direccion"></sm-input>
                             <div class="has-error" *ngIf="registerForm.get('address').hasError('required') && registerForm.get('address').dirty">
                                 Direccion no ingresada
                             </div>
@@ -74,7 +78,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday" placeholder="Ingresar fecha de nacimiento"></sm-input>
+                            <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday"
+                                placeholder="Ingresar fecha de nacimiento"></sm-input>
                             <div class="has-error" *ngIf="registerForm.get('birthday').hasError('required') && registerForm.get('birthday').dirty">
                                 Fecha de nacimiento no ingresada
                             </div>
@@ -104,16 +109,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field text-center">
-                            <div class="two fields">
-                                <div class="field">
-                                    <button class="ui button" [disabled]="!registerForm.valid" type="submit" (click)="updateClientInfo(registerForm)">Actualizar
-                                        Datos
-                                    </button>
-                                </div>
-                                <div class="field">
-                                    <button class="ui right floated button" (click)="profileModal.hide()">Cancelar</button>
-                                </div>
+
+                        <div fxLayout="column" fxLayoutGap="15px">
+                            <div fxLayout="row" fxLayoutGap="15px">
+                                <button fxFlex="20" fxFlex.xs="100"  class="ui button tiny" [disabled]="!registerForm.valid" type="submit" (click)="updateClientInfo(registerForm)">Actualizar
+                                    Datos
+                                </button>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="profileModal.hide()">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -137,7 +141,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Nombre De Fantasia" [control]="userForm.controls.fantasyName" placeholder="Ingresar nombre de fantasia">
+                            <sm-input type="text" label="Nombre De Fantasia" [control]="userForm.controls.fantasyName"
+                                placeholder="Ingresar nombre de fantasia">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('fantasyName').hasError('required') && userForm.get('fantasyName').dirty">
                                 Nombre de fantasia no ingresado
@@ -176,7 +181,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="number" label="Codigo Postal" [control]="userForm.controls.codigoPostal" placeholder="Ingresar codigo postal">
+                            <sm-input type="number" label="Codigo Postal" [control]="userForm.controls.codigoPostal"
+                                placeholder="Ingresar codigo postal">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('required') && userForm.get('codigoPostal').dirty">
                                 Codigo postal no ingresado
@@ -190,7 +196,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Codigo Provincia" [control]="userForm.controls.codigoProvincia" placeholder="Ingresar codigo postal">
+                            <sm-input type="text" label="Codigo Provincia" [control]="userForm.controls.codigoProvincia"
+                                placeholder="Ingresar codigo postal">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty">
                                 Codigo provincia no ingresado
@@ -218,7 +225,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="number" label="Telefono" [control]="userForm.controls.telephone" placeholder="Ingresar Telefono">
+                            <sm-input type="number" label="Telefono" [control]="userForm.controls.telephone"
+                                placeholder="Ingresar Telefono">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').dirty">
                                 Telefono no ingresado
@@ -257,7 +265,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="​Inscripcion en ingresos brutos" [control]="userForm.controls.iib" placeholder="Ingresar ​inscripcion en ingresos brutos">
+                            <sm-input type="text" label="​Inscripcion en ingresos brutos" [control]="userForm.controls.iib"
+                                placeholder="Ingresar ​inscripcion en ingresos brutos">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').dirty">
                                 ​Inscripcion en ingresos brutos no ingresada
@@ -271,7 +280,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Percepcion en ingresos brutos" [control]="userForm.controls.pib" placeholder="Ingresar percepcion en ingresos brutos">
+                            <sm-input type="text" label="Percepcion en ingresos brutos" [control]="userForm.controls.pib"
+                                placeholder="Ingresar percepcion en ingresos brutos">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('pib').hasError('required') && userForm.get('pib').dirty">
                                 Percepcion en ingresos brutos no ingresada
@@ -285,7 +295,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Excencion de percepcion en ingresos brutos" [control]="userForm.controls.epib" placeholder="Ingresar excencion de percepcion en ingresos brutos">
+                            <sm-input type="text" label="Excencion de percepcion en ingresos brutos" [control]="userForm.controls.epib"
+                                placeholder="Ingresar excencion de percepcion en ingresos brutos">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('epib').hasError('required') && userForm.get('epib').dirty">
                                 Excencion de percepcion en ingresos brutos no ingresada
@@ -300,8 +311,8 @@
 
                         <div class="form-group field">
                             <div class="ui toggle checkbox">
-                                <sm-checkbox label="Responsable Inscripto" [control]="userForm.controls.responsableInscripto" (change)="responsableChange(userForm.controls.responsableInscripto)"
-                                    placeholder="Ingresar responsable inscripto">
+                                <sm-checkbox label="Responsable Inscripto" [control]="userForm.controls.responsableInscripto"
+                                    (change)="responsableChange(userForm.controls.responsableInscripto)" placeholder="Ingresar responsable inscripto">
                                 </sm-checkbox>
                             </div>
                         </div>
@@ -316,8 +327,8 @@
 
                         <div class="form-group field">
                             <div class="ui toggle checkbox">
-                                <sm-checkbox label="Responsable de Monotributo" [control]="userForm.controls.responsableMonotributo" (change)="responsableChange(userForm.controls.responsableMonotributo)"
-                                    placeholder="Ingresar si es responsable de monotributo">
+                                <sm-checkbox label="Responsable de Monotributo" [control]="userForm.controls.responsableMonotributo"
+                                    (change)="responsableChange(userForm.controls.responsableMonotributo)" placeholder="Ingresar si es responsable de monotributo">
                                 </sm-checkbox>
                             </div>
                         </div>
@@ -331,7 +342,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="number" label="Precio Lista" [control]="userForm.controls.precioLista" placeholder="Ingresar precio lista">
+                            <sm-input type="number" label="Precio Lista" [control]="userForm.controls.precioLista"
+                                placeholder="Ingresar precio lista">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('precioLista').hasError('required') && userForm.get('precioLista').dirty">
                                 Precio lista no ingresado
@@ -342,7 +354,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Condicion De Venta" [control]="userForm.controls.condicionDeVenta" placeholder="Ingresar condicion de venta">
+                            <sm-input type="text" label="Condicion De Venta" [control]="userForm.controls.condicionDeVenta"
+                                placeholder="Ingresar condicion de venta">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('required') && userForm.get('condicionDeVenta').dirty">
                                 Condicion de venta no ingresada
@@ -356,7 +369,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="number" label="Limite De Credito" [control]="userForm.controls.limiteDeCredito" placeholder="Ingresar condicion de venta">
+                            <sm-input type="number" label="Limite De Credito" [control]="userForm.controls.limiteDeCredito"
+                                placeholder="Ingresar condicion de venta">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('required') && userForm.get('limiteDeCredito').dirty">
                                 Limite de credito no ingresada
@@ -379,7 +393,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Cuentas Generales" [control]="userForm.controls.cuentasGenerales" placeholder="Ingresar cuentas generales">
+                            <sm-input type="text" label="Cuentas Generales" [control]="userForm.controls.cuentasGenerales"
+                                placeholder="Ingresar cuentas generales">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('required') && userForm.get('cuentasGenerales').dirty">
                                 Cuentas Generales no ingresadas
@@ -393,7 +408,8 @@
                         </div>
 
                         <div class="form-group field">
-                            <sm-input type="text" label="Percepcion De Ganancia" [control]="userForm.controls.percepcionDeGanancia" placeholder="Ingresar percepcion de ganancia">
+                            <sm-input type="text" label="Percepcion De Ganancia" [control]="userForm.controls.percepcionDeGanancia"
+                                placeholder="Ingresar percepcion de ganancia">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('required') && userForm.get('percepcionDeGanancia').dirty">
                                 Percepcion De Ganancia no ingresada
@@ -404,17 +420,16 @@
                         </div>
 
                     </div>
+
                     <modal-actions>
-                        <div class="field text-center">
-                            <div class="two fields">
-                                <div class="field">
-                                    <button class="ui button" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar
-                                        Datos
-                                    </button>
-                                </div>
-                                <div class="field">
-                                    <button class="ui right floated button" (click)="profileModal.hide()">Cancelar</button>
-                                </div>
+                        <div fxLayout="column" fxLayoutGap="15px">
+                            <div fxLayout="row" fxLayoutGap="15px">
+                                <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar
+                                    Datos
+                                </button>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="profileModal.hide()">Cancelar</button>
                             </div>
                         </div>
                     </modal-actions>
@@ -424,7 +439,8 @@
                 <form class="ui form" [formGroup]="newSubUserForm" name="newSubUserForm">
                     <div class="ui left aligned basic segment">
                         <div class="form-group field">
-                            <sm-input type="text" label="Nombre de Usuario" [control]="newSubUserForm.controls.username" placeholder="Ingresar nombre de usuario"></sm-input>
+                            <sm-input type="text" label="Nombre de Usuario" [control]="newSubUserForm.controls.username"
+                                placeholder="Ingresar nombre de usuario"></sm-input>
                             <div class="has-error" *ngIf="newSubUserForm.get('username').hasError('required') && newSubUserForm.get('username').dirty">
                                 Nombre de usuario no ingresado
                             </div>
@@ -436,7 +452,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="password" label="Contraseña" [control]="newSubUserForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+                            <sm-input type="password" label="Contraseña" [control]="newSubUserForm.controls.password"
+                                placeholder="Ingresar Contraseña"></sm-input>
                             <div class="has-error" *ngIf="newSubUserForm.get('password').hasError('required') && newSubUserForm.get('password').dirty">
                                 Contraseña no ingresada
                             </div>
@@ -460,7 +477,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="text" label="Apellido" [control]="newSubUserForm.controls.lastname" placeholder="Ingresar Apellido"></sm-input>
+                            <sm-input type="text" label="Apellido" [control]="newSubUserForm.controls.lastname"
+                                placeholder="Ingresar Apellido"></sm-input>
                             <div class="has-error" *ngIf="newSubUserForm.get('lastname').hasError('required') && newSubUserForm.get('lastname').dirty">
                                 Apellido no ingresado
                             </div>
@@ -484,7 +502,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="text" label="Direccion" [control]="newSubUserForm.controls.address" placeholder="Ingresar direccion"></sm-input>
+                            <sm-input type="text" label="Direccion" [control]="newSubUserForm.controls.address"
+                                placeholder="Ingresar direccion"></sm-input>
                             <div class="has-error" *ngIf="newSubUserForm.get('address').hasError('required') && newSubUserForm.get('address').dirty">
                                 Direccion no ingresada
                             </div>
@@ -493,7 +512,8 @@
                             </div>
                         </div>
                         <div class="form-group field">
-                            <sm-input type="date" label="Fecha de nacimiento" [control]="newSubUserForm.controls.birthday" placeholder="Ingresar fecha de nacimiento"></sm-input>
+                            <sm-input type="date" label="Fecha de nacimiento" [control]="newSubUserForm.controls.birthday"
+                                placeholder="Ingresar fecha de nacimiento"></sm-input>
                             <div class="has-error" *ngIf="newSubUserForm.get('birthday').hasError('required') && newSubUserForm.get('birthday').dirty">
                                 Fecha de nacimiento no ingresada
                             </div>
@@ -523,14 +543,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field text-center">
-                            <div class="two fields">
-                                <div class="field">
-                                    <button class="ui button" [disabled]="!newSubUserForm.valid" type="submit" (click)="createSubClient(newSubUserForm)">Crear</button>
-                                </div>
-                                <div class="field">
-                                    <button class="ui right floated button" (click)="profileModal.hide()">Cancelar</button>
-                                </div>
+
+                        <div fxLayout="column" fxLayoutGap="15px">
+                            <div fxLayout="row" fxLayoutGap="15px">
+                                <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" [disabled]="!newSubUserForm.valid" type="submit" (click)="createSubClient(newSubUserForm)">Crear</button>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="profileModal.hide()">Cancelar</button>
                             </div>
                         </div>
                     </div>

@@ -46,7 +46,6 @@ export class ProfileModal implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       id: [''],
-      company_id: [''],
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],

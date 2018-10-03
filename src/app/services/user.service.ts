@@ -65,11 +65,20 @@ export class UserService {
   updateClientCompany(company: Client): Observable<Object[]> {
     return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserCompany', company)
       .map((response: Response) => {
+        delete company.type;
         this.store.dispatch({ type: NEWCOMPANY, payload: company});
         return response.json();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
+
+  deleteUser(user: User): Observable<Object[]> {
+    return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteUser', user)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+    }
 
 
 }

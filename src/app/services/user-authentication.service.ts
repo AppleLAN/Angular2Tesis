@@ -10,57 +10,64 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class UserAuthenticationService {
-  public token: string;
+  public token: string;
 
-  constructor(private router: Router, private api: Http) {
-   }
+  constructor(private router: Router, private api: Http) {}
 
   signIn(userInfo: User): Observable<boolean> {
     // ...using get request
     localStorage.removeItem('currentUser');
-    return this.api.post("https://contaduriabackend.herokuapp.com/api/authenticate",userInfo, )
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/authenticate',
+        userInfo
+      )
       .map((response: any) => {
-          let token = response.json() && response.json().token;
-          if (token) {
-            // set token property
-            this.token = token;
+        const token = response.json() && response.json().token;
+        if (token) {
+          // set token property
+          this.token = token;
 
-            // store username and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify({string: userInfo.email , token: token }));
-            return true;
-          }
-          else {
-            return false;
-          }
+          // store username and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify({ string: userInfo.email, token: token })
+          );
+          return true;
+        } else {
+          return false;
+        }
       })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.json() || 'Server error'));
   }
-  
+
   register(userInfo: User): Observable<boolean> {
     // ...using get request
-    return this.api.post("https://contaduriabackend.herokuapp.com/api/signup",userInfo)
+    return this.api
+      .post('https://contaduriabackend.herokuapp.com/api/signup', userInfo)
       .map((response: any) => {
-       let token = response.json() && response.json().token;
-          if (token) {
-            // set token property
-            this.token = token;
+        const token = response.json() && response.json().token;
+        if (token) {
+          // set token property
+          this.token = token;
 
-            // store username and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify({string: userInfo.email , token: token }));
-            return true;
-          }
-          else {
-            return false;
-          }
+          // store username and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify({ string: userInfo.email, token: token })
+          );
+          return true;
+        } else {
+          return false;
+        }
       })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
+      .catch((error: any) => Observable.throw(error.json() || 'Server error'));
   }
 
   logout(): void {
-      // clear token remove user from local storage to log user out
-      this.token = null;
-      localStorage.removeItem('currentUser');
-      this.router.navigate(['/login']);
+    // clear token remove user from local storage to log user out
+    this.token = null;
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
-
 }
