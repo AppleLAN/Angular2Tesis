@@ -1,11 +1,11 @@
 <div id="personal-info" class="login">
-  <div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlexFill fxLayout="column" fxLayoutAlign="center center">
+    <div class="ui inverted header">
+      <h1 class="brand">Semantic AF Contaduria</h1>
+      <h4>Bienvenido,&nbsp; por favor ingresa tus datos para continuar.</h4>
+    </div>
     <div class="form-box">
       <form class="ui form" [formGroup]="loginForm" name="Form">
-        <div class="header-content">
-          <h1 class="brand">Semantic AF Contaduria</h1>
-          <h4 class="inverted">Bienvenido,&nbsp; por favor ingresa tus datos para continuar.</h4>
-        </div>
         <div class="ui left aligned basic segment">
           <div class="form-group field">
             <sm-input type="email" label="Email" [control]="loginForm.controls.email" placeholder="Ingresar Email"></sm-input>

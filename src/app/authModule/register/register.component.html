@@ -1,14 +1,17 @@
 <div id="personal-info" class="login">
-    <div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlexFill fxLayout="column" fxLayoutAlign="center center">
+        <div class="ui inverted header">
+            <h1 class="brand">Semantic AF Contaduria</h1>
+            <h4>Bienvenido,&nbsp; por favor registrate a continuacion.</h4>
+        </div>
         <div class="form-box">
             <form class="ui form" [formGroup]="registerForm" name="registerForm">
                 <div class="header-content">
-                    <h1 class="brand">Semantic AF Contaduria</h1>
-                    <h4>Bienvenido,&nbsp; por favor registrate a continuacion.</h4>
                 </div>
                 <div class="ui left aligned basic segment">
                     <div class="form-group field">
-                        <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username" placeholder="Ingresar nombre de usuario"></sm-input>
+                        <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username"
+                            placeholder="Ingresar nombre de usuario"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
                             Nombre de usuario no ingresado
                         </div>
@@ -20,7 +23,8 @@
                         </div>
                     </div>
                     <div class="form-group field">
-                        <sm-input type="password" label="Contraseña" [control]="registerForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
+                        <sm-input type="password" label="Contraseña" [control]="registerForm.controls.password"
+                            placeholder="Ingresar Contraseña"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
                             Contraseña no ingresada
                         </div>
@@ -77,7 +81,8 @@
                         </div>
                     </div>
                     <div class="form-group field">
-                        <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday" placeholder="Ingresar fecha de nacimiento"></sm-input>
+                        <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday"
+                            placeholder="Ingresar fecha de nacimiento"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('birthday').hasError('required') && registerForm.get('birthday').touched">
                             La fecha de nacimiento debe ser completa y valida
                         </div>

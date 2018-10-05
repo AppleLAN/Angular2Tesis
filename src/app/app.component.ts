@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from './services/spinner.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { SpinnerService } from './services/spinner.service';
   templateUrl: './app.component.html',
   providers: [SpinnerService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   show: boolean;
 
   constructor(public spinnerService: SpinnerService) {}
