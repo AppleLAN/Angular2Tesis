@@ -1,11 +1,10 @@
-<div class="row" *ngIf="lineChartData ;else noDataTemplate">
+<div class="chart row" *ngIf="lineChartData ;else noDataTemplate">
     <div class="grid"> 
         <div>
             <canvas baseChart width="400" height="400"
                         [datasets]="lineChartData"
                         [labels]="lineChartLabels"
                         [options]="lineChartOptions"
-                        [colors]="lineChartColors"
                         [legend]="lineChartLegend"
                         [chartType]="chartType"
                         (chartHover)="chartHovered($event)"
@@ -13,7 +12,7 @@
             </canvas>
         </div>
     </div>
-    <div *ngIf="!demo" class="grid" style="margin-bottom: 10px">
+    <div *ngIf="!demo" class="grid" style="margin-bottom: 10px; margin-top: 10px">
         <table class="ui celled striped inverted table">
             <thead>
                 <tr>

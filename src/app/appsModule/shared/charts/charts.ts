@@ -4,13 +4,17 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'charts',
-  templateUrl: './charts.html'
+  templateUrl: './charts.html',
+  styleUrls: ['./charts.scss']
 })
 export class ChartComponent implements OnInit {
-  @Input() itemToGet: string;
-  @Input() chartType: String = 'line';
-  @Input() demo: Boolean = false;
-  
+  @Input()
+  itemToGet: string;
+  @Input()
+  chartType: String = 'line';
+  @Input()
+  demo: Boolean = false;
+
   lineChartData: Array<any>;
   lineChartLabels: Array<any>;
   lineChartOptions: any;
@@ -21,19 +25,29 @@ export class ChartComponent implements OnInit {
   constructor(private chartService: ChartService) {}
   ngOnInit() {
     if (!this.demo) {
-      this.chartStorage = this.chartService.getChartStorage().subscribe(data => {
+      this.chartStorage = this.chartService
+        .getChartStorage()
+        .subscribe(data => {
           if (data && data[this.itemToGet]) {
             this.lineChartData = data[this.itemToGet].result;
             this.lineChartLabels = data[this.itemToGet].months;
           }
-      });
+        });
     } else {
       this.lineChartData = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-        {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+        { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
       ];
-      this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+      this.lineChartLabels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July'
+      ];
     }
 
     this.lineChartOptions = {
@@ -41,7 +55,8 @@ export class ChartComponent implements OnInit {
       maintainAspectRatio: false
     };
     this.lineChartColors = [
-      { // grey
+      {
+        // grey
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -49,7 +64,8 @@ export class ChartComponent implements OnInit {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(148,159,177,0.8)'
       },
-      { // dark grey
+      {
+        // dark grey
         backgroundColor: 'rgba(77,83,96,0.2)',
         borderColor: 'rgba(77,83,96,1)',
         pointBackgroundColor: 'rgba(77,83,96,1)',
@@ -57,7 +73,8 @@ export class ChartComponent implements OnInit {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(77,83,96,1)'
       },
-      { // grey
+      {
+        // grey
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
