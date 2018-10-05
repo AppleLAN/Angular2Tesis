@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
@@ -51,13 +56,21 @@ export class ProviderModal implements OnInit {
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
       email: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30)
+        ]
       ],
       place: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      codigoPostal: ['', [Validators.minLength(4), Validators.maxLength(30)]],
+      codigoPostal: [
+        '',
+        [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]
+      ],
       codigoProvincia: [
         '',
         [Validators.minLength(4), Validators.maxLength(30)]
@@ -70,6 +83,7 @@ export class ProviderModal implements OnInit {
         '',
         [
           Validators.required,
+          Validators.min(0),
           Validators.minLength(10),
           Validators.maxLength(11)
         ]
@@ -78,6 +92,7 @@ export class ProviderModal implements OnInit {
         '',
         [
           Validators.required,
+          Validators.min(0),
           Validators.minLength(11),
           Validators.maxLength(11)
         ]
@@ -99,13 +114,13 @@ export class ProviderModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required]],
+      precioLista: ['', [Validators.required, Validators.min(0)]],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required]],
-      numeroDeInscripcionesIB: ['', [Validators.required]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
+      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0)]],
       cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
       percepcionDeGanancia: ['', [Validators.required]]
     });

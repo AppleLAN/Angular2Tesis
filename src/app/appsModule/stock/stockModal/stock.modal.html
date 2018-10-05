@@ -43,6 +43,9 @@
                     <div class="has-error" *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').dirty">
                         Costo minimo no ingresado
                     </div>
+                    <div class="has-error" *ngIf="productForm.get('cost_price').hasError('min') && productForm.get('cost_price').dirty">
+                        Costo minimo no puede ser negativo
+                    </div>
                 </div>
 
                 <div class="form-group field">
@@ -51,6 +54,9 @@
                     </sm-input>
                     <div class="has-error" *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').dirty">
                         Precio a la venta no ingresado
+                    </div>
+                    <div class="has-error" *ngIf="productForm.get('sale_price').hasError('min') && productForm.get('sale_price').dirty">
+                        Precio a la venta no puede ser negativo
                     </div>
                 </div>
 

@@ -55,8 +55,8 @@ export class StockModal implements OnInit {
           Validators.maxLength(120)
         ]
       ],
-      cost_price: ['', [Validators.required]],
-      sale_price: ['', [Validators.required]],
+      cost_price: ['', [Validators.required, Validators.min(0)]],
+      sale_price: ['', [Validators.required, Validators.min(0)]],
       category_id: ['', [Validators.required]],
       created_at: [''],
       updated_at: [''],

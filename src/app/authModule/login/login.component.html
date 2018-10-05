@@ -9,26 +9,29 @@
         <div class="ui left aligned basic segment">
           <div class="form-group field">
             <sm-input type="email" label="Email" [control]="loginForm.controls.email" placeholder="Ingresar Email"></sm-input>
-            <div class="has-error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').dirty">
               Email no ingresado
             </div>
-            <div class="has-error" *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').touched">
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').dirty">
+                Por favor ingrese un email valido
+            </div>
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').dirty">
               Minimo 6 caracteres
             </div>
-            <div class="has-error" *ngIf="loginForm.get('email').hasError('maxlength') && loginForm.get('email').touched">
+            <div class="has-error" *ngIf="loginForm.get('email').hasError('maxlength') && loginForm.get('email').dirty">
               Maximo 12 caracteres
             </div>
           </div>
 
           <div class="form-group field">
             <sm-input type="password" label="Contraseña" [control]="loginForm.controls.password" placeholder="Ingresar Contraseña"></sm-input>
-            <div class="has-error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').dirty">
               Contraseña no ingresada
             </div>
-            <div class="has-error" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').dirty">
               Minimo 6 caracteres
             </div>
-            <div class="has-error" *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched">
+            <div class="has-error" *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').dirty">
               Maximo 12 caracteres
             </div>
           </div>

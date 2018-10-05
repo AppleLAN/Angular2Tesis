@@ -56,13 +56,21 @@ export class ProfileModal implements OnInit {
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
       email: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30)
+        ]
       ],
       place: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      codigoPostal: ['', [Validators.minLength(4), Validators.maxLength(30)]],
+      codigoPostal: [
+        '',
+        [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]
+      ],
       codigoProvincia: [
         '',
         [Validators.minLength(4), Validators.maxLength(30)]
@@ -75,6 +83,7 @@ export class ProfileModal implements OnInit {
         '',
         [
           Validators.required,
+          Validators.min(0),
           Validators.minLength(10),
           Validators.maxLength(11)
         ]
@@ -83,6 +92,7 @@ export class ProfileModal implements OnInit {
         '',
         [
           Validators.required,
+          Validators.min(0),
           Validators.minLength(11),
           Validators.maxLength(11)
         ]
@@ -104,15 +114,21 @@ export class ProfileModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.maxLength(30)]],
+      precioLista: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required, Validators.maxLength(30)]],
+      limiteDeCredito: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ],
       numeroDeInscripcionesIB: [
         '',
-        [Validators.required, Validators.maxLength(30)]
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
@@ -140,7 +156,12 @@ export class ProfileModal implements OnInit {
       ],
       email: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30)
+        ]
       ],
       address: ['', [Validators.required, Validators.minLength(3)]],
       birthday: ['', [Validators.required]],
@@ -168,7 +189,12 @@ export class ProfileModal implements OnInit {
       ],
       email: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30)
+        ]
       ],
       address: ['', [Validators.required, Validators.minLength(3)]],
       birthday: ['', [Validators.required]],

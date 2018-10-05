@@ -56,7 +56,7 @@ export class BuyComponent implements OnInit, OnDestroy {
     this.saleForm = this.fb.group({
       product: ['', [Validators.required]],
       provider_id: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
+      quantity: ['', [Validators.required, Validators.min(0)]],
       typeOfBuy: ['', [Validators.required]]
     });
     this.saleForm.get('product').valueChanges.subscribe(p => {

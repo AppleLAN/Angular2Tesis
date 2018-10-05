@@ -3,54 +3,46 @@
     <div class="row container buy-container">
         <div class="column">
             <form class="ui inverted form" [formGroup]="saleForm" name="Form">
-                <div class="ui four column doubling grid">            
+                <div class="ui four column doubling grid">
                     <div class="row">
                         <div class="column formItem">
-                            <sm-select 
-                                class="fluid inverted search"                            
-                                label="Producto" 
-                                [control]="saleForm.controls.product" 
+                            <sm-select class="fluid inverted search" label="Producto" [control]="saleForm.controls.product"
                                 placeholder="Ingresar Producto">
-                                <option *ngFor="let product of productsToChoose">{{product.name}}</option>                                
+                                <option *ngFor="let product of productsToChoose">{{product.name}}</option>
                             </sm-select>
                         </div>
                         <div class="column formItem">
-                            <sm-select 
-                                class="provider-select fluid search inverted"                                                        
-                                label="Proveedor (el primer valor es recomendado)" 
-                                [control]="saleForm.controls.provider_id" 
-                                placeholder="Ingresar Proveedor">
+                            <sm-select class="provider-select fluid search inverted" label="Proveedor (el primer valor es recomendado)"
+                                [control]="saleForm.controls.provider_id" placeholder="Ingresar Proveedor">
                                 <option *ngFor="let provider of filteredProviders" value="{{provider.id}}">{{provider.name}}</option>
                             </sm-select>
                         </div>
                         <div class="column formItem">
-                            <sm-select 
-                                class="fluid inverted"                            
-                                label="Tipo de Compra" 
-                                [control]="saleForm.controls.typeOfBuy" 
+                            <sm-select class="fluid inverted" label="Tipo de Compra" [control]="saleForm.controls.typeOfBuy"
                                 placeholder="Ingresar tipo de compra">
                                 <option>Cuenta corriente</option>
                                 <option>Efectivo</option>
                             </sm-select>
                         </div>
                         <div class="column formItem">
-                            <sm-input 
-                                icon="shopping bag"
-                                type="number" 
-                                label="Cantidad" 
-                                [control]="saleForm.controls.quantity" 
+                            <sm-input icon="shopping bag" type="number" label="Cantidad" [control]="saleForm.controls.quantity"
                                 placeholder="Ingresar Cantidad">
                             </sm-input>
+                            <div class="has-error" *ngIf="saleForm.get('quantity').hasError('min') && saleForm.get('quantity').dirty">
+                                La cantidad no puede ser negativa
+                            </div>
                         </div>
                         <div class="two wide two height left floated column formItem addProduct">
-                            <sm-button class="normal tiny" [disabled]="saleForm.invalid" (click)="addProduct()">Agregar producto</sm-button>                            
+                            <sm-button class="normal tiny" [disabled]="saleForm.invalid" (click)="addProduct()">Agregar
+                                producto</sm-button>
                         </div>
                     </div>
                 </div>
             </form>
             <div class="row">
                 <div class="column formItem">
-                    <p>"La eleccion de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de compra"</p>
+                    <p>"La eleccion de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la
+                        orden de compra"</p>
                 </div>
             </div>
         </div>
@@ -61,10 +53,10 @@
             <table-pagination [productList]="stock?.products"></table-pagination>
         </div>
     </div>
-    <ng-container *ngIf="!isEmpty(selectedProducts); else noProductsSelectedTemplate">            
+    <ng-container *ngIf="!isEmpty(selectedProducts); else noProductsSelectedTemplate">
         <div class="row container buy-container" *ngFor="let product of selectedProducts | mapToIterable: numberOfChanges">
             <div class="column">
-                <h1>Orden de compras para proveedor "{{product.val.stock[0].provider}}"</h1>                
+                <h1>Orden de compras para proveedor "{{product.val.stock[0].provider}}"</h1>
                 <table class="ui celled table">
                     <thead>
                         <tr>
@@ -79,9 +71,9 @@
                         <tr *ngFor="let selected of product.val.stock">
                             <td>{{selected.product.name}}</td>
                             <td>{{selected.product.description}}</td>
-                            <td>{{selected.provider}}</td>                            
-                            <td>{{selected.quantity}}</td>  
-                            <td><button class="ui button" (click)="deleteProduct(product.key, selected.product.id)">Borrar</button></td>                         
+                            <td>{{selected.provider}}</td>
+                            <td>{{selected.quantity}}</td>
+                            <td><button class="ui button" (click)="deleteProduct(product.key, selected.product.id)">Borrar</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -97,7 +89,7 @@
         </div>
     </ng-container>
     <ng-template #noProductsSelectedTemplate>
-        <div class="row">    
+        <div class="row">
             <table class="ui celled table">
                 <thead>
                     <tr>
@@ -109,7 +101,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="5"><h3>No hay productos seleccionados</h3></td>                                                       
+                        <td colspan="5">
+                            <h3>No hay productos seleccionados</h3>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -118,14 +112,15 @@
     <div class="row">
         <div class="column">
             <span class="total">Total:</span>
-            <span class="total">${{total | number: '1.2-5'}}</span>                                                       
+            <span class="total">${{total | number: '1.2-5'}}</span>
         </div>
     </div>
 
     <div class="row">
         <div class="column">
-            <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="buy()">Generar orden de compra</sm-button>
+            <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="buy()">Generar orden de
+                compra</sm-button>
         </div>
     </div>
 </div>
-<simple-notifications *ngIf="options" [options]="options"></simple-notifications>          
+<simple-notifications *ngIf="options" [options]="options"></simple-notifications>

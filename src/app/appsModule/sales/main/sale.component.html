@@ -41,6 +41,9 @@
                                 [control]="saleForm.controls.quantity" 
                                 placeholder="Ingresar Cantidad">
                             </sm-input>
+                            <div class="has-error" *ngIf="saleForm.get('quantity').hasError('min') && saleForm.get('quantity').dirty">
+                                La cantidad no puede ser negativa
+                            </div>
                         </div>
                         <div class="column formItem">
                             <sm-input 

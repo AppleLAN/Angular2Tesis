@@ -54,7 +54,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.saleForm = this.fb.group({
       product: ['', [Validators.required]],
       client_id: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
+      quantity: ['', [Validators.required, Validators.min(0)]],
       paymentMethods: ['', [Validators.required]],
       saleDate: ['', [Validators.required]]
     });

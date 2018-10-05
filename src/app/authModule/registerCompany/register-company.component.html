@@ -39,6 +39,9 @@
                         <div class="has-error" *ngIf="userForm.get('email').hasError('required') && userForm.get('email').dirty">
                             E-mail no ingresado
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('email').hasError('email') && userForm.get('email').dirty">
+                            Por favor ingrese un email valido
+                        </div>
                         <div class="has-error" *ngIf="userForm.get('email').hasError('minlength') && userForm.get('email').dirty">
                             Minimo 6 caracteres
                         </div>
@@ -67,6 +70,9 @@
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('required') && userForm.get('codigoPostal').dirty">
                             Codigo postal no ingresado
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('min') && userForm.get('codigoPostal').dirty">
+                            Codigo postal no puede ser negativo
                         </div>
                         <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('minlength') && userForm.get('codigoPostal').dirty">
                             Minimo 4 caracteres
@@ -111,6 +117,9 @@
                         <div class="has-error" *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').dirty">
                             Telefono no ingresado
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('telephone').hasError('min') && userForm.get('telephone').dirty">
+                            Telefono no puede ser negativo
+                        </div>
                         <div class="has-error" *ngIf="userForm.get('telephone').hasError('minlength') && userForm.get('telephone').dirty">
                             9 caracteres
                         </div>
@@ -124,6 +133,9 @@
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('cuit').hasError('required') && userForm.get('cuit').dirty">
                             C.U.I.T no ingresado
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('cuit').hasError('min') && userForm.get('cuit').dirty">
+                            C.U.I.T no puede ser negativo
                         </div>
                         <div class="has-error" *ngIf="userForm.get('cuit').hasError('minlength') && userForm.get('cuit').dirty">
                             11 caracteres
@@ -226,6 +238,9 @@
                         <div class="has-error" *ngIf="userForm.get('precioLista').hasError('required') && userForm.get('precioLista').dirty">
                             Precio lista no ingresado
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('precioLista').hasError('min') && userForm.get('precioLista').dirty">
+                            Precio no puede ser negativo
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -250,6 +265,9 @@
                         <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('required') && userForm.get('limiteDeCredito').dirty">
                             Limite de credito no ingresada
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('min') && userForm.get('limiteDeCredito').dirty">
+                            Limite de credito no puede ser negativo
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -258,6 +276,9 @@
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('required') && userForm.get('numeroDeInscripcionesIB').dirty">
                             Numero de inscripciones ingresos brutos no ingresado
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('min') && userForm.get('numeroDeInscripcionesIB').dirty">
+                            Numero de inscripciones ingresos brutos no puede ser negativo
                         </div>
                     </div>
 
