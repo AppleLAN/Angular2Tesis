@@ -12,9 +12,7 @@ export class AppComponent implements OnInit {
   constructor(public spinnerService: SpinnerService) {}
 
   ngOnInit() {
-    console.log('loaded');
     this.spinnerService.loaderStatus.subscribe(state => {
-      console.log('subscribe');
       setTimeout(() => {
         this.show = state.show;
       }, 0);
