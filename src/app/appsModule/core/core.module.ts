@@ -14,13 +14,15 @@ import { SpinnerModule } from '../shared/spinner/spinner.module';
 import { httpFactory } from './service/api';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidebarComponent } from './views/sidebar//sidebar.component';
+import { NotFoundComponent } from './../../not-found.component';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     NavbarComponent,
     ProfileModal,
-    ChartComponent
+    ChartComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
   exports: [
     SidebarComponent,
     NavbarComponent,
+    NotFoundComponent,
     ProfileModal,
     HttpModule,
     NgSemanticModule,

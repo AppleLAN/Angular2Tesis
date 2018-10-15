@@ -1,10 +1,10 @@
-import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../services/auth.guard';
-import { StockMainComponent } from './stock.main.component';
-import { StockGridComponent } from './grid/stock.grid.component';
 import { StockChartsCardsComponent } from './charts/stock.charts.cards.component';
 import { StockChartsComponent } from './charts/stock.charts.component';
+import { StockGridComponent } from './grid/stock.grid.component';
+import { StockMainComponent } from './stock.main.component';
 
 // Route Configuration
 export const routes: Routes = [

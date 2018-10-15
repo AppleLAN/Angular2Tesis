@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterCompanyComponent } from './registerCompany/register-company.component';
 import { HasCompanyGuard } from './../services/company.guard';
+import { HasUserGuard } from './../services/hasUser.guard';
 
 // Route Configuration
 export const routes: Routes = [
@@ -16,7 +17,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'apps', loadChildren: './../appsModule/apps.module#AppsModule', canActivate: [HasCompanyGuard]},
-  { path: 'register-company', component: RegisterCompanyComponent}
+  { path: 'register-company', component: RegisterCompanyComponent, canActivate: [HasUserGuard]}
 ];
 
 // Deprecated provide

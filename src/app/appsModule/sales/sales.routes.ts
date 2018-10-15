@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SalesMainComponent } from './sales-main.component';
 
 // Route Configuration
@@ -8,4 +8,3 @@ export const routes: Routes = [
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
-

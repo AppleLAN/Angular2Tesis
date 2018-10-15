@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found.component';
 export const routes: Routes = [
   { path: '', loadChildren: './authModule/auth.module#AuthModule' },
   { path: '**', redirectTo: '/notfound' },
-  { path: 'notfound', component: NotFoundComponent },  
+  { path: 'notfound', component: NotFoundComponent }
 ];
 
 // Deprecated provide

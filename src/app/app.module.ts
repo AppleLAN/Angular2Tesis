@@ -7,12 +7,10 @@ import { routing } from './app.routes';
 
 import { UserAuthenticationService } from './services/user-authentication.service';
 import { AuthGuard } from './services/auth.guard';
-import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NotFoundComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

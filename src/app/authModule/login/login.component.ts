@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem('currentUser');
     this.loginForm = this.fb.group({
       email: [
         '',

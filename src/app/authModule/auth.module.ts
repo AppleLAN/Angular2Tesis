@@ -16,6 +16,7 @@ import { UserAuthenticationService } from '../services/user-authentication.servi
 import { UserService } from './../services/user.service';
 import { AuthGuard } from '../services/auth.guard';
 import { HasCompanyGuard } from '../services/company.guard';
+import { HasUserGuard } from '../services/hasUser.guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { HasCompanyGuard } from '../services/company.guard';
     CoreModule,
     StoreModule.provideStore([])
   ],
-  providers: [AuthGuard, HasCompanyGuard, UserService, UserAuthenticationService],
+  providers: [AuthGuard, HasCompanyGuard, HasUserGuard, UserService, UserAuthenticationService],
   bootstrap: [ AuthComponent]
 })
 export class AuthModule { }

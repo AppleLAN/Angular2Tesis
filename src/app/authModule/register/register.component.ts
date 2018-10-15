@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem('currentUser');
     this.registerForm = this.fb.group({
       username: [
         '',

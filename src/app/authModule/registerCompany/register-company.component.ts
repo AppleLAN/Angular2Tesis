@@ -139,7 +139,10 @@ export class RegisterCompanyComponent implements OnInit {
         this.userForm.setValue(this.userData.company);
       }
     });
-    this.userService.getProfileInfo().subscribe();
+    this.userService.getProfileInfo().subscribe(
+      r => {},
+      error => this.ns.error('Error!', error)
+    );
   }
 
   updateClientCompany({ value }: { value: Client }) {

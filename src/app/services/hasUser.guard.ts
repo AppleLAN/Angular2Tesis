@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Injectable()
-export class HasCompanyGuard implements CanActivate {
+export class HasUserGuard implements CanActivate {
   constructor(
     private router: Router,
     private userService: UserService,
@@ -18,14 +18,11 @@ export class HasCompanyGuard implements CanActivate {
       return this.userService.getProfileInfo().map(
         response => {
           if (response) {
-            // login successful
             if (response.profile.company_id === null) {
-              this.router.navigate(['/register-company']);
-            } else {
               return true;
+            } else {
+              this.router.navigate(['/**']);
             }
-          } else {
-            return false;
           }
         },
         (error: any) => this.ns.error('Error!', error)

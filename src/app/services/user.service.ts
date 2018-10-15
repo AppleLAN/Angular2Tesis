@@ -6,7 +6,11 @@ import { CompleteUser } from '../interfaces/complete.user';
 
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { NEWUSER, NEWCOMPANY, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
+import {
+  NEWUSER,
+  NEWCOMPANY,
+  NEWUSERPROFILE
+} from './../appsModule/shared/reducers/user.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -14,21 +18,22 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService {
-  token: string;
+  token: string;
   headers: Headers;
-  options: RequestOptions
+  options: RequestOptions;
   userStorage: Observable<CompleteUser>;
-;
+
   constructor(private store: Store<User>, private api: Http) {
     this.userStorage = store.select('user');
-   }
+  }
 
   getUserStorage(): Observable<CompleteUser> {
-      return this.userStorage;
+    return this.userStorage;
   }
 
   getUserApps(): Observable<any> {
-    return this.api.get('https://contaduriabackend.herokuapp.com/api/getUserApps')
+    return this.api
+      .get('https://contaduriabackend.herokuapp.com/api/getUserApps')
       .map((response: any) => {
         return response.json().apps;
       })
@@ -36,49 +41,59 @@ export class UserService {
   }
 
   getProfileInfo(): Observable<any> {
-    return this.api.get(
-      'https://contaduriabackend.herokuapp.com/api/getProfileInfo')
-        .map((response: Response) => {
-            this.store.dispatch({ type: NEWUSER, payload: response.json()});
-            return response.json();
-        })
-        .catch((error: any) => Observable.throw(error || 'Server error')
-        );
+    return this.api
+      .get('https://contaduriabackend.herokuapp.com/api/getProfileInfo')
+      .map((response: Response) => {
+        this.store.dispatch({ type: NEWUSER, payload: response.json() });
+        return response.json();
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   updateClientInfo(user: User): Observable<Object[]> {
-    return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserProfile', user)
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/updateUserProfile',
+        user
+      )
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWUSERPROFILE, payload: user});
+        this.store.dispatch({ type: NEWUSERPROFILE, payload: user });
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   createSubClient(user: User): Observable<Object[]> {
-  return this.api.post('https://contaduriabackend.herokuapp.com/api/createInternalUser', user)
-    .map((response: Response) => {
-      return response.json();
-    })
-    .catch((error: any) => Observable.throw(error || 'Server error'));
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/createInternalUser',
+        user
+      )
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   updateClientCompany(company: Client): Observable<Object[]> {
-    return this.api.post('https://contaduriabackend.herokuapp.com/api/updateUserCompany', company)
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/updateUserCompany',
+        company
+      )
       .map((response: Response) => {
         delete company.type;
-        this.store.dispatch({ type: NEWCOMPANY, payload: company});
+        this.store.dispatch({ type: NEWCOMPANY, payload: company });
         return response.json();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   deleteUser(user: User): Observable<Object[]> {
-    return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteUser', user)
+    return this.api
+      .post('https://contaduriabackend.herokuapp.com/api/deleteUser', user)
       .map((response: Response) => {
         return response.json();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
-
-
+  }
 }

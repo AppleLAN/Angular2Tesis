@@ -209,7 +209,10 @@ export class ProfileModal implements OnInit {
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.setFormData(state);
     });
-    this.userService.getProfileInfo().subscribe();
+    this.userService.getProfileInfo().subscribe(
+      response => {},
+      error => this.ns.error('Error!', error)
+    );
   }
 
   private setFormData(state: CompleteUser) {
