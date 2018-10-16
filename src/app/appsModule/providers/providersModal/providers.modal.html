@@ -127,10 +127,10 @@
                 </div>
 
                 <div class="form-group field">
-                    <sm-input type="number" label="C.U.I.T" [control]="providerForm.controls.cuit" placeholder="Ingresar C.U.I.T">
+                    <sm-input type="number" label="C.U.I.T (solo números)" [control]="providerForm.controls.cuit" placeholder="Ingresar C.U.I.T">
                     </sm-input>
                     <div class="has-error" *ngIf="providerForm.get('cuit').hasError('required') && providerForm.get('cuit').dirty">
-                        C.U.I.T no ingresado
+                        C.U.I.T no ingresado o inválido
                     </div>
                     <div class="has-error" *ngIf="providerForm.get('cuit').hasError('min') && providerForm.get('cuit').dirty">
                         C.U.I.T no puede ser negativo
