@@ -90,6 +90,9 @@
                     <div class="has-error" *ngIf="clientForm.get('codigoProvincia').hasError('maxlength') && clientForm.get('codigoProvincia').dirty">
                         Maximo 30 caracteres
                     </div>
+                    <div class="has-error" *ngIf="clientForm.get('codigoProvincia').hasError('min') && clientForm.get('codigoProvincia').dirty">
+                        Codigo provincia no puede ser negativo
+                    </div>
                 </div>
 
                 <div class="form-group field">
@@ -161,9 +164,6 @@
                     </div>
                     <div class="has-error" *ngIf="clientForm.get('iib').hasError('minlength') && clientForm.get('iib').dirty">
                         Minimo 6 caracteres
-                    </div>
-                    <div class="has-error" *ngIf="clientForm.get('iib').hasError('maxlength') && clientForm.get('iib').dirty">
-                        Maximo 30 caracteres
                     </div>
                 </div>
 
@@ -289,6 +289,9 @@
                     </div>
                     <div class="has-error" *ngIf="clientForm.get('cuentasGenerales').hasError('minlength') && clientForm.get('cuentasGenerales').dirty">
                         Minimo 6 caracteres
+                    </div>
+                    <div class="has-error" *ngIf="clientForm.get('cuentasGenerales').hasError('min') && clientForm.get('cuentasGenerales').dirty">
+                        Cuentas Generales no puede ser negativo
                     </div>
                 </div>
 

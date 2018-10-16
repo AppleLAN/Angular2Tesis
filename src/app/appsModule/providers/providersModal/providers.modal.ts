@@ -73,7 +73,7 @@ export class ProviderModal implements OnInit {
       ],
       codigoProvincia: [
         '',
-        [Validators.minLength(4), Validators.maxLength(30)]
+        [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
       ],
       address: [
         '',
@@ -98,10 +98,7 @@ export class ProviderModal implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      iib: ['', [Validators.required, Validators.minLength(6)]],
       pib: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
@@ -121,8 +118,11 @@ export class ProviderModal implements OnInit {
       ],
       limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
       numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0)]],
-      cuentasGenerales: ['', [Validators.required, Validators.minLength(6)]],
-      percepcionDeGanancia: ['', [Validators.required]]
+      cuentasGenerales: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.min(0)]
+      ],
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0)]]
     });
     this.providerStorage = this.providersService.getProviderStorage();
     this.providersService.getProviders().subscribe();

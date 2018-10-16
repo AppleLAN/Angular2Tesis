@@ -90,6 +90,9 @@
                     <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('maxlength') && providerForm.get('codigoProvincia').dirty">
                         Maximo 30 caracteres
                     </div>
+                    <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('min') && providerForm.get('codigoProvincia').dirty">
+                        Codigo provincia no puede ser negativo
+                    </div>
                 </div>
 
                 <div class="form-group field">
@@ -160,9 +163,6 @@
                     </div>
                     <div class="has-error" *ngIf="providerForm.get('iib').hasError('minlength') && providerForm.get('iib').dirty">
                         Minimo 6 caracteres
-                    </div>
-                    <div class="has-error" *ngIf="providerForm.get('iib').hasError('maxlength') && providerForm.get('iib').dirty">
-                        Maximo 30 caracteres
                     </div>
                 </div>
 
@@ -289,6 +289,9 @@
                     <div class="has-error" *ngIf="providerForm.get('cuentasGenerales').hasError('minlength') && providerForm.get('cuentasGenerales').dirty">
                         Minimo 6 caracteres
                     </div>
+                    <div class="has-error" *ngIf="providerForm.get('cuentasGenerales').hasError('min') && providerForm.get('cuentasGenerales').dirty">
+                        Cuentas Generales no puede ser negativo
+                    </div>
                 </div>
 
                 <div class="form-group field">
@@ -297,6 +300,9 @@
                     </sm-input>
                     <div class="has-error" *ngIf="providerForm.get('percepcionDeGanancia').hasError('required') && providerForm.get('percepcionDeGanancia').dirty">
                         Percepcion De Ganancia no ingresada
+                    </div>
+                    <div class="has-error" *ngIf="providerForm.get('percepcionDeGanancia').hasError('min') && providerForm.get('percepcionDeGanancia').dirty">
+                        Percepcion De Ganancia no puede ser negativo
                     </div>
                 </div>
             </div>

@@ -73,7 +73,7 @@ export class ProfileModal implements OnInit {
       ],
       codigoProvincia: [
         '',
-        [Validators.minLength(4), Validators.maxLength(30)]
+        [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
       ],
       address: [
         '',
@@ -98,10 +98,7 @@ export class ProfileModal implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      iib: ['', [Validators.required, Validators.minLength(6)]],
       pib: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
@@ -114,30 +111,21 @@ export class ProfileModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
-      ],
+      precioLista: ['', [Validators.required, Validators.min(0)]],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
-      ],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
       numeroDeInscripcionesIB: [
         '',
         [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(6), Validators.min(0)]
       ],
-      percepcionDeGanancia: [
-        '',
-        [Validators.required, Validators.maxLength(30)]
-      ]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0)]]
     });
 
     this.registerForm = this.fb.group({
@@ -209,10 +197,9 @@ export class ProfileModal implements OnInit {
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.setFormData(state);
     });
-    this.userService.getProfileInfo().subscribe(
-      response => {},
-      error => this.ns.error('Error!', error)
-    );
+    this.userService
+      .getProfileInfo()
+      .subscribe(response => {}, error => this.ns.error('Error!', error));
   }
 
   private setFormData(state: CompleteUser) {

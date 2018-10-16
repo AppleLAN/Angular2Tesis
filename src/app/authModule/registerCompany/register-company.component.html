@@ -95,6 +95,9 @@
                         <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('maxlength') && userForm.get('codigoProvincia').dirty">
                             Maximo 30 caracteres
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('min') && userForm.get('codigoProvincia').dirty">
+                            Codigo provincia no puede ser negativo
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -165,9 +168,6 @@
                         </div>
                         <div class="has-error" *ngIf="userForm.get('iib').hasError('minlength') && userForm.get('iib').dirty">
                             Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('iib').hasError('maxlength') && userForm.get('iib').dirty">
-                            Maximo 30 caracteres
                         </div>
                     </div>
 
@@ -292,6 +292,9 @@
                         <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('minlength') && userForm.get('cuentasGenerales').dirty">
                             Minimo 6 caracteres
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('min') && userForm.get('cuentasGenerales').dirty">
+                            Cuentas Generales no puede ser negativo
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -300,6 +303,9 @@
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('required') && userForm.get('percepcionDeGanancia').dirty">
                             Percepcion De Ganancia no ingresada
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('min') && userForm.get('percepcionDeGanancia').dirty">
+                            Percepcion De Ganancia no puede ser negativo
                         </div>
                     </div>
 
