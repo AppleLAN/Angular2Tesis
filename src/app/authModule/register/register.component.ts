@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
         '',
         [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      address: ['', [Validators.required, Validators.minLength(3)]],
+      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       birthday: ['', [Validators.required, this.dateValidator]],
       sales: [''],
       stock: [''],

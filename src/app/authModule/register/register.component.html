@@ -82,6 +82,9 @@
                         <div class="has-error" *ngIf="registerForm.get('address').hasError('minlength') && registerForm.get('address').dirty">
                             Minimo 3 caracteres
                         </div>
+                        <div class="has-error" *ngIf="registerForm.get('address').hasError('maxlength') && registerForm.get('address').dirty">
+                            Maximo 30 caracteres
+                        </div>
                     </div>
                     <div class="form-group field">
                         <sm-input type="date" label="Fecha de nacimiento" [control]="registerForm.controls.birthday"
