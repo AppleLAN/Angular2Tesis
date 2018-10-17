@@ -112,7 +112,7 @@ export class RegisterCompanyComponent implements OnInit {
       limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
       numeroDeInscripcionesIB: [
         '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+        [Validators.required, Validators.min(0)]
       ],
       cuentasGenerales: [
         '',
