@@ -6,6 +6,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
+import { NotAuthComponent } from './not-auth.component';
 
 // Route Configuration
 export const routes: Routes = [

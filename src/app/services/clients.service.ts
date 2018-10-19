@@ -1,13 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions, Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { Client } from '../interfaces/client';
-import { NEWCLIENTS, ADDCLIENT, DELETECLIENT, CHANGECLIENT } from './../appsModule/clients/reducers/grid.reducer';
-
+import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Rx';
+import { Client } from '../interfaces/client';
+import { ADDCLIENT, CHANGECLIENT, DELETECLIENT, NEWCLIENTS } from './../appsModule/clients/reducers/grid.reducer';
+
 
 @Injectable()
 export class ClientsService {
@@ -15,7 +16,7 @@ export class ClientsService {
   headers: Headers;
   options: RequestOptions;
   clientStorage: Observable<Client[]>;
-  constructor(private store: Store<Client>, private api: Http) {
+  constructor(private store: Store<Client>, private api: HttpClient) {
         this.clientStorage = store.select('clients');
     }
     getClientStorage(): Observable<Client[]> {
@@ -25,7 +26,7 @@ export class ClientsService {
     getClients(): Observable<Client> {
         return this.api.get('https://contaduriabackend.herokuapp.com/api/getClients')
             .map((response: Response) => {
-                this.store.dispatch({ type: NEWCLIENTS, payload: response.json()});
+                this.store.dispatch({ type: NEWCLIENTS, payload: response});
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -42,7 +43,7 @@ export class ClientsService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/saveClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
-                return response.json();
+                return response;
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
@@ -51,7 +52,7 @@ export class ClientsService {
         return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
-                return response.json();
+                return response;
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

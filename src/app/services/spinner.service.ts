@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export interface LoaderState {
   show: boolean;
@@ -7,7 +7,7 @@ export interface LoaderState {
 
 @Injectable()
 export class SpinnerService {
-  private loaderStatusState = new Subject<any>();
+  private loaderStatusState = new BehaviorSubject<any>(false);
   loaderStatus = this.loaderStatusState.asObservable();
 
   constructor() {}

@@ -3,58 +3,75 @@ import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Provider } from '../interfaces/provider';
-import { NEWPROVIDERS, ADDPROVIDER, DELETEPROVIDER, CHANGEPROVIDER } from './../appsModule/providers/reducers/grid.reducer';
+import {
+  NEWPROVIDERS,
+  ADDPROVIDER,
+  DELETEPROVIDER,
+  CHANGEPROVIDER
+} from './../appsModule/providers/reducers/grid.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProvidersService {
-  token: string;
+  token: string;
   headers: Headers;
-  options: RequestOptions;
+  options: RequestOptions;
   providerStorage: Observable<Provider[]>;
-  constructor(private store: Store<Provider>, private api: Http) {
-        this.providerStorage = store.select('providers');
-    }
-    getProviderStorage(): Observable<Provider[]> {
-        return this.providerStorage;
-    }
+  constructor(private store: Store<Provider>, private api: HttpClient) {
+    this.providerStorage = store.select('providers');
+  }
+  getProviderStorage(): Observable<Provider[]> {
+    return this.providerStorage;
+  }
 
-    getProviders(): Observable<Provider[]> {
-        return this.api.get('https://contaduriabackend.herokuapp.com/api/getProviders')
-            .map((response: Response) => {
-                this.store.dispatch({ type: NEWPROVIDERS, payload: response.json()});
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  getProviders(): Observable<Provider[]> {
+    return this.api
+      .get('https://contaduriabackend.herokuapp.com/api/getProviders')
+      .map((response: Response) => {
+        this.store.dispatch({ type: NEWPROVIDERS, payload: response });
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    updateProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/updateProvider', newProvider)
-            .map((response: Response) => {
-                this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider});
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  updateProvider(newProvider: Provider): Observable<Provider> {
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/updateProvider',
+        newProvider
+      )
+      .map((response: Response) => {
+        this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider });
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    addProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveProvider', newProvider)
-            .map((response: Response) => {
-                this.store.dispatch({ type: ADDPROVIDER, payload: newProvider});
-                return response.json();
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  addProvider(newProvider: Provider): Observable<Provider> {
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/saveProvider',
+        newProvider
+      )
+      .map((response: Response) => {
+        this.store.dispatch({ type: ADDPROVIDER, payload: newProvider });
+        return response;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    deleteProvider(newProvider: Provider): Observable<Provider> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteProvider', newProvider)
-            .map((response: Response) => {
-                this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider});
-                return response.json();
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
-
-
+  deleteProvider(newProvider: Provider): Observable<Provider> {
+    return this.api
+      .post(
+        'https://contaduriabackend.herokuapp.com/api/deleteProvider',
+        newProvider
+      )
+      .map((response: Response) => {
+        this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider });
+        return response;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 }

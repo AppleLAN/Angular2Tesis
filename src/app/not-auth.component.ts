@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from './services/auth.guard';
 
 @Component({
   selector: 'app-not-found',
@@ -33,10 +32,10 @@ import { AuthGuard } from './services/auth.guard';
     <div id="notfound">
       <div class="notfound">
         <div class="notfound-404">
-          <h1>4<span>0</span>4</h1>
+          <h1>4<span>0</span>1</h1>
         </div>
-        <p>La pagina que busca no ha sido encontrada.</p>
-        <a href="/apps/home">volver</a>
+        <p>Sesión expirada.</p>
+        <a href="/login">volver</a>
       </div>
     </div>
 
@@ -45,13 +44,8 @@ import { AuthGuard } from './services/auth.guard';
   </html>
   `
 })
-export class NotFoundComponent implements OnInit {
-  route: string;
-  constructor(private authGuard: AuthGuard) {}
+export class NotAuthComponent implements OnInit {
+  constructor() {}
 
-  ngOnInit() {
-    if (this.authGuard.canActivate()) {
-      this.route = '/apps/home';
-    }
-  }
+  ngOnInit() {}
 }

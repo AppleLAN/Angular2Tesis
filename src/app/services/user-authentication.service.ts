@@ -1,18 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
-import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-
+import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { User } from '../interfaces/user';
 
 @Injectable()
 export class UserAuthenticationService {
   public token: string;
 
-  constructor(private router: Router, private api: Http) {}
+  constructor(private router: Router, private api: HttpClient) {}
 
   signIn(userInfo: User): Observable<boolean> {
     // ...using get request
@@ -23,7 +22,7 @@ export class UserAuthenticationService {
         userInfo
       )
       .map((response: any) => {
-        const token = response.json() && response.json().token;
+        const token = response && response.token;
         if (token) {
           // set token property
           this.token = token;
@@ -46,7 +45,7 @@ export class UserAuthenticationService {
     return this.api
       .post('https://contaduriabackend.herokuapp.com/api/signup', userInfo)
       .map((response: any) => {
-        const token = response.json() && response.json().token;
+        const token = response && response.token;
         if (token) {
           // set token property
           this.token = token;

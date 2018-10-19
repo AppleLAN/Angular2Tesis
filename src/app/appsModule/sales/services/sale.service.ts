@@ -34,7 +34,7 @@ export class SaleService {
         addedProducts
       )
       .map((response: Response) => {
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -46,7 +46,7 @@ export class SaleService {
         addedProducts
       )
       .map((response: Response) => {
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -63,8 +63,8 @@ export class SaleService {
     return this.api
       .get('https://contaduriabackend.herokuapp.com/api/getBuyOrders')
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWORDERS, payload: response.json() });
-        return response.json();
+        this.store.dispatch({ type: NEWORDERS, payload: response });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -73,8 +73,8 @@ export class SaleService {
     return this.api
       .get('https://contaduriabackend.herokuapp.com/api/saleInformation')
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWSALES, payload: response.json() });
-        return response.json();
+        this.store.dispatch({ type: NEWSALES, payload: response });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -86,7 +86,7 @@ export class SaleService {
       })
       .map((response: Response) => {
         this.store.dispatch({ type: DELETEORDER, payload: order });
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -99,7 +99,7 @@ export class SaleService {
       .map((response: Response) => {
         order.status = 'R';
         this.store.dispatch({ type: CHANGEORDER, payload: order });
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }

@@ -1,20 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions, Http } from '@angular/http';
-import { User } from '../interfaces/user';
-import { Client } from '../interfaces/client';
-import { CompleteUser } from '../interfaces/complete.user';
-
-import { Observable } from 'rxjs/Rx';
+import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import {
-  NEWUSER,
-  NEWCOMPANY,
-  NEWUSERPROFILE
-} from './../appsModule/shared/reducers/user.reducer';
-
+import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Rx';
+import { Client } from '../interfaces/client';
+import { CompleteUser } from '../interfaces/complete.user';
+import { User } from '../interfaces/user';
+import {
+  NEWCOMPANY,
+  NEWUSER,
+  NEWUSERPROFILE
+} from './../appsModule/shared/reducers/user.reducer';
 
 @Injectable()
 export class UserService {
@@ -23,7 +22,7 @@ export class UserService {
   options: RequestOptions;
   userStorage: Observable<CompleteUser>;
 
-  constructor(private store: Store<User>, private api: Http) {
+  constructor(private store: Store<User>, private api: HttpClient) {
     this.userStorage = store.select('user');
   }
 
@@ -35,7 +34,7 @@ export class UserService {
     return this.api
       .get('https://contaduriabackend.herokuapp.com/api/getUserApps')
       .map((response: any) => {
-        return response.json().apps;
+        return response.apps;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -44,8 +43,8 @@ export class UserService {
     return this.api
       .get('https://contaduriabackend.herokuapp.com/api/getProfileInfo')
       .map((response: Response) => {
-        this.store.dispatch({ type: NEWUSER, payload: response.json() });
-        return response.json();
+        this.store.dispatch({ type: NEWUSER, payload: response });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -69,7 +68,7 @@ export class UserService {
         user
       )
       .map((response: Response) => {
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -83,7 +82,7 @@ export class UserService {
       .map((response: Response) => {
         delete company.type;
         this.store.dispatch({ type: NEWCOMPANY, payload: company });
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -92,7 +91,7 @@ export class UserService {
     return this.api
       .post('https://contaduriabackend.herokuapp.com/api/deleteUser', user)
       .map((response: Response) => {
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }

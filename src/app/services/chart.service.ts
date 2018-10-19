@@ -1,12 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions, Http } from '@angular/http';
-
-import { Observable } from 'rxjs/Rx';
+import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-
+import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Rx';
 import {
   NEWCLIENTCHARTDATA,
   NEWPROVIDERCHARTDATA,
@@ -20,7 +19,7 @@ export class ChartService {
   options: RequestOptions;
   chartStorage: Observable<any>;
 
-  constructor(private store: Store<any>, private api: Http) {
+  constructor(private store: Store<any>, private api: HttpClient) {
     this.chartStorage = store.select('chart');
   }
 
@@ -31,7 +30,7 @@ export class ChartService {
         params
       )
       .map((response: Response) => {
-        return response.json();
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
