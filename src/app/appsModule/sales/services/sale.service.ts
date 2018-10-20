@@ -1,28 +1,24 @@
-import {
-  CHANGEORDER,
-  DELETEORDER,
-  NEWORDERS,
-  OrdersState
-} from '../reducers/order.reducer';
-import { NEWSALES, SaleState } from '../reducers/sale.reducer';
-
-import { Order } from '../../../interfaces/order';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Response, Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { NewBuy, NewSale } from '../../../interfaces/stock';
+import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-
+import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/Rx';
+import { Order } from '../../../interfaces/order';
+import { NewBuy, NewSale } from '../../../interfaces/stock';
+import { CHANGEORDER, DELETEORDER, NEWORDERS, OrdersState } from '../reducers/order.reducer';
+import { NEWSALES, SaleState } from '../reducers/sale.reducer';
+
+
 
 @Injectable()
 export class SaleService {
   orderStorage: Observable<OrdersState>;
   saleStorage: Observable<SaleState>;
 
-  constructor(private api: Http, private store: Store<OrdersState>) {
+  constructor(private api: HttpClient, private store: Store<OrdersState>) {
     this.orderStorage = store.select('orders');
     this.saleStorage = store.select('sales');
   }
