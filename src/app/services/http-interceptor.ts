@@ -31,12 +31,14 @@ export class HttpApiInterceptor implements HttpInterceptor {
       map((ev: HttpEvent<any>) => {
         return ev;
       }),
-      catchError(response => {
-        if (response.status === 401) {
-          localStorage.removeItem('currentUser');
-          this.router.navigate(['/no-auth']);
+      catchError(error => {
+        if (error.status === 401) {
+          if (!error.error.includes('invalid_credentials')) {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/no-auth']);
+          }
         }
-        return Observable.throw(response);
+        return Observable.throw(error);
       })
     );
   }

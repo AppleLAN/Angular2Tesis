@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="form-group field">
-                        <sm-input type="text" label="Codigo Provincia" [control]="userForm.controls.codigoProvincia"
+                        <sm-input type="number" label="Codigo Provincia" [control]="userForm.controls.codigoProvincia"
                             placeholder="Ingresar codigo postal">
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty">
@@ -124,15 +124,16 @@
                             Telefono no puede ser negativo
                         </div>
                         <div class="has-error" *ngIf="userForm.get('telephone').hasError('minlength') && userForm.get('telephone').dirty">
-                            9 caracteres
+                            Minimo 9 caracteres
                         </div>
                         <div class="has-error" *ngIf="userForm.get('telephone').hasError('maxlength') && userForm.get('telephone').dirty">
-                            9 caracteres
+                            Maximo 9 caracteres
                         </div>
                     </div>
 
                     <div class="form-group field">
-                        <sm-input type="number" label="C.U.I.T (solo números)" [control]="userForm.controls.cuit" placeholder="Ingresar C.U.I.T">
+                        <sm-input type="number" label="C.U.I.T (solo números)" [control]="userForm.controls.cuit"
+                            placeholder="Ingresar C.U.I.T">
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('cuit').hasError('required') && userForm.get('cuit').dirty">
                             C.U.I.T no ingresado o inválido
@@ -141,10 +142,10 @@
                             C.U.I.T no puede ser negativo
                         </div>
                         <div class="has-error" *ngIf="userForm.get('cuit').hasError('minlength') && userForm.get('cuit').dirty">
-                            11 caracteres
+                            Minimo 11 caracteres
                         </div>
                         <div class="has-error" *ngIf="userForm.get('cuit').hasError('maxlength') && userForm.get('cuit').dirty">
-                            11 caracteres
+                            Maximo 11 caracteres
                         </div>
                     </div>
 
@@ -168,6 +169,9 @@
                         </div>
                         <div class="has-error" *ngIf="userForm.get('iib').hasError('minlength') && userForm.get('iib').dirty">
                             Minimo 6 caracteres
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('iib').hasError('maxlength') && userForm.get('iib').dirty">
+                            Maximo 30 caracteres
                         </div>
                     </div>
 
@@ -241,6 +245,9 @@
                         <div class="has-error" *ngIf="userForm.get('precioLista').hasError('min') && userForm.get('precioLista').dirty">
                             Precio no puede ser negativo
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('precioLista').hasError('maxlength') && userForm.get('precioLista').dirty">
+                            Maximo 30 caracteres
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -268,6 +275,9 @@
                         <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('min') && userForm.get('limiteDeCredito').dirty">
                             Limite de credito no puede ser negativo
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('maxlength') && userForm.get('limiteDeCredito').dirty">
+                            Maximo 30 caracteres
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -279,6 +289,9 @@
                         </div>
                         <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('min') && userForm.get('numeroDeInscripcionesIB').dirty">
                             Numero de inscripciones ingresos brutos no puede ser negativo
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('maxlength') && userForm.get('numeroDeInscripcionesIB').dirty">
+                            Maximo 30 caracteres
                         </div>
                     </div>
 
@@ -295,6 +308,9 @@
                         <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('min') && userForm.get('cuentasGenerales').dirty">
                             Cuentas Generales no puede ser negativo
                         </div>
+                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('maxlength') && userForm.get('cuentasGenerales').dirty">
+                            Maximo 30 caracteres
+                        </div>
                     </div>
 
                     <div class="form-group field">
@@ -306,6 +322,9 @@
                         </div>
                         <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('min') && userForm.get('percepcionDeGanancia').dirty">
                             Percepcion De Ganancia no puede ser negativo
+                        </div>
+                        <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('maxlength') && userForm.get('percepcionDeGanancia').dirty">
+                            Maximo 30 caracteres
                         </div>
                     </div>
 

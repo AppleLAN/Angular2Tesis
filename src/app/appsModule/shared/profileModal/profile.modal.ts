@@ -111,21 +111,21 @@ export class ProfileModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0)]],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       numeroDeInscripcionesIB: [
         '',
-        [Validators.required, Validators.min(0)]
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0)]
+        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0)]]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
     });
 
     this.registerForm = this.fb.group({
@@ -151,13 +151,13 @@ export class ProfileModal implements OnInit {
           Validators.maxLength(30)
         ]
       ],
-      address: ['', [Validators.required, Validators.minLength(3)]],
+      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       birthday: ['', [Validators.required]],
       company_id: [''],
-      sales: [''],
-      stock: [''],
-      clients: [''],
-      providers: [''],
+      sales: [false],
+      stock: [false],
+      clients: [false],
+      providers: [false],
       isAdmin: ['']
     });
 
@@ -187,10 +187,10 @@ export class ProfileModal implements OnInit {
       address: ['', [Validators.required, Validators.minLength(3)]],
       birthday: ['', [Validators.required]],
       company_id: [''],
-      sales: [''],
-      stock: [''],
-      clients: [''],
-      providers: [''],
+      sales: [false],
+      stock: [false],
+      clients: [false],
+      providers: [false],
       isAdmin: ['']
     });
 
@@ -217,6 +217,13 @@ export class ProfileModal implements OnInit {
 
   showModal() {
     this.newSubUserForm.reset();
+    this.newSubUserForm.get('sales').setValue(false);
+    this.newSubUserForm.get('providers').setValue(false);
+    this.newSubUserForm.get('stock').setValue(false);
+    this.newSubUserForm.get('clients').setValue(false);
+    this.newSubUserForm.get('isAdmin').setValue(false);
+    this.newSubUserForm.get('company_id').setValue(this.userData.company.id);
+
     this.setFormData(this.userData);
     jQuery('.ui.modal.profile-modal').modal('show');
   }

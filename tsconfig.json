@@ -19,6 +19,7 @@
   "exclude": [
     "**/test/*",
     "./node_modules/*",
+    "./semantic/*",
     "*.html"
   ]
 }

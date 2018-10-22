@@ -91,7 +91,7 @@ export class RegisterCompanyComponent implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6)]],
+      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       pib: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
@@ -104,21 +104,21 @@ export class RegisterCompanyComponent implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0)]],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0)]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       numeroDeInscripcionesIB: [
         '',
-        [Validators.required, Validators.min(0)]
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0)]
+        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0)]]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
     });
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.userData = state;
