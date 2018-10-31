@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../interfaces/client';
+import { SharedService } from '../../services/shared.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { UserService } from '../../services/user.service';
 import { CompleteUser } from './../../interfaces/complete.user';
@@ -26,7 +32,8 @@ export class RegisterCompanyComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private spinnerService: SpinnerService,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private sharedService: SharedService
   ) {
     this.options = {
       timeOut: 3000,
@@ -91,7 +98,10 @@ export class RegisterCompanyComponent implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      iib: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+      ],
       pib: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
@@ -104,21 +114,35 @@ export class RegisterCompanyComponent implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      precioLista: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      limiteDeCredito: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ],
       numeroDeInscripcionesIB: [
         '',
         [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.min(0),
+          Validators.maxLength(30)
+        ]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
+      percepcionDeGanancia: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ]
     });
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.userData = state;
@@ -130,6 +154,10 @@ export class RegisterCompanyComponent implements OnInit {
     this.userService
       .getProfileInfo()
       .subscribe(r => {}, error => this.ns.error('Error!', error));
+  }
+
+  responsableChange(formControl: FormControl) {
+    this.sharedService.responsableChange(formControl, this.userForm);
   }
 
   updateClientCompany({ value }: { value: Client }) {
