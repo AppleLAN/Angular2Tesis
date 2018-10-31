@@ -1,22 +1,18 @@
-<div class="ui stackable container menu borderless inverted">
+<div *ngIf="userStorage | async; let user" class="ui stackable container menu borderless inverted">
     <div class="item brand">Semantic AF Contaduria</div>
     <a routerLink="/apps/home" routerLinkActive="active" class="item home">Inicio</a>
-    <ng-template ngFor let-app [ngForOf]="userApps">
-        <a routerLink="/apps/{{app.app}}" routerLinkActive="active" class="item" [ngSwitch]="app.app">
-            <ng-template [ngSwitchCase]="'clients'">
-                <i class="user icon"></i> Clientes
-            </ng-template>
-            <ng-template [ngSwitchCase]="'providers'">
-                <i class="handshake icon"></i> Proveedores
-            </ng-template>
-            <ng-template [ngSwitchCase]="'sales'">
-                <i class="dollar icon"></i> Operaciones
-            </ng-template>
-            <ng-template [ngSwitchCase]="'stock'">
-                <i class="database icon"></i> Stock
-            </ng-template>
-        </a>
-    </ng-template>
+    <a *ngIf="user.profile.sales" routerLink="/apps/sales" routerLinkActive="active" class="item">
+        <i class="user icon"></i> Operaciones
+    </a>
+    <a *ngIf="user.profile.stock" routerLink="/apps/stock" routerLinkActive="active" class="item">
+        <i class="user icon"></i> Stock
+    </a>
+    <a *ngIf="user.profile.clients" routerLink="/apps/clients" routerLinkActive="active" class="item">
+        <i class="user icon"></i> Clientes
+    </a>
+    <a *ngIf="user.profile.providers" routerLink="/apps/providers" routerLinkActive="active" class="item">
+        <i class="user icon"></i> Proveedores
+    </a>
     <div *ngIf="windowWidth < 767">
         <a (click)="profileModal.showModal()" class="item">Perfil</a>
         <a (click)="logOut()" class="item">Salir</a>

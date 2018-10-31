@@ -1,9 +1,17 @@
-import { AfterViewInit, Component, HostListener, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit,
+  Output,
+  ViewChild,
+  EventEmitter
+} from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { UserAuthenticationService } from '../../../../services/user-authentication.service';
 import { UserService } from '../../../../services/user.service';
-
+import { CompleteUser } from '../../../../interfaces/complete.user';
 
 declare var jQuery: any;
 @Component({
@@ -11,14 +19,14 @@ declare var jQuery: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-
 export class NavbarComponent implements OnInit, AfterViewInit {
+  @ViewChild('myModalNormal')
+  myModalNormal: any;
 
-  @ViewChild('myModalNormal') myModalNormal: any;
-
-  userApps: Observable<void>;
+  userApps: any;
   parentUrl: string;
   windowWidth: number = window.innerWidth;
+  userStorage: Observable<CompleteUser>;
 
   constructor(
     private authService: UserAuthenticationService,
@@ -35,17 +43,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userService.getUserApps()
-    .subscribe(
-     response => {
-      this.userApps = response.filter( (apps: any) => !!apps.active);
-    },
-     error => {
-       console.log(error);
-     }
-   );
-   this.router.events
-    .subscribe((event: Event) => {
+    this.userStorage = this.userService.getUserStorage();
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         this.getUrl(event);
       }
@@ -62,6 +61,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   resize(event: any) {
-      this.windowWidth = window.innerWidth;
+    this.windowWidth = window.innerWidth;
   }
 }

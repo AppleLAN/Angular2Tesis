@@ -83,11 +83,11 @@
                     </div>
 
                     <div class="form-group field">
-                        <sm-input type="number" label="Codigo Provincia" [control]="userForm.controls.codigoProvincia"
+                        <sm-input type="text" label="Provincia" [control]="userForm.controls.codigoProvincia"
                             placeholder="Ingresar codigo postal">
                         </sm-input>
                         <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty">
-                            Codigo provincia no ingresado
+                            Provincia no ingresado
                         </div>
                         <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('minlength') && userForm.get('codigoProvincia').dirty">
                             Minimo 4 caracteres
@@ -96,7 +96,7 @@
                             Maximo 30 caracteres
                         </div>
                         <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('min') && userForm.get('codigoProvincia').dirty">
-                            Codigo provincia no puede ser negativo
+                            Provincia no puede ser negativo
                         </div>
                     </div>
 
