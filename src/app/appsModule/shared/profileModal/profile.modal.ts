@@ -1,10 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
@@ -98,7 +93,10 @@ export class ProfileModal implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      iib: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+      ],
       pib: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
@@ -111,21 +109,35 @@ export class ProfileModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
+      precioLista: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(6)]
+      ],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
       ],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      limiteDeCredito: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ],
       numeroDeInscripcionesIB: [
         '',
         [Validators.required, Validators.min(0), Validators.maxLength(30)]
       ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.min(0),
+          Validators.maxLength(30)
+        ]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
+      percepcionDeGanancia: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30)]
+      ]
     });
 
     this.registerForm = this.fb.group({
@@ -151,7 +163,10 @@ export class ProfileModal implements OnInit {
           Validators.maxLength(30)
         ]
       ],
-      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      address: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
+      ],
       birthday: ['', [Validators.required]],
       company_id: [''],
       sales: [false],
@@ -206,8 +221,12 @@ export class ProfileModal implements OnInit {
     this.userData = state;
     if (state) {
       this.userData.profile.password = null;
-      this.registerForm.setValue(this.userData.profile);
-      this.userForm.setValue(this.userData.company);
+      if (this.userData.profile) {
+        this.registerForm.setValue(this.userData.profile);
+      }
+      if (this.userData.company) {
+        this.userForm.setValue(this.userData.company);
+      }
     }
   }
 

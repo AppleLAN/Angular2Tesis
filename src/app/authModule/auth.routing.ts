@@ -14,12 +14,20 @@ import { RegisterCompanyComponent } from './registerCompany/register-company.com
 
 // Route Configuration
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'apps', loadChildren: './../appsModule/apps.module#AppsModule', canActivate: [HasCompanyGuard]},
+  {
+    path: 'apps',
+    loadChildren: './../appsModule/apps.module#AppsModule',
+    canActivate: [HasCompanyGuard]
+  },
   { path: 'noauth', component: NotAuthComponent },
-  { path: 'register-company', component: RegisterCompanyComponent, canActivate: [HasUserGuard]}
+  {
+    path: 'register-company',
+    component: RegisterCompanyComponent,
+    canActivate: [HasUserGuard]
+  }
 ];
 
 // Deprecated provide
