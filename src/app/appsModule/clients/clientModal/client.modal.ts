@@ -84,8 +84,8 @@ export class ClientModal implements OnInit {
         [
           Validators.required,
           Validators.min(0),
-          Validators.minLength(10),
-          Validators.maxLength(11)
+          Validators.minLength(9),
+          Validators.maxLength(9)
         ]
       ],
       cuit: [
@@ -111,7 +111,7 @@ export class ClientModal implements OnInit {
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0)]],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
       condicionDeVenta: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
