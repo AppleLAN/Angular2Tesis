@@ -37,7 +37,7 @@ export class UserAuthenticationService {
           return false;
         }
       })
-      .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   register(userInfo: User): Observable<boolean> {
@@ -60,7 +60,7 @@ export class UserAuthenticationService {
           return false;
         }
       })
-      .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   logout(): void {

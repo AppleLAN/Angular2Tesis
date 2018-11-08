@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
         },
         error => {
           this.spinnerService.displayLoader(false);
-          if (error.error.includes('Duplicate')) {
+          if (error.error.error.includes('existe')) {
             this.ns.error('Error!', 'Email existente, por favor ingrese un email diferente');
           } else {
             this.ns.error('Error!', 'Porfavor, compruebe los datos ingresados');
