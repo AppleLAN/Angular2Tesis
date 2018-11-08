@@ -167,7 +167,7 @@ export class ProviderModal implements OnInit {
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error('Error!', error);
+        this.ns.error('Error!', error.error.error);
       }
     );
   }
@@ -182,7 +182,7 @@ export class ProviderModal implements OnInit {
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error('Error!', error);
+        this.ns.error('Error!', error.error.error);
       }
     );
   }
@@ -197,7 +197,7 @@ export class ProviderModal implements OnInit {
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error('Error!', error);
+        this.ns.error('Error!', error.error.error);
       }
     );
   }

@@ -106,7 +106,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su producto ha sido agregado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
     // this.addStock(value);
   }
@@ -117,7 +117,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su producto ha sido actualizado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
     // this.updateStock(value);
   }
@@ -128,7 +128,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su producto ha sido eliminado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
     // this.deleteStock(value);
   }
@@ -139,7 +139,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su producto ha sido agregado al stock');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
   }
 
@@ -149,7 +149,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su stock ha sido actualizado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
   }
 
@@ -159,7 +159,7 @@ export class StockModal implements OnInit {
         this.ns.success('Perfecto!', 'Su stock ha sido eliminado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
-      error => this.ns.error('Error!', error)
+      error => this.ns.error('Error!', error.error.error)
     );
   }
 }

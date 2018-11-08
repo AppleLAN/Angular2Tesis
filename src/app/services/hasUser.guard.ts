@@ -25,7 +25,7 @@ export class HasUserGuard implements CanActivate {
             }
           }
         },
-        (error: any) => this.ns.error('Error!', error)
+        (error: any) => this.ns.error('Error!', error.error.error)
       );
     } else {
       return false;

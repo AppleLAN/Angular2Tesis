@@ -28,7 +28,7 @@ export class HasCompanyGuard implements CanActivate {
             return false;
           }
         },
-        (error: any) => this.ns.error('Error!', error)
+        (error: any) => this.ns.error('Error!', error.error.error)
       );
     } else {
       return false;

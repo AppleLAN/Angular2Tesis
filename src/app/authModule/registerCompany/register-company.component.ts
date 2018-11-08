@@ -153,7 +153,7 @@ export class RegisterCompanyComponent implements OnInit {
     });
     this.userService
       .getProfileInfo()
-      .subscribe(r => {}, error => this.ns.error('Error!', error));
+      .subscribe(r => {}, error => this.ns.error('Error!', error.error.error));
   }
 
   responsableChange(formControl: FormControl) {

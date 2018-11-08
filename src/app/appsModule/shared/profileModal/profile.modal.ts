@@ -214,7 +214,7 @@ export class ProfileModal implements OnInit {
     });
     this.userService
       .getProfileInfo()
-      .subscribe(response => {}, error => this.ns.error('Error!', error));
+      .subscribe(response => {}, error => this.ns.error('Error!', error.error.error));
   }
 
   private setFormData(state: CompleteUser) {
@@ -256,7 +256,7 @@ export class ProfileModal implements OnInit {
       .updateClientInfo(value)
       .subscribe(
         suc => this.ns.success('Perfecto!', 'Su perfil ha sido actualizado'),
-        error => this.ns.error('Error!', error)
+        error => this.ns.error('Error!', error.error.error)
       );
   }
 
@@ -266,7 +266,7 @@ export class ProfileModal implements OnInit {
       .updateClientCompany(value)
       .subscribe(
         suc => this.ns.success('Perfecto!', 'Su compañia ha sido actualizada'),
-        error => this.ns.error('Error!', error)
+        error => this.ns.error('Error!', error.error.error)
       );
   }
   createSubClient({ value }: { value: User }) {
@@ -274,7 +274,7 @@ export class ProfileModal implements OnInit {
       .createSubClient(value)
       .subscribe(
         suc => this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado'),
-        error => this.ns.error('Error!', error)
+        error => this.ns.error('Error!', error.error.error)
       );
   }
 }
