@@ -183,7 +183,7 @@
                                 Lugar no ingresado
                             </div>
                             <div class="has-error" *ngIf="userForm.get('place').hasError('minlength') && userForm.get('place').dirty">
-                                Minimo 6 caracteres
+                                Minimo 3 caracteres
                             </div>
                             <div class="has-error" *ngIf="userForm.get('place').hasError('maxlength') && userForm.get('place').dirty">
                                 Maximo 30 caracteres
@@ -210,7 +210,7 @@
 
                         <div class="form-group field">
                             <sm-input type="text" label="Provincia" [control]="userForm.controls.codigoProvincia"
-                                placeholder="Ingresar codigo postal">
+                                placeholder="Ingresar codigo provincia">
                             </sm-input>
                             <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty">
                                 Provincia no ingresado

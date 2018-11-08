@@ -1,4 +1,4 @@
-<sm-modal title="Provider" class="fluid provider-modal" #providerModal>
+<sm-modal title="Proveedor" class="fluid provider-modal" #providerModal>
     <modal-content>
         <form class="ui form" [formGroup]="providerForm" name="Form">
             <div class="ui left aligned basic segment">
@@ -52,7 +52,7 @@
                         Lugar no ingresado
                     </div>
                     <div class="has-error" *ngIf="providerForm.get('place').hasError('minlength') && providerForm.get('place').dirty">
-                        Minimo 6 caracteres
+                        Minimo 3 caracteres
                     </div>
                     <div class="has-error" *ngIf="providerForm.get('place').hasError('maxlength') && providerForm.get('place').dirty">
                         Maximo 30 caracteres
@@ -79,7 +79,7 @@
 
                 <div class="form-group field">
                     <sm-input type="text" label="Provincia" [control]="providerForm.controls.codigoProvincia"
-                        placeholder="Ingresar codigo postal">
+                        placeholder="Ingresar codigo provincia">
                     </sm-input>
                     <div class="has-error" *ngIf="providerForm.get('codigoProvincia').hasError('required') && providerForm.get('codigoProvincia').dirty">
                         Provincia no ingresado

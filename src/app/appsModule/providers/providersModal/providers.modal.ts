@@ -65,7 +65,7 @@ export class ProviderModal implements OnInit {
       ],
       place: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
       ],
       codigoPostal: [
         '',

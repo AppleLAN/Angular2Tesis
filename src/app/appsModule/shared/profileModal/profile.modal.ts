@@ -60,7 +60,7 @@ export class ProfileModal implements OnInit {
       ],
       place: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
       ],
       codigoPostal: [
         '',
@@ -255,7 +255,7 @@ export class ProfileModal implements OnInit {
     this.userService
       .updateClientInfo(value)
       .subscribe(
-        suc => this.ns.success('Perfecto!', 'Su cliente ha sido actualizado'),
+        suc => this.ns.success('Perfecto!', 'Su perfil ha sido actualizado'),
         error => this.ns.error('Error!', error)
       );
   }
