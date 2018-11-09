@@ -255,7 +255,7 @@ export class ProfileModal implements OnInit {
     this.userService
       .updateClientInfo(value)
       .subscribe(
-        suc => this.ns.success('Perfecto!', 'Su perfil ha sido actualizado'),
+        suc => this.ns.success('Perfecto!', 'Su usuario ha sido actualizado'),
         error => this.ns.error('Error!', error.error.error)
       );
   }
