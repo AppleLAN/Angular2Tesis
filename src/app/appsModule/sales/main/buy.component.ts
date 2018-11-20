@@ -127,7 +127,7 @@ export class BuyComponent implements OnInit, OnDestroy {
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
-    this.ns.success('Perfecto!', 'Su producto ha sido agregado eliminado');
+    this.ns.success('Perfecto!', 'Su producto ha sido eliminado');
   }
 
   buy() {
