@@ -30,7 +30,7 @@ export class ProvidersService {
 
   getProviders(): Observable<Provider[]> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/getProviders')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProviders')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWPROVIDERS, payload: response });
       })
@@ -40,7 +40,7 @@ export class ProvidersService {
   updateProvider(newProvider: Provider): Observable<Provider> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/updateProvider',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProvider',
         newProvider
       )
       .map((response: Response) => {
@@ -52,7 +52,7 @@ export class ProvidersService {
   addProvider(newProvider: Provider): Observable<Provider> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/saveProvider',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProvider',
         newProvider
       )
       .map((response: Response) => {
@@ -65,7 +65,7 @@ export class ProvidersService {
   deleteProvider(newProvider: Provider): Observable<Provider> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/deleteProvider',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProvider',
         newProvider
       )
       .map((response: Response) => {

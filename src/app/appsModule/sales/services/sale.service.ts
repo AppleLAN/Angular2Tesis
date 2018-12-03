@@ -26,7 +26,7 @@ export class SaleService {
   buy(addedProducts: NewBuy): Observable<any> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/saveBuyOrder',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveBuyOrder',
         addedProducts
       )
       .map((response: Response) => {
@@ -38,7 +38,7 @@ export class SaleService {
   sale(addedProducts: NewSale): Observable<any> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/createNewSale',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createNewSale',
         addedProducts
       )
       .map((response: Response) => {
@@ -57,7 +57,7 @@ export class SaleService {
 
   getAllOrders(): Observable<any> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/getBuyOrders')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getBuyOrders')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWORDERS, payload: response });
         return response;
@@ -67,7 +67,7 @@ export class SaleService {
 
   getAllSales(): Observable<any> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/saleInformation')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saleInformation')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWSALES, payload: response });
         return response;
@@ -77,7 +77,7 @@ export class SaleService {
 
   deleteOrder(order: Order): Observable<any> {
     return this.api
-      .post(`https://contaduriabackend.herokuapp.com/api/deleteOrder`, {
+      .post(`http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteOrder`, {
         id: order.id
       })
       .map((response: Response) => {
@@ -89,7 +89,7 @@ export class SaleService {
 
   completeOrder(order: Order): Observable<any> {
     return this.api
-      .post(`https://contaduriabackend.herokuapp.com/api/completeOrder`, {
+      .post(`http://ec2-54-227-227-242.compute-1.amazonaws.com/api/completeOrder`, {
         id: order.id
       })
       .map((response: Response) => {

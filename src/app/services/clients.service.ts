@@ -24,7 +24,7 @@ export class ClientsService {
     }
 
     getClients(): Observable<Client> {
-        return this.api.get('https://contaduriabackend.herokuapp.com/api/getClients')
+        return this.api.get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getClients')
             .map((response: Response) => {
                 this.store.dispatch({ type: NEWCLIENTS, payload: response});
             })
@@ -32,7 +32,7 @@ export class ClientsService {
     }
 
     updateClient(newClient: Client): Observable<Client> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/updateClient', newClient)
+        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
             })
@@ -40,7 +40,7 @@ export class ClientsService {
     }
 
     addClient(newClient: Client): Observable<Client> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/saveClient', newClient)
+        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: ADDCLIENT, payload: newClient});
                 return response;
@@ -49,7 +49,7 @@ export class ClientsService {
     }
 
     deleteClient(newClient: Client): Observable<Client> {
-        return this.api.post('https://contaduriabackend.herokuapp.com/api/deleteClient', newClient)
+        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteClient', newClient)
             .map((response: Response) => {
                 this.store.dispatch({ type: DELETECLIENT, payload: newClient});
                 return response;

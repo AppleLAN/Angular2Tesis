@@ -18,7 +18,7 @@ export class UserAuthenticationService {
     localStorage.removeItem('currentUser');
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/authenticate',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/authenticateUser',
         userInfo
       )
       .map((response: any) => {
@@ -43,7 +43,7 @@ export class UserAuthenticationService {
   register(userInfo: User): Observable<boolean> {
     // ...using get request
     return this.api
-      .post('https://contaduriabackend.herokuapp.com/api/signup', userInfo)
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/signup', userInfo)
       .map((response: any) => {
         const token = response && response.token;
         if (token) {

@@ -32,7 +32,7 @@ export class UserService {
 
   getUserApps(): Observable<any> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/getUserApps')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getUserApps')
       .map((response: any) => {
         return response.apps;
       })
@@ -41,7 +41,7 @@ export class UserService {
 
   getProfileInfo(): Observable<any> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/getProfileInfo')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProfileInfo')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSER, payload: response });
         return response;
@@ -52,7 +52,7 @@ export class UserService {
   updateClientInfo(user: User): Observable<Object[]> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/updateUserProfile',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserProfile',
         user
       )
       .map((response: Response) => {
@@ -64,7 +64,7 @@ export class UserService {
   createSubClient(user: User): Observable<Object[]> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/createInternalUser',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createInternalUser',
         user
       )
       .map((response: Response) => {
@@ -76,7 +76,7 @@ export class UserService {
   updateClientCompany(company: Client): Observable<Object[]> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/updateUserCompany',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserCompany',
         company
       )
       .map((response: Response) => {
@@ -89,7 +89,7 @@ export class UserService {
 
   deleteUser(user: User): Observable<Object[]> {
     return this.api
-      .post('https://contaduriabackend.herokuapp.com/api/deleteUser', user)
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteUser', user)
       .map((response: Response) => {
         return response;
       })

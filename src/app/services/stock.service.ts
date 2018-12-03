@@ -42,7 +42,7 @@ export class StockService {
 
   getAfipCae(saleId: number): Observable<any> {
     return this.api
-      .post('https://contaduriabackend.herokuapp.com/api/getAfipCae', {
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getAfipCae', {
         saleId
       })
       .map((response: Response) => {
@@ -69,7 +69,7 @@ export class StockService {
 
   getProducts(): Observable<Product[]> {
     return this.api
-      .get('https://contaduriabackend.herokuapp.com/api/getProducts')
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProducts')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWPRODUCT, payload: response });
         return response;
@@ -80,7 +80,7 @@ export class StockService {
   updateProducts(newProduct: Product): Observable<Product> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/updateProducts',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProducts',
         newProduct
       )
       .map((response: Response) => {
@@ -92,7 +92,7 @@ export class StockService {
   addProducts(newProduct: Product): Observable<Product> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/saveProducts',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProducts',
         newProduct
       )
       .map((response: Response) => {
@@ -105,7 +105,7 @@ export class StockService {
   deleteProducts(newProduct: Product): Observable<Product> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/deleteProducts',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProducts',
         newProduct
       )
       .map((response: Response) => {
@@ -118,7 +118,7 @@ export class StockService {
   getStock(product: Product): Observable<Stock> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/getProductStock',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProductStock',
         product
       )
       .map((response: Response) => {
@@ -130,7 +130,7 @@ export class StockService {
   updateStock(newStock: Stock): Observable<Stock> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/updateMovements',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateMovements',
         newStock
       )
       .map((response: Response) => {
@@ -142,7 +142,7 @@ export class StockService {
   addStock(newStock: Stock): Observable<Stock> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/saveMovements',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveMovements',
         newStock
       )
       .map((response: Response) => {
@@ -155,7 +155,7 @@ export class StockService {
   deleteStock(newStock: Stock): Observable<Stock> {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/deleteMovements',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteMovements',
         newStock
       )
       .map((response: Response) => {

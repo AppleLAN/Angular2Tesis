@@ -26,7 +26,7 @@ export class ChartService {
   private getStatistics(params: any) {
     return this.api
       .post(
-        'https://contaduriabackend.herokuapp.com/api/statisticsUser',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/statisticsUser',
         params
       )
       .map((response: Response) => {

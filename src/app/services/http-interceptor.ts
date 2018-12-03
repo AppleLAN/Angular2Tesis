@@ -32,8 +32,8 @@ export class HttpApiInterceptor implements HttpInterceptor {
         return ev;
       }),
       catchError(error => {
-        if (error.status === 401) {
-          if (!error.error.includes('invalid_credentials')) {
+        if (error.status === 401 || error.status === 500) {
+          if (error.error.includes('TokenExpiredException')) {
             localStorage.removeItem('currentUser');
             this.router.navigate(['/no-auth']);
           }

@@ -186,11 +186,11 @@
                 </div>
 
                 <div class="form-group field">
-                    <sm-input type="text" label="Excencion de percepcion en ingresos brutos" [control]="providerForm.controls.epib"
-                        placeholder="Ingresar excencion de percepcion en ingresos brutos">
+                    <sm-input type="text" label="Exención de percepcion en ingresos brutos" [control]="providerForm.controls.epib"
+                        placeholder="Ingresar exención de percepcion en ingresos brutos">
                     </sm-input>
                     <div class="has-error" *ngIf="providerForm.get('epib').hasError('required') && providerForm.get('epib').dirty">
-                        Excencion de percepcion en ingresos brutos no ingresada
+                        Exención de percepcion en ingresos brutos no ingresada
                     </div>
                     <div class="has-error" *ngIf="providerForm.get('epib').hasError('minlength') && providerForm.get('epib').dirty">
                         Minimo 6 caracteres
@@ -210,8 +210,8 @@
 
                 <div class="form-group field">
                     <div class="ui toggle checkbox">
-                        <sm-checkbox label="Excento" [control]="providerForm.controls.excento" (change)="responsableChange(providerForm.controls.excento)"
-                            placeholder="Ingresar si es excento">
+                        <sm-checkbox label="Exento" [control]="providerForm.controls.excento" (change)="responsableChange(providerForm.controls.excento)"
+                            placeholder="Ingresar si es exento">
                         </sm-checkbox>
                     </div>
                 </div>
