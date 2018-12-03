@@ -67,6 +67,7 @@ export class ApiClient extends Http {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const token = currentUser && currentUser.token;
     options.headers.append('Authorization', 'Bearer' + token);
+    options.headers.append('Referrer Policy', 'origin');
 
     return options;
   }
