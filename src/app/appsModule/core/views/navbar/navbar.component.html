@@ -1,4 +1,4 @@
-<div *ngIf="userStorage | async; let user" class="ui stackable container menu borderless inverted">
+<div *ngIf="userStorage | async; let user" class="ui stackable container menu borderless inverted navbar">
     <div class="item brand">Semantic AF Contaduria</div>
     <a routerLink="/apps/home" routerLinkActive="active" class="item home">Inicio</a>
     <a *ngIf="user.profile.sales" routerLink="/apps/sales" routerLinkActive="active" class="item">
