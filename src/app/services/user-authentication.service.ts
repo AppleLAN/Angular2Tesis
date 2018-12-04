@@ -18,7 +18,7 @@ export class UserAuthenticationService {
     localStorage.removeItem('currentUser');
     return this.api
       .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/authenticateUser',
+        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/authenticate',
         userInfo
       )
       .map((response: any) => {
