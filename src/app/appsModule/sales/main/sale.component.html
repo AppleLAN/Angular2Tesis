@@ -51,7 +51,7 @@
                 La cantidad no puede ser negativa
               </div>
               <div class="has-error" *ngIf="saleForm.get('quantity').hasError('max') && saleForm.get('quantity').dirty">
-                La cantidad no puede superar al stock actual ({{ selectedProduct?.stock }})
+                La cantidad no puede superar al stock actual ({{ maxStock }})
               </div>
             </div>
             <div class="column formItem">
@@ -65,8 +65,8 @@
               </sm-input>
             </div>
             <div class="two wide two height left floated column formItem addProduct">
-              <sm-button class="normal tiny" [disabled]="saleForm.invalid" (click)="addProduct()"
-                >Agregar producto</sm-button
+              <button class="ui button tiny" [disabled]="saleForm.invalid" (click)="addProduct()"
+                >Agregar producto</button
               >
             </div>
           </div>
@@ -152,7 +152,7 @@
 
   <div class="row">
     <div class="column">
-      <sm-button class="normal tiny" [disabled]="isEmpty(selectedProducts)" (click)="sale()">Generar venta</sm-button>
+      <button class="ui button tiny" [disabled]="isEmpty(selectedProducts)" (click)="sale()">Generar venta</button>
     </div>
   </div>
 </div>

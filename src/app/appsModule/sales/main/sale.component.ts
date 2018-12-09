@@ -35,6 +35,7 @@ export class SaleComponent implements OnInit, OnDestroy {
   isEmpty = isEmpty;
   options: any;
   selectedProduct: any;
+  maxStock: number;
 
   constructor(
     private fb: FormBuilder,
@@ -80,9 +81,7 @@ export class SaleComponent implements OnInit, OnDestroy {
           if (this.selectedProduct) {
             const product = stock.products.find(p => p.id === this.selectedProduct.id);
             this.selectedProduct = product;
-            this.saleForm
-              .get('quantity')
-              .setValidators([Validators.required, Validators.min(0), Validators.max(this.selectedProduct.stock)]);
+            this.getTotalStockOfOrder();
           }
           if (stock) {
             this.productsToChoose = stock.products;
@@ -105,12 +104,22 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.sas.getAllSales().subscribe());
   }
 
+  private getTotalStockOfOrder() {
+    let totalOrderStock = 0;
+    forEach(this.selectedProducts, order => {
+      forEach(order.stock, stock => {
+        totalOrderStock = totalOrderStock + stock.quantity;
+        return stock;
+      });
+    });
+    this.maxStock = this.selectedProduct.stock - totalOrderStock;
+    this.saleForm.get('quantity').setValidators([Validators.required, Validators.min(0), Validators.max(this.maxStock)]);
+    this.saleForm.get('quantity').setValue(null);
+  }
+
   onChangeProduct(p: string) {
     this.selectedProduct = this.stock.products.find(prod => prod.id === parseInt(p, 10));
-    this.saleForm
-      .get('quantity')
-      .setValidators([Validators.required, Validators.min(0), Validators.max(this.selectedProduct.stock)]);
-    this.saleForm.get('quantity').setValue(null);
+    this.getTotalStockOfOrder();
   }
 
   addProduct() {
@@ -125,6 +134,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.selectedProducts = addProductResult.selectedProducts;
     this.total = addProductResult.total;
     this.numberOfChanges = addProductResult.numberOfChanges;
+    this.getTotalStockOfOrder();
     this.ns.success('Perfecto!', 'Su producto ha sido agregado debajo');
   }
 
@@ -143,6 +153,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;
+    this.getTotalStockOfOrder();
     this.ns.success('Perfecto!', 'Su producto ha sido eliminado');
   }
 
@@ -158,7 +169,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       this.sas.sale(sale).subscribe(
         () => {
           this.selectedProducts = null;
-          this.total = null;
+          this.total = 0;
           this.ns.success('Perfecto!', 'Sus ventas han sido realizadas');
         },
         error => {

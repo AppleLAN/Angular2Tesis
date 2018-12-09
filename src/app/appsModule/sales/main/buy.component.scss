@@ -1,38 +1,30 @@
-.formItem { 
-    padding: 15px;
+.formItem {
+  padding: 15px;
 }
 
 .addProduct {
-    sm-button {
-        button {
-            font-size: 12px;
-            height: 40px;
-            margin-top: 22px !important;
-        }
-    }
-}
-
-sm-button {
-    &.disabled {
-        cursor: not-allowed; 
-    }
+  button {
+    font-size: 12px;
+    height: 40px;
+    margin-top: 24px !important;
+  }
 }
 
 .total {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 .sub-total {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .main-container {
-    margin-top: 15px !important;
+  margin-top: 15px !important;
 }
 
-.buy-container { 
-    background-color: #262626;
-    margin: 5px;
-    margin-right: 10px;
-    border-radius: 6px;
+.buy-container {
+  background-color: #262626;
+  margin: 5px;
+  margin-right: 10px;
+  border-radius: 6px;
 }
