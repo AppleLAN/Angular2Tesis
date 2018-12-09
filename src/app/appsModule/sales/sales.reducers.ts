@@ -1,10 +1,10 @@
 import { OrderReducer, OrdersState } from './reducers/order.reducer';
 import { SaleReducer, SaleState } from './reducers/sale.reducer';
 export interface State {
-    orders: OrdersState,
-    sales: SaleState
+  orders: OrdersState;
+  sales: SaleState;
 }
 export const reducers = {
-    orders: OrderReducer,
-    sales: SaleReducer
+  orders: OrderReducer,
+  sales: SaleReducer
 };

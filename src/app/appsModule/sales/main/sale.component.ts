@@ -11,6 +11,7 @@ import { StockState } from '../../stock/reducers/grid.reducer';
 import { forEach, uniqBy, isEmpty } from 'lodash';
 import { SaleService } from '../services/sale.service';
 import { SpinnerService } from '../../../services/spinner.service';
+import { ProvidersService } from '../../../services/providers.service';
 
 @Component({
   selector: 'app-sale',
@@ -33,11 +34,13 @@ export class SaleComponent implements OnInit, OnDestroy {
   numberOfChanges = 0;
   isEmpty = isEmpty;
   options: any;
+  selectedProduct: any;
 
   constructor(
     private fb: FormBuilder,
     private ss: StockService,
     private cs: ClientsService,
+    private ps: ProvidersService,
     private sas: SaleService,
     private ns: NotificationsService,
     private spinnerService: SpinnerService
@@ -62,19 +65,52 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       Observable.combineLatest(
         this.ss.getStockStorage(),
-        this.cs.getClientStorage()
-      ).subscribe(([stock, clients]) => {
-        this.spinnerService.displayLoader(false);
-        this.stock = stock;
-        this.clients = clients;
-        if (stock) {
-          this.productsToChoose = uniqBy(stock.products, 'name');
+        this.cs.getClientStorage(),
+        this.ps.getProviderStorage()
+      ).subscribe(([stock, clients, providers]) => {
+        if (stock && clients && providers) {
+          this.spinnerService.displayLoader(false);
+          this.saleForm.get('quantity').setValue(null);
+          this.stock = stock;
+          this.clients = clients;
+          this.stock.products = stock.products.map(p => {
+            p.providerName = providers.find(provider => provider.id === p.provider_id).name;
+            return p;
+          });
+          if (this.selectedProduct) {
+            const product = stock.products.find(p => p.id === this.selectedProduct.id);
+            this.selectedProduct = product;
+            this.saleForm
+              .get('quantity')
+              .setValidators([Validators.required, Validators.min(0), Validators.max(this.selectedProduct.stock)]);
+          }
+          if (stock) {
+            this.productsToChoose = stock.products;
+          }
         }
       })
     );
     this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.cs.getClientStorage().subscribe());
+    this.subscriptions.push(
+      this.sas
+        .getSaleStorage()
+        .flatMap(state => {
+          this.spinnerService.displayLoader(true);
+          return this.ss.getProducts();
+        })
+        .subscribe()
+    );
     this.subscriptions.push(this.cs.getClients().subscribe());
+    this.subscriptions.push(this.sas.getAllSales().subscribe());
+  }
+
+  onChangeProduct(p: string) {
+    this.selectedProduct = this.stock.products.find(prod => prod.id === parseInt(p, 10));
+    this.saleForm
+      .get('quantity')
+      .setValidators([Validators.required, Validators.min(0), Validators.max(this.selectedProduct.stock)]);
+    this.saleForm.get('quantity').setValue(null);
   }
 
   addProduct() {
@@ -116,11 +152,14 @@ export class SaleComponent implements OnInit, OnDestroy {
         newStock: value.stock,
         total: value.subTotal,
         paymentMethods: value.paymentMethods,
-        client_id: parseInt(key),
+        client_id: parseInt(key, 10),
         saleDate: value.saleDate
       };
       this.sas.sale(sale).subscribe(
-        () => this.ns.success('Perfecto!', 'Sus ventas han sido realizadas'),
+        () => {
+          this.selectedProducts = null;
+          this.ns.success('Perfecto!', 'Sus ventas han sido realizadas');
+        },
         error => {
           this.ns.error('Error!', 'Sus ventas no han podido ser realizadas');
         }

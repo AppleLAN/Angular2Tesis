@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Provider } from '../../../interfaces/provider';
 import { NewBuy, Product, SelectedStock } from '../../../interfaces/stock';
 import { ProvidersService } from '../../../services/providers.service';
+import { SpinnerService } from '../../../services/spinner.service';
 import { StockService } from '../../../services/stock.service';
 import { StockState } from '../../stock/reducers/grid.reducer';
 import { SaleService } from '../services/sale.service';
-import { SpinnerService } from '../../../services/spinner.service';
 declare var jQuery: any;
 
 @Component({
@@ -35,6 +35,7 @@ export class BuyComponent implements OnInit, OnDestroy {
   numberOfChanges = 0;
   isEmpty = isEmpty;
   options: any;
+  selectedProduct: any;
 
   constructor(
     private fb: FormBuilder,
@@ -59,42 +60,50 @@ export class BuyComponent implements OnInit, OnDestroy {
       quantity: ['', [Validators.required, Validators.min(0)]],
       typeOfBuy: ['', [Validators.required]]
     });
-    this.saleForm.get('product').valueChanges.subscribe(p => {
-      const filteredProducts = this.stock.products.filter(
-        prod => prod.name === p
-      );
-      const minProductCostProviderId = orderBy(
-        filteredProducts,
-        'cost_price'
-      )[0].provider_id;
-      const minProductCostProvider = this.providers.find(
-        prov => prov.id === minProductCostProviderId
-      );
-      this.filteredProviders = filteredProducts.map(prod =>
-        this.providers.find(prov => prov.id === prod.provider_id)
-      );
-      this.filteredProviders = this.filteredProviders.filter(
-        prov => prov.id !== minProductCostProviderId
-      );
-      this.filteredProviders.unshift(minProductCostProvider);
-      jQuery('.provider-select').dropdown('restore defaults');
-    });
+
     this.spinnerService.displayLoader(true);
     this.subscriptions.push(
-      Observable.combineLatest(
-        this.ss.getStockStorage(),
-        this.ps.getProviderStorage()
-      ).subscribe(([stock, providers]) => {
-        this.spinnerService.displayLoader(false);
-        this.stock = stock;
-        this.providers = providers;
-        if (stock) {
-          this.productsToChoose = uniqBy(stock.products, 'name');
+      Observable.combineLatest(this.ss.getStockStorage(), this.ps.getProviderStorage()).subscribe(
+        ([stock, providers]) => {
+          if (stock && providers) {
+            this.spinnerService.displayLoader(false);
+            this.stock = stock;
+            this.stock.products = stock.products.map(p => {
+              p.providerName = providers.find(provider => provider.id === p.provider_id).name;
+              return p;
+            });
+            this.providers = providers;
+            if (stock) {
+              this.productsToChoose = uniqBy(stock.products, 'name');
+            }
+          }
         }
-      })
+      )
     );
     this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.ps.getProviders().subscribe());
+    this.subscriptions.push(this.sas.getAllOrders().subscribe());
+  }
+
+  onChangeProduct(p: string) {
+    this.selectedProduct = null;
+    const filteredProducts = this.stock.products.filter(prod => prod.id === parseInt(p, 10));
+    const minProductCostProviderId = orderBy(filteredProducts, 'cost_price')[0].provider_id;
+    const minProductCostProvider = this.providers.find(prov => prov.id === minProductCostProviderId);
+    this.filteredProviders = filteredProducts.map(prod => this.providers.find(prov => prov.id === prod.provider_id));
+    this.filteredProviders = this.filteredProviders.filter(prov => prov.id !== minProductCostProviderId);
+    this.filteredProviders.unshift(minProductCostProvider);
+    jQuery('.provider-select').dropdown('restore defaults');
+  }
+
+  onChangeProvider(p: string) {
+    if (p) {
+      const product = this.stock.products.find(
+        (prod: Product) =>
+          prod.id === parseInt(this.saleForm.get('product').value, 10) && prod.provider_id === parseInt(p, 10)
+      );
+      this.selectedProduct = product;
+    }
   }
 
   addProduct() {
@@ -132,11 +141,12 @@ export class BuyComponent implements OnInit, OnDestroy {
 
   buy() {
     forEach(this.selectedProducts, (value, key) => {
+      const typeOfBuy = value.typeOfBuy.includes('Efectivo') ? 'E' : 'C';
       const buyOrder: NewBuy = {
         newStock: value.stock,
         total: value.subTotal,
-        typeOfBuy: value.typeOfBuy,
-        provider_id: parseInt(key)
+        typeOfBuy: typeOfBuy,
+        provider_id: Number(key)
       };
       this.spinnerService.displayLoader(true);
       this.subscriptions.push(

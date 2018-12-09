@@ -10,14 +10,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../interfaces/client';
 import { Provider } from '../interfaces/provider';
-import {
-  AddedBuyStock,
-  AddedSaleStock,
-  AddedStock,
-  Product,
-  SelectedStock,
-  Stock
-} from '../interfaces/stock';
+import { AddedBuyStock, AddedSaleStock, AddedStock, Product, SelectedStock, Stock } from '../interfaces/stock';
 import {
   ADDPRODUCT,
   ADDSTOCK,
@@ -79,22 +72,17 @@ export class StockService {
 
   updateProducts(newProduct: Product): Observable<Product> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProducts',
-        newProduct
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProducts', newProduct)
       .map((response: Response) => {
         this.store.dispatch({ type: CHANGEPRODUCT, payload: newProduct });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   addProducts(newProduct: Product): Observable<Product> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProducts',
-        newProduct
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProducts', newProduct)
       .map((response: Response) => {
         this.store.dispatch({ type: ADDPRODUCT, payload: newProduct });
         return response;
@@ -104,10 +92,7 @@ export class StockService {
 
   deleteProducts(newProduct: Product): Observable<Product> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProducts',
-        newProduct
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProducts', newProduct)
       .map((response: Response) => {
         this.store.dispatch({ type: DELETEPRODUCT, payload: newProduct });
         return response;
@@ -117,34 +102,27 @@ export class StockService {
 
   getStock(product: Product): Observable<Stock> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProductStock',
-        product
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProductStock', product)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWSTOCK, payload: response });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   updateStock(newStock: Stock): Observable<Stock> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateMovements',
-        newStock
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateMovements', newStock)
       .map((response: Response) => {
         this.store.dispatch({ type: CHANGESTOCK, payload: newStock });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   addStock(newStock: Stock): Observable<Stock> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveMovements',
-        newStock
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveMovements', newStock)
       .map((response: Response) => {
         this.store.dispatch({ type: ADDSTOCK, payload: newStock });
         return response;
@@ -154,10 +132,7 @@ export class StockService {
 
   deleteStock(newStock: Stock): Observable<Stock> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteMovements',
-        newStock
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteMovements', newStock)
       .map((response: Response) => {
         this.store.dispatch({ type: DELETESTOCK, payload: newStock });
         return response;
@@ -172,9 +147,7 @@ export class StockService {
     total: number,
     numberOfChanges: number
   ) {
-    selectedProducts[providerId].stock = selectedProducts[
-      providerId
-    ].stock.filter(p => p.product.id !== productId);
+    selectedProducts[providerId].stock = selectedProducts[providerId].stock.filter(p => p.product.id !== productId);
     if (selectedProducts[providerId].stock.length > 0) {
       this.getSubTotal(providerId, selectedProducts);
     } else {
@@ -211,9 +184,8 @@ export class StockService {
     numberOfChanges: number
   ) {
     const product = stock.products.find(p => {
-      const isTheSameProduct = p.name === saleForm.controls['product'].value;
-      const isTheSameProvider =
-        p.provider_id === parseInt(saleForm.controls['provider_id'].value);
+      const isTheSameProduct = p.id === parseInt(saleForm.controls['product'].value, 10);
+      const isTheSameProvider = p.provider_id === parseInt(saleForm.controls['provider_id'].value, 10);
       return isTheSameProduct && isTheSameProvider;
     });
     const selectedProvider = providers.find(p => p.id === product.provider_id);
@@ -224,27 +196,21 @@ export class StockService {
       provider: selectedProvider.name
     };
     if (selectedProducts[selectedProviderId]) {
-      selectedProducts[selectedProviderId].stock = [
-        ...selectedProducts[selectedProviderId].stock,
-        addedProduct
-      ];
+      selectedProducts[selectedProviderId] = {
+        ...selectedProducts[selectedProviderId],
+        stock: [...selectedProducts[selectedProviderId].stock, addedProduct],
+        typeOfBuy: saleForm.controls['typeOfBuy'].value
+      };
     } else {
       selectedProducts[selectedProviderId] = {
-        stock: null,
+        stock: [addedProduct],
         subTotal: 0,
         typeOfBuy: saleForm.controls['typeOfBuy'].value
       };
-      selectedProducts[selectedProviderId].stock = [addedProduct];
     }
-    const selectedProduct = selectedProducts[selectedProviderId].stock.find(
-      p => p.product.id === product.id
-    );
-    selectedProduct.quantity =
-      Number(selectedProduct.quantity) +
-      Number(saleForm.controls['quantity'].value);
-    selectedProducts[selectedProviderId].stock = selectedProducts[
-      selectedProviderId
-    ].stock.map(p => {
+    const selectedProduct = selectedProducts[selectedProviderId].stock.find(p => p.product.id === product.id);
+    selectedProduct.quantity = Number(selectedProduct.quantity) + Number(saleForm.controls['quantity'].value);
+    selectedProducts[selectedProviderId].stock = selectedProducts[selectedProviderId].stock.map(p => {
       if (p.product === selectedProduct.product) {
         p.quantity = selectedProduct.quantity;
       }
@@ -269,42 +235,31 @@ export class StockService {
     total: number,
     numberOfChanges: number
   ) {
-    const product = stock.products.find(
-      p => p.name === saleForm.controls['product'].value
-    );
-    const selectedClient = clients.find(
-      c => c.id === Number(saleForm.controls['client_id'].value)
-    );
+    const product = stock.products.find(p => p.id === parseInt(saleForm.controls['product'].value, 10));
+    const selectedClient = clients.find(c => c.id === parseInt(saleForm.controls['client_id'].value, 10));
     const addedProduct: AddedSaleStock = {
       product: product,
       quantity: 0,
       client: selectedClient.name
     };
     if (selectedProducts[selectedClient.id]) {
-      selectedProducts[selectedClient.id].stock = [
-        ...selectedProducts[selectedClient.id].stock,
-        addedProduct
-      ];
-      selectedProducts[selectedClient.id].saleDate =
-        saleForm.controls['saleDate'].value;
+      selectedProducts[selectedClient.id] = {
+        ...selectedProducts[selectedClient.id],
+        stock: [...selectedProducts[selectedClient.id].stock, addedProduct],
+        saleDate: saleForm.controls['saleDate'].value,
+        paymentMethods: saleForm.controls['paymentMethods'].value
+      };
     } else {
       selectedProducts[selectedClient.id] = {
-        stock: null,
+        stock: [addedProduct],
         subTotal: 0,
         paymentMethods: saleForm.controls['paymentMethods'].value,
-        saleDate: saleForm.controls['saleDate'].value
+        saleDate: saleForm.controls['saleDate'].value,
       };
-      selectedProducts[selectedClient.id].stock = [addedProduct];
     }
-    const selectedProduct = selectedProducts[selectedClient.id].stock.find(
-      p => p.product.id === product.id
-    );
-    selectedProduct.quantity =
-      Number(selectedProduct.quantity) +
-      Number(saleForm.controls['quantity'].value);
-    selectedProducts[selectedClient.id].stock = selectedProducts[
-      selectedClient.id
-    ].stock.map(p => {
+    const selectedProduct = selectedProducts[selectedClient.id].stock.find(p => p.product.id === product.id);
+    selectedProduct.quantity = Number(selectedProduct.quantity) + Number(saleForm.controls['quantity'].value);
+    selectedProducts[selectedClient.id].stock = selectedProducts[selectedClient.id].stock.map(p => {
       if (p.product === selectedProduct.product) {
         p.quantity = selectedProduct.quantity;
       }

@@ -8,10 +8,8 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Order } from '../../../interfaces/order';
 import { NewBuy, NewSale } from '../../../interfaces/stock';
-import { CHANGEORDER, DELETEORDER, NEWORDERS, OrdersState } from '../reducers/order.reducer';
-import { NEWSALES, SaleState } from '../reducers/sale.reducer';
-
-
+import { CHANGEORDER, DELETEORDER, NEWORDERS, OrdersState, ADDORDER } from '../reducers/order.reducer';
+import { NEWSALES, SaleState, ADDSALES } from '../reducers/sale.reducer';
 
 @Injectable()
 export class SaleService {
@@ -25,24 +23,18 @@ export class SaleService {
 
   buy(addedProducts: NewBuy): Observable<any> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveBuyOrder',
-        addedProducts
-      )
-      .map((response: Response) => {
-        return response;
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveBuyOrder', addedProducts)
+      .flatMap((response: Response) => {
+        return this.getAllOrders();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   sale(addedProducts: NewSale): Observable<any> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createNewSale',
-        addedProducts
-      )
-      .map((response: Response) => {
-        return response;
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createNewSale', addedProducts)
+      .flatMap((response: Response) => {
+        return this.getAllSales();
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }

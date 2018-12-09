@@ -2,6 +2,7 @@ export interface Product {
   id: number;
   company_id: number;
   provider_id: number;
+  providerName?: string;
   name: string;
   code: string;
   stock: number;

@@ -15,27 +15,31 @@ export interface OrdersState {
 }
 
 export const initialObject: OrdersState = {
-    order: null,
-    details: null,
-    products: null
-}
+  order: null,
+  details: null,
+  products: null
+};
 
 export const OrderReducer: Reducer<any> = (state: OrdersState[], action: Action) => {
-    switch (action.type) {
-        case NEWORDERS:
-            return action.payload.data;
-        case ADDORDER:
-            return [...state, action.payload];
-        case CHANGEORDER:
-            return state.map(item =>  { 
-                item.order = item.order.id === action.payload.id ? action.payload : item.order;
-                return item;
-            });
-        case DELETEORDER:
-            return state.filter(item => {
-                return item.order.id !== action.payload.id;
-            })
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case NEWORDERS:
+      return [...action.payload.data];
+
+    case ADDORDER:
+      return [...state, action.payload];
+
+    case CHANGEORDER:
+      return [
+        ...state.map(stateItem => {
+          stateItem.order = stateItem.order.id === action.payload.id ? action.payload : stateItem.order;
+          return stateItem;
+        })
+      ];
+
+    case DELETEORDER:
+      return [...state.filter(stateItem => stateItem.order.id !== action.payload.id)];
+
+    default:
+      return state;
+  }
 };
