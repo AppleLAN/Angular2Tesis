@@ -158,6 +158,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       this.sas.sale(sale).subscribe(
         () => {
           this.selectedProducts = null;
+          this.total = null;
           this.ns.success('Perfecto!', 'Sus ventas han sido realizadas');
         },
         error => {
