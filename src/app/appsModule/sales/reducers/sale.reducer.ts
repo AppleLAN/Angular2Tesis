@@ -23,7 +23,7 @@ export const initialObject: SaleState = {
 export const SaleReducer: Reducer<any> = (state: SaleState[], action: Action) => {
   switch (action.type) {
     case NEWSALES:
-      return [...action.payload.data];
+      return action.payload.data ? [...action.payload.data] : state;
 
     case ADDSALES:
       return [...state, action.payload];

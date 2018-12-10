@@ -23,7 +23,7 @@ export const initialObject: OrdersState = {
 export const OrderReducer: Reducer<any> = (state: OrdersState[], action: Action) => {
   switch (action.type) {
     case NEWORDERS:
-      return [...action.payload.data];
+      return action.payload.data ? [...action.payload.data] : state;
 
     case ADDORDER:
       return [...state, action.payload];
