@@ -85,6 +85,7 @@ export class StockModal implements OnInit {
 
   openNewStockModal() {
     this.productForm.reset();
+    this.productForm.get('provider_id').setValue(null);
     let productFormObject: any;
     productFormObject = this.productFormEmptyObject;
     productFormObject.new = true;

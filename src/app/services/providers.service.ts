@@ -33,6 +33,7 @@ export class ProvidersService {
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProviders')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWPROVIDERS, payload: response });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -45,6 +46,7 @@ export class ProvidersService {
       )
       .map((response: Response) => {
         this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider });
+        return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }

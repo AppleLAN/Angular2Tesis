@@ -1,20 +1,11 @@
-<div
-  *ngIf="($orders | async) as orders; else: noOrdersTemplate"
-  class="ui column doubling grid main-container"
->
+<div *ngIf="($orders | async) as orders; else: noOrdersTemplate" class="ui column doubling grid main-container">
   <div class="row">
     <div class="column">
-      <div
-        class="container order-container buy-container"
-        *ngFor="let order of orders"
-      >
+      <div class="container order-container buy-container" *ngFor="let order of orders">
         <p>Proveedor: {{ order.order.provider }}</p>
         <p>Total: {{ order.order.orderTotal }}</p>
         <p>Status: {{ order.order.status }}</p>
-        <p>
-          Tipo de compra:
-          {{ order.order.typeOfBuy === 'E' ? 'Efectivo' : 'Cuenta Corriente' }}
-        </p>
+        <p>Tipo de compra: {{ order.order.typeOfBuy === 'E' ? 'Efectivo' : 'Cuenta Corriente' }}</p>
         <p>Productos de la orden</p>
         <table class="ui celled table">
           <thead>
@@ -37,18 +28,10 @@
         <div *ngIf="order.order.status === 'C'" class="row">
           <div class="column">
             <div class="ui eight buttons">
-              <button
-                class="ui positive  button"
-                (click)="completeOrder(order.order)"
-              >
+              <button class="ui positive  button" (click)="completeOrder(order.order)">
                 Completar orden de compra
               </button>
-              <button
-                class="ui negative button"
-                (click)="deleteOrder(order.order)"
-              >
-                Cancelar orden de compra
-              </button>
+              <button class="ui negative button" (click)="deleteOrder(order.order)">Cancelar orden de compra</button>
             </div>
           </div>
         </div>
@@ -57,11 +40,6 @@
   </div>
 </div>
 <ng-template #noOrdersTemplate>
-  <div class="ui red message main-container">
-    No se han encotrado ordenes de compra realizadas !
-  </div>
+  <div class="ui red message main-container">No se han encotrado ordenes de compra realizadas !</div>
 </ng-template>
-<simple-notifications
-  *ngIf="options"
-  [options]="options"
-></simple-notifications>
+<simple-notifications *ngIf="options" [options]="options"></simple-notifications>
