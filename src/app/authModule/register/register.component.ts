@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  dateValidator(control: FormControl) {
+  dateValidator(control: any) {
     const actualDate = new Date();
     actualDate.setHours(0);
     actualDate.setMinutes(0);

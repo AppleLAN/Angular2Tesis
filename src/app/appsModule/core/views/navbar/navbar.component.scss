@@ -20,3 +20,10 @@
   position: fixed;
   z-index: 900;
 }
+
+@media (max-width: 767px) {
+  .navbar {
+    top: 0;
+    position: inherit;
+  }
+}

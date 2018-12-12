@@ -156,7 +156,7 @@ export class RegisterCompanyComponent implements OnInit {
       .subscribe(r => {}, error => this.ns.error('Error!', error.error.error));
   }
 
-  responsableChange(formControl: FormControl) {
+  responsableChange(formControl: any) {
     this.sharedService.responsableChange(formControl, this.userForm);
   }
 

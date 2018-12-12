@@ -247,7 +247,7 @@ export class ProfileModal implements OnInit {
     jQuery('.ui.modal.profile-modal').modal('show');
   }
 
-  responsableChange(formControl: FormControl) {
+  responsableChange(formControl: any) {
     this.sharedService.responsableChange(formControl, this.userForm);
   }
 

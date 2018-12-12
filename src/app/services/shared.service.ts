@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SharedService {
   constructor() {}
 
-  responsableChange(formControl: FormControl, form: FormGroup) {
+  responsableChange(formControl: any, form: FormGroup) {
     const values = [
       form.get('responsableInscripto'),
       form.get('excento'),
