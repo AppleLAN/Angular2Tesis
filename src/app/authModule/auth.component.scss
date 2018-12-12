@@ -96,18 +96,18 @@
   }
 
   button {
-    color: #ddd;
+    color: #525252;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 0.0625rem solid #ddd;
+    border-bottom: 0.0625rem solid #525252;
     border-radius: 0;
     box-shadow: none;
     background-color: transparent;
 
     &:hover {
-      color: #525252;
-      border-color: #525252;
+      color: #ddd;
+      border-color: #ddd;
     }
 
     &[disabled] {

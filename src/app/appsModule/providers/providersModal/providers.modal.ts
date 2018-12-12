@@ -136,6 +136,7 @@ export class ProviderModal implements OnInit {
     this.providerForm.reset();
     const formProvider: any = provider;
     formProvider.new = false;
+    this.providerForm.get('fantasyName').disable();
     this.providerForm.setValue(formProvider);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
@@ -145,6 +146,7 @@ export class ProviderModal implements OnInit {
     let providerFormObject: any;
     providerFormObject = this.providerFormEmptyObject;
     providerFormObject.new = true;
+    this.providerForm.get('fantasyName').enable();
     this.providerForm.setValue(providerFormObject);
     jQuery('.ui.modal.provider-modal').modal('show');
   }

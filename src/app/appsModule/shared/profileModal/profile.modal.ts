@@ -44,129 +44,43 @@ export class ProfileModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(30)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30)
-        ]
-      ],
-      place: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
-      ],
-      codigoPostal: [
-        '',
-        [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]
-      ],
-      codigoProvincia: [
-        '',
-        [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
-      ],
-      address: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      telephone: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ]
-      ],
-      cuit: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(11),
-          Validators.maxLength(11)
-        ]
-      ],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
+      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      codigoPostal: ['', [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
+      codigoProvincia: ['', [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
+      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
       web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
-      iib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      pib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      epib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(6)]
-      ],
-      condicionDeVenta: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      limiteDeCredito: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
-      ],
-      numeroDeInscripcionesIB: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
-      ],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       cuentasGenerales: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.min(0),
-          Validators.maxLength(30)
-        ]
+        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
       ],
-      percepcionDeGanancia: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30)]
-      ]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
     });
 
+    this.userForm.get('fantasyName').disable();
+
     this.registerForm = this.fb.group({
-      username: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
-      ],
+      username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
       password: ['', [Validators.minLength(6), Validators.maxLength(12)]],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
-      ],
-      lastname: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
-      ],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30)
-        ]
-      ],
-      address: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       birthday: ['', [Validators.required]],
       company_id: [''],
       sales: [false],
@@ -177,28 +91,11 @@ export class ProfileModal implements OnInit {
     });
 
     this.newSubUserForm = this.fb.group({
-      username: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
-      ],
+      username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
       password: ['', [Validators.minLength(6), Validators.maxLength(12)]],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
-      ],
-      lastname: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
-      ],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30)
-        ]
-      ],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
       address: ['', [Validators.required, Validators.minLength(3)]],
       birthday: ['', [Validators.required]],
       company_id: [''],
@@ -212,9 +109,7 @@ export class ProfileModal implements OnInit {
     this.userStorage = this.userService.getUserStorage().subscribe(state => {
       this.setFormData(state);
     });
-    this.userService
-      .getProfileInfo()
-      .subscribe(response => {}, error => this.ns.error('Error!', error.error.error));
+    this.userService.getProfileInfo().subscribe(response => {}, error => this.ns.error('Error!', error.error.error));
   }
 
   private setFormData(state: CompleteUser) {

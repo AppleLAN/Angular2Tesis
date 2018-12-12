@@ -132,6 +132,7 @@ export class ClientModal implements OnInit {
     this.clientForm.reset();
     const formClient: any = client;
     formClient.new = false;
+    this.clientForm.get('fantasyName').disable();
     this.clientForm.setValue(formClient);
     jQuery('.ui.modal.client-modal').modal('show');
   }
@@ -141,6 +142,7 @@ export class ClientModal implements OnInit {
     let clientFormObject: any;
     clientFormObject = this.clientFormEmptyObject;
     clientFormObject.new = true;
+    this.clientForm.get('fantasyName').enable();
     this.clientForm.setValue(clientFormObject);
     jQuery('.ui.modal.client-modal').modal('show');
   }
