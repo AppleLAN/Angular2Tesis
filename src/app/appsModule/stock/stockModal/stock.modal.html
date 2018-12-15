@@ -6,7 +6,7 @@
           <sm-input type="text" label="Nombre" [control]="productForm.controls.name" placeholder="Ingresar Nombre">
           </sm-input>
           <div class="has-error" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').dirty">
-            Nombre no ingresado
+            Nombre no ingresado o inválido
           </div>
           <div class="has-error" *ngIf="productForm.get('name').hasError('minlength') && productForm.get('name').dirty">
             Minimo 6 caracteres
@@ -65,7 +65,7 @@
             class="has-error"
             *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').dirty"
           >
-            Costo minimo no ingresado
+            Costo minimo no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -87,7 +87,7 @@
             class="has-error"
             *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').dirty"
           >
-            Precio a la venta no ingresado
+            Precio a la venta no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -109,7 +109,7 @@
             class="has-error"
             *ngIf="productForm.get('category_id').hasError('required') && productForm.get('category_id').dirty"
           >
-            Id de categoria no ingresado
+            Id de categoria no ingresado o inválido
           </div>
         </div>
 
@@ -122,7 +122,7 @@
           >
           </sm-input>
           <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').dirty">
-            Codigo de identificacion no ingresado
+            Codigo de identificacion no ingresado o inválido
           </div>
         </div>
       </div>
@@ -157,5 +157,5 @@
       </modal-actions>
     </form>
   </modal-content>
-  <modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>
 </sm-modal>
+<modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>

@@ -15,7 +15,7 @@
                 class="has-error"
                 *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').dirty"
               >
-                Nombre de usuario no ingresado
+                Nombre de usuario no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -67,7 +67,7 @@
                 class="has-error"
                 *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').dirty"
               >
-                Nombre no ingresado
+                Nombre no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -93,7 +93,7 @@
                 class="has-error"
                 *ngIf="registerForm.get('lastname').hasError('required') && registerForm.get('lastname').dirty"
               >
-                Apellido no ingresado
+                Apellido no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -119,7 +119,7 @@
                 class="has-error"
                 *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').dirty"
               >
-                Email no ingresado
+                Email no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -235,7 +235,7 @@
               <sm-input type="text" label="Nombre" [control]="userForm.controls.name" placeholder="Ingresar Nombre">
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('name').hasError('required') && userForm.get('name').dirty">
-                Nombre no ingresado
+                Nombre no ingresado o inválido
               </div>
               <div class="has-error" *ngIf="userForm.get('name').hasError('minlength') && userForm.get('name').dirty">
                 Minimo 6 caracteres
@@ -257,7 +257,7 @@
                 class="has-error"
                 *ngIf="userForm.get('fantasyName').hasError('required') && userForm.get('fantasyName').dirty"
               >
-                Nombre de fantasia no ingresado
+                Nombre de fantasia no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -271,7 +271,7 @@
               <sm-input type="email" label="E-mail" [control]="userForm.controls.email" placeholder="Ingresar E-mail">
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('email').hasError('required') && userForm.get('email').dirty">
-                E-mail no ingresado
+                E-mail no ingresado o inválido
               </div>
               <div class="has-error" *ngIf="userForm.get('email').hasError('email') && userForm.get('email').dirty">
                 Por favor ingrese un email valido
@@ -293,7 +293,7 @@
               >
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('place').hasError('required') && userForm.get('place').dirty">
-                Lugar no ingresado
+                Lugar no ingresado o inválido
               </div>
               <div class="has-error" *ngIf="userForm.get('place').hasError('minlength') && userForm.get('place').dirty">
                 Minimo 3 caracteres
@@ -315,7 +315,7 @@
                 class="has-error"
                 *ngIf="userForm.get('codigoPostal').hasError('required') && userForm.get('codigoPostal').dirty"
               >
-                Codigo postal no ingresado
+                Codigo postal no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -349,7 +349,7 @@
                 class="has-error"
                 *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty"
               >
-                Provincia no ingresado
+                Provincia no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -411,7 +411,7 @@
                 class="has-error"
                 *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').dirty"
               >
-                Telefono no ingresado
+                Telefono no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -588,7 +588,7 @@
                 class="has-error"
                 *ngIf="userForm.get('precioLista').hasError('required') && userForm.get('precioLista').dirty"
               >
-                Precio lista no ingresado
+                Precio lista no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -675,7 +675,7 @@
                   userForm.get('numeroDeInscripcionesIB').dirty
                 "
               >
-                Numero de inscripciones ingresos brutos no ingresado
+                Numero de inscripciones ingresos brutos no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -804,7 +804,7 @@
                 class="has-error"
                 *ngIf="newSubUserForm.get('username').hasError('required') && newSubUserForm.get('username').dirty"
               >
-                Nombre de usuario no ingresado
+                Nombre de usuario no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -856,7 +856,7 @@
                 class="has-error"
                 *ngIf="newSubUserForm.get('name').hasError('required') && newSubUserForm.get('name').dirty"
               >
-                Nombre no ingresado
+                Nombre no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -882,7 +882,7 @@
                 class="has-error"
                 *ngIf="newSubUserForm.get('lastname').hasError('required') && newSubUserForm.get('lastname').dirty"
               >
-                Apellido no ingresado
+                Apellido no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -908,7 +908,7 @@
                 class="has-error"
                 *ngIf="newSubUserForm.get('email').hasError('required') && newSubUserForm.get('email').dirty"
               >
-                Email no ingresado
+                Email no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -1019,5 +1019,5 @@
       </sm-tab>
     </sm-tabs>
   </modal-content>
-  <modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>
 </sm-modal>
+<modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>

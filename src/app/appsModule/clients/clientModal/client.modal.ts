@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
@@ -49,73 +44,25 @@ export class ClientModal implements OnInit {
       updated_at: [''],
       deleted_at: [''],
       new: [true],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(30)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30)
-        ]
-      ],
-      place: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
-      ],
-      codigoPostal: [
-        '',
-        [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]
-      ],
-      codigoProvincia: [
-        '',
-        [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
-      ],
-      address: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      telephone: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ]
-      ],
-      cuit: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(11),
-          Validators.maxLength(11)
-        ]
-      ],
-      web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
+      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      codigoPostal: ['', [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
+      codigoProvincia: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
+      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
+      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      pib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      epib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
       precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
-      condicionDeVenta: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       cuentasGenerales: [
@@ -161,7 +108,7 @@ export class ClientModal implements OnInit {
 
   addClient({ value }: { value: Client }) {
     this.spinnerService.displayLoader(true);
-    this.clientsService.addClient(value).subscribe(
+    this.clientsService.addClient(this.clientForm.getRawValue()).subscribe(
       suc => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su cliente ha sido agregado');
@@ -176,7 +123,7 @@ export class ClientModal implements OnInit {
 
   updateClient({ value }: { value: Client }) {
     this.spinnerService.displayLoader(true);
-    this.clientsService.updateClient(value).subscribe(
+    this.clientsService.updateClient(this.clientForm.getRawValue()).subscribe(
       suc => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su cliente ha sido actualizado');
@@ -191,7 +138,7 @@ export class ClientModal implements OnInit {
 
   deleteClient({ value }: { value: Client }) {
     this.spinnerService.displayLoader(true);
-    this.clientsService.deleteClient(value).subscribe(
+    this.clientsService.deleteClient(this.clientForm.getRawValue()).subscribe(
       suc => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su cliente ha sido eliminado');

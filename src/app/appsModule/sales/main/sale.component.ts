@@ -75,7 +75,8 @@ export class SaleComponent implements OnInit, OnDestroy {
           this.stock = stock;
           this.clients = clients;
           this.stock.products = stock.products.map(p => {
-            p.providerName = providers.find(provider => provider.id === p.provider_id).name;
+            const foundProvider = providers.find(provider => provider.id === p.provider_id);
+            p.providerName = foundProvider ? foundProvider.name : null;
             return p;
           });
           if (this.selectedProduct) {
@@ -113,7 +114,9 @@ export class SaleComponent implements OnInit, OnDestroy {
       });
     });
     this.maxStock = this.selectedProduct.stock - totalOrderStock;
-    this.saleForm.get('quantity').setValidators([Validators.required, Validators.min(0), Validators.max(this.maxStock)]);
+    this.saleForm
+      .get('quantity')
+      .setValidators([Validators.required, Validators.min(0), Validators.max(this.maxStock)]);
     this.saleForm.get('quantity').setValue(null);
   }
 

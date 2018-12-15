@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
@@ -49,73 +44,28 @@ export class ProviderModal implements OnInit {
       updated_at: [''],
       deleted_at: [''],
       new: [true],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(30)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30)
-        ]
-      ],
-      place: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(30)]
-      ],
-      codigoPostal: [
-        '',
-        [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]
-      ],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
+      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      codigoPostal: ['', [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
       codigoProvincia: [
         '',
-        [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
+        [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
       ],
-      address: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      telephone: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ]
-      ],
-      cuit: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(11),
-          Validators.maxLength(11)
-        ]
-      ],
-      web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
+      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
+      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      pib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
-      epib: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
       precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
-      condicionDeVenta: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30)]
-      ],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
       cuentasGenerales: [
@@ -161,7 +111,7 @@ export class ProviderModal implements OnInit {
 
   addProvider({ value }: { value: Provider }) {
     this.spinnerService.displayLoader(true);
-    this.providersService.addProvider(value).subscribe(
+    this.providersService.addProvider(this.providerForm.getRawValue()).subscribe(
       () => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su proveedor ha sido agregado');
@@ -176,7 +126,7 @@ export class ProviderModal implements OnInit {
 
   updateProvider({ value }: { value: Provider }) {
     this.spinnerService.displayLoader(true);
-    this.providersService.updateProvider(value).subscribe(
+    this.providersService.updateProvider(this.providerForm.getRawValue()).subscribe(
       () => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su proveedor ha sido actualizado');
@@ -191,7 +141,7 @@ export class ProviderModal implements OnInit {
 
   deleteProvider({ value }: { value: Provider }) {
     this.spinnerService.displayLoader(true);
-    this.providersService.deleteProvider(value).subscribe(
+    this.providersService.deleteProvider(this.providerForm.getRawValue()).subscribe(
       () => {
         this.spinnerService.displayLoader(false);
         this.ns.success('Perfecto!', 'Su proveedor ha sido eliminado');

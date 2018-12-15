@@ -7,6 +7,10 @@ body {
   background: url('/assets/images/background2.jpg') repeat center;
 }
 
+.simple-notification-wrapper {
+  z-index: 2000 !important;
+}
+
 .brand {
   font-family: 'Pacifico', cursive;
   color: black;

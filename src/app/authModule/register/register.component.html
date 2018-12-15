@@ -13,7 +13,7 @@
                         <sm-input type="text" label="Nombre de Usuario" [control]="registerForm.controls.username"
                             placeholder="Ingresar nombre de usuario"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').dirty">
-                            Nombre de usuario no ingresado
+                            Nombre de usuario no ingresado o inválido
                         </div>
                         <div class="has-error" *ngIf="registerForm.get('username').hasError('minlength') && registerForm.get('username').dirty">
                             Minimo 6 caracteres
@@ -38,7 +38,7 @@
                     <div class="form-group field">
                         <sm-input type="text" label="Nombre" [control]="registerForm.controls.name" placeholder="Ingresar Nombre"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').dirty">
-                            Nombre no ingresado
+                            Nombre no ingresado o inválido
                         </div>
                         <div class="has-error" *ngIf="registerForm.get('name').hasError('minlength') && registerForm.get('name').dirty">
                             Minimo 3 caracteres
@@ -50,7 +50,7 @@
                     <div class="form-group field">
                         <sm-input type="text" label="Apellido" [control]="registerForm.controls.lastname" placeholder="Ingresar Apellido"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('lastname').hasError('required') && registerForm.get('lastname').dirty">
-                            Apellido no ingresado
+                            Apellido no ingresado o inválido
                         </div>
                         <div class="has-error" *ngIf="registerForm.get('lastname').hasError('minlength') && registerForm.get('lastname').dirty">
                             Minimo 6 caracteres
@@ -62,7 +62,7 @@
                     <div class="form-group field">
                         <sm-input type="email" label="Email" [control]="registerForm.controls.email" placeholder="Ingresar Email"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').dirty">
-                            Email no ingresado
+                            Email no ingresado o inválido
                         </div>
                         <div class="has-error" *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').dirty">
                             Por favor ingrese un email valido

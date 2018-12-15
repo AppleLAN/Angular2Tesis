@@ -9,7 +9,7 @@
             class="has-error"
             *ngIf="providerForm.get('name').hasError('required') && providerForm.get('name').dirty"
           >
-            Nombre no ingresado
+            Nombre no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -37,7 +37,7 @@
             class="has-error"
             *ngIf="providerForm.get('fantasyName').hasError('required') && providerForm.get('fantasyName').dirty"
           >
-            Nombre de fantasia no ingresado
+            Nombre de fantasia no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -54,7 +54,7 @@
             class="has-error"
             *ngIf="providerForm.get('email').hasError('required') && providerForm.get('email').dirty"
           >
-            E-mail no ingresado
+            E-mail no ingresado o inválido
           </div>
           <div class="has-error" *ngIf="providerForm.get('email').hasError('email') && providerForm.get('email').dirty">
             Por favor ingrese un email valido
@@ -85,7 +85,7 @@
             class="has-error"
             *ngIf="providerForm.get('place').hasError('required') && providerForm.get('place').dirty"
           >
-            Lugar no ingresado
+            Lugar no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -113,7 +113,7 @@
             class="has-error"
             *ngIf="providerForm.get('codigoPostal').hasError('required') && providerForm.get('codigoPostal').dirty"
           >
-            Codigo postal no ingresado
+            Codigo postal no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -149,7 +149,7 @@
               providerForm.get('codigoProvincia').hasError('required') && providerForm.get('codigoProvincia').dirty
             "
           >
-            Provincia no ingresado
+            Provincia no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -215,7 +215,7 @@
             class="has-error"
             *ngIf="providerForm.get('telephone').hasError('required') && providerForm.get('telephone').dirty"
           >
-            Telefono no ingresado
+            Telefono no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -410,7 +410,7 @@
             class="has-error"
             *ngIf="providerForm.get('precioLista').hasError('required') && providerForm.get('precioLista').dirty"
           >
-            Precio lista no ingresado
+            Precio lista no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -507,7 +507,7 @@
               providerForm.get('numeroDeInscripcionesIB').dirty
             "
           >
-            Numero de inscripciones ingresos brutos no ingresado
+            Numero de inscripciones ingresos brutos no ingresado o inválido
           </div>
           <div
             class="has-error"
@@ -636,5 +636,5 @@
       </modal-actions>
     </form>
   </modal-content>
-  <modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>
 </sm-modal>
+<modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>

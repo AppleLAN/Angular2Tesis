@@ -109,7 +109,6 @@ export class StockModal implements OnInit {
       },
       error => this.ns.error('Error!', error.error.error)
     );
-    // this.addStock(value);
   }
 
   updateProducts({ value }: { value: Product }) {
@@ -120,44 +119,12 @@ export class StockModal implements OnInit {
       },
       error => this.ns.error('Error!', error.error.error)
     );
-    // this.updateStock(value);
   }
 
   deleteProducts({ value }: { value: Product }) {
     this.stockService.deleteProducts(value).subscribe(
       suc => {
         this.ns.success('Perfecto!', 'Su producto ha sido eliminado');
-        jQuery('.ui.modal.stock-modal').modal('hide');
-      },
-      error => this.ns.error('Error!', error.error.error)
-    );
-    // this.deleteStock(value);
-  }
-
-  addStock({ value }: { value: Stock }) {
-    this.stockService.addStock(value).subscribe(
-      suc => {
-        this.ns.success('Perfecto!', 'Su producto ha sido agregado al stock');
-        jQuery('.ui.modal.stock-modal').modal('hide');
-      },
-      error => this.ns.error('Error!', error.error.error)
-    );
-  }
-
-  updateStock({ value }: { value: Stock }) {
-    this.stockService.updateStock(value).subscribe(
-      suc => {
-        this.ns.success('Perfecto!', 'Su stock ha sido actualizado');
-        jQuery('.ui.modal.stock-modal').modal('hide');
-      },
-      error => this.ns.error('Error!', error.error.error)
-    );
-  }
-
-  deleteStock({ value }: { value: Stock }) {
-    this.stockService.deleteStock(value).subscribe(
-      suc => {
-        this.ns.success('Perfecto!', 'Su stock ha sido eliminado');
         jQuery('.ui.modal.stock-modal').modal('hide');
       },
       error => this.ns.error('Error!', error.error.error)

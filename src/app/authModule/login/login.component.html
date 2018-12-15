@@ -10,7 +10,7 @@
           <div class="form-group field">
             <sm-input type="email" label="Email" [control]="loginForm.controls.email" placeholder="Ingresar Email"></sm-input>
             <div class="has-error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').dirty">
-              Email no ingresado
+              Email no ingresado o inválido
             </div>
             <div class="has-error" *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').dirty">
                 Por favor ingrese un email valido

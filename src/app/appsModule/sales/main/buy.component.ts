@@ -69,7 +69,8 @@ export class BuyComponent implements OnInit, OnDestroy {
             this.spinnerService.displayLoader(false);
             this.stock = stock;
             this.stock.products = stock.products.map(p => {
-              p.providerName = providers.find(provider => provider.id === p.provider_id).name;
+              const foundProvider = providers.find(provider => provider.id === p.provider_id);
+              p.providerName = foundProvider ? foundProvider.name : null;
               return p;
             });
             this.providers = providers;

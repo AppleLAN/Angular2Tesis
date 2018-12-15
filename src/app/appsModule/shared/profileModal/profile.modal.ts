@@ -48,12 +48,15 @@ export class ProfileModal implements OnInit {
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
       place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      codigoPostal: ['', [Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
-      codigoProvincia: ['', [Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]],
+      codigoPostal: ['', [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
+      codigoProvincia: [
+        '',
+        [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
+      ],
       address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
-      web: ['', [Validators.minLength(6), Validators.maxLength(30)]],
+      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
@@ -156,9 +159,12 @@ export class ProfileModal implements OnInit {
   }
 
   updateClientCompany({ value }: { value: Client }) {
-    value.type = 'UPDATE';
+    const valueToSend = {
+      ...this.userForm.getRawValue(),
+      type: 'UPDATE'
+    };
     this.userService
-      .updateClientCompany(value)
+      .updateClientCompany(valueToSend)
       .subscribe(
         suc => this.ns.success('Perfecto!', 'Su compañia ha sido actualizada'),
         error => this.ns.error('Error!', error.error.error)

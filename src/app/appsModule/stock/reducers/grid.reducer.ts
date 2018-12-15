@@ -50,10 +50,7 @@ export const initialModalObject: StockState = {
   ]
 };
 
-export const gridReducer: Reducer<any> = (
-  state: StockState,
-  action: Action
-) => {
+export const gridReducer: Reducer<any> = (state: StockState, action: Action) => {
   const newState: StockState = { ...initialModalObject };
 
   switch (action.type) {
@@ -81,20 +78,19 @@ export const gridReducer: Reducer<any> = (
         return item.id !== action.payload.id;
       });
     case 'NEWPRODUCT':
+      action.payload.provider_id = Number(action.payload.provider_id);
       newState.products = action.payload;
       return newState;
     case 'ADDPRODUCT':
+      action.payload.provider_id = Number(action.payload.provider_id);
       state.products = [...state.products, action.payload];
       return state;
     case 'CHANGEPRODUCT':
-      state.products = state.products.map(
-        item => (item.id === action.payload.id ? action.payload : item)
-      );
+      action.payload.provider_id = Number(action.payload.provider_id);
+      state.products = state.products.map(item => (item.id === action.payload.id ? action.payload : item));
       return state;
     case 'DELETEPRODUCT':
-      state.products = state.products.filter(
-        item => item.id !== action.payload.id
-      );
+      state.products = state.products.filter(item => item.id !== action.payload.id);
       return state;
     default:
       return state;
