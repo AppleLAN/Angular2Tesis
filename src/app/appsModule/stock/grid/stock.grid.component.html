@@ -1,5 +1,5 @@
 <div class="grid">
-  <button class="ui button" [disabled]="providers?.length === 0" (click)="newModal()">Agregar Nuevo Producto</button>
+  <button class="ui button" [disabled]="!providers || providers?.length === 0" (click)="newModal()">Agregar Nuevo Producto</button>
   <table class="ui celled striped inverted table">
     <thead>
       <tr>
