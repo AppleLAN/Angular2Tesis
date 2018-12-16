@@ -47,7 +47,8 @@
           <sm-select
             class="fluid search inverted"
             label="Proveedor"
-            [control]="productForm.controls.provider_id"
+            [(model)]="providerId"
+            (onChange)="onChangeProvider($event)"
             placeholder="Ingresar Proveedor"
           >
             <option *ngFor="let provider of providers" value="{{provider.id}}">{{ provider.name }}</option>

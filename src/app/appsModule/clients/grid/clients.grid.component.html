@@ -1,24 +1,27 @@
-<div class="grid"> 
-    <button class="ui button" (click)="clientModal.openNewClientModal()">Agregar Nuevo Cliente</button>
-    <table class="ui celled striped inverted table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>E-Mail</th>
-                <th>Localidad</th>
-                <th>Telefono</th>
-                <th>C.U.I.T</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let client of clientStorage | async; let i = index;">
-                <td><span class="name" (click)="clientModal.changeInformation(client)">{{client.name}}</span></td>
-                <td>{{client.email}}</td>
-                <td>{{client.place}}</td>
-                <td>{{client.telephone}}</td>
-                <td>{{client.cuit}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="grid">
+  <button class="ui button" (click)="clientModal.openNewClientModal()">Agregar Nuevo Cliente</button>
+  <table class="ui celled striped inverted table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>E-Mail</th>
+        <th>Localidad</th>
+        <th>Telefono</th>
+        <th>C.U.I.T</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clientStorage; let i = index;">
+        <td><span class="name" (click)="clientModal.changeInformation(client)">{{client.name}}</span></td>
+        <td>{{client.email}}</td>
+        <td>{{client.place}}</td>
+        <td>{{client.telephone}}</td>
+        <td>{{client.cuit}}</td>
+      </tr>
+      <tr colspan="5" *ngIf="clientStorage?.length === 0">
+        <td>No se han encontrado clientes</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <app-client-modal #clientModal></app-client-modal>

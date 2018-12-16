@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Provider } from '../../../interfaces/provider';
 import { StockService } from '../../../services/stock.service';
@@ -23,6 +23,7 @@ export class StockModal implements OnInit {
   providers: Provider[];
   subscriptions: Subscription[] = [];
   options: any;
+  providerId: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -42,19 +43,9 @@ export class StockModal implements OnInit {
       id: [''],
       company_id: [''],
       provider_id: ['', [Validators.required]],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(30)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       code: ['', [Validators.required]],
-      description: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(120)
-        ]
-      ],
+      description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
       cost_price: ['', [Validators.required, Validators.min(0)]],
       sale_price: ['', [Validators.required, Validators.min(0)]],
       category_id: ['', [Validators.required]],
@@ -77,10 +68,16 @@ export class StockModal implements OnInit {
 
   changeInformation(stock: Stock) {
     this.productForm.reset();
+    this.productForm.get('provider_id').setValue(null);
     const productForm: any = stock;
     productForm.new = false;
     this.productForm.setValue(productForm);
+    this.providerId = productForm.provider_id;
     jQuery('.ui.modal.stock-modal').modal('show');
+  }
+
+  onChangeProvider(event: any) {
+    this.productForm.get('provider_id').setValue(event);
   }
 
   openNewStockModal() {

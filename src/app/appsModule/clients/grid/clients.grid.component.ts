@@ -9,18 +9,19 @@ import { SpinnerService } from '../../../services/spinner.service';
   templateUrl: './clients.grid.component.html',
   styleUrls: ['../clients.component.scss']
 })
-
 export class ClientsGridComponent implements OnInit {
-  clientStorage: Observable<Client[]>;
   clients: Client;
   error: String;
+  clientStorage: Client[];
 
-  constructor(
-    private clientsService: ClientsService, private spinnerService: SpinnerService) {
-  }
+  constructor(private clientsService: ClientsService, private spinnerService: SpinnerService) {}
   ngOnInit() {
     this.spinnerService.displayLoader(true);
-    this.clientStorage = this.clientsService.getClientStorage();
+    this.clientsService.getClientStorage().subscribe(clients => {
+      if (clients) {
+        this.clientStorage = clients;
+      }
+    });
     this.clientsService.getClients().subscribe(r => {
       this.spinnerService.displayLoader(false);
     });
