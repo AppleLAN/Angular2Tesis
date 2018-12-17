@@ -40,10 +40,7 @@ export class ProvidersService {
 
   updateProvider(newProvider: Provider): Observable<Provider> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProvider',
-        newProvider
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProvider', newProvider)
       .map((response: Response) => {
         this.store.dispatch({ type: CHANGEPROVIDER, payload: newProvider });
         return response;
@@ -53,12 +50,9 @@ export class ProvidersService {
 
   addProvider(newProvider: Provider): Observable<Provider> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProvider',
-        newProvider
-      )
-      .map((response: Response) => {
-        this.store.dispatch({ type: ADDPROVIDER, payload: newProvider });
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProvider', newProvider)
+      .map((response: any) => {
+        this.store.dispatch({ type: ADDPROVIDER, payload: response.success });
         return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
@@ -66,10 +60,7 @@ export class ProvidersService {
 
   deleteProvider(newProvider: Provider): Observable<Provider> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProvider',
-        newProvider
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteProvider', newProvider)
       .map((response: Response) => {
         this.store.dispatch({ type: DELETEPROVIDER, payload: newProvider });
         return response;

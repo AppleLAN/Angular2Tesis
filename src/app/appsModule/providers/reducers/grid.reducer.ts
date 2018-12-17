@@ -38,10 +38,7 @@ export const initialModalObject: Provider = {
   percepcionDeGanancia: null
 };
 
-export const gridReducer: Reducer<any> = (
-  state: Provider[],
-  action: Action
-) => {
+export const gridReducer: Reducer<any> = (state: Provider[], action: Action) => {
   switch (action.type) {
     case 'NEWPROVIDERS':
       return action.payload;

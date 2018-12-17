@@ -40,9 +40,6 @@ export class ClientModal implements OnInit {
     this.clientForm = this.fb.group({
       id: [''],
       company_id: [''],
-      created_at: [''],
-      updated_at: [''],
-      deleted_at: [''],
       new: [true],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
@@ -80,7 +77,7 @@ export class ClientModal implements OnInit {
     const formClient: any = client;
     formClient.new = false;
     this.clientForm.get('fantasyName').disable();
-    this.clientForm.setValue(formClient);
+    this.clientForm.patchValue(formClient);
     jQuery('.ui.modal.client-modal').modal('show');
   }
 
@@ -90,7 +87,7 @@ export class ClientModal implements OnInit {
     clientFormObject = this.clientFormEmptyObject;
     clientFormObject.new = true;
     this.clientForm.get('fantasyName').enable();
-    this.clientForm.setValue(clientFormObject);
+    this.clientForm.patchValue(clientFormObject);
     jQuery('.ui.modal.client-modal').modal('show');
   }
 

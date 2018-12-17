@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="number" label="Codigo Postal" [control]="clientForm.controls.codigoPostal" placeholder="Ingresar codigo postal">
+          <sm-input type="number" label="Código Postal" [control]="clientForm.controls.codigoPostal" placeholder="Ingresar codigo postal">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('codigoPostal').hasError('required') && clientForm.get('codigoPostal').dirty">
             Codigo postal no ingresado o inválido
@@ -93,10 +93,10 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="Direccion" [control]="clientForm.controls.address" placeholder="Ingresar Direccion">
+          <sm-input type="text" label="Dirección" [control]="clientForm.controls.address" placeholder="Ingresar Dirección">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('address').hasError('required') && clientForm.get('address').dirty">
-            Direccion no ingresada
+            Dirección no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('address').hasError('minlength') && clientForm.get('address').dirty">
             Minimo 6 caracteres
@@ -107,13 +107,13 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="number" label="Telefono" [control]="clientForm.controls.telephone" placeholder="Ingresar Telefono">
+          <sm-input type="number" label="Teléfono" [control]="clientForm.controls.telephone" placeholder="Ingresar Teléfono">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('telephone').hasError('required') && clientForm.get('telephone').dirty">
-            Telefono no ingresado o inválido
+            Teléfono no ingresado o inválido
           </div>
           <div class="has-error" *ngIf="clientForm.get('telephone').hasError('min') && clientForm.get('telephone').dirty">
-            Telefono no puede ser negativo
+            Teléfono no puede ser negativo
           </div>
           <div class="has-error" *ngIf="clientForm.get('telephone').hasError('minlength') && clientForm.get('telephone').dirty">
             Minimo 9 caracteres
@@ -153,10 +153,10 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="​Inscripcion en ingresos brutos" [control]="clientForm.controls.iib" placeholder="Ingresar ​inscripcion en ingresos brutos">
+          <sm-input type="text" label="​Inscripción en ingresos brutos" [control]="clientForm.controls.iib" placeholder="Ingresar ​inscripción en ingresos brutos">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('iib').hasError('required') && clientForm.get('iib').dirty">
-            ​Inscripcion en ingresos brutos no ingresada
+            ​inscripción en ingresos brutos no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('iib').hasError('minlength') && clientForm.get('iib').dirty">
             Minimo 6 caracteres
@@ -167,10 +167,10 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="Percepcion en ingresos brutos" [control]="clientForm.controls.pib" placeholder="Ingresar percepcion en ingresos brutos">
+          <sm-input type="text" label="Percepción en ingresos brutos" [control]="clientForm.controls.pib" placeholder="Ingresar percepción en ingresos brutos">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('pib').hasError('required') && clientForm.get('pib').dirty">
-            Percepcion en ingresos brutos no ingresada
+            Percepción en ingresos brutos no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('pib').hasError('minlength') && clientForm.get('pib').dirty">
             Minimo 6 caracteres
@@ -181,11 +181,11 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="Exención de percepcion en ingresos brutos" [control]="clientForm.controls.epib"
-            placeholder="Ingresar exención de percepcion en ingresos brutos">
+          <sm-input type="text" label="Exención de percepción en ingresos brutos" [control]="clientForm.controls.epib"
+            placeholder="Ingresar exención de percepción en ingresos brutos">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('epib').hasError('required') && clientForm.get('epib').dirty">
-            Exención de percepcion en ingresos brutos no ingresada
+            Exención de percepción en ingresos brutos no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('epib').hasError('minlength') && clientForm.get('epib').dirty">
             Minimo 6 caracteres
@@ -242,10 +242,10 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="Condicion De Venta" [control]="clientForm.controls.condicionDeVenta" placeholder="Ingresar condicion de venta">
+          <sm-input type="text" label="Condición De Venta" [control]="clientForm.controls.condicionDeVenta" placeholder="Ingresar condición de venta">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('condicionDeVenta').hasError('required') && clientForm.get('condicionDeVenta').dirty">
-            Condicion de venta no ingresada
+            Condición de venta no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('condicionDeVenta').hasError('minlength') && clientForm.get('condicionDeVenta').dirty">
             Minimo 6 caracteres
@@ -256,13 +256,13 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="number" label="Limite De Credito" [control]="clientForm.controls.limiteDeCredito" placeholder="Ingresar condicion de venta">
+          <sm-input type="number" label="Límite De Crédito" [control]="clientForm.controls.limiteDeCredito" placeholder="Ingresar condición de venta">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('limiteDeCredito').hasError('required') && clientForm.get('limiteDeCredito').dirty">
-            Limite de credito no ingresada
+            Límite de crédito no ingresada
           </div>
           <div class="has-error" *ngIf="clientForm.get('limiteDeCredito').hasError('min') && clientForm.get('limiteDeCredito').dirty">
-            Limite de credito no puede ser negativo
+            Límite de crédito no puede ser negativo
           </div>
           <div class="has-error" *ngIf="clientForm.get('limiteDeCredito').hasError('maxlength') && clientForm.get('limiteDeCredito').dirty">
             Maximo 30 caracteres
@@ -270,20 +270,20 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="number" label="Numero De Inscripciones Ingresos Brutos" [control]="clientForm.controls.numeroDeInscripcionesIB"
-            placeholder="Ingresar numero de inscripciones ingresos brutos">
+          <sm-input type="number" label="Número De Inscripciones Ingresos Brutos" [control]="clientForm.controls.numeroDeInscripcionesIB"
+            placeholder="Ingresar número de inscripciones ingresos brutos">
           </sm-input>
           <div class="has-error" *ngIf="
               clientForm.get('numeroDeInscripcionesIB').hasError('required') &&
               clientForm.get('numeroDeInscripcionesIB').dirty
             ">
-            Numero de inscripciones ingresos brutos no ingresado o inválido
+            Número de inscripciones ingresos brutos no ingresado o inválido
           </div>
           <div class="has-error" *ngIf="
               clientForm.get('numeroDeInscripcionesIB').hasError('min') &&
               clientForm.get('numeroDeInscripcionesIB').dirty
             ">
-            Numero de inscripciones ingresos brutos no puede ser negativo
+            Número de inscripciones ingresos brutos no puede ser negativo
           </div>
           <div class="has-error" *ngIf="
               clientForm.get('numeroDeInscripcionesIB').hasError('maxlength') &&
@@ -311,19 +311,19 @@
         </div>
 
         <div class="form-group field">
-          <sm-input type="text" label="Percepcion De Ganancia" [control]="clientForm.controls.percepcionDeGanancia"
-            placeholder="Ingresar percepcion de ganancia">
+          <sm-input type="number" label="Percepción De Ganancia" [control]="clientForm.controls.percepcionDeGanancia"
+            placeholder="Ingresar percepción de ganancia">
           </sm-input>
           <div class="has-error" *ngIf="
               clientForm.get('percepcionDeGanancia').hasError('required') &&
               clientForm.get('percepcionDeGanancia').dirty
             ">
-            Percepcion De Ganancia no ingresada
+            Percepción De Ganancia no ingresada
           </div>
           <div class="has-error" *ngIf="
               clientForm.get('percepcionDeGanancia').hasError('min') && clientForm.get('percepcionDeGanancia').dirty
             ">
-            Percepcion De Ganancia no puede ser negativo
+            Percepción De Ganancia no puede ser negativo
           </div>
           <div class="has-error" *ngIf="
               clientForm.get('percepcionDeGanancia').hasError('maxlength') &&

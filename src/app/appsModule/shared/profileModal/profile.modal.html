@@ -143,7 +143,7 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Direccion"
+                label="Dirección"
                 [control]="registerForm.controls.address"
                 placeholder="Ingresar direccion"
               ></sm-input>
@@ -151,7 +151,7 @@
                 class="has-error"
                 *ngIf="registerForm.get('address').hasError('required') && registerForm.get('address').dirty"
               >
-                Direccion no ingresada
+                Dirección no ingresada
               </div>
               <div
                 class="has-error"
@@ -306,7 +306,7 @@
             <div class="form-group field">
               <sm-input
                 type="number"
-                label="Codigo Postal"
+                label="Código Postal"
                 [control]="userForm.controls.codigoPostal"
                 placeholder="Ingresar codigo postal"
               >
@@ -374,16 +374,16 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Direccion"
+                label="Dirección"
                 [control]="userForm.controls.address"
-                placeholder="Ingresar Direccion"
+                placeholder="Ingresar Dirección"
               >
               </sm-input>
               <div
                 class="has-error"
                 *ngIf="userForm.get('address').hasError('required') && userForm.get('address').dirty"
               >
-                Direccion no ingresada
+                Dirección no ingresada
               </div>
               <div
                 class="has-error"
@@ -402,22 +402,22 @@
             <div class="form-group field">
               <sm-input
                 type="tel"
-                label="Telefono"
+                label="Teléfono"
                 [control]="userForm.controls.telephone"
-                placeholder="Ingresar Telefono"
+                placeholder="Ingresar Teléfono"
               >
               </sm-input>
               <div
                 class="has-error"
                 *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').dirty"
               >
-                Telefono no ingresado o inválido
+                Teléfono no ingresado o inválido
               </div>
               <div
                 class="has-error"
                 *ngIf="userForm.get('telephone').hasError('min') && userForm.get('telephone').dirty"
               >
-                Telefono no puede ser negativo
+                Teléfono no puede ser negativo
               </div>
               <div
                 class="has-error"
@@ -474,13 +474,13 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="​Inscripcion en ingresos brutos"
+                label="​Inscripción en ingresos brutos"
                 [control]="userForm.controls.iib"
-                placeholder="Ingresar ​inscripcion en ingresos brutos"
+                placeholder="Ingresar ​inscripción en ingresos brutos"
               >
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').dirty">
-                ​Inscripcion en ingresos brutos no ingresada
+                ​inscripción en ingresos brutos no ingresada
               </div>
               <div class="has-error" *ngIf="userForm.get('iib').hasError('minlength') && userForm.get('iib').dirty">
                 Minimo 6 caracteres
@@ -493,13 +493,13 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Percepcion en ingresos brutos"
+                label="Percepción en ingresos brutos"
                 [control]="userForm.controls.pib"
-                placeholder="Ingresar percepcion en ingresos brutos"
+                placeholder="Ingresar percepción en ingresos brutos"
               >
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('pib').hasError('required') && userForm.get('pib').dirty">
-                Percepcion en ingresos brutos no ingresada
+                Percepción en ingresos brutos no ingresada
               </div>
               <div class="has-error" *ngIf="userForm.get('pib').hasError('minlength') && userForm.get('pib').dirty">
                 Minimo 6 caracteres
@@ -512,13 +512,13 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Exención de percepcion en ingresos brutos"
+                label="Exención de percepción en ingresos brutos"
                 [control]="userForm.controls.epib"
-                placeholder="Ingresar exención de percepcion en ingresos brutos"
+                placeholder="Ingresar exención de percepción en ingresos brutos"
               >
               </sm-input>
               <div class="has-error" *ngIf="userForm.get('epib').hasError('required') && userForm.get('epib').dirty">
-                Exención de percepcion en ingresos brutos no ingresada
+                Exención de percepción en ingresos brutos no ingresada
               </div>
               <div class="has-error" *ngIf="userForm.get('epib').hasError('minlength') && userForm.get('epib').dirty">
                 Minimo 6 caracteres
@@ -607,16 +607,16 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Condicion De Venta"
+                label="Condición De Venta"
                 [control]="userForm.controls.condicionDeVenta"
-                placeholder="Ingresar condicion de venta"
+                placeholder="Ingresar condición de venta"
               >
               </sm-input>
               <div
                 class="has-error"
                 *ngIf="userForm.get('condicionDeVenta').hasError('required') && userForm.get('condicionDeVenta').dirty"
               >
-                Condicion de venta no ingresada
+                Condición de venta no ingresada
               </div>
               <div
                 class="has-error"
@@ -635,22 +635,22 @@
             <div class="form-group field">
               <sm-input
                 type="number"
-                label="Limite De Credito"
+                label="Límite De Crédito"
                 [control]="userForm.controls.limiteDeCredito"
-                placeholder="Ingresar condicion de venta"
+                placeholder="Ingresar condición de venta"
               >
               </sm-input>
               <div
                 class="has-error"
                 *ngIf="userForm.get('limiteDeCredito').hasError('required') && userForm.get('limiteDeCredito').dirty"
               >
-                Limite de credito no ingresada
+                Límite de crédito no ingresada
               </div>
               <div
                 class="has-error"
                 *ngIf="userForm.get('limiteDeCredito').hasError('min') && userForm.get('limiteDeCredito').dirty"
               >
-                Limite de credito no puede ser negativo
+                Límite de crédito no puede ser negativo
               </div>
               <div
                 class="has-error"
@@ -663,9 +663,9 @@
             <div class="form-group field">
               <sm-input
                 type="number"
-                label="Numero De Inscripciones Ingresos Brutos"
+                label="Número De Inscripciones Ingresos Brutos"
                 [control]="userForm.controls.numeroDeInscripcionesIB"
-                placeholder="Ingresar numero de inscripciones ingresos brutos"
+                placeholder="Ingresar número de inscripciones ingresos brutos"
               >
               </sm-input>
               <div
@@ -675,7 +675,7 @@
                   userForm.get('numeroDeInscripcionesIB').dirty
                 "
               >
-                Numero de inscripciones ingresos brutos no ingresado o inválido
+                Número de inscripciones ingresos brutos no ingresado o inválido
               </div>
               <div
                 class="has-error"
@@ -684,7 +684,7 @@
                   userForm.get('numeroDeInscripcionesIB').dirty
                 "
               >
-                Numero de inscripciones ingresos brutos no puede ser negativo
+                Número de inscripciones ingresos brutos no puede ser negativo
               </div>
               <div
                 class="has-error"
@@ -734,9 +734,9 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Percepcion De Ganancia"
+                label="Percepción De Ganancia"
                 [control]="userForm.controls.percepcionDeGanancia"
-                placeholder="Ingresar percepcion de ganancia"
+                placeholder="Ingresar percepción de ganancia"
               >
               </sm-input>
               <div
@@ -746,7 +746,7 @@
                   userForm.get('percepcionDeGanancia').dirty
                 "
               >
-                Percepcion De Ganancia no ingresada
+                Percepción De Ganancia no ingresada
               </div>
               <div
                 class="has-error"
@@ -754,7 +754,7 @@
                   userForm.get('percepcionDeGanancia').hasError('min') && userForm.get('percepcionDeGanancia').dirty
                 "
               >
-                Percepcion De Ganancia no puede ser negativo
+                Percepción De Ganancia no puede ser negativo
               </div>
               <div
                 class="has-error"
@@ -932,7 +932,7 @@
             <div class="form-group field">
               <sm-input
                 type="text"
-                label="Direccion"
+                label="Dirección"
                 [control]="newSubUserForm.controls.address"
                 placeholder="Ingresar direccion"
               ></sm-input>
@@ -940,7 +940,7 @@
                 class="has-error"
                 *ngIf="newSubUserForm.get('address').hasError('required') && newSubUserForm.get('address').dirty"
               >
-                Direccion no ingresada
+                Dirección no ingresada
               </div>
               <div
                 class="has-error"

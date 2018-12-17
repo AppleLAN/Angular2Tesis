@@ -75,9 +75,9 @@
                         </div>
                     </div>
                     <div class="form-group field">
-                        <sm-input type="text" label="Direccion" [control]="registerForm.controls.address" placeholder="Ingresar direccion"></sm-input>
+                        <sm-input type="text" label="Dirección" [control]="registerForm.controls.address" placeholder="Ingresar direccion"></sm-input>
                         <div class="has-error" *ngIf="registerForm.get('address').hasError('required') && registerForm.get('address').dirty">
-                            Direccion no ingresada
+                            Dirección no ingresada
                         </div>
                         <div class="has-error" *ngIf="registerForm.get('address').hasError('minlength') && registerForm.get('address').dirty">
                             Minimo 3 caracteres

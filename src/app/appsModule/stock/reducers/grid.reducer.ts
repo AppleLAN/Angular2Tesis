@@ -56,17 +56,17 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
   switch (action.type) {
     case 'NEWSTOCK':
       state.products.map(p => (p.quantity = action.payload));
-      return state;
+      return { ...state };
     case 'ADDSTOCK':
       state.stock = [...state.stock, action.payload];
       state.products.map(p => (p.quantity = action.payload));
-      return state;
+      return { ...state };
     case 'CHANGESTOCK':
       state.stock.map(item => {
         return item.id === action.payload.id ? action.payload : item;
       });
       state.products.map(p => (p.quantity = action.payload.quantity));
-      return state;
+      return { ...state };
     case 'DELETESTOCK':
       state.products.map(p => {
         if (action.payload.find((s: Stock) => s.product_id === p.id)) {
@@ -74,7 +74,7 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
         }
         return p;
       });
-      return state.stock.filter(item => {
+      return { ...state }.stock.filter(item => {
         return item.id !== action.payload.id;
       });
     case 'NEWPRODUCT':
@@ -84,14 +84,14 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
     case 'ADDPRODUCT':
       action.payload.provider_id = Number(action.payload.provider_id);
       state.products = [...state.products, action.payload];
-      return state;
+      return { ...state };
     case 'CHANGEPRODUCT':
       action.payload.provider_id = Number(action.payload.provider_id);
       state.products = state.products.map(item => (item.id === action.payload.id ? action.payload : item));
-      return state;
+      return { ...state };
     case 'DELETEPRODUCT':
       state.products = state.products.filter(item => item.id !== action.payload.id);
-      return state;
+      return { ...state };
     default:
       return state;
   }

@@ -40,9 +40,6 @@ export class ProviderModal implements OnInit {
     this.providerForm = this.fb.group({
       id: [''],
       company_id: [''],
-      created_at: [''],
-      updated_at: [''],
-      deleted_at: [''],
       new: [true],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
@@ -87,7 +84,7 @@ export class ProviderModal implements OnInit {
     const formProvider: any = provider;
     formProvider.new = false;
     this.providerForm.get('fantasyName').disable();
-    this.providerForm.setValue(formProvider);
+    this.providerForm.patchValue(formProvider);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
 
@@ -97,7 +94,7 @@ export class ProviderModal implements OnInit {
     providerFormObject = this.providerFormEmptyObject;
     providerFormObject.new = true;
     this.providerForm.get('fantasyName').enable();
-    this.providerForm.setValue(providerFormObject);
+    this.providerForm.patchValue(providerFormObject);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
 

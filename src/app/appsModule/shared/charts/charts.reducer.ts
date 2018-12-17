@@ -17,23 +17,20 @@ export const initialObject: ChartsState = {
   clients: null
 };
 
-export const chartsReducer: Reducer<any> = (
-  state: ChartsState,
-  action: Action
-) => {
+export const chartsReducer: Reducer<any> = (state: ChartsState, action: Action) => {
   if (!state) {
     state = initialObject;
   }
   switch (action.type) {
     case NEWCLIENTCHARTDATA:
       state.clients = action.payload;
-      return {...state};
+      return { ...state };
     case NEWPROVIDERCHARTDATA:
       state.providers = action.payload;
-      return {...state};
+      return { ...state };
     case NEWSTOCKCHARTDATA:
       state.stock = action.payload;
-      return {...state};
+      return { ...state };
     default:
       return state;
   }

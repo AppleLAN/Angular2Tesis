@@ -4,15 +4,17 @@
     <thead>
       <tr>
         <th>Nombre</th>
+        <th>Nombre de fantasia</th>
         <th>E-Mail</th>
         <th>Localidad</th>
-        <th>Telefono</th>
+        <th>Teléfono</th>
         <th>C.U.I.T</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clientStorage; let i = index;">
         <td><span class="name" (click)="clientModal.changeInformation(client)">{{client.name}}</span></td>
+        <td>{{client.fantasyName}}</td>
         <td>{{client.email}}</td>
         <td>{{client.place}}</td>
         <td>{{client.telephone}}</td>

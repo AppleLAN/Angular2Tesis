@@ -9,53 +9,54 @@ import { Observable } from 'rxjs/Rx';
 import { Client } from '../interfaces/client';
 import { ADDCLIENT, CHANGECLIENT, DELETECLIENT, NEWCLIENTS } from './../appsModule/clients/reducers/grid.reducer';
 
-
 @Injectable()
 export class ClientsService {
-  token: string;
+  token: string;
   headers: Headers;
-  options: RequestOptions;
+  options: RequestOptions;
   clientStorage: Observable<Client[]>;
   constructor(private store: Store<Client>, private api: HttpClient) {
-        this.clientStorage = store.select('clients');
-    }
-    getClientStorage(): Observable<Client[]> {
-        return this.clientStorage;
-    }
+    this.clientStorage = store.select('clients');
+  }
+  getClientStorage(): Observable<Client[]> {
+    return this.clientStorage;
+  }
 
-    getClients(): Observable<Client> {
-        return this.api.get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getClients')
-            .map((response: Response) => {
-                this.store.dispatch({ type: NEWCLIENTS, payload: response});
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  getClients(): Observable<Client> {
+    return this.api
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getClients')
+      .map((response: Response) => {
+        this.store.dispatch({ type: NEWCLIENTS, payload: response });
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    updateClient(newClient: Client): Observable<Client> {
-        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateClient', newClient)
-            .map((response: Response) => {
-                this.store.dispatch({ type: CHANGECLIENT, payload: newClient});
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  updateClient(newClient: Client): Observable<Client> {
+    return this.api
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateClient', newClient)
+      .map((response: Response) => {
+        this.store.dispatch({ type: CHANGECLIENT, payload: newClient });
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    addClient(newClient: Client): Observable<Client> {
-        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveClient', newClient)
-            .map((response: Response) => {
-                this.store.dispatch({ type: ADDCLIENT, payload: newClient});
-                return response;
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
+  addClient(newClient: Client): Observable<Client> {
+    return this.api
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveClient', newClient)
+      .map((response: any) => {
+        this.store.dispatch({ type: ADDCLIENT, payload: response.success });
+        return response;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 
-    deleteClient(newClient: Client): Observable<Client> {
-        return this.api.post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteClient', newClient)
-            .map((response: Response) => {
-                this.store.dispatch({ type: DELETECLIENT, payload: newClient});
-                return response;
-            })
-            .catch((error: any) => Observable.throw(error || 'Server error'));
-    }
-
-
+  deleteClient(newClient: Client): Observable<Client> {
+    return this.api
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteClient', newClient)
+      .map((response: Response) => {
+        this.store.dispatch({ type: DELETECLIENT, payload: newClient });
+        return response;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 }

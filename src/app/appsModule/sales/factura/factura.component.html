@@ -27,7 +27,7 @@
         <span *ngIf="client?.ivaInscripto; else: noInscripto">Responsable Inscripto</span>
         <ng-template #noInscripto> <span *ngIf="!client?.ivaInscripto">Consumidor final</span> </ng-template>
       </p>
-      <p><strong>Condicion de venta:</strong> {{ sale.payments }}</p>
+      <p><strong>Condición de venta:</strong> {{ sale.payments }}</p>
     </div>
     <div class="eigth">
       <p><strong>Apellido y nombre/ Razon social:</strong> {{ client?.name }}</p>

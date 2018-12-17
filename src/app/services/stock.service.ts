@@ -83,8 +83,8 @@ export class StockService {
   addProducts(newProduct: Product): Observable<Product> {
     return this.api
       .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProducts', newProduct)
-      .map((response: Response) => {
-        this.store.dispatch({ type: ADDPRODUCT, payload: newProduct });
+      .map((response: any) => {
+        this.store.dispatch({ type: ADDPRODUCT, payload: response.success });
         return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));

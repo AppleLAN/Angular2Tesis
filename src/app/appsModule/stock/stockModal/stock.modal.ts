@@ -71,7 +71,7 @@ export class StockModal implements OnInit {
     this.productForm.get('provider_id').setValue(null);
     const productForm: any = stock;
     productForm.new = false;
-    this.productForm.setValue(productForm);
+    this.productForm.patchValue(productForm);
     this.providerId = productForm.provider_id;
     jQuery('.ui.modal.stock-modal').modal('show');
   }
@@ -86,7 +86,7 @@ export class StockModal implements OnInit {
     let productFormObject: any;
     productFormObject = this.productFormEmptyObject;
     productFormObject.new = true;
-    this.productForm.setValue(productFormObject);
+    this.productForm.patchValue(productFormObject);
     jQuery('.ui.modal.stock-modal').modal('show');
   }
 
