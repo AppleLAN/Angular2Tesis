@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications';
 import { NgSemanticModule } from 'ng-semantic/ng-semantic';
@@ -29,6 +29,7 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     NgSemanticModule,
     ReactiveFormsModule,
     RouterModule,
@@ -44,6 +45,7 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
     NotFoundComponent,
     NotAuthComponent,
     ProfileModal,
+    FormsModule,
     HttpClientModule,
     NgSemanticModule,
     ReactiveFormsModule,

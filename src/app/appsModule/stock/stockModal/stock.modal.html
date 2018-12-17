@@ -117,13 +117,13 @@
         <div class="form-group field">
           <sm-input
             type="text"
-            label="Ingresar codigo de identificacion"
+            label="Ingresar código de identificacion"
             [control]="productForm.controls.code"
-            placeholder="Ingresar codigo de identificacion"
+            placeholder="Ingresar código de identificacion"
           >
           </sm-input>
           <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').dirty">
-            Codigo de identificacion no ingresado o inválido
+            Código de identificacion no ingresado o inválido
           </div>
         </div>
       </div>

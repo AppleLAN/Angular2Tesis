@@ -62,10 +62,10 @@
           <sm-input type="number" label="Código Postal" [control]="clientForm.controls.codigoPostal" placeholder="Ingresar codigo postal">
           </sm-input>
           <div class="has-error" *ngIf="clientForm.get('codigoPostal').hasError('required') && clientForm.get('codigoPostal').dirty">
-            Codigo postal no ingresado o inválido
+            Código postal no ingresado o inválido
           </div>
           <div class="has-error" *ngIf="clientForm.get('codigoPostal').hasError('min') && clientForm.get('codigoPostal').dirty">
-            Codigo postal no puede ser negativo
+            Código postal no puede ser negativo
           </div>
           <div class="has-error" *ngIf="clientForm.get('codigoPostal').hasError('minlength') && clientForm.get('codigoPostal').dirty">
             Minimo 4 caracteres

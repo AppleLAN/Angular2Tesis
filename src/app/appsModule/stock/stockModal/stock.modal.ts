@@ -1,12 +1,12 @@
-import { Component, OnInit, Output, Input, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Provider } from '../../../interfaces/provider';
-import { StockService } from '../../../services/stock.service';
-import { ProvidersService } from '../../../services/providers.service';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { Stock, Product } from '../../../interfaces/stock';
-import { initialModalObject, StockState } from '../reducers/grid.reducer';
 import { NotificationsService } from 'angular2-notifications';
+import { Observable, Subscription } from 'rxjs/Rx';
+import { Provider } from '../../../interfaces/provider';
+import { Product, Stock } from '../../../interfaces/stock';
+import { ProvidersService } from '../../../services/providers.service';
+import { StockService } from '../../../services/stock.service';
+import { initialModalObject, StockState } from '../reducers/grid.reducer';
 
 declare var jQuery: any;
 

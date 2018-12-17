@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, TestabilityRegistry } from '@angular/core';
-import { Stock } from '../../../interfaces/stock';
+import { Stock, Product } from '../../../interfaces/stock';
 import { Subscription } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
 import { ProvidersService } from '../../../services/providers.service';
@@ -20,12 +20,15 @@ export class StockGridComponent implements OnInit {
   storage: StockState;
   providers: Provider[];
   showModal = false;
+  filteredProducts: Product[] = [];
+  filter: string = null;
 
   constructor(
     private stockService: StockService,
     private spinnerService: SpinnerService,
     private providersService: ProvidersService
   ) {}
+
   ngOnInit() {
     this.spinnerService.displayLoader(true);
     this.stockService
@@ -33,6 +36,7 @@ export class StockGridComponent implements OnInit {
       .combineLatest(this.providersService.getProviderStorage(), this.stockService.getStockStorage())
       .subscribe(([products, providers, storage]) => {
         this.storage = storage;
+        this.filteredProducts = storage.products;
         this.providers = providers;
         if (storage && providers) {
           this.storage.products.map(p => {
@@ -45,6 +49,20 @@ export class StockGridComponent implements OnInit {
       });
 
     this.providersService.getProviders().subscribe();
+  }
+
+  onChange(event: string) {
+    if (event.length > 2) {
+      this.filteredProducts = this.storage.products.filter(
+        p =>
+          p.name.toUpperCase().includes(event.toUpperCase()) ||
+          p.providerName.toUpperCase().includes(event.toUpperCase()) ||
+          p.category_id.toUpperCase().includes(event.toUpperCase()) ||
+          p.code.toUpperCase().includes(event.toUpperCase())
+      );
+    } else {
+      this.filteredProducts = this.storage.products;
+    }
   }
 
   editModal(product: Stock) {

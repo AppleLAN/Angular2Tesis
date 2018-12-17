@@ -9,7 +9,7 @@ export interface Product {
   description: string;
   cost_price: number;
   sale_price: number;
-  category_id: number;
+  category_id: string;
   created_at: string;
   updated_at: string;
   deleted_at: string;

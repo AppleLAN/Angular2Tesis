@@ -58,7 +58,7 @@ import { includes } from 'lodash';
                 >{{ pageNumber + 1 }}</a
               >
               <button
-                [disabled]="currentIndex + 1 === pageSize || filteredItems.length < pageSize"
+                [disabled]="currentIndex >= productList.length - pageSize || filteredItems.length < pageSize"
                 [ngClass]="{ disabled: currentIndex === pageSize && filteredItems.length > 0 }"
                 class="pagination-button"
                 (click)="nextPage()"
@@ -114,7 +114,7 @@ export class Pagination implements OnChanges, OnInit {
   }
 
   nextPage() {
-    if (this.currentIndex < this.pageSize) {
+    if (this.currentIndex < this.productList.length - this.pageSize) {
       this.currentIndex = this.currentIndex + this.pageSize;
       this.getNewItems();
     }
