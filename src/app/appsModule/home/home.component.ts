@@ -6,7 +6,6 @@ import { UserService } from '../../services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
 export class HomeComponent implements OnInit {
   arrowImg: string;
   salesImg: string;
@@ -17,14 +16,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: UserService) {}
   ngOnInit() {
-     this.arrowImg = '../../assets/images/arrow-up.png';
-     this.salesImg = '../../assets/images/sales.png';
-     this.stockImg = '../../assets/images/stock.png';
-     this.clientsImg = '../../assets/images/client.png';
-     this.providersImg = '../../assets/images/provider.png';
+    this.arrowImg = '../../assets/images/arrow-up.png';
+    this.salesImg = '../../assets/images/sales.png';
+    this.stockImg = '../../assets/images/stock.png';
+    this.clientsImg = '../../assets/images/client.png';
+    this.providersImg = '../../assets/images/provider.png';
 
-     this.authService.getUserApps()
-     .subscribe(
+    this.authService.getUserApps().subscribe(
       response => {
         this.apps = response;
       },
@@ -34,19 +32,19 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getAppImage (app: string) {
+  getAppImage(app: string) {
     let result: string;
     switch (app) {
       case 'sales':
         result = this.salesImg;
         break;
-    case 'stock':
+      case 'stock':
         result = this.stockImg;
         break;
-    case 'clients':
+      case 'clients':
         result = this.clientsImg;
         break;
-    case 'providers':
+      case 'providers':
         result = this.providersImg;
         break;
     }

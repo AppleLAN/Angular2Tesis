@@ -7,6 +7,7 @@ import { CompleteUser } from '../../../interfaces/complete.user';
 import { User } from '../../../interfaces/user';
 import { SharedService } from '../../../services/shared.service';
 import { UserService } from '../../../services/user.service';
+import { ValidationService } from '../../../services/validation.service';
 
 declare var jQuery: any;
 
@@ -28,7 +29,8 @@ export class ProfileModal implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private ns: NotificationsService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -44,35 +46,41 @@ export class ProfileModal implements OnInit {
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
-      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      codigoPostal: ['', [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      fantasyName: ['', [Validators.required, Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      codigoPostal: [
+        '',
+        [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
       codigoProvincia: [
         '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]
+        [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0), this.vs.emptySpaceValidator]
       ],
-      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
-      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
-      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      telephone: [
+        '',
+        [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
+      ],
+      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
+      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
-      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
-      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6), this.vs.emptySpaceValidator]],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
+        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
     });
 
     this.userForm.get('fantasyName').disable();
@@ -84,7 +92,7 @@ export class ProfileModal implements OnInit {
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
       address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      birthday: ['', [Validators.required]],
+      birthday: ['', [Validators.required, this.vs.dateValidator]],
       company_id: [''],
       sales: [false],
       stock: [false],
@@ -100,7 +108,7 @@ export class ProfileModal implements OnInit {
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
       address: ['', [Validators.required, Validators.minLength(3)]],
-      birthday: ['', [Validators.required]],
+      birthday: ['', [Validators.required, this.vs.dateValidator]],
       company_id: [''],
       sales: [false],
       stock: [false],
@@ -121,6 +129,34 @@ export class ProfileModal implements OnInit {
       this.userData.profile.password = null;
       if (this.userData.profile) {
         this.registerForm.setValue(this.userData.profile);
+        if (this.userData.profile.clients) {
+          this.newSubUserForm.get('clients').setValue(1);
+          this.newSubUserForm.get('clients').enable();
+        } else {
+          this.newSubUserForm.get('clients').setValue(0);
+          this.newSubUserForm.get('clients').disable();
+        }
+        if (this.userData.profile.stock) {
+          this.newSubUserForm.get('stock').setValue(1);
+          this.newSubUserForm.get('stock').enable();
+        } else {
+          this.newSubUserForm.get('stock').setValue(0);
+          this.newSubUserForm.get('stock').disable();
+        }
+        if (this.userData.profile.providers) {
+          this.newSubUserForm.get('providers').setValue(1);
+          this.newSubUserForm.get('providers').enable();
+        } else {
+          this.newSubUserForm.get('providers').setValue(0);
+          this.newSubUserForm.get('providers').disable();
+        }
+        if (this.userData.profile.sales) {
+          this.newSubUserForm.get('sales').setValue(1);
+          this.newSubUserForm.get('sales').enable();
+        } else {
+          this.newSubUserForm.get('sales').setValue(0);
+          this.newSubUserForm.get('sales').disable();
+        }
       }
       if (this.userData.company) {
         this.userForm.setValue(this.userData.company);
@@ -173,9 +209,6 @@ export class ProfileModal implements OnInit {
   createSubClient({ value }: { value: User }) {
     this.userService
       .createSubClient(value)
-      .subscribe(
-        suc => this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado'),
-        error => this.ns.error('Error!', error.error.error)
-      );
+      .subscribe(suc => this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado'), error => this.ns.error('Error!', error.error.error));
   }
 }

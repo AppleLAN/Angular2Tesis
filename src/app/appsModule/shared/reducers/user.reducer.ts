@@ -23,25 +23,24 @@ export const initialUserObject: User = {
   providers: false
 };
 
-const emptyState: CompleteUser = {
-  profile: initialUserObject,
-  company: initialModalObject
-};
-
 export const userReducer: Reducer<any> = (state: CompleteUser, action: Action) => {
   switch (action.type) {
     case NEWUSER:
-      emptyState.profile = action.payload.profile;
-      if (action.payload.company) {
-        emptyState.company = action.payload.company;
-      }
-      return emptyState;
+      return {
+        ...state,
+        profile: action.payload.profile,
+        ...(action.payload.company ? { company: action.payload.company } : initialModalObject)
+      };
     case NEWUSERPROFILE:
-      emptyState.profile = action.payload;
-      return emptyState;
+      return {
+        ...state,
+        profile: action.payload
+      };
     case NEWCOMPANY:
-      emptyState.company = action.payload;
-      return emptyState;
+      return {
+        ...state,
+        company: action.payload
+      };
     default:
       return state;
   }

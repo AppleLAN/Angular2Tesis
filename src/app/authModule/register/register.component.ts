@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { User } from '../../interfaces/user';
 import { SpinnerService } from '../../services/spinner.service';
 import { UserAuthenticationService } from '../../services/user-authentication.service';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
     private authService: UserAuthenticationService,
     private router: Router,
     private spinnerService: SpinnerService,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -35,46 +37,37 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       username: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
+        [Validators.required, Validators.minLength(6), Validators.maxLength(12), this.vs.emptySpaceValidator]
       ],
       password: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
+        [Validators.required, Validators.minLength(6), Validators.maxLength(12), this.vs.emptySpaceValidator]
       ],
-      name: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
-      ],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12), this.vs.emptySpaceValidator]],
       lastname: [
         '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(12)]
+        [Validators.required, Validators.minLength(3), Validators.maxLength(12), this.vs.emptySpaceValidator]
       ],
       email: [
         '',
-        [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]
       ],
-      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      birthday: ['', [Validators.required, this.dateValidator]],
+      address: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
+      birthday: ['', [Validators.required, this.vs.dateValidator]],
       sales: [false],
       stock: [false],
       clients: [false],
       providers: [false]
     });
-  }
-
-  dateValidator(control: any) {
-    const actualDate = new Date();
-    actualDate.setHours(0);
-    actualDate.setMinutes(0);
-    actualDate.setSeconds(0);
-    actualDate.setMilliseconds(0);
-    const formDate = new Date(control.value);
-    formDate.setHours(formDate.getHours() + 3);
-    if (formDate < actualDate) {
-      return null;
-    } else if (formDate instanceof Date && !isNaN(formDate.getTime())) {
-      return { dateValidator: 'bad date' };
-    }
   }
 
   submit({ value }: { value: User }) {

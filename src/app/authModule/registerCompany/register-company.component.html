@@ -1,346 +1,226 @@
 <div id="personal-info" class="login">
-    <div fxFlexFill fxLayout="column wrap" fxLayoutAlign="center center">
-        <div class="ui inverted header">
-            <h1 class="brand">Semantic AF Contaduria</h1>
-            <h4>Bienvenido,&nbsp; por favor registra tu compañia a continuacion.</h4>
-        </div>
-        <div class="form-box">
-            <form class="ui form" [formGroup]="userForm" name="Form">
-                <div class="ui left aligned basic segment">
-                    <div class="form-group field">
-                        <sm-input type="text" label="Nombre" [control]="userForm.controls.name" placeholder="Ingresar Nombre">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('name').hasError('required') && userForm.get('name').dirty">
-                            Nombre no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('name').hasError('minlength') && userForm.get('name').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('name').hasError('maxlength') && userForm.get('name').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Nombre De Fantasia" [control]="userForm.controls.fantasyName"
-                            placeholder="Ingresar nombre de fantasia">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('fantasyName').hasError('required') && userForm.get('fantasyName').dirty">
-                            Nombre de fantasia no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('fantasyName').hasError('maxlength') && userForm.get('fantasyName').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="email" label="E-mail" [control]="userForm.controls.email" placeholder="Ingresar E-mail">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('email').hasError('required') && userForm.get('email').dirty">
-                            E-mail no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('email').hasError('email') && userForm.get('email').dirty">
-                            Por favor ingrese un email valido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('email').hasError('minlength') && userForm.get('email').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('email').hasError('maxlength') && userForm.get('email').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Localidad" [control]="userForm.controls.place" placeholder="Ingresar Localidad">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('place').hasError('required') && userForm.get('place').dirty">
-                            Lugar no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('place').hasError('minlength') && userForm.get('place').dirty">
-                            Minimo 3 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('place').hasError('maxlength') && userForm.get('place').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="Código Postal" [control]="userForm.controls.codigoPostal"
-                            placeholder="Ingresar codigo postal">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('required') && userForm.get('codigoPostal').dirty">
-                            Código postal no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('min') && userForm.get('codigoPostal').dirty">
-                            Código postal no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('minlength') && userForm.get('codigoPostal').dirty">
-                            Minimo 4 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoPostal').hasError('maxlength') && userForm.get('codigoPostal').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Provincia" [control]="userForm.controls.codigoProvincia"
-                            placeholder="Ingresar codigo provincia">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('required') && userForm.get('codigoProvincia').dirty">
-                            Provincia no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('minlength') && userForm.get('codigoProvincia').dirty">
-                            Minimo 4 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('maxlength') && userForm.get('codigoProvincia').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('codigoProvincia').hasError('min') && userForm.get('codigoProvincia').dirty">
-                            Provincia no puede ser negativo
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Dirección" [control]="userForm.controls.address" placeholder="Ingresar Dirección">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('address').hasError('required') && userForm.get('address').dirty">
-                            Dirección no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('address').hasError('minlength') && userForm.get('address').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('address').hasError('maxlength') && userForm.get('address').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="Teléfono" [control]="userForm.controls.telephone" placeholder="Ingresar Teléfono">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('telephone').hasError('required') && userForm.get('telephone').dirty">
-                            Teléfono no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('telephone').hasError('min') && userForm.get('telephone').dirty">
-                            Teléfono no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('telephone').hasError('minlength') && userForm.get('telephone').dirty">
-                            Minimo 9 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('telephone').hasError('maxlength') && userForm.get('telephone').dirty">
-                            Maximo 9 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="C.U.I.T (solo números)" [control]="userForm.controls.cuit"
-                            placeholder="Ingresar C.U.I.T">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('cuit').hasError('required') && userForm.get('cuit').dirty">
-                            C.U.I.T no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuit').hasError('min') && userForm.get('cuit').dirty">
-                            C.U.I.T no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuit').hasError('minlength') && userForm.get('cuit').dirty">
-                            Minimo 11 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuit').hasError('maxlength') && userForm.get('cuit').dirty">
-                            Maximo 11 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Pagina Web" [control]="userForm.controls.web" placeholder="Ingresar Pagina Web">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('web').hasError('minlength') && userForm.get('web').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('web').hasError('maxlength') && userForm.get('web').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="​Inscripción en ingresos brutos" [control]="userForm.controls.iib"
-                            placeholder="Ingresar ​inscripción en ingresos brutos">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').dirty">
-                            ​inscripción en ingresos brutos no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('iib').hasError('minlength') && userForm.get('iib').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('iib').hasError('maxlength') && userForm.get('iib').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Percepción en ingresos brutos" [control]="userForm.controls.pib"
-                            placeholder="Ingresar percepción en ingresos brutos">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('pib').hasError('required') && userForm.get('pib').dirty">
-                            Percepción en ingresos brutos no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('pib').hasError('minlength') && userForm.get('pib').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('pib').hasError('maxlength') && userForm.get('pib').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Exención de percepción en ingresos brutos" [control]="userForm.controls.epib"
-                            placeholder="Ingresar exención de percepción en ingresos brutos">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('epib').hasError('required') && userForm.get('epib').dirty">
-                            Exención de percepción en ingresos brutos no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('epib').hasError('minlength') && userForm.get('epib').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('epib').hasError('maxlength') && userForm.get('epib').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <div class="ui toggle checkbox">
-                            <sm-checkbox label="Responsable Inscripto" [control]="userForm.controls.responsableInscripto"
-                                (change)="responsableChange(userForm.controls.responsableInscripto)" placeholder="Ingresar responsable inscripto">
-                            </sm-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <div class="ui toggle checkbox">
-                            <sm-checkbox label="Exento" [control]="userForm.controls.excento" (change)="responsableChange(userForm.controls.excento)"
-                                placeholder="Ingresar si es exento">
-                            </sm-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <div class="ui toggle checkbox">
-                            <sm-checkbox label="Responsable de Monotributo" [control]="userForm.controls.responsableMonotributo"
-                                (change)="responsableChange(userForm.controls.responsableMonotributo)" placeholder="Ingresar si es responsable de monotributo">
-                            </sm-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <div class="ui toggle checkbox">
-                            <sm-checkbox label="Iva Inscripto" [control]="userForm.controls.ivaInscripto" (change)="responsableChange(userForm.controls.ivaInscripto)"
-                                placeholder="Ingresar si es iva inscripto">
-                            </sm-checkbox>
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="Precio Lista" [control]="userForm.controls.precioLista"
-                            placeholder="Ingresar precio lista">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('precioLista').hasError('required') && userForm.get('precioLista').dirty">
-                            Precio lista no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('precioLista').hasError('min') && userForm.get('precioLista').dirty">
-                            Precio no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('precioLista').hasError('maxlength') && userForm.get('precioLista').dirty">
-                            Maximo 6 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Condición De Venta" [control]="userForm.controls.condicionDeVenta"
-                            placeholder="Ingresar condición de venta">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('required') && userForm.get('condicionDeVenta').dirty">
-                            Condición de venta no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('minlength') && userForm.get('condicionDeVenta').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('condicionDeVenta').hasError('maxlength') && userForm.get('condicionDeVenta').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="Límite De Crédito" [control]="userForm.controls.limiteDeCredito"
-                            placeholder="Ingresar condición de venta">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('required') && userForm.get('limiteDeCredito').dirty">
-                            Límite de crédito no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('min') && userForm.get('limiteDeCredito').dirty">
-                            Límite de crédito no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('limiteDeCredito').hasError('maxlength') && userForm.get('limiteDeCredito').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="number" label="Número De Inscripciones Ingresos Brutos" [control]="userForm.controls.numeroDeInscripcionesIB"
-                            placeholder="Ingresar número de inscripciones ingresos brutos">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('required') && userForm.get('numeroDeInscripcionesIB').dirty">
-                            Número de inscripciones ingresos brutos no ingresado o inválido
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('min') && userForm.get('numeroDeInscripcionesIB').dirty">
-                            Número de inscripciones ingresos brutos no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('numeroDeInscripcionesIB').hasError('maxlength') && userForm.get('numeroDeInscripcionesIB').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Cuentas Generales" [control]="userForm.controls.cuentasGenerales"
-                            placeholder="Ingresar cuentas generales">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('required') && userForm.get('cuentasGenerales').dirty">
-                            Cuentas Generales no ingresadas
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('minlength') && userForm.get('cuentasGenerales').dirty">
-                            Minimo 6 caracteres
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('min') && userForm.get('cuentasGenerales').dirty">
-                            Cuentas Generales no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('cuentasGenerales').hasError('maxlength') && userForm.get('cuentasGenerales').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                    <div class="form-group field">
-                        <sm-input type="text" label="Percepción De Ganancia" [control]="userForm.controls.percepcionDeGanancia"
-                            placeholder="Ingresar percepción de ganancia">
-                        </sm-input>
-                        <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('required') && userForm.get('percepcionDeGanancia').dirty">
-                            Percepción De Ganancia no ingresada
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('min') && userForm.get('percepcionDeGanancia').dirty">
-                            Percepción De Ganancia no puede ser negativo
-                        </div>
-                        <div class="has-error" *ngIf="userForm.get('percepcionDeGanancia').hasError('maxlength') && userForm.get('percepcionDeGanancia').dirty">
-                            Maximo 30 caracteres
-                        </div>
-                    </div>
-
-                </div>
-                <modal-actions>
-                    <div fxLayout="column" fxLayoutGap="15px">
-                        <div fxLayout="row" fxLayoutGap="15px">
-                            <button class="ui button" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar
-                                Datos</button>
-                        </div>
-                    </div>
-                </modal-actions>
-            </form>
-        </div>
+  <div fxFlexFill fxLayout="column wrap" fxLayoutAlign="center center">
+    <div class="ui inverted header">
+      <h1 class="brand">Semantic AF Contaduria</h1>
+      <h4>Bienvenido,&nbsp; por favor registra tu compañia a continuacion.</h4>
     </div>
+    <div class="form-box">
+      <form class="ui form" [formGroup]="userForm" name="Form">
+        <div class="ui left aligned basic segment">
+          <div class="form-group field">
+            <sm-input type="text" label="Nombre" [control]="userForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.name"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Nombre De Fantasia"
+              [control]="userForm.controls.fantasyName"
+              placeholder="Ingresar nombre de fantasia"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.fantasyName"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="email" label="E-mail" [control]="userForm.controls.email" placeholder="Ingresar E-mail"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.email"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="text" label="Localidad" [control]="userForm.controls.place" placeholder="Ingresar Localidad"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.place"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="number" label="Código Postal" [control]="userForm.controls.codigoPostal" placeholder="Ingresar codigo postal">
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.codigoPostal"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="text" label="Provincia" [control]="userForm.controls.codigoProvincia" placeholder="Ingresar codigo provincia">
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.codigoProvincia"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="text" label="Dirección" [control]="userForm.controls.address" placeholder="Ingresar Dirección"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.address"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="number" label="Teléfono" [control]="userForm.controls.telephone" placeholder="Ingresar Teléfono"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.telephone"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="number" label="C.U.I.T (solo números)" [control]="userForm.controls.cuit" placeholder="Ingresar C.U.I.T">
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.cuit"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="text" label="Pagina Web" [control]="userForm.controls.web" placeholder="Ingresar Pagina Web"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.web"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="​Inscripción en ingresos brutos"
+              [control]="userForm.controls.iib"
+              placeholder="Ingresar ​inscripción en ingresos brutos"
+            >
+            </sm-input>
+            <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').dirty">
+              ​inscripción en ingresos brutos no ingresada
+            </div>
+            <app-input-error-messages [control]="userForm.controls.iib"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Percepción en ingresos brutos"
+              [control]="userForm.controls.pib"
+              placeholder="Ingresar percepción en ingresos brutos"
+            >
+            </sm-input>
+
+            <app-input-error-messages [control]="userForm.controls.pib"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Exención de percepción en ingresos brutos"
+              [control]="userForm.controls.epib"
+              placeholder="Ingresar exención de percepción en ingresos brutos"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.epib"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <div class="ui toggle checkbox">
+              <sm-checkbox
+                label="Responsable Inscripto"
+                [control]="userForm.controls.responsableInscripto"
+                (change)="responsableChange(userForm.controls.responsableInscripto)"
+                placeholder="Ingresar responsable inscripto"
+              >
+              </sm-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group field">
+            <div class="ui toggle checkbox">
+              <sm-checkbox
+                label="Exento"
+                [control]="userForm.controls.excento"
+                (change)="responsableChange(userForm.controls.excento)"
+                placeholder="Ingresar si es exento"
+              >
+              </sm-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group field">
+            <div class="ui toggle checkbox">
+              <sm-checkbox
+                label="Responsable de Monotributo"
+                [control]="userForm.controls.responsableMonotributo"
+                (change)="responsableChange(userForm.controls.responsableMonotributo)"
+                placeholder="Ingresar si es responsable de monotributo"
+              >
+              </sm-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group field">
+            <div class="ui toggle checkbox">
+              <sm-checkbox
+                label="Iva Inscripto"
+                [control]="userForm.controls.ivaInscripto"
+                (change)="responsableChange(userForm.controls.ivaInscripto)"
+                placeholder="Ingresar si es iva inscripto"
+              >
+              </sm-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="number" label="Precio Lista" [control]="userForm.controls.precioLista" placeholder="Ingresar precio lista">
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.precioLista"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Condición De Venta"
+              [control]="userForm.controls.condicionDeVenta"
+              placeholder="Ingresar condición de venta"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.condicionDeVenta"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="number"
+              label="Límite De Crédito"
+              [control]="userForm.controls.limiteDeCredito"
+              placeholder="Ingresar condición de venta"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.limiteDeCredito"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="number"
+              label="Número De Inscripciones Ingresos Brutos"
+              [control]="userForm.controls.numeroDeInscripcionesIB"
+              placeholder="Ingresar número de inscripciones ingresos brutos"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.numeroDeInscripcionesIB"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Cuentas Generales"
+              [control]="userForm.controls.cuentasGenerales"
+              placeholder="Ingresar cuentas generales"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.cuentasGenerales"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input
+              type="text"
+              label="Percepción De Ganancia"
+              [control]="userForm.controls.percepcionDeGanancia"
+              placeholder="Ingresar percepción de ganancia"
+            >
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.percepcionDeGanancia"></app-input-error-messages>
+          </div>
+        </div>
+        <modal-actions>
+          <div fxLayout="column" fxLayoutGap="15px">
+            <div fxLayout="row" fxLayoutGap="15px">
+              <button class="ui button" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar Datos</button>
+            </div>
+          </div>
+        </modal-actions>
+      </form>
+    </div>
+  </div>
 </div>
 <simple-notifications *ngIf="options" [options]="options"></simple-notifications>

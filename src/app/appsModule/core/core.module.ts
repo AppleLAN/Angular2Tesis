@@ -17,6 +17,8 @@ import { NotAuthComponent } from './../../not-auth.component';
 import { NotFoundComponent } from './../../not-found.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidebarComponent } from './views/sidebar//sidebar.component';
+import { InputErrorMessagesComponent } from './views/error-message/input-error-messages.component';
+import { ValidationService } from '../../services/validation.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
     ProfileModal,
     ChartComponent,
     NotFoundComponent,
-    NotAuthComponent
+    NotAuthComponent,
+    InputErrorMessagesComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +44,7 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
   ],
   exports: [
     SidebarComponent,
+    InputErrorMessagesComponent,
     NavbarComponent,
     NotFoundComponent,
     NotAuthComponent,
@@ -58,6 +62,7 @@ import { SidebarComponent } from './views/sidebar//sidebar.component';
   ],
   providers: [
     NotificationsService,
+    ValidationService,
     SpinnerService,
     HttpClient,
     SharedService,

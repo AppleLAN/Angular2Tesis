@@ -7,6 +7,7 @@ import { Product, Stock } from '../../../interfaces/stock';
 import { ProvidersService } from '../../../services/providers.service';
 import { StockService } from '../../../services/stock.service';
 import { initialModalObject, StockState } from '../reducers/grid.reducer';
+import { ValidationService } from '../../../services/validation.service';
 
 declare var jQuery: any;
 
@@ -29,7 +30,8 @@ export class StockModal implements OnInit {
     private fb: FormBuilder,
     private stockService: StockService,
     private ps: ProvidersService,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -42,13 +44,13 @@ export class StockModal implements OnInit {
     this.productForm = this.fb.group({
       id: [''],
       company_id: [''],
-      provider_id: ['', [Validators.required]],
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      code: ['', [Validators.required]],
-      description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
-      cost_price: ['', [Validators.required, Validators.min(0)]],
-      sale_price: ['', [Validators.required, Validators.min(0)]],
-      category_id: ['', [Validators.required]],
+      provider_id: ['', [Validators.required, this.vs.emptySpaceValidator]],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      code: ['', [Validators.required, this.vs.emptySpaceValidator]],
+      description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120), this.vs.emptySpaceValidator]],
+      cost_price: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
+      sale_price: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
+      category_id: ['', [Validators.required, this.vs.emptySpaceValidator]],
       created_at: [''],
       updated_at: [''],
       deleted_at: [''],

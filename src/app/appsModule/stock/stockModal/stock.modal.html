@@ -3,45 +3,14 @@
     <form class="ui form" [formGroup]="productForm" name="Form">
       <div class="ui left aligned basic segment">
         <div class="form-group field">
-          <sm-input type="text" label="Nombre" [control]="productForm.controls.name" placeholder="Ingresar Nombre">
-          </sm-input>
-          <div class="has-error" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').dirty">
-            Nombre no ingresado o inválido
-          </div>
-          <div class="has-error" *ngIf="productForm.get('name').hasError('minlength') && productForm.get('name').dirty">
-            Minimo 6 caracteres
-          </div>
-          <div class="has-error" *ngIf="productForm.get('name').hasError('maxlength') && productForm.get('name').dirty">
-            Maximo 30 caracteres
-          </div>
+          <sm-input type="text" label="Nombre" [control]="productForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
+          <app-input-error-messages [control]="productForm.controls.name"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
-          <sm-input
-            type="text"
-            label="Descripcion"
-            [control]="productForm.controls.description"
-            placeholder="Ingresar Descripcion"
-          >
+          <sm-input type="text" label="Descripcion" [control]="productForm.controls.description" placeholder="Ingresar Descripcion">
           </sm-input>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('description').hasError('required') && productForm.get('description').dirty"
-          >
-            Descripcion no ingresada
-          </div>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('description').hasError('minlength') && productForm.get('description').dirty"
-          >
-            Minimo 4 caracteres
-          </div>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('description').hasError('maxlength') && productForm.get('description').dirty"
-          >
-            Maximo 120 caracteres
-          </div>
+          <app-input-error-messages [control]="productForm.controls.description"></app-input-error-messages>
         </div>
         <div class="form-group field">
           <sm-select
@@ -51,29 +20,13 @@
             (onChange)="onChangeProvider($event)"
             placeholder="Ingresar Proveedor"
           >
-            <option *ngFor="let provider of providers" value="{{provider.id}}">{{ provider.name }}</option>
+            <option *ngFor="let provider of providers" value="{{ provider.id }}">{{ provider.name }}</option>
           </sm-select>
         </div>
         <div class="form-group field">
-          <sm-input
-            type="number"
-            label="Precio a costo"
-            [control]="productForm.controls.cost_price"
-            placeholder="Ingresar Costo Minimo"
-          >
+          <sm-input type="number" label="Precio a costo" [control]="productForm.controls.cost_price" placeholder="Ingresar Costo Minimo">
           </sm-input>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('cost_price').hasError('required') && productForm.get('cost_price').dirty"
-          >
-            Costo minimo no ingresado o inválido
-          </div>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('cost_price').hasError('min') && productForm.get('cost_price').dirty"
-          >
-            Costo minimo no puede ser negativo
-          </div>
+          <app-input-error-messages [control]="productForm.controls.cost_price"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
@@ -84,34 +37,13 @@
             placeholder="Ingresar Precio a la venta"
           >
           </sm-input>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('sale_price').hasError('required') && productForm.get('sale_price').dirty"
-          >
-            Precio a la venta no ingresado o inválido
-          </div>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('sale_price').hasError('min') && productForm.get('sale_price').dirty"
-          >
-            Precio a la venta no puede ser negativo
-          </div>
+          <app-input-error-messages [control]="productForm.controls.sale_price"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
-          <sm-input
-            type="text"
-            label="Id de Categoria"
-            [control]="productForm.controls.category_id"
-            placeholder="Ingresar id de categoria"
-          >
+          <sm-input type="text" label="Id de Categoria" [control]="productForm.controls.category_id" placeholder="Ingresar id de categoria">
           </sm-input>
-          <div
-            class="has-error"
-            *ngIf="productForm.get('category_id').hasError('required') && productForm.get('category_id').dirty"
-          >
-            Id de categoria no ingresado o inválido
-          </div>
+          <app-input-error-messages [control]="productForm.controls.category_id"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
@@ -122,21 +54,14 @@
             placeholder="Ingresar código de identificacion"
           >
           </sm-input>
-          <div class="has-error" *ngIf="productForm.get('code').hasError('required') && productForm.get('code').dirty">
-            Código de identificacion no ingresado o inválido
-          </div>
+          <app-input-error-messages [control]="productForm.controls.code"></app-input-error-messages>
         </div>
       </div>
 
       <modal-actions>
         <div fxLayout="column" fxLayoutGap="15px">
           <div fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
-            <button
-              class="ui button tiny"
-              (click)="addProducts(productForm)"
-              [disabled]="productForm.invalid"
-              *ngIf="isNew(productForm)"
-            >
+            <button class="ui button tiny" (click)="addProducts(productForm)" [disabled]="productForm.invalid" *ngIf="isNew(productForm)">
               Agregar Producto
             </button>
             <button
@@ -147,9 +72,7 @@
             >
               Actualizar Datos
             </button>
-            <button class="ui button tiny" (click)="deleteProducts(productForm)" *ngIf="!isNew(productForm)">
-              Borrar Producto
-            </button>
+            <button class="ui button tiny" (click)="deleteProducts(productForm)" *ngIf="!isNew(productForm)">Borrar Producto</button>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center">
             <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="stockModal.hide()">Cancelar</button>

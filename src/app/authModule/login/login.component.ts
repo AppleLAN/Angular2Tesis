@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserAuthenticationService } from '../../services/user-authentication.service';
 import { NotificationsService } from 'angular2-notifications';
 import { SpinnerService } from '../../services/spinner.service';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'app-login-component',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private authService: UserAuthenticationService,
     private router: Router,
     private ns: NotificationsService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -35,12 +37,15 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: [
         '',
-        [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]
       ],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
-      ]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]]
     });
   }
 

@@ -7,6 +7,7 @@ import { ClientsService } from '../../../services/clients.service';
 import { SharedService } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { initialModalObject } from '../reducers/grid.reducer';
+import { ValidationService } from '../../../services/validation.service';
 declare var jQuery: any;
 
 @Component({
@@ -27,7 +28,8 @@ export class ClientModal implements OnInit {
     private clientsService: ClientsService,
     private ns: NotificationsService,
     private sharedService: SharedService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -41,32 +43,101 @@ export class ClientModal implements OnInit {
       id: [''],
       company_id: [''],
       new: [true],
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      fantasyName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
-      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      codigoPostal: ['', [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30)]],
-      codigoProvincia: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0)]],
-      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      telephone: ['', [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9)]],
-      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11)]],
-      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      fantasyName: ['', [Validators.required, Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]
+      ],
+      place: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
+      codigoPostal: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]
+      ],
+      codigoProvincia: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.min(0),
+          this.vs.emptySpaceValidator
+        ]
+      ],
+      address: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
+      telephone: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.minLength(9),
+          Validators.maxLength(9),
+          this.vs.emptySpaceValidator
+        ]
+      ],
+      cuit: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          this.vs.emptySpaceValidator
+        ]
+      ],
+      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6)]],
-      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
-      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]],
+      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6), this.vs.emptySpaceValidator]],
+      condicionDeVenta: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
+      limiteDeCredito: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
+      numeroDeInscripcionesIB: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ],
       cuentasGenerales: [
         '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30)]
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.min(0),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]
       ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30)]]
+      percepcionDeGanancia: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
+      ]
     });
     this.clientStorage = this.clientsService.getClientStorage();
     this.clientsService.getClients().subscribe();
