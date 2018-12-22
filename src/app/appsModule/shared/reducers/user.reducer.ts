@@ -29,7 +29,7 @@ export const userReducer: Reducer<any> = (state: CompleteUser, action: Action) =
       return {
         ...state,
         profile: action.payload.profile,
-        ...(action.payload.company ? { company: action.payload.company } : initialModalObject)
+        ...(action.payload.company ? { company: action.payload.company } : { company: initialModalObject })
       };
     case NEWUSERPROFILE:
       return {

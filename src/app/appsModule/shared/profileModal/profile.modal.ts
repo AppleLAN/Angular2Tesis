@@ -107,7 +107,7 @@ export class ProfileModal implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30)]],
-      address: ['', [Validators.required, Validators.minLength(3)]],
+      address: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       birthday: ['', [Validators.required, this.vs.dateValidator]],
       company_id: [''],
       sales: [false],
@@ -159,7 +159,7 @@ export class ProfileModal implements OnInit {
         }
       }
       if (this.userData.company) {
-        this.userForm.setValue(this.userData.company);
+        this.userForm.patchValue(this.userData.company);
       }
     }
   }
