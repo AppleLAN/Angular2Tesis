@@ -1,13 +1,10 @@
-import { StockService } from '../../../services/stock.service';
-import { Product } from '../../../interfaces/stock';
-import { Details, Sale } from '../../../interfaces/sale';
-import { Client } from '../../../interfaces/client';
-import { NotificationsService } from 'angular2-notifications';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ClientsService } from '../../../services/clients.service';
-import { UserService } from '../../../services/user.service';
+import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
+import { Details, Sale } from '../../../interfaces/sale';
+import { StockService } from '../../../services/stock.service';
+import { UserService } from '../../../services/user.service';
 
 interface Vto {
   year: string;
@@ -25,6 +22,7 @@ export class FacturaComponent implements OnInit {
   @Input() products_details: [Details];
   @Input() products: [Details];
   @Input() sale: Sale;
+  @Input() clients: Client[];
   clientStorage: Observable<Client[]>;
   client: Client;
   userStorage: Observable<CompleteUser>;
@@ -36,8 +34,6 @@ export class FacturaComponent implements OnInit {
   };
 
   constructor(
-    private ns: NotificationsService,
-    private clientsService: ClientsService,
     private userService: UserService,
     private stockService: StockService
   ) {
@@ -50,14 +46,7 @@ export class FacturaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clientStorage = this.clientsService.getClientStorage();
-    this.clientStorage.subscribe(c => {
-      if (c) {
-        const clients = c;
-        this.client = clients.find(cl => cl.id === this.sale.client_id);
-      }
-    });
-    this.clientsService.getClients().subscribe();
+    this.client = this.clients.find(cl => cl.id === this.sale.client_id);
     this.userStorage = this.userService.getUserStorage();
   }
 
