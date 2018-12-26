@@ -84,6 +84,7 @@ export class ProfileModal implements OnInit {
     });
 
     this.userForm.get('fantasyName').disable();
+    this.userForm.get('cuit').disable();
 
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],

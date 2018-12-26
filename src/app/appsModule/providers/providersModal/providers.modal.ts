@@ -45,64 +45,22 @@ export class ProviderModal implements OnInit {
       new: [true],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       fantasyName: ['', [Validators.required, Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.minLength(6),
-          Validators.maxLength(30),
-          this.vs.emptySpaceValidator
-        ]
-      ],
-      place: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      place: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       codigoPostal: [
         '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(4),
-          Validators.maxLength(30),
-          this.vs.emptySpaceValidator
-        ]
+        [Validators.required, Validators.min(0), Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]
       ],
       codigoProvincia: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(30),
-          Validators.min(0),
-          this.vs.emptySpaceValidator
-        ]
+        [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.min(0), this.vs.emptySpaceValidator]
       ],
-      address: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
+      address: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       telephone: [
         '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(9),
-          Validators.maxLength(9),
-          this.vs.emptySpaceValidator
-        ]
+        [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
-      cuit: [
-        '',
-        [
-          Validators.required,
-          Validators.min(0),
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          this.vs.emptySpaceValidator
-        ]
-      ],
+      cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
@@ -112,32 +70,14 @@ export class ProviderModal implements OnInit {
       responsableMonotributo: ['', []],
       ivaInscripto: ['', []],
       precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6), this.vs.emptySpaceValidator]],
-      condicionDeVenta: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
-      limiteDeCredito: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
-      numeroDeInscripcionesIB: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
+      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       cuentasGenerales: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.min(0),
-          Validators.maxLength(30),
-          this.vs.emptySpaceValidator
-        ]
+        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
       ],
-      percepcionDeGanancia: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ]
+      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
     });
     this.providerStorage = this.providersService.getProviderStorage();
     this.providersService.getProviders().subscribe();
@@ -152,6 +92,7 @@ export class ProviderModal implements OnInit {
     const formProvider: any = provider;
     formProvider.new = false;
     this.providerForm.get('fantasyName').disable();
+    this.providerForm.get('cuit').disable();
     this.providerForm.patchValue(formProvider);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
@@ -162,6 +103,7 @@ export class ProviderModal implements OnInit {
     providerFormObject = this.providerFormEmptyObject;
     providerFormObject.new = true;
     this.providerForm.get('fantasyName').enable();
+    this.providerForm.get('cuit').enable();
     this.providerForm.patchValue(providerFormObject);
     jQuery('.ui.modal.provider-modal').modal('show');
   }

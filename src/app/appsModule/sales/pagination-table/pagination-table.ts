@@ -21,10 +21,10 @@ import { includes } from 'lodash';
         <tr>
           <th>Nombre</th>
           <th>Proveedor Origen</th>
-          <th>Descripcion</th>
+          <th>Descripción</th>
           <th>Precio a costo</th>
-          <th>Categoria</th>
-          <th>Codigo</th>
+          <th>Categoría</th>
+          <th>Código</th>
           <th>Cantidad</th>
         </tr>
       </thead>
