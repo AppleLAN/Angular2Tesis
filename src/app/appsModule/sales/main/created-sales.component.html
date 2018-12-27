@@ -27,7 +27,7 @@
           </tbody>
         </table>
         <factura
-          *ngIf="clients.length > 0"
+          *ngIf="clients?.length > 0"
           [clients]="clients"
           [products_details]="sale.sale_details"
           [products]="sale.products"
