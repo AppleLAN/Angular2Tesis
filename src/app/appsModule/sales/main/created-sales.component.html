@@ -1,36 +1,41 @@
-<div *ngIf="$sales | async  as sales;else noSalesTemplate" class="ui column doubling grid main-container">
-    <div class="row">
-        <div class="column">
-            <div class="ui orange message">Por favor verificar que el bloqueo de pop ups este desactivado para poder imprimir una factura !</div>
-            <div class="container order-container buy-container" *ngFor="let sale of sales; let index = index">
-                <p>Cliente: {{sale.sale.client_name}}</p>
-                <p>Total: {{sale.sale.total}}</p>
-                <p>Status: {{sale.sale.status}}</p>
-                <p>Tipo de venta: {{sale.sale.payments}}</p>
-                <p>Productos de la venta</p>
-                <table class="ui celled table">
-                    <thead>
-                        <tr>
-                            <th>Nombre de producto</th>
-                            <th>Descripción</th>
-                            <th>Costo</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let details of sale.sale_details">
-                            <td>{{details.product_name}}</td>
-                            <td>{{sale.products[details.product_id].description}}</td>
-                            <td>{{sale.products[details.product_id].sale_price}}</td>
-                            <td>{{details.quantity}}</td>                            
-                        </tr>
-                    </tbody>
-                </table>
-                <factura *ngIf="clients" [clients]="clients" [products_details]="sale.sale_details" [products]="sale.products" [sale]="sale.sale" [id]="'to_print' + index" ></factura>
-            </div>
-        </div>
+<div *ngIf="($sales | async) as sales; else noSalesTemplate" class="ui column doubling grid main-container">
+  <div class="row">
+    <div class="column">
+      <div class="ui orange message">Por favor verificar que el bloqueo de pop ups este desactivado para poder imprimir una factura !</div>
+      <div class="container order-container buy-container" *ngFor="let sale of sales; let index = index">
+        <p>Cliente: {{ sale.sale.client_name }}</p>
+        <p>Total: {{ sale.sale.total }}</p>
+        <p>Status: {{ sale.sale.status }}</p>
+        <p>Tipo de venta: {{ sale.sale.payments }}</p>
+        <p>Productos de la venta</p>
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>Nombre de producto</th>
+              <th>Descripción</th>
+              <th>Costo</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let details of sale.sale_details">
+              <td>{{ details.product_name }}</td>
+              <td>{{ sale.products[details.product_id].description }}</td>
+              <td>{{ sale.products[details.product_id].sale_price }}</td>
+              <td>{{ details.quantity }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <factura
+          *ngIf="clients.length > 0"
+          [clients]="clients"
+          [products_details]="sale.sale_details"
+          [products]="sale.products"
+          [sale]="sale.sale"
+          [id]="'to_print' + index"
+        ></factura>
+      </div>
     </div>
+  </div>
 </div>
-<ng-template #noSalesTemplate>
-    <div class="ui red message main-container">No se han encotrado ventas realizadas !</div>
-</ng-template>
+<ng-template #noSalesTemplate> <div class="ui red message main-container">No se han encotrado ventas realizadas !</div> </ng-template>
