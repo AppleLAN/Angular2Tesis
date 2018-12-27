@@ -57,17 +57,18 @@ export class FacturaComponent implements OnInit {
   print(): void {
     let printContents;
     this.spinnerService.displayLoader(true);
-    this.stockService.getAfipCae(this.sale.id).subscribe(response => {
-      this.spinnerService.displayLoader(false);
-      if (!response.success.Err) {
-        this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
-        const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
-        this.vto.year = vtoString.slice(0, 4);
-        this.vto.month = vtoString.slice(4, 6);
-        this.vto.day = vtoString.slice(6, 8);
-        setTimeout(() => {
-          printContents = document.getElementById(this.id).innerHTML;
-          printContents = `
+    this.stockService.getAfipCae(this.sale.id).subscribe(
+      response => {
+        this.spinnerService.displayLoader(false);
+        if (!response.success.Err) {
+          this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
+          const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
+          this.vto.year = vtoString.slice(0, 4);
+          this.vto.month = vtoString.slice(4, 6);
+          this.vto.day = vtoString.slice(6, 8);
+          setTimeout(() => {
+            printContents = document.getElementById(this.id).innerHTML;
+            printContents = `
             <html>
               <head>
                 <title>Print tab</title>
@@ -161,30 +162,35 @@ export class FacturaComponent implements OnInit {
               <body>${printContents}</body>
             </html>`;
 
-          const frame1 = document.createElement('iframe');
-          frame1.name = 'frame1';
-          frame1.style.position = 'absolute';
-          frame1.style.top = '-1000000px';
-          document.body.appendChild(frame1);
-          const frameDoc = frame1.contentWindow;
-          frameDoc.document.open();
-          frameDoc.document.write(printContents);
-          frameDoc.document.close();
+            const frame1 = document.createElement('iframe');
+            frame1.name = 'frame1';
+            frame1.style.position = 'absolute';
+            frame1.style.top = '-1000000px';
+            document.body.appendChild(frame1);
+            const frameDoc = frame1.contentWindow;
+            frameDoc.document.open();
+            frameDoc.document.write(printContents);
+            frameDoc.document.close();
 
-          setTimeout(function() {
-            frameDoc.focus();
-            frameDoc.print();
-          }, 500);
+            setTimeout(function() {
+              frameDoc.focus();
+              frameDoc.print();
+            }, 500);
 
-          // Remove the iframe after a delay of 1.5 seconds
-          // (the delay is required for this to work on iPads)
-          setTimeout(function() {
-            document.body.removeChild(frame1);
-          }, 1500);
-        }, 0);
-      } else {
+            // Remove the iframe after a delay of 1.5 seconds
+            // (the delay is required for this to work on iPads)
+            setTimeout(function() {
+              document.body.removeChild(frame1);
+            }, 1500);
+          }, 0);
+        } else {
+          this.ns.error('Error!', 'Se ha encontrado un error en los servidores de AFIP, por favor intente luego');
+        }
+      },
+      error => {
+        this.spinnerService.displayLoader(false);
         this.ns.error('Error!', 'Se ha encontrado un error en los servidores de AFIP, por favor intente luego');
       }
-    });
+    );
   }
 }
