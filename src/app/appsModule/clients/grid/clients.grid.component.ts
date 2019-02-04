@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { SpinnerService } from '../../../services/spinner.service';
+import { ClientModal } from '../clientModal/client.modal';
 
 @Component({
   selector: 'app-clients-grid',
@@ -10,11 +11,13 @@ import { SpinnerService } from '../../../services/spinner.service';
   styleUrls: ['../clients.component.scss']
 })
 export class ClientsGridComponent implements OnInit {
+  @ViewChild('clientModal') clientModal: ClientModal;
   clients: Client;
   error: String;
   clientStorage: Client[];
   filter: string = null;
   filteredClients: Client[];
+  showModal = false;
 
   constructor(private clientsService: ClientsService, private spinnerService: SpinnerService) {}
   ngOnInit() {
@@ -42,5 +45,25 @@ export class ClientsGridComponent implements OnInit {
     } else {
       this.filteredClients = this.clientStorage;
     }
+  }
+
+  editModal(client: Client) {
+    this.showModal = false;
+    setTimeout(() => {
+      this.showModal = true;
+      setTimeout(() => {
+        this.clientModal.changeInformation(client);
+      }, 0);
+    }, 0);
+  }
+
+  newModal() {
+    this.showModal = false;
+    setTimeout(() => {
+      this.showModal = true;
+      setTimeout(() => {
+        this.clientModal.openNewClientModal();
+      }, 0);
+    }, 0);
   }
 }

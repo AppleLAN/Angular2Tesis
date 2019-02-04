@@ -15,7 +15,7 @@
     </div>
 
     <div fxFlex>
-      <button class="ui button" (click)="clientModal.openNewClientModal()">Agregar Nuevo Cliente</button>
+      <button class="ui button" (click)="newModal()">Agregar Nuevo Cliente</button>
     </div>
 
     <table class="ui celled striped inverted table">
@@ -32,7 +32,7 @@
       <tbody>
         <tr *ngFor="let client of filteredClients; let i = index">
           <td>
-            <span class="name" (click)="clientModal.changeInformation(client)">{{ client.name }}</span>
+            <span class="name" (click)="editModal(client)">{{ client.name }}</span>
           </td>
           <td>{{ client.fantasyName }}</td>
           <td>{{ client.email }}</td>
@@ -46,5 +46,7 @@
       </tbody>
     </table>
   </div>
-  <app-client-modal #clientModal></app-client-modal>
+  <div *ngIf="showModal">
+    <app-client-modal #clientModal></app-client-modal>
+  </div>
 </div>

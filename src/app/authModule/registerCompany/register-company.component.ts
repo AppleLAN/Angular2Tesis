@@ -107,7 +107,7 @@ export class RegisterCompanyComponent implements OnInit {
         ]
       ],
       web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],

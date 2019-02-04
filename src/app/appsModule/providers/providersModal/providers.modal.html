@@ -182,22 +182,24 @@
         </div>
 
         <div class="form-group field">
-          <sm-input
-            type="text"
-            label="Cuentas Generales"
-            [control]="providerForm.controls.cuentasGenerales"
-            placeholder="Ingresar cuentas generales"
+          <sm-select
+            class="fluid search inverted"
+            label="Cuentas"
+            [(model)]="cuenta"
+            (onChange)="onChangeCuenta($event)"
+            placeholder="Ingresar Tipo De Cuenta"
           >
-          </sm-input>
+            <option value="'Cuenta General'">Cuenta General</option> <option value="'Cuenta Interna'">Cuenta Interna</option>
+          </sm-select>
           <app-input-error-messages [control]="providerForm.controls.cuentasGenerales"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
           <sm-input
             type="number"
-            label="Percepción De Ganancia"
+            label="Retención De Ganancia"
             [control]="providerForm.controls.percepcionDeGanancia"
-            placeholder="Ingresar percepción de ganancia"
+            placeholder="Ingresar retención de ganancia"
           >
           </sm-input>
           <app-input-error-messages [control]="providerForm.controls.percepcionDeGanancia"></app-input-error-messages>

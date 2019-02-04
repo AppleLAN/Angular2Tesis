@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ProvidersService } from '../../../services/providers.service';
-import { Observable } from 'rxjs/Rx';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Provider } from '../../../interfaces/provider';
+import { ProvidersService } from '../../../services/providers.service';
 import { SpinnerService } from '../../../services/spinner.service';
+import { ProviderModal } from '../providersModal/providers.modal';
 
 @Component({
   selector: 'app-providers-grid',
@@ -10,11 +10,13 @@ import { SpinnerService } from '../../../services/spinner.service';
   styleUrls: ['../providers.component.scss']
 })
 export class ProvidersGridComponent implements OnInit {
+  @ViewChild('providerModal') providerModal: ProviderModal;
   providerStorage: Provider[];
   providers: Provider;
   error: String;
   filter: string;
   filteredProviders: Provider[] = null;
+  showModal = false;
 
   constructor(private providersService: ProvidersService, private spinnerService: SpinnerService) {}
   ngOnInit() {
@@ -40,5 +42,25 @@ export class ProvidersGridComponent implements OnInit {
     } else {
       this.filteredProviders = this.providerStorage;
     }
+  }
+
+  editModal(provider: Provider) {
+    this.showModal = false;
+    setTimeout(() => {
+      this.showModal = true;
+      setTimeout(() => {
+        this.providerModal.changeInformation(provider);
+      }, 0);
+    }, 0);
+  }
+
+  newModal() {
+    this.showModal = false;
+    setTimeout(() => {
+      this.showModal = true;
+      setTimeout(() => {
+        this.providerModal.openNewProviderModal();
+      }, 0);
+    }, 0);
   }
 }

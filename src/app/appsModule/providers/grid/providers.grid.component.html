@@ -14,9 +14,7 @@
       </div>
     </div>
 
-    <div fxFlex>
-      <button class="ui button" (click)="providerModal.openNewProviderModal()">Agregar Nuevo Proveedor</button>
-    </div>
+    <div fxFlex><button class="ui button" (click)="newModal()">Agregar Nuevo Proveedor</button></div>
 
     <table class="ui celled striped inverted table">
       <thead>
@@ -32,7 +30,7 @@
       <tbody>
         <tr *ngFor="let provider of filteredProviders; let i = index">
           <td>
-            <span class="name" (click)="providerModal.changeInformation(provider)">{{ provider.name }}</span>
+            <span class="name" (click)="editModal(provider)">{{ provider.name }}</span>
           </td>
           <td>{{ provider.fantasyName }}</td>
           <td>{{ provider.email }}</td>
@@ -46,5 +44,5 @@
       </tbody>
     </table>
   </div>
-  <app-provider-modal #providerModal></app-provider-modal>
+  <div *ngIf="showModal"><app-provider-modal #providerModal></app-provider-modal></div>
 </div>

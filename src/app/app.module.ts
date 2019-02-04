@@ -7,19 +7,10 @@ import { CoreModule } from './appsModule/core/core.module';
 import { AuthGuard } from './services/auth.guard';
 import { UserAuthenticationService } from './services/user-authentication.service';
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
-    CoreModule,
-    routing,
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, NoopAnimationsModule, CoreModule, routing],
   providers: [AuthGuard, UserAuthenticationService],
-  bootstrap: [ AppComponent]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

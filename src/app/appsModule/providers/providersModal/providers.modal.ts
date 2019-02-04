@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
 import { ProvidersService } from '../../../services/providers.service';
 import { SharedService } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
-import { initialModalObject } from '../reducers/grid.reducer';
 import { ValidationService } from '../../../services/validation.service';
+import { initialModalObject } from '../reducers/grid.reducer';
 declare var jQuery: any;
 
 @Component({
@@ -22,6 +22,7 @@ export class ProviderModal implements OnInit {
   error: String;
   providerFormEmptyObject = initialModalObject;
   options: any;
+  cuenta: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +63,7 @@ export class ProviderModal implements OnInit {
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      iib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
@@ -94,7 +95,12 @@ export class ProviderModal implements OnInit {
     this.providerForm.get('fantasyName').disable();
     this.providerForm.get('cuit').disable();
     this.providerForm.patchValue(formProvider);
+    this.cuenta = formProvider.cuentasGenerales;
     jQuery('.ui.modal.provider-modal').modal('show');
+  }
+
+  onChangeCuenta(event: any) {
+    this.providerForm.get('cuentasGenerales').setValue(event);
   }
 
   openNewProviderModal() {

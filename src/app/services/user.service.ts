@@ -9,11 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import { Client } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
 import { User } from '../interfaces/user';
-import {
-  NEWCOMPANY,
-  NEWUSER,
-  NEWUSERPROFILE
-} from './../appsModule/shared/reducers/user.reducer';
+import { NEWCOMPANY, NEWUSER, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
 
 @Injectable()
 export class UserService {
@@ -51,10 +47,7 @@ export class UserService {
 
   updateClientInfo(user: User): Observable<Object[]> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserProfile',
-        user
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserProfile', user)
       .map((response: Response) => {
         this.store.dispatch({ type: NEWUSERPROFILE, payload: user });
       })
@@ -63,10 +56,7 @@ export class UserService {
 
   createSubClient(user: User): Observable<Object[]> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createInternalUser',
-        user
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/createInternalUser', user)
       .map((response: Response) => {
         return response;
       })
@@ -75,10 +65,7 @@ export class UserService {
 
   updateClientCompany(company: Client): Observable<Object[]> {
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserCompany',
-        company
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserCompany', company)
       .map((response: Response) => {
         delete company.type;
         this.store.dispatch({ type: NEWCOMPANY, payload: company });
