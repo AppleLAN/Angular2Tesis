@@ -19,6 +19,7 @@ import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidebarComponent } from './views/sidebar//sidebar.component';
 import { InputErrorMessagesComponent } from './views/error-message/input-error-messages.component';
 import { ValidationService } from '../../services/validation.service';
+import { UserAuthenticationService } from '../../services/user-authentication.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ValidationService } from '../../services/validation.service';
     SpinnerService,
     HttpClient,
     SharedService,
+    UserAuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpApiInterceptor,

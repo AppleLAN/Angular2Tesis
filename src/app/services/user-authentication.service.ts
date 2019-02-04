@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
+import { LOGOUT } from '../authModule/auth.reducers';
 import { User } from '../interfaces/user';
 
 @Injectable()
 export class UserAuthenticationService {
   public token: string;
 
-  constructor(private router: Router, private api: HttpClient) {}
+  constructor(private router: Router, private api: HttpClient, private store: Store<any>) {}
 
   signIn(userInfo: User): Observable<boolean> {
     // ...using get request
     localStorage.removeItem('currentUser');
     return this.api
-      .post(
-        'http://ec2-54-227-227-242.compute-1.amazonaws.com/api/authenticate',
-        userInfo
-      )
+      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/authenticate', userInfo)
       .map((response: any) => {
         const token = response && response.token;
         if (token) {
@@ -28,10 +27,7 @@ export class UserAuthenticationService {
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem(
-            'currentUser',
-            JSON.stringify({ string: userInfo.email, token: token })
-          );
+          localStorage.setItem('currentUser', JSON.stringify({ string: userInfo.email, token: token }));
           return true;
         } else {
           return false;
@@ -51,10 +47,7 @@ export class UserAuthenticationService {
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem(
-            'currentUser',
-            JSON.stringify({ string: userInfo.email, token: token })
-          );
+          localStorage.setItem('currentUser', JSON.stringify({ string: userInfo.email, token: token }));
           return true;
         } else {
           return false;
@@ -66,6 +59,7 @@ export class UserAuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
+    this.store.dispatch({ type: LOGOUT, payload: 'test' });
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }

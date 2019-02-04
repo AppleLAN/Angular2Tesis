@@ -5,12 +5,11 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routes';
 import { CoreModule } from './appsModule/core/core.module';
 import { AuthGuard } from './services/auth.guard';
-import { UserAuthenticationService } from './services/user-authentication.service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, BrowserAnimationsModule, NoopAnimationsModule, CoreModule, routing],
-  providers: [AuthGuard, UserAuthenticationService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
