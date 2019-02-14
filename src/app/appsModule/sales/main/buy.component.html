@@ -13,7 +13,7 @@
                 placeholder="Ingresar Producto"
                 (onChange)="onChangeProduct($event)"
               >
-                > <option *ngFor="let product of productsToChoose" value="{{product.id}}">{{ product.name }}</option>
+                > <option *ngFor="let product of productsToChoose" value="{{ product.id }}">{{ product.name }}</option>
               </sm-select>
             </div>
             <div class="column formItem">
@@ -24,7 +24,7 @@
                 (onChange)="onChangeProvider($event)"
                 placeholder="Ingresar Proveedor"
               >
-                <option *ngFor="let provider of filteredProviders" value="{{provider.id}}">{{ provider.name }}</option>
+                <option *ngFor="let provider of filteredProviders" value="{{ provider.id }}">{{ provider.name }}</option>
               </sm-select>
             </div>
             <div class="column formItem">
@@ -65,8 +65,7 @@
       <div class="row">
         <div class="column formItem">
           <p>
-            "La elección de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de
-            compra"
+            "La elección de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de compra"
           </p>
         </div>
       </div>
@@ -78,11 +77,8 @@
       <table-pagination [productList]="stock?.products"></table-pagination>
     </div>
   </div>
-  <ng-container *ngIf="!isEmpty(selectedProducts); else: noProductsSelectedTemplate">
-    <div
-      class="row container buy-container"
-      *ngFor="let product of (selectedProducts | mapToIterable: numberOfChanges)"
-    >
+  <ng-container *ngIf="!isEmpty(selectedProducts); else noProductsSelectedTemplate">
+    <div class="row container buy-container" *ngFor="let product of (selectedProducts | mapToIterable: numberOfChanges)">
       <div class="column">
         <h1>Orden de compras para proveedor "{{ product.val.stock[0].provider }}"</h1>
         <table class="ui celled table">

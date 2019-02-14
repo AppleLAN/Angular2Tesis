@@ -145,11 +145,12 @@ export class StockService {
     productId: number,
     selectedProducts: SelectedStock,
     total: number,
-    numberOfChanges: number
+    numberOfChanges: number,
+    sale = false
   ) {
     selectedProducts[providerId].stock = selectedProducts[providerId].stock.filter(p => p.product.id !== productId);
     if (selectedProducts[providerId].stock.length > 0) {
-      this.getSubTotal(providerId, selectedProducts);
+      this.getSubTotal(providerId, selectedProducts, sale);
     } else {
       delete selectedProducts[providerId];
     }
@@ -158,10 +159,10 @@ export class StockService {
     return { selectedProducts, total, numberOfChanges };
   }
 
-  getSubTotal(selectedProviderId: number, selectedProducts: SelectedStock) {
+  getSubTotal(selectedProviderId: number, selectedProducts: SelectedStock, sale = false) {
     selectedProducts[selectedProviderId].subTotal = 0;
     forEach(selectedProducts[selectedProviderId].stock, (p: AddedStock) => {
-      const quantityPrice = p.product.sale_price * p.quantity;
+      const quantityPrice = sale ? p.product.sale_price * p.quantity : p.product.cost_price * p.quantity;
       selectedProducts[selectedProviderId].subTotal += quantityPrice;
     });
     return selectedProducts;
@@ -183,45 +184,42 @@ export class StockService {
     total: number,
     numberOfChanges: number
   ) {
+    const foundProduct = stock.products.find(p => p.id === parseInt(saleForm.controls['product'].value, 10));
     const product = stock.products.find(p => {
-      const isTheSameProduct = p.id === parseInt(saleForm.controls['product'].value, 10);
+      const isTheSameProduct = p.name === foundProduct.name;
       const isTheSameProvider = p.provider_id === parseInt(saleForm.controls['provider_id'].value, 10);
       return isTheSameProduct && isTheSameProvider;
     });
-    const selectedProvider = providers.find(p => p.id === product.provider_id);
-    const selectedProviderId = product.provider_id;
+    const selectedProvider = providers.find(p => p.id === parseInt(saleForm.controls['provider_id'].value, 10));
     const addedProduct: AddedBuyStock = {
       product: product,
       quantity: 0,
       provider: selectedProvider.name
     };
-    if (selectedProducts[selectedProviderId]) {
-      selectedProducts[selectedProviderId] = {
-        ...selectedProducts[selectedProviderId],
-        stock: [...selectedProducts[selectedProviderId].stock, addedProduct],
+    if (selectedProducts[selectedProvider.id]) {
+      selectedProducts[selectedProvider.id] = {
+        ...selectedProducts[selectedProvider.id],
+        stock: [...selectedProducts[selectedProvider.id].stock, addedProduct],
         typeOfBuy: saleForm.controls['typeOfBuy'].value
       };
     } else {
-      selectedProducts[selectedProviderId] = {
+      selectedProducts[selectedProvider.id] = {
         stock: [addedProduct],
         subTotal: 0,
         typeOfBuy: saleForm.controls['typeOfBuy'].value
       };
     }
-    const selectedProduct = selectedProducts[selectedProviderId].stock.find(p => p.product.id === product.id);
+    const selectedProduct = selectedProducts[selectedProvider.id].stock.find(p => p.product.id === product.id);
     selectedProduct.quantity = Number(selectedProduct.quantity) + Number(saleForm.controls['quantity'].value);
-    selectedProducts[selectedProviderId].stock = selectedProducts[selectedProviderId].stock.map(p => {
+    selectedProducts[selectedProvider.id].stock = selectedProducts[selectedProvider.id].stock.map(p => {
       if (p.product === selectedProduct.product) {
         p.quantity = selectedProduct.quantity;
       }
       return p;
     });
-    selectedProducts[selectedProviderId].stock = uniqBy(
-      selectedProducts[selectedProviderId].stock,
-      (p: AddedStock) => p.product.id
-    );
-    selectedProducts[selectedProviderId].subTotal = 0;
-    selectedProducts = this.getSubTotal(selectedProviderId, selectedProducts);
+    selectedProducts[selectedProvider.id].stock = uniqBy(selectedProducts[selectedProvider.id].stock, (p: AddedStock) => p.product.id);
+    selectedProducts[selectedProvider.id].subTotal = 0;
+    selectedProducts = this.getSubTotal(selectedProvider.id, selectedProducts);
     total = this.getTotal(selectedProducts);
     numberOfChanges = numberOfChanges + 1;
     return { selectedProducts, total, numberOfChanges };
@@ -254,7 +252,7 @@ export class StockService {
         stock: [addedProduct],
         subTotal: 0,
         paymentMethods: saleForm.controls['paymentMethods'].value,
-        saleDate: saleForm.controls['saleDate'].value,
+        saleDate: saleForm.controls['saleDate'].value
       };
     }
     const selectedProduct = selectedProducts[selectedClient.id].stock.find(p => p.product.id === product.id);
@@ -265,12 +263,9 @@ export class StockService {
       }
       return p;
     });
-    selectedProducts[selectedClient.id].stock = uniqBy(
-      selectedProducts[selectedClient.id].stock,
-      (p: AddedStock) => p.product.id
-    );
+    selectedProducts[selectedClient.id].stock = uniqBy(selectedProducts[selectedClient.id].stock, (p: AddedStock) => p.product.id);
     selectedProducts[selectedClient.id].subTotal = 0;
-    selectedProducts = this.getSubTotal(selectedClient.id, selectedProducts);
+    selectedProducts = this.getSubTotal(selectedClient.id, selectedProducts, true);
     total = this.getTotal(selectedProducts);
     numberOfChanges = numberOfChanges + 1;
     return { selectedProducts, total, numberOfChanges };

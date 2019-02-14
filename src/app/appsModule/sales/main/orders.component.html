@@ -27,6 +27,7 @@
             <th>Nombre de producto</th>
             <th>Descripción</th>
             <th>Costo</th>
+            <th>Precio de Venta</th>
             <th>Cantidad</th>
           </tr>
         </thead>
@@ -35,6 +36,7 @@
             <td>{{ details.product_name }}</td>
             <td>{{ order.products[details.product_id].description }}</td>
             <td>{{ order.products[details.product_id].cost_price }}</td>
+            <td>{{ order.products[details.product_id].sale_price }}</td>
             <td>{{ details.quantity }}</td>
           </tr>
         </tbody>

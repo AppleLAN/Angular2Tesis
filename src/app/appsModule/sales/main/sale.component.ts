@@ -151,7 +151,8 @@ export class SaleComponent implements OnInit, OnDestroy {
       productId,
       this.selectedProducts,
       this.total,
-      this.numberOfChanges
+      this.numberOfChanges,
+      true
     );
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;

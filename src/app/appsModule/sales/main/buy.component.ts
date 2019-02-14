@@ -63,23 +63,21 @@ export class BuyComponent implements OnInit, OnDestroy {
 
     this.spinnerService.displayLoader(true);
     this.subscriptions.push(
-      Observable.combineLatest(this.ss.getStockStorage(), this.ps.getProviderStorage()).subscribe(
-        ([stock, providers]) => {
-          if (stock && providers) {
-            this.spinnerService.displayLoader(false);
-            this.stock = stock;
-            this.stock.products = stock.products.map(p => {
-              const foundProvider = providers.find(provider => provider.id === p.provider_id);
-              p.providerName = foundProvider ? foundProvider.name : null;
-              return p;
-            });
-            this.providers = providers;
-            if (stock) {
-              this.productsToChoose = uniqBy(stock.products, 'name');
-            }
+      Observable.combineLatest(this.ss.getStockStorage(), this.ps.getProviderStorage()).subscribe(([stock, providers]) => {
+        if (stock && providers) {
+          this.spinnerService.displayLoader(false);
+          this.stock = stock;
+          this.stock.products = stock.products.map(p => {
+            const foundProvider = providers.find(provider => provider.id === p.provider_id);
+            p.providerName = foundProvider ? foundProvider.name : null;
+            return p;
+          });
+          this.providers = providers;
+          if (stock) {
+            this.productsToChoose = uniqBy(stock.products, 'name');
           }
         }
-      )
+      })
     );
     this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.ps.getProviders().subscribe());
@@ -100,8 +98,7 @@ export class BuyComponent implements OnInit, OnDestroy {
   onChangeProvider(p: string) {
     if (p) {
       const product = this.stock.products.find(
-        (prod: Product) =>
-          prod.id === parseInt(this.saleForm.get('product').value, 10) && prod.provider_id === parseInt(p, 10)
+        (prod: Product) => prod.id === parseInt(this.saleForm.get('product').value, 10) && prod.provider_id === parseInt(p, 10)
       );
       this.selectedProduct = product;
     }
@@ -127,13 +124,7 @@ export class BuyComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(providerId: number, productId: number) {
-    const deletedResult = this.ss.deleteProduct(
-      providerId,
-      productId,
-      this.selectedProducts,
-      this.total,
-      this.numberOfChanges
-    );
+    const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges);
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;

@@ -35,17 +35,19 @@ export class StockGridComponent implements OnInit {
       .getProducts()
       .combineLatest(this.providersService.getProviderStorage(), this.stockService.getStockStorage())
       .subscribe(([products, providers, storage]) => {
-        this.storage = storage;
-        this.filteredProducts = storage.products;
-        this.providers = providers;
-        if (storage && providers) {
-          this.storage.products.map(p => {
-            const foundProvider = providers.find(provider => provider.id === p.provider_id);
-            p.providerName = foundProvider ? foundProvider.name : null;
-            return p;
-          });
+        if (products && providers && storage) {
+          this.storage = storage;
+          this.filteredProducts = storage.products;
+          this.providers = providers;
+          if (storage && providers) {
+            this.storage.products.map(p => {
+              const foundProvider = providers.find(provider => provider.id === p.provider_id);
+              p.providerName = foundProvider ? foundProvider.name : null;
+              return p;
+            });
+          }
+          this.spinnerService.displayLoader(false);
         }
-        this.spinnerService.displayLoader(false);
       });
 
     this.providersService.getProviders().subscribe();

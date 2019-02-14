@@ -34,6 +34,9 @@ export class FacturaComponent implements OnInit {
     month: null,
     day: null
   };
+  docNro: number;
+  cuit: number;
+  puntoVenta: number;
 
   constructor(
     private userService: UserService,
@@ -61,7 +64,10 @@ export class FacturaComponent implements OnInit {
       response => {
         this.spinnerService.displayLoader(false);
         if (!response.success.Err) {
+          this.cuit = response.success.FeCabResp.Cuit;
+          this.puntoVenta = response.success.FeCabResp.PtoVta;
           this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
+          this.docNro = response.success.FeDetResp.FECAEDetResponse.DocNro;
           const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
           this.vto.year = vtoString.slice(0, 4);
           this.vto.month = vtoString.slice(4, 6);
@@ -71,92 +77,123 @@ export class FacturaComponent implements OnInit {
             printContents = `
             <html>
               <head>
-                <title>Print tab</title>
                 <style>
-    
-                  img {
-                    width: 120px;
-                    heigth: 120px;
-                    padding-top: 15px;
-                    padding-bottom: 15px;
-                  }
-    
-                  .factura-container {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                    border: 1px solid black;
-                  }
-    
-                  .ui.container {
+                html {
+                  font-family: sans-serif;
+                  line-height: 1.15;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%;
+                }
+                .app, app-dashboard, app-root {
+                  display: flex;
+                  flex-direction: column;
+                  min-height: 100vh;
+                }
+                body {
+                  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+                  font-size: .875rem;
+                  font-weight: 400;
+                  line-height: 1.5;
+                  color: #444D58;
+                  background-color: #EFF3F8;
+                }
+                .tipo {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  margin: 0 auto;
+                  right: 0;
+                  width: 70px;
+                  z-index: 1;
+                  font-size: 70px;
+                  font-weight: 700;
+                  padding: 0!important;
+                  text-align: center;
+                  height: 100%;
+                }
+                .tipo span {
+                  position: relative;
+                  display: block;
+                  background-color: #fff;
+                  line-height: 55px;
+                  padding: 10px;
+                  padding-top: 7px;
+                  border: solid 1px #e3e8ec;
+                }
+                .table {
+                  border-collapse: collapse;
+                  background-color: transparent;
+                  width: 100%;
+                  max-width: 100%;
+                  margin-bottom: 1rem;
+                }
+                table.table {
+                  clear: both;
+                  max-width: none!important;
+                }
+                .table-bordered {
+                  border: 1px solid #E3E8EC;
+                }
+                .table-bordered th, .table-bordered td {
+                  border: 1px solid #E3E8EC;
+                }
+                .table th, .table td {
+                    padding: .75rem;
+                    vertical-align: top;
+                    border-top: 1px solid #E3E8EC;
+                }
+                #header td {
+                  width: 50%!important;
+                }
+                .table-bordered th, .table-bordered td {
+                    border: 1px solid #E3E8EC;
+                }
+                th:last-child, td:last-child {
+                    width: 250px;
+                    text-align: center;
+                }
+                *, *::before, *::after {
+                  box-sizing: inherit;
+                }
+                h3 {
                     display: block;
-                    max-width: 100% !important;
-                  }
-    
-                  .three {
-                    width: 31% !important;
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    display: inline-block;
-                    vertical-align: top;
-                  }
-    
-                  .four {
-                    width: 23% !important;
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    display: inline-block;
-                    vertical-align: top;
-                  }
-    
-                  .eigth {
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    display: inline-block;
-                    vertical-align: top;
-                  }
-    
-                  .eigth:first-child {
-                    width: 60% !important;
-                  }
-    
-                  .eigth:last-child {
-                    width: 36% !important;
-                  }
-    
-                  .sixteen {
-                    width: 100% !important;
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    display: inline-block;
-                    vertical-align: top;
-                  }
-    
-                  .ui.grid + .grid {
-                    margin-top: 1rem;
-                  }
-    
-                  .ui.table {
-                    width: 100%;
-                    background: #FFFFFF;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                    text-align: left;
-                    color: rgba(0, 0, 0, 0.87);
-                    border-collapse: separate;
-                    border-spacing: 0px;
-                  }
-    
-                  .table tr td{
-                    border-top: 1px solid rgba(34, 36, 38, 0.15);
-                  }
-    
-                  .ui.table:first-child {
-                    margin-top: 0em;
-                  }
-    
-                  .ui.table:last-child {
-                    margin-bottom: 0em;
-                  }
+                    font-size: 25px;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                    margin-bottom: 20px;
+                }
+
+                h3, .h3 {
+                    font-size: 1.75rem;
+                }
+                h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+                    margin-bottom: .5rem;
+                    font-family: inherit;
+                    font-weight: 500;
+                    line-height: 1.1;
+                    color: inherit;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    margin-top: 0;
+                    margin-bottom: .5rem;
+                }
+                h6, .h6 {
+                  font-size: 1rem;
+                }
+                p {
+                  margin-top: 0;
+                  font-size: 13px;
+                  line-height: 15px;
+                  margin-bottom: 0;
+                }
+                small, .small {
+                    font-size: 80%;
+                    font-weight: 400;
+                }
+                h3 small {
+                  display: block;
+                  font-size: 9px;
+                }
                 </style>
               </head>
               <body>${printContents}</body>
