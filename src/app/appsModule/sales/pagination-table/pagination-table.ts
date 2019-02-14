@@ -91,7 +91,8 @@ export class Pagination implements OnChanges, OnInit {
 
   ngOnInit() {
     this.searchProduct.valueChanges.debounceTime(400).subscribe(value => {
-      this.filteredItems = this.productList.filter(product => includes(`${product.name}`, value));
+      const searchValue = value.toUpperCase();
+      this.filteredItems = this.productList.filter(product => includes(`${product.name.toUpperCase()}`, searchValue));
       this.numberOfPages = Array.from(Array(Math.ceil(this.filteredItems.length / this.pageSize)).keys());
     });
   }

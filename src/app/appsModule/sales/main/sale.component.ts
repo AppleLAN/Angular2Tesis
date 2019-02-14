@@ -12,6 +12,7 @@ import { forEach, uniqBy, isEmpty } from 'lodash';
 import { SaleService } from '../services/sale.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { ProvidersService } from '../../../services/providers.service';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-sale',
@@ -64,31 +65,30 @@ export class SaleComponent implements OnInit, OnDestroy {
     });
     this.spinnerService.displayLoader(true);
     this.subscriptions.push(
-      Observable.combineLatest(
-        this.ss.getStockStorage(),
-        this.cs.getClientStorage(),
-        this.ps.getProviderStorage()
-      ).subscribe(([stock, clients, providers]) => {
-        if (stock && clients && providers) {
-          this.spinnerService.displayLoader(false);
-          this.saleForm.get('quantity').setValue(null);
-          this.stock = stock;
-          this.clients = clients;
-          this.stock.products = stock.products.map(p => {
-            const foundProvider = providers.find(provider => provider.id === p.provider_id);
-            p.providerName = foundProvider ? foundProvider.name : null;
-            return p;
-          });
-          if (this.selectedProduct) {
-            const product = stock.products.find(p => p.id === this.selectedProduct.id);
-            this.selectedProduct = product;
-            this.getTotalStockOfOrder();
-          }
-          if (stock) {
-            this.productsToChoose = stock.products;
+      Observable.combineLatest(this.ss.getStockStorage(), this.cs.getClientStorage(), this.ps.getProviderStorage()).subscribe(
+        ([stock, clients, providers]) => {
+          if (stock && clients && providers) {
+            this.spinnerService.displayLoader(false);
+            this.saleForm.get('quantity').setValue(null);
+            this.stock = stock;
+            this.clients = clients;
+            this.stock.products = stock.products.map(p => {
+              const foundProvider = providers.find(provider => provider.id === p.provider_id);
+              p.providerName = foundProvider ? foundProvider.name : null;
+              return p;
+            });
+            if (this.selectedProduct) {
+              const product = stock.products.find(p => p.id === this.selectedProduct.id);
+              this.selectedProduct = product;
+              this.getTotalStockOfOrder();
+            }
+            if (stock) {
+              this.productsToChoose = stock.products;
+              this.productsToChoose = orderBy(this.productsToChoose, 'name');
+            }
           }
         }
-      })
+      )
     );
     this.subscriptions.push(this.ss.getProducts().subscribe());
     this.subscriptions.push(this.cs.getClientStorage().subscribe());
@@ -114,9 +114,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       });
     });
     this.maxStock = this.selectedProduct.stock - totalOrderStock;
-    this.saleForm
-      .get('quantity')
-      .setValidators([Validators.required, Validators.min(0), Validators.max(this.maxStock)]);
+    this.saleForm.get('quantity').setValidators([Validators.required, Validators.min(0), Validators.max(this.maxStock)]);
     this.saleForm.get('quantity').setValue(null);
   }
 
@@ -146,14 +144,7 @@ export class SaleComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(providerId: number, productId: number) {
-    const deletedResult = this.ss.deleteProduct(
-      providerId,
-      productId,
-      this.selectedProducts,
-      this.total,
-      this.numberOfChanges,
-      true
-    );
+    const deletedResult = this.ss.deleteProduct(providerId, productId, this.selectedProducts, this.total, this.numberOfChanges, true);
     this.selectedProducts = deletedResult.selectedProducts;
     this.total = deletedResult.total;
     this.numberOfChanges = deletedResult.numberOfChanges;

@@ -75,6 +75,7 @@ export class BuyComponent implements OnInit, OnDestroy {
           this.providers = providers;
           if (stock) {
             this.productsToChoose = uniqBy(stock.products, 'name');
+            this.productsToChoose = orderBy(this.productsToChoose, 'name');
           }
         }
       })

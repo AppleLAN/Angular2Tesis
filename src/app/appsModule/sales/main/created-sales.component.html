@@ -19,7 +19,7 @@
       <p>Número de Venta: {{ sale.sale.id }}</p>
       <p>Fecha de creación: {{ sale.sale.created_at | date: 'short' }}</p>
       <p>Total: {{ sale.sale.total }}</p>
-      <p>Status: {{ sale.sale.status }}</p>
+      <p>Status: {{ sale.sale.status === 'F' ? 'Facturado' : 'Completado' }}</p>
       <p>Tipo de venta: {{ sale.sale.payments }}</p>
       <p>Productos de la venta</p>
       <table class="ui celled table">
