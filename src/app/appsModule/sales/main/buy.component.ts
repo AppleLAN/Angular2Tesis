@@ -87,8 +87,8 @@ export class BuyComponent implements OnInit, OnDestroy {
   }
 
   onChangeProduct(p: string) {
-    this.selectedProduct = null;
-    const filteredProducts = this.stock.products.filter(prod => prod.id === parseInt(p, 10));
+    this.selectedProduct = this.stock.products.find(prod => prod.id === parseInt(p, 10));
+    const filteredProducts = this.stock.products.filter(prod => prod.name === this.selectedProduct.name);
     const minProductCostProviderId = orderBy(filteredProducts, 'cost_price')[0].provider_id;
     const minProductCostProvider = this.providers.find(prov => prov.id === minProductCostProviderId);
     this.filteredProviders = filteredProducts.map(prod => this.providers.find(prov => prov.id === prod.provider_id));

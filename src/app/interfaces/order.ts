@@ -3,6 +3,7 @@ export interface Order {
   orderTotal: number;
   provider: string;
   status: string;
+  typeOfBuy: string;
 }
 
 export interface Details {

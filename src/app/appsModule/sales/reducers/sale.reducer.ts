@@ -9,7 +9,7 @@ export const DELETESALES = 'DELETESALES';
 export const ADDSALES = 'ADDSALES';
 
 export interface SaleState {
-  sale: Sale[];
+  sale: Sale;
   sale_details: Details[];
   products: Product[];
 }
@@ -31,21 +31,13 @@ export const SaleReducer: Reducer<any> = (state: SaleState[], action: Action) =>
     case CHANGESALES:
       return [
         ...state.map(stateItem => {
-          stateItem.sale = stateItem.sale.map(s => {
-            s = s.id === action.payload.id ? action.payload : s;
-            return s;
-          });
+          stateItem.sale = stateItem.sale.id === action.payload.id ? action.payload : stateItem.sale;
           return stateItem;
         })
       ];
 
     case DELETESALES:
-      return [
-        ...state.map(stateItem => {
-          stateItem.sale = stateItem.sale.filter(s => s.id !== action.payload.id);
-          return stateItem;
-        })
-      ];
+      return [...state.filter(stateItem => stateItem.sale.id !== action.payload.id)];
 
     default:
       return state;

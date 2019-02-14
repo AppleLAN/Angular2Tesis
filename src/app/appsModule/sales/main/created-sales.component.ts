@@ -13,6 +13,8 @@ import { Client } from '../../../interfaces/client';
 })
 export class CreatedSalesComponent implements OnInit {
   $sales: Observable<SaleState>;
+  salesStorage: SaleState[];
+  filteredSales: SaleState[];
   clients: Client[];
   constructor(private ss: SaleService, private spinnerService: SpinnerService, private clientsService: ClientsService) {}
 
@@ -22,10 +24,25 @@ export class CreatedSalesComponent implements OnInit {
       .getAllSales()
       .combineLatest(this.clientsService.getClientStorage())
       .subscribe(([sales, clientStorage]) => {
+        this.salesStorage = sales.data;
+        this.filteredSales = sales.data;
         this.clients = clientStorage;
         this.spinnerService.displayLoader(false);
       });
     this.$sales = this.ss.getSaleStorage();
     this.clientsService.getClients().subscribe();
+  }
+
+  onChange(event: string) {
+    if (event.length > 0) {
+      this.filteredSales = this.salesStorage.filter(
+        s =>
+          s.sale.client_name.toUpperCase().includes(event.toUpperCase()) ||
+          s.sale.id.toString().includes(event.toUpperCase()) ||
+          s.sale.payments.toUpperCase().includes(event.toUpperCase())
+      );
+    } else {
+      this.filteredSales = this.salesStorage;
+    }
   }
 }

@@ -7,14 +7,7 @@ import { includes } from 'lodash';
   selector: 'table-pagination',
   template: `
     <div>
-      <sm-input
-        icon="shopping bag"
-        type="text"
-        [formControl]="searchProduct"
-        placeholder="Ingrese nombre..."
-        ngDefaultControl
-      >
-      </sm-input>
+      <sm-input icon="shopping bag" type="text" [formControl]="searchProduct" placeholder="Ingrese nombre..." ngDefaultControl> </sm-input>
     </div>
     <table class="ui celled table">
       <thead>
@@ -55,6 +48,7 @@ import { includes } from 'lodash';
                 class="item"
                 [ngClass]="{ active: currentIndex / 5 === index }"
                 *ngFor="let pageNumber of numberOfPages; let index = index"
+                (click)="changePage(pageNumber)"
                 >{{ pageNumber + 1 }}</a
               >
               <button
@@ -118,6 +112,11 @@ export class Pagination implements OnChanges, OnInit {
       this.currentIndex = this.currentIndex + this.pageSize;
       this.getNewItems();
     }
+  }
+
+  changePage(pageNumber: number) {
+    this.currentIndex = pageNumber * this.pageSize;
+    this.getNewItems();
   }
 
   previousPage() {

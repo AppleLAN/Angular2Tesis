@@ -1,10 +1,9 @@
-import { NotificationsService } from 'angular2-notifications';
-import { OrdersState } from '../reducers/order.reducer';
-import { Observable } from 'rxjs/Rx';
-import { Order } from '../../../interfaces/order';
-import { SaleService } from '../services/sale.service';
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
+import { Order } from '../../../interfaces/order';
 import { SpinnerService } from '../../../services/spinner.service';
+import { SaleService } from '../services/sale.service';
+import { OrdersState } from '../reducers/order.reducer';
 
 @Component({
   selector: 'orders',
@@ -12,14 +11,12 @@ import { SpinnerService } from '../../../services/spinner.service';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  $orders: Observable<OrdersState>;
   options: any;
+  filter: string = null;
+  ordersStorage: OrdersState[];
+  filteredOrders: OrdersState[];
 
-  constructor(
-    private ss: SaleService,
-    private ns: NotificationsService,
-    private spinnerService: SpinnerService
-  ) {
+  constructor(private ss: SaleService, private ns: NotificationsService, private spinnerService: SpinnerService) {
     this.options = {
       timeOut: 3000,
       showProgressBar: true,
@@ -30,10 +27,34 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.displayLoader(true);
-    this.ss.getAllOrders().subscribe(r => {
+    this.ss.getAllOrders().subscribe(orders => {
+      if (orders) {
+        const formattedOrder = orders.data.map((order: any) => {
+          order.order.createdAt = order.details[0].created_at;
+          return order;
+        });
+        this.ordersStorage = formattedOrder;
+        this.filteredOrders = formattedOrder;
+      }
       this.spinnerService.displayLoader(false);
     });
-    this.$orders = this.ss.getOrderStorage();
+  }
+
+  onChange(event: string) {
+    if (event.length > 0) {
+      this.filteredOrders = this.ordersStorage.filter(
+        o =>
+          o.order.provider.toUpperCase().includes(event.toUpperCase()) ||
+          o.order.status.toUpperCase().includes(event.toUpperCase()) ||
+          o.order.id.toString().includes(event.toUpperCase()) ||
+          (o.order.status === 'R' && 'Recibido'.toUpperCase().includes(event.toUpperCase())) ||
+          (o.order.status !== 'R' && 'A Completar'.toUpperCase().includes(event.toUpperCase())) ||
+          (o.order.typeOfBuy === 'E' && 'Efectivo'.toUpperCase().includes(event.toUpperCase())) ||
+          (o.order.typeOfBuy !== 'E' && 'Cuenta Corriente'.toUpperCase().includes(event.toUpperCase()))
+      );
+    } else {
+      this.filteredOrders = this.ordersStorage;
+    }
   }
 
   completeOrder(order: Order) {
@@ -45,10 +66,7 @@ export class OrdersComponent implements OnInit {
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error(
-          'Error!',
-          'Un error ha ocurrido por favor intentelo mas tarde'
-        );
+        this.ns.error('Error!', 'Un error ha ocurrido por favor intentelo mas tarde');
       }
     );
   }
@@ -62,10 +80,7 @@ export class OrdersComponent implements OnInit {
       },
       error => {
         this.spinnerService.displayLoader(false);
-        this.ns.error(
-          'Error!',
-          'Un error ha ocurrido por favor intentelo mas tarde'
-        );
+        this.ns.error('Error!', 'Un error ha ocurrido por favor intentelo mas tarde');
       }
     );
   }
