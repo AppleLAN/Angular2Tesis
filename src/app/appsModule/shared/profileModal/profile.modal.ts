@@ -25,6 +25,7 @@ export class ProfileModal implements OnInit {
   userData: CompleteUser;
   options: any;
   cuenta: any = null;
+  internalUsers: User[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -123,6 +124,9 @@ export class ProfileModal implements OnInit {
       this.setFormData(state);
     });
     this.userService.getProfileInfo().subscribe(response => {}, error => this.ns.error('Error!', error.error.error));
+    this.userService
+      .getAllInternalUsers()
+      .subscribe(response => (this.internalUsers = response), error => this.ns.error('Error!', error.error.error));
   }
 
   private setFormData(state: CompleteUser) {

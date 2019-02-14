@@ -35,6 +35,15 @@ export class UserService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
+  getAllInternalUsers(): Observable<any> {
+    return this.api
+      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getAllInternalUsers')
+      .map((response: any) => {
+        return response.success;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
+
   getProfileInfo(): Observable<any> {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProfileInfo')

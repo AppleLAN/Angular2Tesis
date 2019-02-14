@@ -272,7 +272,7 @@
             </div>
 
             <div class="form-group field">
-                <sm-select
+              <sm-select
                 class="fluid search inverted"
                 label="Cuentas"
                 [(model)]="cuenta"
@@ -413,6 +413,59 @@
             </div>
           </div>
         </form>
+      </sm-tab>
+      <sm-tab *ngIf="userData?.profile.isAdmin" title="Sub-usuarios asociados">
+        <table class="ui celled striped inverted table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>E-Mail</th>
+              <th>Ventas</th>
+              <th>Clientes</th>
+              <th>Proveedores</th>
+              <th>Productos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let internalUser of internalUsers; let i = index">
+              <td>{{ internalUser.name }}</td>
+              <td>{{ internalUser.lastname }}</td>
+              <td>{{ internalUser.email }}</td>
+
+              <ng-container *ngIf="internalUser.sales; else elseSalesTemplate">
+                <td><i class="check icon"></i></td>
+              </ng-container>
+              <ng-template #elseSalesTemplate>
+                <td><i class="x icon"></i></td>
+              </ng-template>
+
+              <ng-container *ngIf="internalUser.clients; else elseClientsTemplate">
+                <td><i class="check icon"></i></td>
+              </ng-container>
+              <ng-template #elseClientsTemplate>
+                <td><i class="x icon"></i></td>
+              </ng-template>
+
+              <ng-container *ngIf="internalUser.providers; else elseProvidersTemplate">
+                <td><i class="check icon"></i></td>
+              </ng-container>
+              <ng-template #elseProvidersTemplate>
+                <td><i class="x icon"></i></td>
+              </ng-template>
+
+              <ng-container *ngIf="internalUser.stock; else elseStockTemplate">
+                <td><i class="check icon"></i></td>
+              </ng-container>
+              <ng-template #elseStockTemplate>
+                <td><i class="x icon"></i></td>
+              </ng-template>
+            </tr>
+            <tr colspan="5" *ngIf="internalUsers.length === 0">
+              <td>No se han encontrado usuarios internos</td>
+            </tr>
+          </tbody>
+        </table>
       </sm-tab>
     </sm-tabs>
   </modal-content>
