@@ -74,7 +74,7 @@ export class FacturaComponent implements OnInit {
           const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
           const code = ('0000' + this.sale_point).substr(-4, 4);
           const saleNumber = ( '00000000' + this.sale.id.toString()).substr(-8, 8);
-          this.invoice_number = code + saleNumber;
+          this.invoice_number = `${code}-${saleNumber}`;
           this.vto.year = vtoString.slice(0, 4);
           this.vto.month = vtoString.slice(4, 6);
           this.vto.day = vtoString.slice(6, 8);
