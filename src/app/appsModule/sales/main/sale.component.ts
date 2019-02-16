@@ -13,6 +13,7 @@ import { SaleService } from '../services/sale.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { ProvidersService } from '../../../services/providers.service';
 import { orderBy } from 'lodash';
+import { ValidationService } from '../../../services/validation.service';
 
 @Component({
   selector: 'app-sale',
@@ -45,7 +46,8 @@ export class SaleComponent implements OnInit, OnDestroy {
     private ps: ProvidersService,
     private sas: SaleService,
     private ns: NotificationsService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private vs: ValidationService
   ) {
     this.options = {
       timeOut: 3000,
@@ -61,7 +63,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       client_id: ['', [Validators.required]],
       quantity: ['', [Validators.required, Validators.min(0)]],
       paymentMethods: ['', [Validators.required]],
-      saleDate: ['', [Validators.required]]
+      saleDate: ['', [Validators.required, this.vs.dateValidator]]
     });
     this.spinnerService.displayLoader(true);
     this.subscriptions.push(

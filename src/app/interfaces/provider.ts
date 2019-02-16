@@ -27,4 +27,6 @@ export interface Provider {
   numeroDeInscripcionesIB: number;
   cuentasGenerales: string;
   percepcionDeGanancia: number;
+  sale_point: string;
+  start_date: string;
 }

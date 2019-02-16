@@ -35,6 +35,22 @@
         </div>
 
         <div class="form-group field">
+          <sm-input type="number" label="Punto de venta" [control]="clientForm.controls.sale_point" placeholder="Ingresar punto de venta">
+          </sm-input>
+          <app-input-error-messages [control]="clientForm.controls.sale_point"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-input
+            type="date"
+            label="Fecha de inicio de actividad"
+            [control]="clientForm.controls.start_date"
+            placeholder="Ingresar fecha de inicio de actividad"
+          ></sm-input>
+          <app-input-error-messages [control]="clientForm.controls.start_date"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
           <sm-input type="text" label="Provincia" [control]="clientForm.controls.codigoProvincia" placeholder="Ingresar código provincia">
           </sm-input>
           <app-input-error-messages [control]="clientForm.controls.codigoProvincia"></app-input-error-messages>
@@ -133,10 +149,10 @@
         <div class="form-group field">
           <div class="ui toggle checkbox">
             <sm-checkbox
-              label="Iva Inscripto"
+              label="Iva No Inscripto"
               [control]="clientForm.controls.ivaInscripto"
               (change)="responsableChange(clientForm.controls.ivaInscripto)"
-              placeholder="Ingresar si es iva inscripto"
+              placeholder="Ingresar si es iva no inscripto"
             >
             </sm-checkbox>
           </div>

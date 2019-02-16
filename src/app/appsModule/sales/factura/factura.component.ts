@@ -25,6 +25,8 @@ export class FacturaComponent implements OnInit {
   @Input() products: [Details];
   @Input() sale: Sale;
   @Input() clients: Client[];
+  private sale_point: string;
+  invoice_number: string;
   clientStorage: Observable<Client[]>;
   client: Client;
   userStorage: Observable<CompleteUser>;
@@ -36,7 +38,6 @@ export class FacturaComponent implements OnInit {
   };
   docNro: number;
   cuit: number;
-  puntoVenta: number;
 
   constructor(
     private userService: UserService,
@@ -55,6 +56,9 @@ export class FacturaComponent implements OnInit {
   ngOnInit() {
     this.client = this.clients.find(cl => cl.id === this.sale.client_id);
     this.userStorage = this.userService.getUserStorage();
+    this.userService.getUserStorage().subscribe(state => {
+      this.sale_point = state.company.sale_point;
+    });
   }
 
   print(): void {
@@ -65,10 +69,12 @@ export class FacturaComponent implements OnInit {
         this.spinnerService.displayLoader(false);
         if (!response.success.Err) {
           this.cuit = response.success.FeCabResp.Cuit;
-          this.puntoVenta = response.success.FeCabResp.PtoVta;
           this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
           this.docNro = response.success.FeDetResp.FECAEDetResponse.DocNro;
           const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
+          const code = ('0000' + this.sale_point).substr(-4, 4);
+          const saleNumber = ( '00000000' + this.sale.id.toString()).substr(-8, 8);
+          this.invoice_number = code + saleNumber;
           this.vto.year = vtoString.slice(0, 4);
           this.vto.month = vtoString.slice(4, 6);
           this.vto.day = vtoString.slice(6, 8);
@@ -196,7 +202,7 @@ export class FacturaComponent implements OnInit {
                 }
                 </style>
               </head>
-              <body>${printContents}</body>
+              ${printContents}
             </html>`;
 
             const frame1 = document.createElement('iframe');

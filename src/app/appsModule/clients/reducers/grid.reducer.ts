@@ -35,7 +35,9 @@ export const initialModalObject: Client = {
   limiteDeCredito: null,
   numeroDeInscripcionesIB: null,
   cuentasGenerales: '',
-  percepcionDeGanancia: null
+  percepcionDeGanancia: null,
+  sale_point: null,
+  start_date: null
 };
 
 export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {

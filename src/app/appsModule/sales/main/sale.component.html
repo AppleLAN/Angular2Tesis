@@ -63,6 +63,7 @@
                 placeholder="Ingresar Fecha"
               >
               </sm-input>
+              <app-input-error-messages [control]="saleForm.controls.saleDate"></app-input-error-messages>
             </div>
             <div class="two wide two height left floated column formItem addProduct">
               <button class="ui button tiny" [disabled]="saleForm.invalid" (click)="addProduct()">
@@ -73,7 +74,7 @@
         </div>
       </form>
       <p>
-        "La elección de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de compra"
+        "La elección de Proveedor y Tipo de Compra reemplazara los anteriormente seleccionados en la orden de venta"
       </p>
     </div>
   </div>
@@ -89,7 +90,7 @@
       *ngFor="let product of (selectedProducts | mapToIterable: numberOfChanges)"
     >
       <div class="column">
-        <h1>Orden de compras para Cliente "{{ product.val.stock[0].client }}"</h1>
+        <h1>Orden de ventas para Cliente "{{ product.val.stock[0].client }}"</h1>
         <table class="ui celled table">
           <thead>
             <tr>
@@ -97,7 +98,7 @@
               <th>Descripción</th>
               <th>Cliente</th>
               <th>Cantidad</th>
-              <th>Eliminar producto de orden de compra</th>
+              <th>Eliminar producto de orden de venta</th>
             </tr>
           </thead>
           <tbody>

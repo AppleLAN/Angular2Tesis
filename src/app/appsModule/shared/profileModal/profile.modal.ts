@@ -82,6 +82,11 @@ export class ProfileModal implements OnInit {
         '',
         [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
       ],
+      sale_point: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      start_date: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator, this.vs.dateValidator]
+      ],
       percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
     });
 
@@ -172,7 +177,9 @@ export class ProfileModal implements OnInit {
   }
 
   refresh() {
-    jQuery('.ui.modal.profile-modal').modal('refresh');
+    setTimeout(() => {
+      jQuery('.profile-modal').modal('refresh');
+    }, 0);
   }
 
   showModal() {
@@ -185,7 +192,9 @@ export class ProfileModal implements OnInit {
     this.newSubUserForm.get('company_id').setValue(this.userData.company.id);
 
     this.setFormData(this.userData);
-    jQuery('.ui.modal.profile-modal').modal('show');
+    setTimeout(() => {
+      jQuery('.profile-modal').modal('show');
+    }, 0);
   }
 
   onChangeCuenta(event: any) {

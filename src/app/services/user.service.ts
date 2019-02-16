@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
+import * as moment from 'moment';
 import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -47,7 +48,8 @@ export class UserService {
   getProfileInfo(): Observable<any> {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProfileInfo')
-      .map((response: Response) => {
+      .map((response: any) => {
+        response.company.start_date = moment(response.company.start_date).format('YYYY-MM-DD');
         this.store.dispatch({ type: NEWUSER, payload: response });
         return response;
       })

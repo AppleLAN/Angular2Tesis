@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../interfaces/client';
 import { ADDCLIENT, CHANGECLIENT, DELETECLIENT, NEWCLIENTS } from './../appsModule/clients/reducers/grid.reducer';
+import * as moment from 'moment';
 
 @Injectable()
 export class ClientsService {
@@ -25,7 +26,11 @@ export class ClientsService {
   getClients(): Observable<Client> {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getClients')
-      .map((response: Response) => {
+      .map((response: any) => {
+        response.map((r: any) => {
+          r.start_date = moment(r.start_date).format('YYYY-MM-DD');
+          return r;
+        });
         this.store.dispatch({ type: NEWCLIENTS, payload: response });
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));

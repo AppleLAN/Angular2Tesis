@@ -35,7 +35,9 @@ export const initialModalObject: Provider = {
   limiteDeCredito: null,
   numeroDeInscripcionesIB: null,
   cuentasGenerales: '',
-  percepcionDeGanancia: null
+  percepcionDeGanancia: null,
+  sale_point: null,
+  start_date: null
 };
 
 export const gridReducer: Reducer<any> = (state: Provider[], action: Action) => {

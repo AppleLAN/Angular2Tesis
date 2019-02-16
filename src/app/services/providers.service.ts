@@ -3,17 +3,13 @@ import { Response, Headers, RequestOptions, Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Provider } from '../interfaces/provider';
-import {
-  NEWPROVIDERS,
-  ADDPROVIDER,
-  DELETEPROVIDER,
-  CHANGEPROVIDER
-} from './../appsModule/providers/reducers/grid.reducer';
+import { NEWPROVIDERS, ADDPROVIDER, DELETEPROVIDER, CHANGEPROVIDER } from './../appsModule/providers/reducers/grid.reducer';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
 
 @Injectable()
 export class ProvidersService {
@@ -31,7 +27,11 @@ export class ProvidersService {
   getProviders(): Observable<Provider[]> {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProviders')
-      .map((response: Response) => {
+      .map((response: any) => {
+        response.map((r: any) => {
+          r.start_date = moment(r.start_date).format('YYYY-MM-DD');
+          return r;
+        });
         this.store.dispatch({ type: NEWPROVIDERS, payload: response });
         return response;
       })

@@ -17,7 +17,7 @@
     <div class="container order-container buy-container" *ngFor="let sale of filteredSales; let index = index">
       <p>Cliente: {{ sale.sale.client_name }}</p>
       <p>Número de Venta: {{ sale.sale.id }}</p>
-      <p>Fecha de creación: {{ sale.sale.created_at | date: 'short' }}</p>
+      <p>Fecha de creación: {{ sale.sale.created_at }}</p>
       <p>Total: {{ sale.sale.total }}</p>
       <p>Status: {{ sale.sale.status === 'F' ? 'Facturado' : 'Completado' }}</p>
       <p>Tipo de venta: {{ sale.sale.payments }}</p>
