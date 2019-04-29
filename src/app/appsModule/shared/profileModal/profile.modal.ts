@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { User } from '../../../interfaces/user';
-import { SharedService, documentTypes, retentionTypes } from '../../../services/shared.service';
+import { SharedService, DocumentTypes, RetentionTypes } from '../../../services/shared.service';
 import { UserService } from '../../../services/user.service';
 import { ValidationService } from '../../../services/validation.service';
 
@@ -16,8 +16,8 @@ declare var jQuery: any;
   templateUrl: './profile.modal.html'
 })
 export class ProfileModal implements OnInit {
-  documentTypes = documentTypes;
-  retentionTypes = retentionTypes;
+  documentTypes = DocumentTypes;
+  retentionTypes = RetentionTypes;
   clients: Client;
   userForm: FormGroup;
   registerForm: FormGroup;

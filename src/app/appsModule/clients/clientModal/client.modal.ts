@@ -4,7 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { ClientsService } from '../../../services/clients.service';
-import { SharedService, documentTypes, retentionTypes, saleConditionTypes } from '../../../services/shared.service';
+import { SharedService, DocumentTypes, RetentionTypes, SaleConditionTypes } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { ValidationService } from '../../../services/validation.service';
 import { initialModalObject } from '../reducers/grid.reducer';
@@ -16,14 +16,14 @@ declare var jQuery: any;
   styleUrls: ['.././clients.component.scss']
 })
 export class ClientModal implements OnInit {
-  documentTypes = documentTypes;
-  retentionTypes = retentionTypes;
+  documentTypes = DocumentTypes;
+  retentionTypes = RetentionTypes;
   clientStorage: Observable<Client[]>;
   clients: Client;
   clientForm: FormGroup;
   error: String;
   clientFormEmptyObject = initialModalObject;
-  saleConditionTypes = saleConditionTypes;
+  saleConditionTypes = SaleConditionTypes;
   options: any;
   cuenta: any = null;
   constructor(

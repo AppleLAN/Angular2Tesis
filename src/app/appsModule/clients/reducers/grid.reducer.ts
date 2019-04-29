@@ -29,6 +29,7 @@ export const initialModalObject: Client = {
   excento: false,
   responsableMonotributo: false,
   cuentasGenerales: '',
+  condicionDeVenta: '',
   G: false,
   IIBB: false,
   IVA: false,

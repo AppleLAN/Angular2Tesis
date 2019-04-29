@@ -4,7 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
 import { ProvidersService } from '../../../services/providers.service';
-import { SharedService, retentionTypes, documentTypes } from '../../../services/shared.service';
+import { SharedService, RetentionTypes, DocumentTypes } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { ValidationService } from '../../../services/validation.service';
 import { initialModalObject } from '../reducers/grid.reducer';
@@ -16,8 +16,8 @@ declare var jQuery: any;
   styleUrls: ['.././providers.component.scss']
 })
 export class ProviderModal implements OnInit {
-  documentTypes = documentTypes;
-  retentionTypes = retentionTypes;
+  documentTypes = DocumentTypes;
+  retentionTypes = RetentionTypes;
   providerStorage: Observable<Provider[]>;
   providers: Provider;
   providerForm: FormGroup;

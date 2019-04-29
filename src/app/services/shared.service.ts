@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from './validation.service';
 
-export const documentTypes = [
+export const DocumentTypes = [
   { label: 'Documenti Único', value: 'DNI' },
   { label: 'Libreta de Enrolamiento', value: 'LE' },
   { label: 'Libreta Cívica', value: 'LC' },
@@ -11,14 +11,19 @@ export const documentTypes = [
   { label: 'Cédula Extranjera', value: 'CE' }
 ];
 
-export const saleConditionTypes = [{ label: 'IVA', value: 'IVA' }, { label: 'Inscripción Ingresos Brutos', value: 'IIBB' }];
+export const SaleConditionTypes = [{ label: 'IVA', value: 'IVA' }, { label: 'Inscripción Ingresos Brutos', value: 'IIBB' }];
 
-export const retentionTypes = [
+export const RetentionTypes = [
   { label: 'IVA', value: 'IVA' },
   { label: 'Inscripción Ingresos Brutos', value: 'IIBB' },
   { label: 'Ganancia', value: 'G' },
   { label: 'SUS', value: 'SUS' }
 ];
+
+export const IvaTypes = [5.25, 10.5, 21, 27];
+
+export const ProducTypes = ['Compra', 'Venta', 'Compra-Venta'];
+
 @Injectable()
 export class SharedService {
   constructor(private vs: ValidationService) {}
@@ -33,7 +38,7 @@ export class SharedService {
   }
 
   retencionChange(formControl: any, form: FormGroup) {
-    return retentionTypes.filter(item => !!form.get(item.value).value).map(item => item.value);
+    return RetentionTypes.filter(item => !!form.get(item.value).value).map(item => item.value);
   }
 
   generateMap(arr: any, value: any, keyAddition?: string) {

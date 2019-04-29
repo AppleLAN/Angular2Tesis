@@ -1,0 +1,64 @@
+<sm-modal title="Lista de Precios" class="fluid price-list-modal" #priceListModal>
+  <modal-content>
+    <form class="ui form" [formGroup]="priceListsForm" name="Form">
+      <div class="ui left aligned basic segment">
+        <div class="ui horizontal divider">Datos Generales</div>
+
+        <div class="form-group field">
+          <sm-input type="text" label="Nombre" [control]="priceListsForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
+          <app-input-error-messages [control]="priceListsForm.controls.name"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-input type="text" label="Porcentaje" [control]="priceListsForm.controls.percentage" placeholder="Ingresar Porcentaje">
+          </sm-input>
+          <app-input-error-messages [control]="priceListsForm.controls.percentage"></app-input-error-messages>
+        </div>
+
+        <div *ngIf="productsToChoose?.length > 0" class="column formItem">
+          <sm-select
+            class="fluid inverted search multiple"
+            label="Productos"
+            [control]="priceListsForm.controls.products"
+            placeholder="Ingresar Productos"
+          >
+            >
+            <option *ngFor="let product of productsToChoose" value="{{ product.id }}"
+              >{{ product.name }} ( {{ product.providerName }})</option
+            >
+          </sm-select>
+        </div>
+      </div>
+
+      <modal-actions>
+        <div fxLayout="column" fxLayoutGap="15px">
+          <div fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutGap="15px">
+            <button
+              class="ui button tiny"
+              (click)="addPriceList(priceListsForm)"
+              [disabled]="priceListsForm.invalid"
+              *ngIf="isNew(priceListsForm)"
+            >
+              Agregar Lista de Precio
+            </button>
+            <button
+              class="ui button tiny"
+              (click)="updatePriceList(priceListsForm)"
+              [disabled]="priceListsForm.invalid"
+              *ngIf="!isNew(priceListsForm)"
+            >
+              Actualizar Datos
+            </button>
+            <button class="ui button tiny" (click)="deletePriceList(priceListsForm)" *ngIf="!isNew(priceListsForm)">
+              Borrar Lista de Precios
+            </button>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="stockModal.hide()">Cancelar</button>
+          </div>
+        </div>
+      </modal-actions>
+    </form>
+  </modal-content>
+</sm-modal>
+<modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>
