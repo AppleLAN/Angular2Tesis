@@ -49,7 +49,6 @@ export class UserService {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProfileInfo')
       .map((response: any) => {
-        response.company.start_date = moment(response.company.start_date).format('YYYY-MM-DD');
         this.store.dispatch({ type: NEWUSER, payload: response });
         return response;
       })

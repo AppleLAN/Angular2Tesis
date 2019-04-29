@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { User } from '../../../interfaces/user';
-import { SharedService } from '../../../services/shared.service';
+import { SharedService, documentTypes, retentionTypes } from '../../../services/shared.service';
 import { UserService } from '../../../services/user.service';
 import { ValidationService } from '../../../services/validation.service';
 
@@ -16,6 +16,8 @@ declare var jQuery: any;
   templateUrl: './profile.modal.html'
 })
 export class ProfileModal implements OnInit {
+  documentTypes = documentTypes;
+  retentionTypes = retentionTypes;
   clients: Client;
   userForm: FormGroup;
   registerForm: FormGroup;
@@ -66,28 +68,13 @@ export class ProfileModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
-      ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6), this.vs.emptySpaceValidator]],
-      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      cuentasGenerales: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
-      sale_point: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      start_date: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator, this.vs.dateValidator]
-      ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
+      cuentasGenerales: ['Cuenta Interna', []]
     });
 
     this.userForm.get('fantasyName').disable();
@@ -174,6 +161,10 @@ export class ProfileModal implements OnInit {
         this.cuenta = this.userData.company.cuentasGenerales;
       }
     }
+  }
+
+  checkDocumentType(event: any) {
+    this.sharedService.checkDocumentType(event, this.userForm);
   }
 
   refresh() {

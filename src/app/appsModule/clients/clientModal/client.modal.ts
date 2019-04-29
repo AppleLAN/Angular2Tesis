@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { ClientsService } from '../../../services/clients.service';
-import { SharedService } from '../../../services/shared.service';
+import { SharedService, documentTypes, retentionTypes, saleConditionTypes } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
-import { initialModalObject } from '../reducers/grid.reducer';
 import { ValidationService } from '../../../services/validation.service';
+import { initialModalObject } from '../reducers/grid.reducer';
 declare var jQuery: any;
 
 @Component({
@@ -16,14 +16,16 @@ declare var jQuery: any;
   styleUrls: ['.././clients.component.scss']
 })
 export class ClientModal implements OnInit {
+  documentTypes = documentTypes;
+  retentionTypes = retentionTypes;
   clientStorage: Observable<Client[]>;
   clients: Client;
   clientForm: FormGroup;
   error: String;
   clientFormEmptyObject = initialModalObject;
+  saleConditionTypes = saleConditionTypes;
   options: any;
   cuenta: any = null;
-
   constructor(
     private fb: FormBuilder,
     private clientsService: ClientsService,
@@ -40,6 +42,8 @@ export class ClientModal implements OnInit {
     };
   }
   ngOnInit() {
+    const retentionTypes = this.sharedService.generateMap(this.retentionTypes, ['', []]);
+    const retentionPercentages = this.sharedService.generateMap(this.retentionTypes, [{ value: '', disabled: true }, []], 'Percentage');
     this.clientForm = this.fb.group({
       id: [''],
       company_id: [''],
@@ -63,30 +67,22 @@ export class ClientModal implements OnInit {
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required]],
+      documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
-      ivaInscripto: ['', []],
-      precioLista: ['', [Validators.required, Validators.min(0), Validators.maxLength(6), this.vs.emptySpaceValidator]],
-      condicionDeVenta: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      limiteDeCredito: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      numeroDeInscripcionesIB: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      cuentasGenerales: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
-      ],
-      sale_point: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      start_date: [
-        '',
-        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator, this.vs.dateValidator]
-      ],
-      percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
+      cuentasGenerales: ['Cuenta General', []],
+      condicionDeVenta: ['', [Validators.required]],
+      ...retentionTypes,
+      ...retentionPercentages
     });
     this.clientStorage = this.clientsService.getClientStorage();
     this.clientsService.getClients().subscribe();
+  }
+
+  checkDocumentType(event: any) {
+    this.sharedService.checkDocumentType(event, this.clientForm);
   }
 
   changeInformation(client: Client) {
@@ -102,6 +98,10 @@ export class ClientModal implements OnInit {
 
   onChangeCuenta(event: any) {
     this.clientForm.get('cuentasGenerales').setValue(event);
+  }
+
+  onCondicionDeVentaChange(event: any) {
+    this.clientForm.get('condicionDeVenta').setValue(event);
   }
 
   openNewClientModal() {
@@ -125,6 +125,23 @@ export class ClientModal implements OnInit {
 
   responsableChange(formControl: any) {
     this.sharedService.responsableChange(formControl, this.clientForm);
+  }
+
+  retencionChange(formControl: any) {
+    const values = this.sharedService.retencionChange(formControl, this.clientForm);
+    this.retentionTypes.forEach(item => {
+      const found = values.find(value => item.value === value);
+      if (found) {
+        this.clientForm
+          .get(item.value + 'Percentage')
+          .setValidators([Validators.required, this.vs.emptySpaceValidator, Validators.min(0), Validators.max(100)]);
+        this.clientForm.get(item.value + 'Percentage').enable();
+      } else {
+        this.clientForm.get(item.value + 'Percentage').setValidators([]);
+        this.clientForm.get(item.value + 'Percentage').reset();
+        this.clientForm.get(item.value + 'Percentage').disable();
+      }
+    });
   }
 
   addClient({ value }: { value: Client }) {
