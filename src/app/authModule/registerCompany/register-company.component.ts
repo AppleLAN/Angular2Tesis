@@ -22,6 +22,10 @@ export class RegisterCompanyComponent implements OnInit {
   userStorage: Subscription;
   userData: CompleteUser;
   options: any;
+  tipoDocumento: any;
+  checkDocumentType: any;
+  profileModal: any;
+  documentTypes: any;
 
   constructor(
     private fb: FormBuilder,

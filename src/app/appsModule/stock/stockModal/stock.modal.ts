@@ -28,6 +28,8 @@ export class StockModal implements OnInit {
   providerId: any = null;
   ivaTypes = IvaTypes;
   producTypes = ProducTypes;
+  productType: any;
+  condition: any;
 
   constructor(
     private fb: FormBuilder,

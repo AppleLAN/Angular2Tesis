@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { orderBy, uniqBy } from 'lodash';
@@ -8,6 +8,7 @@ import { PriceList } from './../../../../interfaces/price.list';
 import { Product } from './../../../../interfaces/stock';
 import { StockService } from './../../../../services/stock.service';
 import { ValidationService } from './../../../../services/validation.service';
+import { StockModal } from './../../../../appsModule/stock/stockModal/stock.modal';
 declare var jQuery: any;
 
 @Component({

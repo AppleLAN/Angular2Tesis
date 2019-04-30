@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { User } from '../../../interfaces/user';
-import { SharedService, DocumentTypes, RetentionTypes } from '../../../services/shared.service';
+import { DocumentTypes, RetentionTypes, SharedService } from '../../../services/shared.service';
 import { UserService } from '../../../services/user.service';
 import { ValidationService } from '../../../services/validation.service';
 
@@ -13,7 +13,8 @@ declare var jQuery: any;
 
 @Component({
   selector: 'app-profile-modal',
-  templateUrl: './profile.modal.html'
+  templateUrl: './profile.modal.html',
+  styleUrls: ['./profile.modal.scss']
 })
 export class ProfileModal implements OnInit {
   documentTypes = DocumentTypes;
@@ -165,12 +166,6 @@ export class ProfileModal implements OnInit {
 
   checkDocumentType(event: any) {
     this.sharedService.checkDocumentType(event, this.userForm);
-  }
-
-  refresh() {
-    setTimeout(() => {
-      jQuery('.profile-modal').modal('refresh');
-    }, 0);
   }
 
   showModal() {

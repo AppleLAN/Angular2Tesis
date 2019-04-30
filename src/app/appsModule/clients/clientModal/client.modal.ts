@@ -26,6 +26,9 @@ export class ClientModal implements OnInit {
   saleConditionTypes = SaleConditionTypes;
   options: any;
   cuenta: any = null;
+  tipoDocumento: any;
+  condicionDeVenta: any;
+
   constructor(
     private fb: FormBuilder,
     private clientsService: ClientsService,

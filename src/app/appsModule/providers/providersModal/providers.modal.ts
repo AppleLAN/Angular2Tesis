@@ -25,6 +25,7 @@ export class ProviderModal implements OnInit {
   providerFormEmptyObject = initialModalObject;
   options: any;
   cuenta: any = null;
+  tipoDocumento: any;
 
   constructor(
     private fb: FormBuilder,
