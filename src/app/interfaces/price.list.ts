@@ -1,5 +1,5 @@
 export interface PriceList {
-  products: string[];
+  products: number[];
   description: string;
   name: string;
   percentage: number;
