@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../../interfaces/client';
 import { CompleteUser } from '../../../interfaces/complete.user';
 import { User } from '../../../interfaces/user';
-import { SharedService } from '../../../services/shared.service';
+import { DocumentTypes, RetentionTypes, SharedService } from '../../../services/shared.service';
 import { UserService } from '../../../services/user.service';
 import { ValidationService } from '../../../services/validation.service';
 
@@ -13,9 +13,12 @@ declare var jQuery: any;
 
 @Component({
   selector: 'app-profile-modal',
-  templateUrl: './profile.modal.html'
+  templateUrl: './profile.modal.html',
+  styleUrls: ['./profile.modal.scss']
 })
 export class ProfileModal implements OnInit {
+  documentTypes = DocumentTypes;
+  retentionTypes = RetentionTypes;
   clients: Client;
   userForm: FormGroup;
   registerForm: FormGroup;
@@ -66,10 +69,9 @@ export class ProfileModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],

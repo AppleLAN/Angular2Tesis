@@ -1,0 +1,41 @@
+<div class="grid" fxLayout="column" fxLayoutGap="15px">
+  <div fxLayout="column" fxLayoutGap="15px">
+    <div fxFlex>
+      <div fxLayout="row">
+        <div fxFlex="40%" fxFlex.md="55%" fxFlex.sm="100%" fxFlex.xs="100%" class="ui icon right labeled input">
+          <input type="text" [ngModel]="filter" (ngModelChange)="onChange($event)" placeholder="Ingrese Nombre" />
+          <div class="ui tag label"><i class="search icon"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex>
+      <button class="ui button" (click)="newModal()">
+        Agregar Nueva Lista
+      </button>
+    </div>
+  </div>
+
+  <table class="ui celled striped inverted table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Porcentaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let priceList of filteredPriceLists; let i = index">
+        <td>
+          <span class="name" (click)="editModal(priceList)">{{ priceList.name }}</span>
+        </td>
+        <td>{{ priceList.description }}</td>
+        <td>{{ priceList.percentage }}</td>
+      </tr>
+      <tr colspan="7" *ngIf="filteredPriceLists.length === 0">
+        <td>No se han encontrado listas</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-price-list-modal *ngIf="showModal" #priceListModal></app-price-list-modal>

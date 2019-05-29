@@ -2,13 +2,8 @@
   <div fxLayout="column" fxLayoutGap="15px">
     <div fxFlex>
       <div fxLayout="row">
-        <div fxFlex="40%" fxFlex.md="55%" fxFlex.sm="100%" fxFlex.xs="100%"  class="ui icon right labeled input">
-          <input
-            type="text"
-            [ngModel]="filter"
-            (ngModelChange)="onChange($event)"
-            placeholder="Ingrese Nombre, Proveedor, Categoría o Código"
-          />
+        <div fxFlex="40%" fxFlex.md="55%" fxFlex.sm="100%" fxFlex.xs="100%" class="ui icon right labeled input">
+          <input type="text" [ngModel]="filter" (ngModelChange)="onChange($event)" placeholder="Ingrese Nombre o Proveedor" />
           <div class="ui tag label"><i class="search icon"></i></div>
         </div>
       </div>
@@ -27,10 +22,6 @@
         <th>Nombre</th>
         <th>Proveedor</th>
         <th>Descripción</th>
-        <th>Precio a costo</th>
-        <th>Precio a la venta</th>
-        <th>Categoría</th>
-        <th>Código</th>
       </tr>
     </thead>
     <tbody>
@@ -40,10 +31,6 @@
         </td>
         <td>{{ product.providerName }}</td>
         <td>{{ product.description }}</td>
-        <td>{{ product.cost_price }}</td>
-        <td>{{ product.sale_price }}</td>
-        <td>{{ product.category_id }}</td>
-        <td>{{ product.code }}</td>
       </tr>
       <tr colspan="7" *ngIf="filteredProducts.length === 0">
         <td>No se han encontrado productos</td>

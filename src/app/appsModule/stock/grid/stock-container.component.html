@@ -1,0 +1,12 @@
+<div class="grid stock-container">
+  <div class="four ui buttons">
+    <button [ngClass]="{ active: operation === 'stock' }" class="ui button normal tiny fluid" (click)="operation = 'stock'">
+      Productos
+    </button>
+    <button [ngClass]="{ active: operation === 'list-price' }" class="ui button normal tiny fluid" (click)="operation = 'list-price'">
+      Lista de Precios
+    </button>
+  </div>
+  <app-stock-grid *ngIf="operation === 'stock'"></app-stock-grid>
+  <app-stock-price-list *ngIf="operation === 'list-price'"></app-stock-price-list>
+</div>

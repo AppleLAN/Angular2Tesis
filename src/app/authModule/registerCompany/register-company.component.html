@@ -6,6 +6,8 @@
     </div>
     <div class="form-box">
       <form class="ui form" [formGroup]="userForm" name="Form">
+        <div class="ui horizontal divider">Datos Generales</div>
+
         <div class="ui left aligned basic segment">
           <div class="form-group field">
             <sm-input type="text" label="Nombre" [control]="userForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
@@ -51,7 +53,7 @@
           </div>
 
           <div class="form-group field">
-            <sm-input type="number" label="Teléfono" [control]="userForm.controls.telephone" placeholder="Ingresar Teléfono"> </sm-input>
+            <sm-input type="tel" label="Teléfono" [control]="userForm.controls.telephone" placeholder="Ingresar Teléfono"> </sm-input>
             <app-input-error-messages [control]="userForm.controls.telephone"></app-input-error-messages>
           </div>
 
@@ -62,46 +64,29 @@
           </div>
 
           <div class="form-group field">
+            <sm-select
+              class="fluid search inverted"
+              label="Tipo de Documento"
+              [(model)]="tipoDocumento"
+              (onChange)="checkDocumentType($event)"
+              placeholder="Seleccione tipo de documento"
+            >
+              <option *ngFor="let tipo of documentTypes" [value]="tipo.value">{{ tipo.label }}</option>
+            </sm-select>
+            <app-input-error-messages [control]="userForm.controls.tipoDocumento"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
+            <sm-input type="text" label="Documento" [control]="userForm.controls.documento" placeholder="Ingresar Documento"> </sm-input>
+            <app-input-error-messages [control]="userForm.controls.documento"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
             <sm-input type="text" label="Página Web" [control]="userForm.controls.web" placeholder="Ingresar Página Web"> </sm-input>
             <app-input-error-messages [control]="userForm.controls.web"></app-input-error-messages>
           </div>
 
-          <div class="form-group field">
-            <sm-input
-              type="text"
-              label="​Inscripción en ingresos brutos"
-              [control]="userForm.controls.iib"
-              placeholder="Ingresar ​inscripción en ingresos brutos"
-            >
-            </sm-input>
-            <div class="has-error" *ngIf="userForm.get('iib').hasError('required') && userForm.get('iib').dirty">
-              ​inscripción en ingresos brutos no ingresada
-            </div>
-            <app-input-error-messages [control]="userForm.controls.iib"></app-input-error-messages>
-          </div>
-
-          <div class="form-group field">
-            <sm-input
-              type="text"
-              label="Percepción en ingresos brutos"
-              [control]="userForm.controls.pib"
-              placeholder="Ingresar percepción en ingresos brutos"
-            >
-            </sm-input>
-
-            <app-input-error-messages [control]="userForm.controls.pib"></app-input-error-messages>
-          </div>
-
-          <div class="form-group field">
-            <sm-input
-              type="text"
-              label="Exención de percepción en ingresos brutos"
-              [control]="userForm.controls.epib"
-              placeholder="Ingresar exención de percepción en ingresos brutos"
-            >
-            </sm-input>
-            <app-input-error-messages [control]="userForm.controls.epib"></app-input-error-messages>
-          </div>
+          <div class="ui horizontal divider">Tipo de responsabilidad</div>
 
           <div class="form-group field">
             <div class="ui toggle checkbox">
@@ -130,10 +115,10 @@
           <div class="form-group field">
             <div class="ui toggle checkbox">
               <sm-checkbox
-                label="Responsable de Monotributo"
+                label="Responsable Monotributo"
                 [control]="userForm.controls.responsableMonotributo"
                 (change)="responsableChange(userForm.controls.responsableMonotributo)"
-                placeholder="Ingresar si es responsable de monotributo"
+                placeholder="Ingresar si es responsable monotributo"
               >
               </sm-checkbox>
             </div>
@@ -212,10 +197,22 @@
             <app-input-error-messages [control]="userForm.controls.percepcionDeGanancia"></app-input-error-messages>
           </div>
         </div>
+
         <modal-actions>
           <div fxLayout="column" fxLayoutGap="15px">
             <div fxLayout="row" fxLayoutGap="15px">
-              <button class="ui button" (click)="updateClientCompany(userForm)" [disabled]="userForm.invalid">Actualizar Datos</button>
+              <button
+                fxFlex="20"
+                fxFlex.xs="100"
+                class="ui button tiny"
+                (click)="updateClientCompany(userForm)"
+                [disabled]="userForm.invalid"
+              >
+                Actualizar Datos
+              </button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button fxFlex="20" fxFlex.xs="100" class="ui button tiny" (click)="profileModal.hide()">Cancelar</button>
             </div>
           </div>
         </modal-actions>

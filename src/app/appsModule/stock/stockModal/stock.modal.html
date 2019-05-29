@@ -2,6 +2,8 @@
   <modal-content>
     <form class="ui form" [formGroup]="productForm" name="Form">
       <div class="ui left aligned basic segment">
+        <div class="ui horizontal divider">Datos Generales</div>
+
         <div class="form-group field">
           <sm-input type="text" label="Nombre" [control]="productForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
           <app-input-error-messages [control]="productForm.controls.name"></app-input-error-messages>
@@ -12,49 +14,89 @@
           </sm-input>
           <app-input-error-messages [control]="productForm.controls.description"></app-input-error-messages>
         </div>
+
         <div class="form-group field">
           <sm-select
             class="fluid search inverted"
             label="Proveedor"
             [(model)]="providerId"
-            (onChange)="onChangeProvider($event)"
+            (onChange)="onProviderChange($event)"
             placeholder="Ingresar Proveedor"
           >
             <option *ngFor="let provider of providers" value="{{ provider.id }}">{{ provider.name }}</option>
           </sm-select>
         </div>
-        <div class="form-group field">
-          <sm-input type="number" label="Precio a costo" [control]="productForm.controls.cost_price" placeholder="Ingresar Costo Mínimo">
-          </sm-input>
-          <app-input-error-messages [control]="productForm.controls.cost_price"></app-input-error-messages>
-        </div>
+
+        <div class="ui horizontal divider">Estructura Impositiva</div>
 
         <div class="form-group field">
           <sm-input
-            type="number"
-            label="Precio a la venta"
-            [control]="productForm.controls.sale_price"
-            placeholder="Ingresar Precio a la venta"
+            type="text"
+            label="Precio de Costo Sin Impuesto"
+            [control]="productForm.controls.costPrice"
+            placeholder="Ingresar Precio de Costo Sin Impuesto"
           >
           </sm-input>
-          <app-input-error-messages [control]="productForm.controls.sale_price"></app-input-error-messages>
-        </div>
-
-        <div class="form-group field">
-          <sm-input type="text" label="Id de Categoría" [control]="productForm.controls.category_id" placeholder="Ingresar id de categoría">
-          </sm-input>
-          <app-input-error-messages [control]="productForm.controls.category_id"></app-input-error-messages>
+          <app-input-error-messages [control]="productForm.controls.costPrice"></app-input-error-messages>
         </div>
 
         <div class="form-group field">
           <sm-input
             type="text"
-            label="Ingresar código de identificación"
-            [control]="productForm.controls.code"
-            placeholder="Ingresar código de identificación"
+            label="Neto Gravado Sin Impuesto"
+            [control]="productForm.controls.netPrice"
+            placeholder="Ingresar Neto Gravado Sin Impuesto"
           >
           </sm-input>
-          <app-input-error-messages [control]="productForm.controls.code"></app-input-error-messages>
+          <app-input-error-messages [control]="productForm.controls.netPrice"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-select
+            class="fluid search inverted"
+            label="Condición"
+            [(model)]="condition"
+            (onChange)="onConditionChange($event)"
+            placeholder="Seleccione Condición"
+          >
+            <option *ngFor="let tipo of ivaTypes" [value]="tipo">{{ tipo }}</option>
+          </sm-select>
+          <app-input-error-messages [control]="productForm.controls.condition"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-input
+            type="text"
+            label="Derechos de Importación"
+            [control]="productForm.controls.importRight"
+            placeholder="Ingresar Derechos de Importación"
+          >
+          </sm-input>
+          <app-input-error-messages [control]="productForm.controls.importRight"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-input
+            type="text"
+            label="Precio Tentativo"
+            [control]="productForm.controls.tentativeCost"
+            placeholder="Ingresar Precio Tentativo"
+          >
+          </sm-input>
+          <app-input-error-messages [control]="productForm.controls.tentativeCost"></app-input-error-messages>
+        </div>
+
+        <div class="form-group field">
+          <sm-select
+            class="fluid search inverted"
+            label="Tipo de Producto"
+            [(model)]="productType"
+            (onChange)="onProductTypeChange($event)"
+            placeholder="Seleccione Tipo de Producto"
+          >
+            <option *ngFor="let tipo of producTypes" [value]="tipo">{{ tipo }}</option>
+          </sm-select>
+          <app-input-error-messages [control]="productForm.controls.productType"></app-input-error-messages>
         </div>
       </div>
 

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./sales-main.component.scss']
 })
 export class SalesMainComponent {
-  operation: string = 'buy';
+  operation = 'buy';
 
   constructor() { }
 

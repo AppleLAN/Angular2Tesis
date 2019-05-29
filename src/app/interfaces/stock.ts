@@ -2,17 +2,15 @@ export interface Product {
   id: number;
   company_id: number;
   provider_id: number;
-  providerName?: string;
   name: string;
-  code: string;
-  stock: number;
   description: string;
-  cost_price: number;
-  sale_price: number;
-  category_id: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string;
+  costPrice: number;
+  netPrice: number;
+  condition: string;
+  productType: string;
+  importRight: number;
+  tentativeCost: number;
+  providerName?: string;
   type?: string;
   quantity?: number;
 }
@@ -42,12 +40,7 @@ export interface AddedSaleStock extends AddedStock {
 }
 
 export interface SelectedStock {
-  [id: string]: { stock: AddedStock[],
-                  subTotal: number,
-                  typeOfBuy?: string,
-                  saleDate?: Date,
-                  paymentMethods?: string
-                };
+  [id: string]: { stock: AddedStock[]; subTotal: number; typeOfBuy?: string; saleDate?: Date; paymentMethods?: string };
 }
 
 export interface NewOperation {
@@ -55,7 +48,7 @@ export interface NewOperation {
   total: number;
 }
 
-export interface NewBuy extends NewOperation{
+export interface NewBuy extends NewOperation {
   typeOfBuy: string;
   provider_id: number;
 }
