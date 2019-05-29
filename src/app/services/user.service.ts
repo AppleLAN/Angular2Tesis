@@ -11,6 +11,7 @@ import { Client } from '../interfaces/client';
 import { CompleteUser } from '../interfaces/complete.user';
 import { User } from '../interfaces/user';
 import { NEWCOMPANY, NEWUSER, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
+import { Company } from 'interfaces/company';
 
 @Injectable()
 export class UserService {
@@ -73,7 +74,7 @@ export class UserService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-  updateClientCompany(company: Client): Observable<Object[]> {
+  updateClientCompany(company: Company): Observable<Object[]> {
     return this.api
       .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserCompany', company)
       .map((response: Response) => {
