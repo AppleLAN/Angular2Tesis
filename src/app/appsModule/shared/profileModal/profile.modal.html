@@ -1,6 +1,6 @@
 <sm-modal title="Perfil" class="fluid profile-modal" icon="home" #profileModal>
   <modal-content>
-    <sm-tabs>
+    <sm-tabs (click)="refresh()">
       <sm-tab title="Datos de Usuario">
         <form class="ui form" [formGroup]="registerForm" name="registerForm">
           <div class="ui left aligned basic segment">
@@ -91,8 +91,6 @@
       </sm-tab>
       <sm-tab *ngIf="userData?.profile.isAdmin" title="Datos de Empresa">
         <form class="ui form" [formGroup]="userForm" name="Form">
-          <div class="ui horizontal divider">Datos Generales</div>
-
           <div class="ui left aligned basic segment">
             <div class="form-group field">
               <sm-input type="text" label="Nombre" [control]="userForm.controls.name" placeholder="Ingresar Nombre"> </sm-input>
@@ -165,29 +163,42 @@
             </div>
 
             <div class="form-group field">
-              <sm-select
-                class="fluid search inverted"
-                label="Tipo de Documento"
-                [(model)]="tipoDocumento"
-                (onChange)="checkDocumentType($event)"
-                placeholder="Seleccione tipo de documento"
-              >
-                <option *ngFor="let tipo of documentTypes" [value]="tipo.value">{{ tipo.label }}</option>
-              </sm-select>
-              <app-input-error-messages [control]="userForm.controls.tipoDocumento"></app-input-error-messages>
-            </div>
-
-            <div class="form-group field">
-              <sm-input type="text" label="Documento" [control]="userForm.controls.documento" placeholder="Ingresar Documento"> </sm-input>
-              <app-input-error-messages [control]="userForm.controls.documento"></app-input-error-messages>
-            </div>
-
-            <div class="form-group field">
               <sm-input type="text" label="Página Web" [control]="userForm.controls.web" placeholder="Ingresar Página Web"> </sm-input>
               <app-input-error-messages [control]="userForm.controls.web"></app-input-error-messages>
             </div>
 
-            <div class="ui horizontal divider">Tipo de responsabilidad</div>
+            <div class="form-group field">
+              <sm-input
+                type="text"
+                label="​Inscripción en ingresos brutos"
+                [control]="userForm.controls.iib"
+                placeholder="Ingresar ​inscripción en ingresos brutos"
+              >
+              </sm-input>
+              <app-input-error-messages [control]="userForm.controls.iib"></app-input-error-messages>
+            </div>
+
+            <div class="form-group field">
+              <sm-input
+                type="text"
+                label="Percepción en ingresos brutos"
+                [control]="userForm.controls.pib"
+                placeholder="Ingresar percepción en ingresos brutos"
+              >
+              </sm-input>
+              <app-input-error-messages [control]="userForm.controls.pib"></app-input-error-messages>
+            </div>
+
+            <div class="form-group field">
+              <sm-input
+                type="text"
+                label="Exención de percepción en ingresos brutos"
+                [control]="userForm.controls.epib"
+                placeholder="Ingresar exención de percepción en ingresos brutos"
+              >
+              </sm-input>
+              <app-input-error-messages [control]="userForm.controls.epib"></app-input-error-messages>
+            </div>
 
             <div class="form-group field">
               <div class="ui toggle checkbox">
@@ -216,10 +227,10 @@
             <div class="form-group field">
               <div class="ui toggle checkbox">
                 <sm-checkbox
-                  label="Responsable Monotributo"
+                  label="Responsable de Monotributo"
                   [control]="userForm.controls.responsableMonotributo"
                   (change)="responsableChange(userForm.controls.responsableMonotributo)"
-                  placeholder="Ingresar si es responsable monotributo"
+                  placeholder="Ingresar si es responsable de monotributo"
                 >
                 </sm-checkbox>
               </div>

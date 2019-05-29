@@ -1,26 +1,19 @@
 import { Action } from './../../../interfaces/action';
 import { Reducer } from './../../../interfaces/reducer';
 import { Stock, Product } from './../../../interfaces/stock';
-import { PriceList } from './../../../interfaces/price.list';
 
 export const NEWSTOCK = 'NEWSTOCK';
 export const CHANGESTOCK = 'CHANGESTOCK';
 export const ADDSTOCK = 'ADDSTOCK';
 export const DELETESTOCK = 'DELETESTOCK';
-
 export const NEWPRODUCT = 'NEWPRODUCT';
 export const CHANGEPRODUCT = 'CHANGEPRODUCT';
 export const ADDPRODUCT = 'ADDPRODUCT';
 export const DELETEPRODUCT = 'DELETEPRODUCT';
 
-export const NEWPRICELISTS = 'NEWPRICELISTS';
-export const CHANGEPRICELIST = 'CHANGEPRICELIST';
-export const ADDPRICELIST = 'ADDPRICELIST';
-export const DELETEPRICELIST = 'DELETEPRICELIST';
 export interface StockState {
   products: Product[];
   stock: Stock[];
-  priceLists: PriceList[];
 }
 
 export const initialModalObject: StockState = {
@@ -30,16 +23,15 @@ export const initialModalObject: StockState = {
       company_id: null,
       provider_id: null,
       name: null,
+      code: null,
+      stock: null,
       description: null,
-      costPrice: null,
-      netPrice: null,
-      condition: null,
-      productType: null,
-      importRight: null,
-      tentativeCost: null,
-      providerName: null,
-      type: null,
-      quantity: null
+      cost_price: null,
+      sale_price: null,
+      category_id: null,
+      created_at: null,
+      updated_at: null,
+      deleted_at: null
     }
   ],
   stock: [
@@ -54,14 +46,6 @@ export const initialModalObject: StockState = {
       created_at: null,
       updated_at: null,
       deleted_at: null
-    }
-  ],
-  priceLists: [
-    {
-      products: null,
-      description: null,
-      name: null,
-      percentage: null
     }
   ]
 };
@@ -93,7 +77,6 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
       return { ...state }.stock.filter(item => {
         return item.id !== action.payload.id;
       });
-
     case 'NEWPRODUCT':
       action.payload.provider_id = Number(action.payload.provider_id);
       newState.products = action.payload;
@@ -108,20 +91,6 @@ export const gridReducer: Reducer<any> = (state: StockState, action: Action) => 
       return { ...state };
     case 'DELETEPRODUCT':
       state.products = state.products.filter(item => item.id !== action.payload.id);
-      return { ...state };
-
-    case 'NEWPRICELISTS':
-      newState.priceLists = action.payload;
-      return newState;
-    case 'ADDPRICELIST':
-      state.priceLists = [...state.priceLists, action.payload];
-      return { ...state };
-    case 'CHANGEPRICELIST':
-      action.payload.name = Number(action.payload.name);
-      state.priceLists = state.priceLists.map(item => (item.name === action.payload.name ? action.payload : item));
-      return { ...state };
-    case 'DELETEPRICELIST':
-      state.priceLists = state.priceLists.filter(item => item.name !== action.payload.name);
       return { ...state };
     default:
       return state;

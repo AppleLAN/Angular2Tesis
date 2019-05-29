@@ -20,13 +20,8 @@ import {
   DELETESTOCK,
   NEWPRODUCT,
   NEWSTOCK,
-  NEWPRICELISTS,
-  StockState,
-  CHANGEPRICELIST,
-  ADDPRICELIST,
-  DELETEPRICELIST
+  StockState
 } from './../appsModule/stock/reducers/grid.reducer';
-import { PriceList } from './../interfaces/price.list';
 
 @Injectable()
 export class StockService {
@@ -70,46 +65,6 @@ export class StockService {
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProducts')
       .map((response: Response) => {
         this.store.dispatch({ type: NEWPRODUCT, payload: response });
-        return response;
-      })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
-  }
-
-  getPriceLists(): Observable<PriceList[]> {
-    return this.api
-      .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProducts')
-      .map((response: Response) => {
-        this.store.dispatch({ type: NEWPRICELISTS, payload: response });
-        return response;
-      })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
-  }
-
-  updatePriceLists(newPriceList: PriceList): Observable<PriceList> {
-    return this.api
-      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateProducts', newPriceList)
-      .map((response: Response) => {
-        this.store.dispatch({ type: CHANGEPRICELIST, payload: newPriceList });
-        return response;
-      })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
-  }
-
-  addPriceList(newPriceList: PriceList): Observable<Product> {
-    return this.api
-      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/saveProducts', newPriceList)
-      .map((response: any) => {
-        this.store.dispatch({ type: ADDPRICELIST, payload: response.success });
-        return response;
-      })
-      .catch((error: any) => Observable.throw(error || 'Server error'));
-  }
-
-  deletePriceList(newPriceList: PriceList): Observable<Stock> {
-    return this.api
-      .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/deleteMovements', newPriceList)
-      .map((response: Response) => {
-        this.store.dispatch({ type: DELETEPRICELIST, payload: newPriceList });
         return response;
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));
@@ -205,12 +160,12 @@ export class StockService {
   }
 
   getSubTotal(selectedProviderId: number, selectedProducts: SelectedStock, sale = false) {
-    /*  selectedProducts[selectedProviderId].subTotal = 0;
+    selectedProducts[selectedProviderId].subTotal = 0;
     forEach(selectedProducts[selectedProviderId].stock, (p: AddedStock) => {
       const quantityPrice = sale ? p.product.sale_price * p.quantity : p.product.cost_price * p.quantity;
       selectedProducts[selectedProviderId].subTotal += quantityPrice;
     });
-    return selectedProducts; */
+    return selectedProducts;
   }
 
   getTotal(selectedProducts: SelectedStock) {
@@ -264,7 +219,7 @@ export class StockService {
     });
     selectedProducts[selectedProvider.id].stock = uniqBy(selectedProducts[selectedProvider.id].stock, (p: AddedStock) => p.product.id);
     selectedProducts[selectedProvider.id].subTotal = 0;
-    /* selectedProducts = this.getSubTotal(selectedProvider.id, selectedProducts); */
+    selectedProducts = this.getSubTotal(selectedProvider.id, selectedProducts);
     total = this.getTotal(selectedProducts);
     numberOfChanges = numberOfChanges + 1;
     return { selectedProducts, total, numberOfChanges };
@@ -310,7 +265,7 @@ export class StockService {
     });
     selectedProducts[selectedClient.id].stock = uniqBy(selectedProducts[selectedClient.id].stock, (p: AddedStock) => p.product.id);
     selectedProducts[selectedClient.id].subTotal = 0;
-    /* selectedProducts = this.getSubTotal(selectedClient.id, selectedProducts, true); */
+    selectedProducts = this.getSubTotal(selectedClient.id, selectedProducts, true);
     total = this.getTotal(selectedProducts);
     numberOfChanges = numberOfChanges + 1;
     return { selectedProducts, total, numberOfChanges };

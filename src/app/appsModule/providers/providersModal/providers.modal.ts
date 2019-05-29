@@ -4,7 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
 import { ProvidersService } from '../../../services/providers.service';
-import { SharedService, RetentionTypes, DocumentTypes } from '../../../services/shared.service';
+import { SharedService } from '../../../services/shared.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { ValidationService } from '../../../services/validation.service';
 import { initialModalObject } from '../reducers/grid.reducer';
@@ -16,8 +16,6 @@ declare var jQuery: any;
   styleUrls: ['.././providers.component.scss']
 })
 export class ProviderModal implements OnInit {
-  documentTypes = DocumentTypes;
-  retentionTypes = RetentionTypes;
   providerStorage: Observable<Provider[]>;
   providers: Provider;
   providerForm: FormGroup;
@@ -25,7 +23,6 @@ export class ProviderModal implements OnInit {
   providerFormEmptyObject = initialModalObject;
   options: any;
   cuenta: any = null;
-  tipoDocumento: any;
 
   constructor(
     private fb: FormBuilder,
@@ -42,11 +39,7 @@ export class ProviderModal implements OnInit {
       clickToClose: true
     };
   }
-
   ngOnInit() {
-    const retentionTypes = this.sharedService.generateMap(this.retentionTypes, ['', []]);
-    const retentionPercentages = this.sharedService.generateMap(this.retentionTypes, [{ value: '', disabled: true }, []], 'Percentage');
-
     this.providerForm = this.fb.group({
       id: [''],
       company_id: [''],
@@ -69,10 +62,10 @@ export class ProviderModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      ganancia: ['', []],
+      iib: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
+      pib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      epib: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
       responsableMonotributo: ['', []],
@@ -96,33 +89,8 @@ export class ProviderModal implements OnInit {
     this.providersService.getProviders().subscribe();
   }
 
-  checkDocumentType(event: any) {
-    this.sharedService.checkDocumentType(event, this.providerForm);
-  }
-
   responsableChange(formControl: any) {
     this.sharedService.responsableChange(formControl, this.providerForm);
-  }
-
-  retencionChange(formControl: any) {
-    const values = this.sharedService.retencionChange(formControl, this.providerForm);
-    this.retentionTypes.forEach(item => {
-      const found = values.find(value => item.value === value);
-      if (found) {
-        this.providerForm
-          .get(item.value + 'Percentage')
-          .setValidators([Validators.required, this.vs.emptySpaceValidator, Validators.min(0), Validators.max(100)]);
-        this.providerForm.get(item.value + 'Percentage').enable();
-      } else {
-        this.providerForm.get(item.value + 'Percentage').setValidators([]);
-        this.providerForm.get(item.value + 'Percentage').reset();
-        this.providerForm.get(item.value + 'Percentage').disable();
-      }
-    });
-  }
-
-  onChangeRetencion(event: any) {
-    this.providerForm.get('retencion').setValue(event);
   }
 
   changeInformation(provider: Provider) {
@@ -134,6 +102,10 @@ export class ProviderModal implements OnInit {
     this.providerForm.patchValue(formProvider);
     this.cuenta = formProvider.cuentasGenerales;
     jQuery('.ui.modal.provider-modal').modal('show');
+  }
+
+  onChangeCuenta(event: any) {
+    this.providerForm.get('cuentasGenerales').setValue(event);
   }
 
   openNewProviderModal() {

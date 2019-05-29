@@ -8,7 +8,6 @@ import { ProvidersService } from '../../../services/providers.service';
 import { StockService } from '../../../services/stock.service';
 import { initialModalObject, StockState } from '../reducers/grid.reducer';
 import { ValidationService } from '../../../services/validation.service';
-import { IvaTypes, ProducTypes } from '../../../services/shared.service';
 
 declare var jQuery: any;
 
@@ -26,10 +25,6 @@ export class StockModal implements OnInit {
   subscriptions: Subscription[] = [];
   options: any;
   providerId: any = null;
-  ivaTypes = IvaTypes;
-  producTypes = ProducTypes;
-  productType: any;
-  condition: any;
 
   constructor(
     private fb: FormBuilder,
@@ -45,20 +40,21 @@ export class StockModal implements OnInit {
       clickToClose: true
     };
   }
-
   ngOnInit() {
     this.productForm = this.fb.group({
       id: [''],
       company_id: [''],
       provider_id: ['', [Validators.required, this.vs.emptySpaceValidator]],
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      code: ['', [Validators.required, this.vs.emptySpaceValidator]],
       description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120), this.vs.emptySpaceValidator]],
-      costPrice: ['', [Validators.required, this.vs.numberValidator, this.vs.emptySpaceValidator]],
-      netPrice: ['', [Validators.required, this.vs.numberValidator, this.vs.emptySpaceValidator]],
-      condition: ['', [Validators.required]],
-      productType: ['', [Validators.required]],
-      importRight: ['', [Validators.required, this.vs.numberValidator, this.vs.emptySpaceValidator]],
-      tentativeCost: ['', [Validators.required, this.vs.numberValidator, this.vs.emptySpaceValidator]],
+      cost_price: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
+      sale_price: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
+      category_id: ['', [Validators.required, this.vs.emptySpaceValidator]],
+      created_at: [''],
+      updated_at: [''],
+      deleted_at: [''],
+      stock: [''],
       new: [true]
     });
 
@@ -82,16 +78,8 @@ export class StockModal implements OnInit {
     jQuery('.ui.modal.stock-modal').modal('show');
   }
 
-  onProviderChange(event: any) {
+  onChangeProvider(event: any) {
     this.productForm.get('provider_id').setValue(event);
-  }
-
-  onConditionChange(event: any) {
-    this.productForm.get('condition').setValue(event);
-  }
-
-  onProductTypeChange(event: any) {
-    this.productForm.get('productType').setValue(event);
   }
 
   openNewStockModal() {
