@@ -1,106 +1,96 @@
-<div [id]="id" [hidden]="true">
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-      <title>Semantic AF</title>
-    </head>
-    <body *ngIf="(userStorage | async); let user" class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-      <div style="background: #fff" class="ng-scope">
-        <div class="tipo">
-          <span class="ng-binding">B</span>
-        </div>
-        <table class="table table-bordered table-condensed" id="header">
-          <tbody>
-            <tr>
-              <td>
-                <span></span>
-                <h3>{{ user.company.fantasyName }}</h3>
-                <p>
-                  Condicion frente al IVA: <span *ngIf="user.company.ivaInscripto; else noInscripto">Responsable Inscripto</span>
-                  <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
-                </p>
-                <p>Cuit: {{ user.company.cuit }}</p>
-                <p></p>
-                <p>Domicilio Comercial: {{ user.company.place }}</p>
-                <br />
-              </td>
-              <td>
-                <h3>Remito<br /></h3>
-                <p class="ng-binding">
-                  <span style="font-size: 16px; font-weight: bold;" class="ng-binding">Nº {{ docNro }}</span>
-                  <br /><br />Punto de venta: {{ puntoVenta }}
-                  <br /><br />Fecha de emision: {{ sale.updated_at | date: 'shortDate' }}
-                  <br /><br />Cuit: {{ cuit }}
-                  <br /><br />Ingresos brutos: {{ user.company.iib }}
-                  <br /><br />Fecha de inicio de actividades: {{ user.company.created_at | date: 'shortDate' }}
-
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align: left;">
-                <p class="ng-binding">Apellido y nombre/ Razon social: {{ client?.name }}</p>
-                <p class="ng-binding">Domicilio Comercial: {{ client?.place }}</p>
-                <p class="ng-binding">Cuit: {{ client?.cuit }}</p>
-                <p class="ng-binding">
-                  Condicion frente al IVA: <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
-                  <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Cantidad</th>
-              <th>Precio unitario</th>
-              <th>Precio total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let details of products_details">
-              <td class="ng-binding">{{ products[details.product_id].code }}</td>
-              <td class="ng-binding">{{ details.product_name }}</td>
-              <td class="ng-binding">{{ products[details.product_id].description }}</td>
-              <td class="ng-binding">{{ details.quantity }}</td>
-              <td class="ng-binding">{{ products[details.product_id].sale_price }}</td>
-              <td class="ng-binding">{{ details.quantity * products[details.product_id].sale_price }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <br /><br />
-        <table class="table table-bordered table-condensed">
-          <tbody>
-            <tr>
-              <td>Costo de servicios</td>
-              <td class="ng-binding">{{ sale.total }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <img src="../../assets/images/afip.png" alt="afip" />
-              </td>
-              <td>Comprobante autorizado</td>
-              <td>Nro CAE: {{ cae }}</td>
-              <td>Vto CAE: {{ vto.year }}/{{ vto.month }}/{{ vto.day }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </body>
-  </html>
-</div>
+<body
+  [id]="id"
+  [hidden]="true"
+  *ngIf="(userStorage | async); let user"
+  class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"
+>
+  <div style="background: #fff" class="ng-scope">
+    <div class="tipo">
+      <span class="ng-binding">{{ sale.letter }}</span>
+    </div>
+    <table class="table table-bordered table-condensed" id="header">
+      <tbody>
+        <tr>
+          <td>
+            <span></span>
+            <h3>{{ user.company.fantasyName }}</h3>
+            <p>
+              Condicion frente al IVA: <span *ngIf="user.company.ivaInscripto; else noInscripto">Responsable Inscripto</span>
+              <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
+            </p>
+            <p>Cuit: {{ user.company.cuit }}</p>
+            <p></p>
+            <p>Domicilio Comercial: {{ user.company.place }}</p>
+            <br />
+          </td>
+          <td>
+            <h3>Factura<br /></h3>
+            <p class="ng-binding">
+              <span style="font-size: 16px; font-weight: bold;" class="ng-binding">Nº {{ invoice_number }}</span>
+              <br /><br />Punto de venta: {{ user.company.sale_point }} <br /><br />Fecha de emision: {{ sale.updated_at | date: 'yyyy/MM/dd' }}
+              <br /><br />Cuit: {{ cuit }} <br /><br />Ingresos brutos: {{ user.company.iib }} <br /><br />Fecha de inicio de actividades:
+              {{ user.company.start_date | date: 'yyyy/MM/dd' }}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: left;">
+            <p class="ng-binding">Apellido y nombre/ Razon social: {{ client?.name }}</p>
+            <p class="ng-binding">Domicilio Comercial: {{ client?.place }}</p>
+            <p class="ng-binding">Cuit: {{ client?.cuit }}</p>
+            <p class="ng-binding">
+              Condicion frente al IVA: <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
+              <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Precio unitario</th>
+          <th>Precio total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let details of products_details">
+          <td class="ng-binding">{{ products[details.product_id].code }}</td>
+          <td class="ng-binding">{{ details.product_name }}</td>
+          <td class="ng-binding">{{ products[details.product_id].description }}</td>
+          <td class="ng-binding">{{ details.quantity }}</td>
+          <td class="ng-binding">{{ products[details.product_id].sale_price }}</td>
+          <td class="ng-binding">{{ details.quantity * products[details.product_id].sale_price }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br /><br />
+    <table class="table table-bordered table-condensed">
+      <tbody>
+        <tr>
+          <td>Costo de servicios</td>
+          <td class="ng-binding">{{ sale.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <img src="../../assets/images/afip.png" alt="afip" />
+          </td>
+          <td>Comprobante autorizado</td>
+          <td>Nro CAE: {{ cae }}</td>
+          <td>Vto CAE: {{ vto.year }}/{{ vto.month }}/{{ vto.day }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
 
 <button class="ui button tiny" (click)="print()">Imprimir Factura</button>
 <modal-actions> <simple-notifications *ngIf="options" [options]="options"></simple-notifications> </modal-actions>

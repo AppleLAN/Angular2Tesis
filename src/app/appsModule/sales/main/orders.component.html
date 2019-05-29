@@ -16,7 +16,7 @@
     <div class="container order-container buy-container" *ngFor="let order of filteredOrders">
       <p>Proveedor: {{ order.order.provider }}</p>
       <p>Número de Orden: {{ order.order.id }}</p>
-      <p>Fecha de creación: {{ order.order.createdAt | date: 'short' }}</p>
+      <p>Fecha de creación: {{ order.order.createdAt}}</p>
       <p>Total: {{ order.order.orderTotal }}</p>
       <p>Status: {{ order.order.status === 'R' ? 'Recibido' : 'A Completar' }}</p>
       <p>Tipo de compra: {{ order.order.typeOfBuy === 'E' ? 'Efectivo' : 'Cuenta Corriente' }}</p>

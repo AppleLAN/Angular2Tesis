@@ -28,4 +28,6 @@ export interface Client {
   cuentasGenerales: String,
   percepcionDeGanancia: number,
   type?: string;
+  sale_point: string;
+  start_date: string;
 }

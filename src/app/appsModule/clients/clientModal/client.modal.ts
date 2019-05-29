@@ -78,6 +78,11 @@ export class ClientModal implements OnInit {
         '',
         [Validators.required, Validators.minLength(6), Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]
       ],
+      sale_point: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      start_date: [
+        '',
+        [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator, this.vs.dateValidator]
+      ],
       percepcionDeGanancia: ['', [Validators.required, Validators.min(0), Validators.maxLength(30), this.vs.emptySpaceValidator]]
     });
     this.clientStorage = this.clientsService.getClientStorage();

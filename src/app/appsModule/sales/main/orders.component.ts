@@ -4,6 +4,7 @@ import { Order } from '../../../interfaces/order';
 import { SpinnerService } from '../../../services/spinner.service';
 import { SaleService } from '../services/sale.service';
 import { OrdersState } from '../reducers/order.reducer';
+import * as moment from 'moment';
 
 @Component({
   selector: 'orders',
@@ -31,6 +32,7 @@ export class OrdersComponent implements OnInit {
       if (orders) {
         const formattedOrder = orders.data.map((order: any) => {
           order.order.createdAt = order.details[0].created_at;
+          order.order.createdAt = moment(order.order.createdAt).format('YYYY-MM-DD');
           return order;
         });
         this.ordersStorage = formattedOrder;

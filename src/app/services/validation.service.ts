@@ -15,7 +15,7 @@ export class ValidationService {
       emptySpace: `Este campo no puede contener solo espacios`,
       min: `El número no puede ser inferior a ${validatorValue.min}`,
       max: `El número no puede ser superior a ${validatorValue.maxValue}`,
-      dateValidator: 'La fecha de nacimiento debe ser menor a la fecha actual'
+      dateValidator: 'La fecha debe ser menor a la fecha actual'
     };
 
     return config[validatorName];
