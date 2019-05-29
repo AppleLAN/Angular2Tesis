@@ -2,16 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import * as moment from 'moment';
 import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
-import { Client } from '../interfaces/client';
+import { Company } from '../interfaces/company';
 import { CompleteUser } from '../interfaces/complete.user';
 import { User } from '../interfaces/user';
 import { NEWCOMPANY, NEWUSER, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
-import { Company } from 'interfaces/company';
 
 @Injectable()
 export class UserService {
