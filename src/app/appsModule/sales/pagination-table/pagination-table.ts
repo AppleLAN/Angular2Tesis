@@ -94,6 +94,7 @@ export class Pagination implements OnChanges, OnInit {
       const searchValue = value.toUpperCase();
       this.filteredItems = this.productList.filter(product => includes(`${product.name.toUpperCase()}`, searchValue));
       this.numberOfPages = Array.from(Array(Math.ceil(this.filteredItems.length / this.pageSize)).keys());
+      this.filteredItems = this.filteredItems.slice(this.currentIndex, this.pageSize + this.currentIndex);
     });
   }
 
