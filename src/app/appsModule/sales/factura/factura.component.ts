@@ -38,6 +38,8 @@ export class FacturaComponent implements OnInit {
   };
   docNro: number;
   cuit: number;
+  condicionClient: string;
+  condicionUser: string;
 
   constructor(
     private userService: UserService,
@@ -68,12 +70,12 @@ export class FacturaComponent implements OnInit {
       response => {
         this.spinnerService.displayLoader(false);
         if (!response.success.Err) {
-          this.cuit = response.success.FeCabResp.Cuit;
-          this.cae = response.success.FeDetResp.FECAEDetResponse.CAE;
-          this.docNro = response.success.FeDetResp.FECAEDetResponse.DocNro;
-          const vtoString = response.success.FeDetResp.FECAEDetResponse.CAEFchVto;
+          this.cae = response.success.CAE;
+          this.condicionUser = response.success.condicion_user;
+          this.condicionClient = response.success.condicion_client;
+          const vtoString = response.success.CAEFchVto;
           const code = ('0000' + this.sale_point).substr(-4, 4);
-          const saleNumber = ( '00000000' + this.sale.id.toString()).substr(-8, 8);
+          const saleNumber = ('00000000' + this.sale.id.toString()).substr(-8, 8);
           this.invoice_number = `${code}-${saleNumber}`;
           this.vto.year = vtoString.slice(0, 4);
           this.vto.month = vtoString.slice(4, 6);

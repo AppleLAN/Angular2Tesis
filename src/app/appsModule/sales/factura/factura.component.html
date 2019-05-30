@@ -1,7 +1,7 @@
 <body
   [id]="id"
   [hidden]="true"
-  *ngIf="(userStorage | async); let user"
+  *ngIf="userStorage | async; let user"
   class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"
 >
   <div style="background: #fff" class="ng-scope">
@@ -14,10 +14,7 @@
           <td>
             <span></span>
             <h3>{{ user.company.fantasyName }}</h3>
-            <p>
-              Condicion frente al IVA: <span *ngIf="user.company.ivaInscripto; else noInscripto">Responsable Inscripto</span>
-              <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
-            </p>
+            <p>Condicion frente al IVA: {{ condicionUsuario }}</p>
             <p>Cuit: {{ user.company.cuit }}</p>
             <p></p>
             <p>Domicilio Comercial: {{ user.company.place }}</p>
@@ -27,8 +24,9 @@
             <h3>Factura<br /></h3>
             <p class="ng-binding">
               <span style="font-size: 16px; font-weight: bold;" class="ng-binding">Nº {{ invoice_number }}</span>
-              <br /><br />Punto de venta: {{ user.company.sale_point }} <br /><br />Fecha de emision: {{ sale.updated_at | date: 'yyyy/MM/dd' }}
-              <br /><br />Cuit: {{ cuit }} <br /><br />Ingresos brutos: {{ user.company.iib }} <br /><br />Fecha de inicio de actividades:
+              <br /><br />Punto de venta: {{ user.company.sale_point }} <br /><br />Fecha de emision:
+              {{ sale.updated_at | date: 'yyyy/MM/dd' }} <br /><br />Cuit: {{ cuit }} <br /><br />Ingresos brutos: {{ user.company.iib }}
+              <br /><br />Fecha de inicio de actividades:
               {{ user.company.start_date | date: 'yyyy/MM/dd' }}
             </p>
           </td>
@@ -38,10 +36,7 @@
             <p class="ng-binding">Apellido y nombre/ Razon social: {{ client?.name }}</p>
             <p class="ng-binding">Domicilio Comercial: {{ client?.place }}</p>
             <p class="ng-binding">Cuit: {{ client?.cuit }}</p>
-            <p class="ng-binding">
-              Condicion frente al IVA: <span *ngIf="client?.ivaInscripto; else noInscripto">Responsable Inscripto</span>
-              <ng-template #noInscripto> <span>Consumidor final</span> </ng-template>
-            </p>
+            <p class="ng-binding">Condicion frente al IVA: {{ condicionClient }}</p>
           </td>
         </tr>
       </tbody>
