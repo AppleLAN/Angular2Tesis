@@ -36,8 +36,6 @@ export class FacturaComponent implements OnInit {
     month: null,
     day: null
   };
-  docNro: number;
-  cuit: number;
   condicionClient: string;
   condicionUser: string;
 
