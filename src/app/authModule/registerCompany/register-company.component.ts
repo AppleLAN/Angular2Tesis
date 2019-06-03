@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
@@ -7,8 +7,9 @@ import { Client } from '../../interfaces/client';
 import { SharedService } from '../../services/shared.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { UserService } from '../../services/user.service';
-import { CompleteUser } from './../../interfaces/complete.user';
 import { ValidationService } from '../../services/validation.service';
+import { Company } from './../../interfaces/company';
+import { CompleteUser } from './../../interfaces/complete.user';
 
 @Component({
   selector: 'app-register-company-component',
@@ -91,7 +92,7 @@ export class RegisterCompanyComponent implements OnInit {
     this.sharedService.responsableChange(formControl, this.userForm);
   }
 
-  updateClientCompany({ value }: { value: Client }) {
+  updateClientCompany({ value }: { value: Company }) {
     if (this.userForm.valid) {
       this.spinnerService.displayLoader(true);
       value.type = 'CREATE';
