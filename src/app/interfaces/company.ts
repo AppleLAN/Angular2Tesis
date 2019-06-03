@@ -18,6 +18,7 @@ export interface Company {
   responsableInscripto: Boolean;
   excento: Boolean;
   responsableMonotributo: Boolean;
+  sale_point: string;
   cuentasGenerales: String;
   type?: string;
 }

@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from './validation.service';
 
 export const DocumentTypes = [
-  { label: 'Documenti Único', value: 'DNI' },
+  { label: 'Documento Único', value: 'DNI' },
   { label: 'Libreta de Enrolamiento', value: 'LE' },
   { label: 'Libreta Cívica', value: 'LC' },
   { label: 'Pasaporte', value: 'PASAPORTE' },

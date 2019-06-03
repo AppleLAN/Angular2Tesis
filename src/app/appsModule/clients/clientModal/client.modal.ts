@@ -69,7 +69,7 @@ export class ClientModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       tipoDocumento: ['', [Validators.required]],
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],

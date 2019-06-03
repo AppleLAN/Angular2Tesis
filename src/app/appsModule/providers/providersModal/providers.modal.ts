@@ -71,7 +71,7 @@ export class ProviderModal implements OnInit {
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
       tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      web: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       ganancia: ['', []],
       responsableInscripto: ['', []],
       excento: ['', []],

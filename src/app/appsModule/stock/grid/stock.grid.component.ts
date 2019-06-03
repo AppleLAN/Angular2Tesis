@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, TestabilityRegistry } from '@angular/core';
-import { Stock, Product } from '../../../interfaces/stock';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
 import { Provider } from '../../../interfaces/provider';
+import { Product, Stock } from '../../../interfaces/stock';
 import { ProvidersService } from '../../../services/providers.service';
 import { SpinnerService } from '../../../services/spinner.service';
 import { StockService } from '../../../services/stock.service';
@@ -23,11 +23,7 @@ export class StockGridComponent implements OnInit {
   filteredProducts: Product[] = [];
   filter: string = null;
 
-  constructor(
-    private stockService: StockService,
-    private spinnerService: SpinnerService,
-    private providersService: ProvidersService
-  ) {}
+  constructor(private stockService: StockService, private spinnerService: SpinnerService, private providersService: ProvidersService) {}
 
   ngOnInit() {
     this.spinnerService.displayLoader(true);
