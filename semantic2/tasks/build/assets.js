@@ -10,8 +10,8 @@ var
   gulpif       = require('gulp-if'),
 
   // config
-  config       = require('../config/user'),
-  tasks        = require('../config/tasks'),
+  config       = require('../../../semantic/tasks/config/user'),
+  tasks        = require('../../../semantic/tasks/config/tasks'),
 
   // shorthand
   globs        = config.globs,

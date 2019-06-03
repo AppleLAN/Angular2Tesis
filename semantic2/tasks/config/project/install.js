@@ -5,8 +5,8 @@
 var
   fs             = require('fs'),
   path           = require('path'),
-  defaults       = require('../defaults'),
-  release        = require('./release'),
+  defaults       = require('../../../../semantic/tasks/config/defaults'),
+  release        = require('../../../../semantic/tasks/config/project/release'),
 
   requireDotFile = require('require-dot-file')
 ;

@@ -25,12 +25,12 @@ var
   watch        = require('gulp-watch'),
 
   // user config
-  config       = require('../config/docs'),
+  config       = require('../../../semantic/tasks/config/docs'),
 
   // task config
-  tasks        = require('../config/tasks'),
-  configSetup  = require('../config/project/config'),
-  install      = require('../config/project/install'),
+  tasks        = require('../../../semantic/tasks/config/tasks'),
+  configSetup  = require('../../../semantic/tasks/config/project/config'),
+  install      = require('../../../semantic/tasks/config/project/install'),
 
   // shorthand
   banner       = tasks.banner,
@@ -44,7 +44,7 @@ var
   source
 ;
 
-require('../collections/internal')(gulp);
+require('../../../semantic/tasks/collections/internal')(gulp);
 
 module.exports = function () {
 

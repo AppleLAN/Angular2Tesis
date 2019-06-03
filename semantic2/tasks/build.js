@@ -8,8 +8,8 @@ var
   runSequence  = require('run-sequence'),
 
   // config
-  config       = require('./config/user'),
-  install      = require('./config/project/install'),
+  config       = require('../../semantic/tasks/config/user'),
+  install      = require('../../semantic/tasks/config/project/install'),
 
   // task sequence
   tasks        = []
@@ -18,9 +18,9 @@ var
 
 // sub-tasks
 if(config.rtl) {
-  require('./collections/rtl')(gulp);
+  require('../../semantic/tasks/collections/rtl')(gulp);
 }
-require('./collections/build')(gulp);
+require('../../semantic/tasks/collections/build')(gulp);
 
 
 module.exports = function(callback) {

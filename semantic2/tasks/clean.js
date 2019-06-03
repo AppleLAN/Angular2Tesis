@@ -4,8 +4,8 @@
 
 var
   del    = require('del'),
-  config = require('./config/user'),
-  tasks  = require('./config/tasks')
+  config = require('../../semantic/tasks/config/user'),
+  tasks  = require('../../semantic/tasks/config/tasks')
 ;
 
 // cleans distribution files

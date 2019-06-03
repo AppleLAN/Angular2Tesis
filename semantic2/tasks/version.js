@@ -3,7 +3,7 @@
 *******************************/
 
 var
-  release = require('./config/project/release')
+  release = require('../../semantic/tasks/config/project/release')
 ;
 
 module.exports = function(callback) {

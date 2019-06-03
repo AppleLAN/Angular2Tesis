@@ -26,15 +26,15 @@ var
   uglify       = require('gulp-uglify'),
 
   // user config
-  config       = require('../config/docs'),
+  config       = require('../../../semantic/tasks/config/docs'),
 
   // install config
-  tasks        = require('../config/tasks'),
-  configSetup  = require('../config/project/config'),
-  install      = require('../config/project/install'),
+  tasks        = require('../../../semantic/tasks/config/tasks'),
+  configSetup  = require('../../../semantic/tasks/config/project/config'),
+  install      = require('../../../semantic/tasks/config/project/install'),
 
   // metadata parsing
-  metadata     = require('./metadata'),
+  metadata     = require('../../../semantic/tasks/docs/metadata'),
 
   // shorthand
   globs,
@@ -49,7 +49,7 @@ var
 ;
 
 // add internal tasks (concat release)
-require('../collections/internal')(gulp);
+require('../../../semantic/tasks/collections/internal')(gulp);
 
 module.exports = function(callback) {
 

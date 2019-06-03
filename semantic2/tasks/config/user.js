@@ -10,8 +10,8 @@ var
   requireDotFile  = require('require-dot-file'),
 
   // semantic.json defaults
-  defaults        = require('./defaults'),
-  config          = require('./project/config'),
+  defaults        = require('../../../semantic/tasks/config/defaults'),
+  config          = require('../../../semantic/tasks/config/project/config'),
 
   // Final config object
   gulpConfig = {},

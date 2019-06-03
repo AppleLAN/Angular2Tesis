@@ -28,12 +28,12 @@ module.exports = function(gulp) {
     uglify     = require('gulp-uglify'),
 
     // user config
-    config     = require('./../config/user'),
-    docsConfig = require('./../config/docs'),
+    config     = require('../../../semantic/tasks/config/user'),
+    docsConfig = require('../../../semantic/tasks/config/docs'),
 
     // install config
-    tasks      = require('./../config/tasks'),
-    release    = require('./../config/project/release'),
+    tasks      = require('../../../semantic/tasks/config/tasks'),
+    release    = require('../../../semantic/tasks/config/project/release'),
 
     // shorthand
     globs      = config.globs,

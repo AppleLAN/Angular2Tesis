@@ -6,9 +6,9 @@ module.exports = function(gulp) {
 
   var
     // build sub-tasks
-    buildJS      = require('./../build/javascript'),
-    buildCSS     = require('./../build/css'),
-    buildAssets  = require('./../build/assets')
+    buildJS      = require('../../../semantic/tasks/build/javascript'),
+    buildCSS     = require('../../../semantic/tasks/build/css'),
+    buildAssets  = require('../../../semantic/tasks/build/assets')
   ;
 
   // in case these tasks are undefined during import, less make sure these are available in scope

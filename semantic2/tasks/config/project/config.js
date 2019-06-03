@@ -7,7 +7,7 @@ var
   fs       = require('fs'),
   path     = require('path'),
 
-  defaults = require('../defaults')
+  defaults = require('../../../../semantic/tasks/config/defaults')
 ;
 
 

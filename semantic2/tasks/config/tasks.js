@@ -1,7 +1,7 @@
 var
   console = require('better-console'),
-  config  = require('./user'),
-  release = require('./project/release')
+  config  = require('../../../semantic/tasks/config/user'),
+  release = require('../../../semantic/tasks/config/project/release')
 ;
 
 

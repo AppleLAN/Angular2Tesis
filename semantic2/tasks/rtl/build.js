@@ -24,11 +24,11 @@ var
   uglify       = require('gulp-uglify'),
 
   // user config
-  config       = require('../config/user'),
+  config       = require('../../../semantic/tasks/config/user'),
 
   // install config
-  tasks        = require('../config/tasks'),
-  install      = require('../config/project/install'),
+  tasks        = require('../../../semantic/tasks/config/tasks'),
+  install      = require('../../../semantic/tasks/config/project/install'),
 
   // shorthand
   globs        = config.globs,
@@ -43,7 +43,7 @@ var
 ;
 
 // add internal tasks (concat release)
-require('../collections/internal')(gulp);
+require('../../../semantic/tasks/collections/internal')(gulp);
 
 module.exports = function(callback) {
 
