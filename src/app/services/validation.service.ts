@@ -14,7 +14,7 @@ export class ValidationService {
       maxlength: `El valor no puede ser superior a ${validatorValue.requiredLength} caracteres`,
       emptySpace: `Este campo no puede contener solo espacios`,
       min: `El número no puede ser inferior a ${validatorValue.min}`,
-      max: `El número no puede ser superior a ${validatorValue.maxValue}`,
+      max: `El número no puede ser superior a ${validatorValue.max}`,
       dateValidator: 'La fecha debe ser menor a la fecha actual'
     };
 

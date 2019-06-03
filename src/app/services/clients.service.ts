@@ -27,10 +27,6 @@ export class ClientsService {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getClients')
       .map((response: any) => {
-        response.map((r: any) => {
-          r.start_date = moment(r.start_date).format('YYYY-MM-DD');
-          return r;
-        });
         this.store.dispatch({ type: NEWCLIENTS, payload: response });
       })
       .catch((error: any) => Observable.throw(error || 'Server error'));

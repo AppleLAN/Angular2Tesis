@@ -2,12 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import * as moment from 'moment';
 import 'rxjs/add/operator/catch';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
-import { Client } from '../interfaces/client';
+import { Company } from '../interfaces/company';
 import { CompleteUser } from '../interfaces/complete.user';
 import { User } from '../interfaces/user';
 import { NEWCOMPANY, NEWUSER, NEWUSERPROFILE } from './../appsModule/shared/reducers/user.reducer';
@@ -49,7 +48,6 @@ export class UserService {
     return this.api
       .get('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/getProfileInfo')
       .map((response: any) => {
-        response.company.start_date = moment(response.company.start_date).format('YYYY-MM-DD');
         this.store.dispatch({ type: NEWUSER, payload: response });
         return response;
       })
@@ -74,7 +72,7 @@ export class UserService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-  updateClientCompany(company: Client): Observable<Object[]> {
+  updateClientCompany(company: Company): Observable<Object[]> {
     return this.api
       .post('http://ec2-54-227-227-242.compute-1.amazonaws.com/api/updateUserCompany', company)
       .map((response: Response) => {

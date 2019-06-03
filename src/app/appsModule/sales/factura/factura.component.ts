@@ -25,7 +25,6 @@ export class FacturaComponent implements OnInit {
   @Input() products: [Details];
   @Input() sale: Sale;
   @Input() clients: Client[];
-  private sale_point: string;
   invoice_number: string;
   clientStorage: Observable<Client[]>;
   client: Client;
@@ -56,9 +55,6 @@ export class FacturaComponent implements OnInit {
   ngOnInit() {
     this.client = this.clients.find(cl => cl.id === this.sale.client_id);
     this.userStorage = this.userService.getUserStorage();
-    this.userService.getUserStorage().subscribe(state => {
-      this.sale_point = state.company.sale_point;
-    });
   }
 
   print(): void {
@@ -72,7 +68,7 @@ export class FacturaComponent implements OnInit {
           this.condicionUser = response.success.condicion_user;
           this.condicionClient = response.success.condicion_client;
           const vtoString = response.success.CAEFchVto;
-          const code = ('0000' + this.sale_point).substr(-4, 4);
+          const code = '0000'.substr(-4, 4);
           const saleNumber = ('00000000' + this.sale.id.toString()).substr(-8, 8);
           this.invoice_number = `${code}-${saleNumber}`;
           this.vto.year = vtoString.slice(0, 4);

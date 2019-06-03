@@ -22,22 +22,22 @@ export const initialModalObject: Client = {
   address: '',
   telephone: null,
   cuit: '',
+  tipoDocumento: '',
+  documento: '',
   web: '',
-  iib: '',
-  pib: '',
-  epib: '',
   responsableInscripto: false,
   excento: false,
   responsableMonotributo: false,
-  ivaInscripto: false,
-  precioLista: null,
-  condicionDeVenta: '',
-  limiteDeCredito: null,
-  numeroDeInscripcionesIB: null,
   cuentasGenerales: '',
-  percepcionDeGanancia: null,
-  sale_point: null,
-  start_date: null
+  condicionDeVenta: '',
+  G: false,
+  IIBB: false,
+  IVA: false,
+  SUS: false,
+  GPercentage: null,
+  IIBBPercentage: null,
+  IVAPercentage: null,
+  SUSPercentage: null
 };
 
 export const gridReducer: Reducer<any> = (state: Client[], action: Action) => {
