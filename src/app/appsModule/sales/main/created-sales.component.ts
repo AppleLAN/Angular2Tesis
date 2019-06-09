@@ -25,10 +25,12 @@ export class CreatedSalesComponent implements OnInit {
       .getAllSales()
       .combineLatest(this.clientsService.getClientStorage())
       .subscribe(([sales, clientStorage]) => {
-        this.salesStorage = sales.data.map((sale: any) => {
-          sale.sale.created_at = moment(sale.sale.created_at).format('YYYY-MM-DD');
-          return sale;
-        });
+        this.salesStorage = sales.data
+          ? sales.data.map((sale: any) => {
+              sale.sale.created_at = moment(sale.sale.created_at).format('YYYY-MM-DD');
+              return sale;
+            })
+          : null;
         this.filteredSales = sales.data;
         this.clients = clientStorage;
         this.spinnerService.displayLoader(false);

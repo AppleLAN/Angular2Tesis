@@ -107,7 +107,7 @@ export class RegisterCompanyComponent implements OnInit {
         },
         error => {
           this.spinnerService.displayLoader(false);
-          this.ns.error('Error!', 'Porfavor, compruebe los datos ingresados');
+          this.ns.error('Error!', error.error.error);
         }
       );
     }

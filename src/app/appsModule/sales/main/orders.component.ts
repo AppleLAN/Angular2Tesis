@@ -30,11 +30,13 @@ export class OrdersComponent implements OnInit {
     this.spinnerService.displayLoader(true);
     this.ss.getAllOrders().subscribe(orders => {
       if (orders) {
-        const formattedOrder = orders.data.map((order: any) => {
-          order.order.createdAt = order.details[0].created_at;
-          order.order.createdAt = moment(order.order.createdAt).format('YYYY-MM-DD');
-          return order;
-        });
+        const formattedOrder = orders.data
+          ? orders.data.map((order: any) => {
+              order.order.createdAt = order.details[0].created_at;
+              order.order.createdAt = moment(order.order.createdAt).format('YYYY-MM-DD');
+              return order;
+            })
+          : null;
         this.ordersStorage = formattedOrder;
         this.filteredOrders = formattedOrder;
       }
