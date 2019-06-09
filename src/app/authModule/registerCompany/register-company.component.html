@@ -42,6 +42,12 @@
           </div>
 
           <div class="form-group field">
+            <sm-input type="number" label="Punto de venta" [control]="userForm.controls.sale_point" placeholder="Ingresar punto de venta">
+            </sm-input>
+            <app-input-error-messages [control]="userForm.controls.sale_point"></app-input-error-messages>
+          </div>
+
+          <div class="form-group field">
             <sm-input type="text" label="Provincia" [control]="userForm.controls.codigoProvincia" placeholder="Ingresar código provincia">
             </sm-input>
             <app-input-error-messages [control]="userForm.controls.codigoProvincia"></app-input-error-messages>

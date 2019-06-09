@@ -26,7 +26,7 @@ export class ClientModal implements OnInit {
   saleConditionTypes = SaleConditionTypes;
   options: any;
   cuenta: any = null;
-  tipoDocumento: any;
+  tipoDocumento: string;
   condicionDeVenta: any;
 
   constructor(
@@ -95,7 +95,12 @@ export class ClientModal implements OnInit {
     this.clientForm.get('fantasyName').disable();
     this.clientForm.get('cuit').disable();
     this.clientForm.patchValue(formClient);
+    this.tipoDocumento = formClient.tipoDocumento;
+    this.clientForm.get('tipoDocumento').setValue(formClient.tipoDocumento);
     this.cuenta = formClient.cuentasGenerales;
+    this.condicionDeVenta = formClient.condicionDeVenta;
+    this.clientForm.get('condicionDeVenta').setValue(formClient.condicionDeVenta);
+    this.retencionChange();
     jQuery('.ui.modal.client-modal').modal('show');
   }
 
@@ -130,8 +135,8 @@ export class ClientModal implements OnInit {
     this.sharedService.responsableChange(formControl, this.clientForm);
   }
 
-  retencionChange(formControl: any) {
-    const values = this.sharedService.retencionChange(formControl, this.clientForm);
+  retencionChange() {
+    const values = this.sharedService.retencionChange(this.clientForm);
     this.retentionTypes.forEach(item => {
       const found = values.find(value => item.value === value);
       if (found) {

@@ -25,7 +25,7 @@ export class ProviderModal implements OnInit {
   providerFormEmptyObject = initialModalObject;
   options: any;
   cuenta: any = null;
-  tipoDocumento: any;
+  tipoDocumento: string;
 
   constructor(
     private fb: FormBuilder,
@@ -69,7 +69,7 @@ export class ProviderModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required]],
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       ganancia: ['', []],
@@ -92,8 +92,8 @@ export class ProviderModal implements OnInit {
     this.sharedService.responsableChange(formControl, this.providerForm);
   }
 
-  retencionChange(formControl: any) {
-    const values = this.sharedService.retencionChange(formControl, this.providerForm);
+  retencionChange() {
+    const values = this.sharedService.retencionChange(this.providerForm);
     this.retentionTypes.forEach(item => {
       const found = values.find(value => item.value === value);
       if (found) {
@@ -120,7 +120,10 @@ export class ProviderModal implements OnInit {
     this.providerForm.get('fantasyName').disable();
     this.providerForm.get('cuit').disable();
     this.providerForm.patchValue(formProvider);
+    this.tipoDocumento = formProvider.tipoDocumento;
+    this.providerForm.get('tipoDocumento').setValue(formProvider.tipoDocumento);
     this.cuenta = formProvider.cuentasGenerales;
+    this.retencionChange();
     jQuery('.ui.modal.provider-modal').modal('show');
   }
 

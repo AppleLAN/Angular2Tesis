@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Rx';
 import { Client } from '../../interfaces/client';
-import { SharedService } from '../../services/shared.service';
+import { SharedService, DocumentTypes } from '../../services/shared.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { UserService } from '../../services/user.service';
 import { ValidationService } from '../../services/validation.service';
@@ -23,10 +23,9 @@ export class RegisterCompanyComponent implements OnInit {
   userStorage: Subscription;
   userData: CompleteUser;
   options: any;
-  tipoDocumento: any;
-  checkDocumentType: any;
+  tipoDocumento: string;
   profileModal: any;
-  documentTypes: any;
+  documentTypes = DocumentTypes;
 
   constructor(
     private fb: FormBuilder,
@@ -69,8 +68,9 @@ export class RegisterCompanyComponent implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required]],
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      sale_point: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
       web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       responsableInscripto: ['', []],
       excento: ['', []],
@@ -82,10 +82,14 @@ export class RegisterCompanyComponent implements OnInit {
       this.userData = state;
       if (state) {
         this.userData.profile.password = null;
-        this.userForm.setValue(this.userData.company);
+        this.userForm.patchValue(this.userData.company);
       }
     });
     this.userService.getProfileInfo().subscribe(r => {}, error => this.ns.error('Error!', error.error.error));
+  }
+
+  checkDocumentType(event: any) {
+    this.sharedService.checkDocumentType(event, this.userForm);
   }
 
   responsableChange(formControl: any) {

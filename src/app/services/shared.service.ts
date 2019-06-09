@@ -32,7 +32,7 @@ export class SharedService {
     });
   }
 
-  retencionChange(formControl: any, form: FormGroup) {
+  retencionChange(form: FormGroup) {
     return RetentionTypes.filter(item => !!form.get(item.value).value).map(item => item.value);
   }
 
@@ -48,12 +48,24 @@ export class SharedService {
     if (form.get('tipoDocumento').value !== 'PASAPORTE') {
       form
         .get('documento')
-        .setValidators([Validators.maxLength(50), this.vs.numberValidator, Validators.required, this.vs.emptySpaceValidator]);
+        .setValidators([
+          this.vs.numberValidator,
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator
+        ]);
       form.get('documento').updateValueAndValidity();
     } else {
       form
         .get('documento')
-        .setValidators([Validators.required, this.vs.emptySpaceValidator, Validators.maxLength(50), this.vs.alphanumericValidator]);
+        .setValidators([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          this.vs.emptySpaceValidator,
+          this.vs.alphanumericValidator
+        ]);
       form.get('documento').updateValueAndValidity();
     }
   }

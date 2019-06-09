@@ -28,6 +28,7 @@ export class ProfileModal implements OnInit {
   options: any;
   cuenta: any = null;
   internalUsers: User[] = [];
+  tipoDocumento: string;
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +69,7 @@ export class ProfileModal implements OnInit {
         [Validators.required, Validators.min(0), Validators.minLength(9), Validators.maxLength(9), this.vs.emptySpaceValidator]
       ],
       cuit: ['', [Validators.required, Validators.min(0), Validators.minLength(11), Validators.maxLength(11), this.vs.emptySpaceValidator]],
-      tipoDocumento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
+      tipoDocumento: ['', [Validators.required]],
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       sale_point: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
       web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
@@ -117,6 +118,10 @@ export class ProfileModal implements OnInit {
       this.setFormData(state);
     });
     this.userService.getProfileInfo().subscribe(response => {}, error => this.ns.error('Error!', error.error.error));
+    this.getInternalUsers();
+  }
+
+  private getInternalUsers() {
     this.userService
       .getAllInternalUsers()
       .subscribe(response => (this.internalUsers = response), error => this.ns.error('Error!', error.error.error));
@@ -127,7 +132,7 @@ export class ProfileModal implements OnInit {
     if (state) {
       this.userData.profile.password = null;
       if (this.userData.profile) {
-        this.registerForm.setValue(this.userData.profile);
+        this.registerForm.patchValue(this.userData.profile);
         if (this.userData.profile.clients) {
           this.newSubUserForm.get('clients').setValue(1);
           this.newSubUserForm.get('clients').enable();
@@ -159,6 +164,8 @@ export class ProfileModal implements OnInit {
       }
       if (this.userData.company) {
         this.userForm.patchValue(this.userData.company);
+        this.tipoDocumento = this.userData.company.tipoDocumento;
+        this.userForm.get('tipoDocumento').setValue(this.userData.company.tipoDocumento);
         this.cuenta = this.userData.company.cuentasGenerales;
       }
     }
@@ -213,8 +220,12 @@ export class ProfileModal implements OnInit {
       );
   }
   createSubClient({ value }: { value: User }) {
-    this.userService
-      .createSubClient(value)
-      .subscribe(suc => this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado'), error => this.ns.error('Error!', error.error.error));
+    this.userService.createSubClient(value).subscribe(
+      suc => {
+        this.ns.success('Perfecto!', 'Su sub-cliente ha sido creado');
+        this.getInternalUsers();
+      },
+      error => this.ns.error('Error!', error.error.error)
+    );
   }
 }
