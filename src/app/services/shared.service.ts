@@ -30,6 +30,10 @@ export class SharedService {
     turnToFalseValues.forEach(turnedToFalse => {
       turnedToFalse.setValue(false);
     });
+    const trueValue = values.find(formValue => !!formValue.value);
+    if (!trueValue) {
+      formControl.setValue(true);
+    }
   }
 
   retencionChange(form: FormGroup) {

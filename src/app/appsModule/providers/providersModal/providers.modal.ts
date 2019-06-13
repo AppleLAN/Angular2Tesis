@@ -135,6 +135,7 @@ export class ProviderModal implements OnInit {
     this.providerForm.get('fantasyName').enable();
     this.providerForm.get('cuit').enable();
     this.providerForm.patchValue(providerFormObject);
+    this.providerForm.get('responsableInscripto').setValue(true);
     jQuery('.ui.modal.provider-modal').modal('show');
   }
 

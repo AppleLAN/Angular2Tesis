@@ -120,6 +120,7 @@ export class ClientModal implements OnInit {
     this.clientForm.get('fantasyName').enable();
     this.clientForm.get('cuit').enable();
     this.clientForm.patchValue(clientFormObject);
+    this.clientForm.get('responsableInscripto').setValue(true);
     jQuery('.ui.modal.client-modal').modal('show');
   }
 

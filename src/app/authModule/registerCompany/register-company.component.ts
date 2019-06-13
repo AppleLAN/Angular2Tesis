@@ -72,7 +72,7 @@ export class RegisterCompanyComponent implements OnInit {
       documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
       sale_point: ['', [Validators.required, Validators.min(0), this.vs.emptySpaceValidator]],
       web: ['', [Validators.minLength(6), Validators.maxLength(30), this.vs.emptySpaceValidator]],
-      responsableInscripto: ['', []],
+      responsableInscripto: [true, []],
       excento: ['', []],
       responsableMonotributo: ['', []],
       cuentasGenerales: ['Cuenta Interna', []]
