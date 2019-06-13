@@ -40,14 +40,7 @@
           </tr>
         </tbody>
       </table>
-      <factura
-        *ngIf="clients?.length > 0"
-        [clients]="clients"
-        [products_details]="sale.sale_details"
-        [products]="sale.products"
-        [sale]="sale.sale"
-        [id]="'to_print' + index"
-      ></factura>
+      <factura [products_details]="sale.sale_details" [products]="sale.products" [sale]="sale.sale" [id]="'to_print' + index"></factura>
     </div>
   </div>
 </div>

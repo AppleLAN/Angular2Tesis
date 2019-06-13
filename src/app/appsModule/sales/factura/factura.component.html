@@ -25,18 +25,16 @@
             <p class="ng-binding">
               <span style="font-size: 16px; font-weight: bold;" class="ng-binding">Nº {{ invoice_number }}</span>
               <br /><br />Punto de venta: {{ user.company.sale_point }} <br /><br />Fecha de emision:
-              {{ sale.updated_at | date: 'yyyy/MM/dd' }} <br /><br />Cuit: {{ cuit }} <br /><br />Ingresos brutos: {{ user.company.iib }}
-              <br /><br />Fecha de inicio de actividades:
-              {{ user.company.start_date | date: 'yyyy/MM/dd' }}
+              {{ sale.updated_at | date: 'yyyy/MM/dd' }}
             </p>
           </td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: left;">
-            <p class="ng-binding">Apellido y nombre/ Razon social: {{ client?.name }}</p>
-            <p class="ng-binding">Domicilio Comercial: {{ client?.place }}</p>
-            <p class="ng-binding">Cuit: {{ client?.cuit }}</p>
-            <p class="ng-binding">Condicion frente al IVA: {{ condicionClient }}</p>
+            <p class="ng-binding">Apellido y nombre/ Razon social: {{ clientInformation?.fantasyName_client }}</p>
+            <p class="ng-binding">Domicilio Comercial: {{ clientInformation?.place_client }}</p>
+            <p class="ng-binding">Cuit: {{ clientInformation?.cuit_client }}</p>
+            <p class="ng-binding">Condicion frente al IVA: {{ clientInformation?.condicion_client }}</p>
           </td>
         </tr>
       </tbody>

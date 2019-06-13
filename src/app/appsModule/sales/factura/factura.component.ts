@@ -24,11 +24,9 @@ export class FacturaComponent implements OnInit {
   @Input() products_details: [Details];
   @Input() products: [Details];
   @Input() sale: Sale;
-  @Input() clients: Client[];
   private sale_point: string;
   invoice_number: string;
   clientStorage: Observable<Client[]>;
-  client: Client;
   userStorage: Observable<CompleteUser>;
   cae: string;
   vto: Vto = {
@@ -36,7 +34,7 @@ export class FacturaComponent implements OnInit {
     month: null,
     day: null
   };
-  condicionClient: string;
+  clientInformation: any;
   condicionUser: string;
 
   constructor(
@@ -54,7 +52,6 @@ export class FacturaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.client = this.clients.find(cl => cl.id === this.sale.client_id);
     this.userStorage = this.userService.getUserStorage();
     this.userService.getUserStorage().subscribe(state => {
       this.sale_point = state.company.sale_point;
@@ -70,7 +67,11 @@ export class FacturaComponent implements OnInit {
         if (!response.success.Err) {
           this.cae = response.success.CAE;
           this.condicionUser = response.success.condicion_user;
-          this.condicionClient = response.success.condicion_client;
+          this.clientInformation = {};
+          this.clientInformation.condicion_client = response.success.condicion_client;
+          this.clientInformation.fantasyName_client = response.success.fantasyName_client;
+          this.clientInformation.cuit_client = response.success.cuit_client;
+          this.clientInformation.place_client = response.success.place_client;
           const vtoString = response.success.CAEFchVto;
           const code = ('0000' + this.sale_point).substr(-4, 4);
           const saleNumber = ('00000000' + this.sale.id.toString()).substr(-8, 8);
